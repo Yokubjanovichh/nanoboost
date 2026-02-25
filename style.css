@@ -1,5 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap");
-
 @font-face {
   font-family: "LEMON MILK";
   src: url("./assets/fonts/LEMONMILK-Light.woff") format("woff");
@@ -45,12 +43,17 @@ html {
 }
 
 body {
-  width: 100%;
+  background-color: #08071a; /* rasmga yaqin */
   padding-top: 9.2rem;
-  background: url(./assets/images/mainBg.webp);
+  background-image:
+    radial-gradient(
+      1200px 800px at 50% 20%,
+      rgba(104, 73, 254, 0.18),
+      transparent 70%
+    ),
+    url(./assets/images/mainBg.webp);
   background-size: cover;
   background-position: top left;
-  overflow-x: hidden;
 }
 
 /* =============================================
@@ -508,6 +511,7 @@ a {
 
   .nav__link {
     font-size: 2rem;
+    line-height: 1.1;
   }
 
   .header__right {
@@ -560,6 +564,32 @@ a {
 
   .burger.is-open .burger__line:nth-child(3) {
     transform: translateY(calc(-0.8rem - 2px)) rotate(-45deg);
+  }
+
+  /* Dropdown: stack layout on small screens (prevents width overflow) */
+  .nav__item--dropdown {
+    width: 100%;
+  }
+
+  .dropdown {
+    position: absolute;
+    top: calc(100% + 1.2rem);
+    left: 0;
+    min-width: 0;
+    width: 100%;
+    max-width: 100%;
+    flex-direction: column;
+  }
+
+  .dropdown__sub {
+    width: 100%;
+    border-left: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+  }
+
+  .dropdown__item,
+  .dropdown__subitem a {
+    white-space: normal;
   }
 }
 
@@ -3108,5 +3138,12 @@ a {
   }
   to {
     background-position: 300% 50%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .game-card::before,
+  .animated-border::before {
+    animation: none !important;
   }
 }

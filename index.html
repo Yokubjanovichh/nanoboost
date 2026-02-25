@@ -12,6 +12,18 @@
       href="./assets/images/mainBg.webp"
       fetchpriority="high"
     />
+    <link
+      rel="preload"
+      as="image"
+      href="./assets/images/gta5.webp"
+      fetchpriority="high"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <!-- ===== HEADER ===== -->
@@ -317,6 +329,9 @@
               src="./assets/images/gta5.webp"
               alt="GTA 5"
               class="hero__img"
+              fetchpriority="high"
+              loading="eager"
+              decoding="async"
             />
           </div>
           <div class="hero__inner">
