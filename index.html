@@ -1,0 +1,1542 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- ===== HEADER ===== -->
+    <header class="header">
+      <div class="container header__inner">
+        <!-- Logo -->
+        <a href="#" class="logo">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="logo__icon"
+            viewBox="0 0 208.11 302.92"
+          >
+            <defs>
+              <linearGradient
+                id="mainGradient"
+                x1="0%"
+                y1="100%"
+                x2="100%"
+                y2="0%"
+              >
+                <stop offset="0%" stop-color="#2de1fe" />
+                <stop offset="50%" stop-color="#6849fe" />
+                <stop offset="100%" stop-color="#9d21fe" />
+              </linearGradient>
+            </defs>
+            <g>
+              <path
+                fill="url(#mainGradient)"
+                d="M203.2,96.06l-.88-.88L108.73,1.59h0a7.06,7.06,0,0,0-8.85-.06l-.06.06L5.72,95.69A17.38,17.38,0,0,0,0,108.39V244a16.41,16.41,0,0,0,4.6,11.4l29.07,30.12,5.19,5.53a1.22,1.22,0,0,0,2.1-.83V198.8a2.92,2.92,0,0,1,5-2.07L150.49,301.26a6.48,6.48,0,0,0,8.65,0h0l45.69-47.35a11.69,11.69,0,0,0,3.27-8.11V107.93a16.78,16.78,0,0,0-4.91-11.87Zm-35,144.29A8.6,8.6,0,0,1,159.9,249a6.34,6.34,0,0,1-4.61-1.6L47,139a15.89,15.89,0,0,1,.22-22.48L98.72,65a7.37,7.37,0,0,1,10.42-.11l57.67,58.55a8.36,8.36,0,0,1,2.4,6l-1.05,110.92Z"
+              />
+              <circle
+                cx="104.06"
+                cy="151.46"
+                r="19.39"
+                fill="url(#mainGradient)"
+              />
+            </g>
+          </svg>
+          <span class="logo__text">nanoboost</span>
+        </a>
+
+        <!-- Navigation -->
+        <nav class="nav">
+          <ul class="nav__list">
+            <li class="nav__item nav__item--dropdown">
+              <a href="#" class="nav__link">
+                Games
+                <svg
+                  class="nav__chevron"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="12"
+                  height="12"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </a>
+
+              <!-- Dropdown modal -->
+              <div class="dropdown">
+                <div class="dropdown__games">
+                  <ul class="dropdown__list">
+                    <li class="dropdown__item is-active" data-game="gta5">
+                      <span>GTA5</span>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="10"
+                        height="10"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <polyline points="9 18 15 12 9 6" />
+                      </svg>
+                    </li>
+                    <li class="dropdown__item" data-game="destiny2">
+                      <span>Destiny 2</span>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="10"
+                        height="10"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <polyline points="9 18 15 12 9 6" />
+                      </svg>
+                    </li>
+                    <li class="dropdown__item" data-game="wow">
+                      <span>World Of Warcraft</span>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="10"
+                        height="10"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <polyline points="9 18 15 12 9 6" />
+                      </svg>
+                    </li>
+                    <li class="dropdown__item" data-game="arc">
+                      <span>Arc Raiders</span>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="10"
+                        height="10"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <polyline points="9 18 15 12 9 6" />
+                      </svg>
+                    </li>
+                    <li class="dropdown__item" data-game="cs2">
+                      <span>CS2</span>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="10"
+                        height="10"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <polyline points="9 18 15 12 9 6" />
+                      </svg>
+                    </li>
+                    <li class="dropdown__item" data-game="wow2">
+                      <span>World Of Warcraft</span>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="10"
+                        height="10"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <polyline points="9 18 15 12 9 6" />
+                      </svg>
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="dropdown__sub">
+                  <!-- GTA5 -->
+                  <ul class="dropdown__sublist is-active" data-for="gta5">
+                    <li class="dropdown__subitem"><a href="#">cash</a></li>
+                    <li class="dropdown__subitem dropdown__subitem--active">
+                      <a href="#">cash&amp;cars</a>
+                    </li>
+                    <li class="dropdown__subitem"><a href="#">level</a></li>
+                    <li class="dropdown__subitem">
+                      <a href="#">modded account</a>
+                    </li>
+                  </ul>
+                  <!-- Destiny 2 -->
+                  <ul class="dropdown__sublist" data-for="destiny2">
+                    <li class="dropdown__subitem"><a href="#">boost</a></li>
+                    <li class="dropdown__subitem"><a href="#">carry</a></li>
+                    <li class="dropdown__subitem"><a href="#">coaching</a></li>
+                    <li class="dropdown__subitem">
+                      <a href="#">power level</a>
+                    </li>
+                  </ul>
+                  <!-- World Of Warcraft -->
+                  <ul class="dropdown__sublist" data-for="wow">
+                    <li class="dropdown__subitem"><a href="#">gold</a></li>
+                    <li class="dropdown__subitem"><a href="#">leveling</a></li>
+                    <li class="dropdown__subitem">
+                      <a href="#">gear boost</a>
+                    </li>
+                    <li class="dropdown__subitem">
+                      <a href="#">raid carry</a>
+                    </li>
+                  </ul>
+                  <!-- Arc Raiders -->
+                  <ul class="dropdown__sublist" data-for="arc">
+                    <li class="dropdown__subitem">
+                      <a href="#">rank boost</a>
+                    </li>
+                    <li class="dropdown__subitem"><a href="#">resources</a></li>
+                    <li class="dropdown__subitem"><a href="#">coaching</a></li>
+                  </ul>
+                  <!-- CS2 -->
+                  <ul class="dropdown__sublist" data-for="cs2">
+                    <li class="dropdown__subitem">
+                      <a href="#">rank boost</a>
+                    </li>
+                    <li class="dropdown__subitem"><a href="#">premier</a></li>
+                    <li class="dropdown__subitem"><a href="#">faceit</a></li>
+                    <li class="dropdown__subitem"><a href="#">wingman</a></li>
+                  </ul>
+                  <!-- WoW 2 -->
+                  <ul class="dropdown__sublist" data-for="wow2">
+                    <li class="dropdown__subitem"><a href="#">mythic+</a></li>
+                    <li class="dropdown__subitem"><a href="#">pvp boost</a></li>
+                    <li class="dropdown__subitem"><a href="#">arena</a></li>
+                  </ul>
+                </div>
+              </div>
+            </li>
+            <li class="nav__item"><a href="#" class="nav__link">Why Us</a></li>
+            <li class="nav__item">
+              <a href="#contacts" class="nav__link">Contacts</a>
+            </li>
+            <li class="nav__item"><a href="#faq" class="nav__link">FAQ</a></li>
+          </ul>
+        </nav>
+
+        <!-- Burger (768px va pastida ko'rinadi) -->
+        <button class="burger" id="burger" aria-label="Menu">
+          <span class="burger__line"></span>
+          <span class="burger__line"></span>
+          <span class="burger__line"></span>
+        </button>
+
+        <!-- Right side: Search + Cart -->
+        <div class="header__right">
+          <div class="search">
+            <input
+              type="text"
+              class="search__input"
+              placeholder="Search services"
+            />
+            <button class="search__btn" aria-label="Search">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="11" cy="11" r="8" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+              </svg>
+            </button>
+          </div>
+
+          <a href="#" class="cart" aria-label="Cart">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="30"
+              height="30"
+              viewBox="0 -0.5 25 25"
+              fill="none"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M5.50063 16.1407C5.46273 18.2335 7.1278 19.9613 9.22063 20.0007H15.7806C17.8735 19.9613 19.5385 18.2335 19.5006 16.1407L19.0636 11.4527C18.9527 9.68529 17.716 8.19053 16.0006 7.75065C15.6432 7.64667 15.2729 7.59348 14.9006 7.59265H10.1006C9.72837 7.59348 9.35808 7.64667 9.00063 7.75065C7.28636 8.19067 6.05026 9.68433 5.93863 11.4507L5.50063 16.1407Z"
+                stroke="#ffffff"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M16.0006 9.38862V7.36762C15.9629 5.4718 14.3965 3.96493 12.5006 4.00062C10.6047 3.96493 9.03835 5.4718 9.00061 7.36762V9.38762"
+                stroke="#ffffff"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            <span class="cart__badge">5</span>
+          </a>
+        </div>
+      </div>
+    </header>
+    <!-- ===== /HEADER ===== -->
+
+    <main class="main">
+      <section class="hero container">
+        <div class="hero__top">
+          <div class="hero__bg">
+            <img
+              src="./assets/images/gta5.webp"
+              alt="GTA 5"
+              class="hero__img"
+            />
+          </div>
+          <div class="hero__inner">
+            <div class="hero__content">
+              <h1 class="hero__title">
+                <span class="hero__title-top">GTA 5 ONLINE</span>
+                <span class="hero__title-bottom">BOOSTING</span>
+              </h1>
+              <p class="hero__desc">
+                Level up fast. Earn more.<br />Unlock everything
+              </p>
+              <a href="#" class="hero__btn animated-border">SELECT A SERVICE</a>
+            </div>
+          </div>
+          <div class="hero__dots">
+            <span class="hero__dot is-active"></span>
+            <span class="hero__dot"></span>
+            <span class="hero__dot"></span>
+            <span class="hero__dot"></span>
+          </div>
+        </div>
+
+        <div class="hero__bottom">
+          <div class="hero__benefits">
+            <article class="benefit">
+              <div class="benefit__icon" aria-hidden="true">
+                <img src="./assets/images/shield.webp" alt="shield" />
+              </div>
+              <h3 class="benefit__title">Safe &amp; Secure</h3>
+              <p class="benefit__text">
+                Only trusted methods.<br />Your account is protected.
+              </p>
+            </article>
+
+            <article class="benefit">
+              <div class="benefit__icon" aria-hidden="true">
+                <img src="./assets/images/rocket.webp" alt="rocket" />
+              </div>
+              <h3 class="benefit__title">Super-Fast Delivery</h3>
+              <p class="benefit__text">
+                Start within minutes.<br />We don't waste your time.
+              </p>
+            </article>
+
+            <article class="benefit">
+              <div class="benefit__icon" aria-hidden="true">
+                <img src="./assets/images/support.webp" alt="support" />
+              </div>
+              <h3 class="benefit__title">24/7 Support Team</h3>
+              <p class="benefit__text">
+                Always online — any question, any timezone.
+              </p>
+            </article>
+
+            <article class="benefit">
+              <div class="benefit__icon" aria-hidden="true">
+                <img src="./assets/images/buttons.webp" alt="buttons" />
+              </div>
+              <h3 class="benefit__title">Pro Players Only</h3>
+              <p class="benefit__text">
+                Experienced boosters with thousands of completed orders
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="games container">
+        <div class="games__head">
+          <h2 class="games__title" aria-label="Games">
+            <svg
+              class="games__title-bg"
+              aria-hidden="true"
+              focusable="false"
+              viewBox="0 0 600 140"
+              preserveAspectRatio="xMidYMid meet"
+            >
+              <defs>
+                <linearGradient
+                  id="gamesStrokeGrad"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="0%"
+                >
+                  <stop offset="0%" stop-color="#3e228e" />
+                  <stop offset="50%" stop-color="#653ade" />
+                  <stop offset="100%" stop-color="#3d228c" />
+                </linearGradient>
+              </defs>
+              <text
+                x="300"
+                y="105"
+                text-anchor="middle"
+                font-family="Jost, sans-serif"
+                font-size="110"
+                font-weight="700"
+                fill="transparent"
+                stroke="url(#gamesStrokeGrad)"
+                stroke-width="3"
+                stroke-linejoin="round"
+              >
+                Games
+              </text>
+            </svg>
+            <span class="games__title-fg">Games</span>
+          </h2>
+        </div>
+
+        <div class="games__grid">
+          <article class="game-card">
+            <picture>
+              <source
+                media="(max-width: 430px)"
+                srcset="./assets/images/mobgames1.webp"
+              />
+              <img
+                class="game-card__img"
+                src="./assets/images/games1.webp"
+                alt="GTA5 Online"
+              />
+            </picture>
+            <div class="game-card__content">
+              <h3 class="game-card__title">GTA5 Online</h3>
+              <button class="game-card__cta" href="#">CHOOSE A SERVICE</button>
+            </div>
+          </article>
+
+          <article class="game-card">
+            <picture>
+              <source
+                media="(max-width: 430px)"
+                srcset="./assets/images/mobgames2.webp"
+              />
+              <img
+                class="game-card__img"
+                src="./assets/images/games2.webp"
+                alt="WORLD OF WARCRAFT"
+              />
+            </picture>
+            <div class="game-card__content">
+              <h3 class="game-card__title">
+                WORLD <br />
+                OF WARCRAFT
+              </h3>
+              <button disabled class="game-card__cta" href="#">
+                Coming Soon
+              </button>
+            </div>
+          </article>
+
+          <article class="game-card">
+            <picture>
+              <source
+                media="(max-width: 430px)"
+                srcset="./assets/images/mobgames3.webp"
+              />
+              <img
+                class="game-card__img"
+                src="./assets/images/games3.webp"
+                alt="Destiny 2"
+              />
+            </picture>
+            <div class="game-card__content">
+              <h3 class="game-card__title">DESTINY 2</h3>
+              <button disabled class="game-card__cta" href="#">
+                Coming Soon
+              </button>
+            </div>
+          </article>
+
+          <article class="game-card">
+            <picture>
+              <source
+                media="(max-width: 430px)"
+                srcset="./assets/images/mobgames4.webp"
+              />
+              <img
+                class="game-card__img"
+                src="./assets/images/games4.webp"
+                alt="LEAGUE OF LEGENDS"
+              />
+            </picture>
+            <div class="game-card__content">
+              <h3 class="game-card__title">
+                LEAGUE <br />
+                OF LEGENDS
+              </h3>
+              <button disabled class="game-card__cta" href="#">
+                Coming soon
+              </button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="services container">
+        <div class="services__head">
+          <h2 class="services__title" aria-label="Hot right now">
+            <svg
+              class="services__title-bg"
+              aria-hidden="true"
+              focusable="false"
+              viewBox="0 0 800 140"
+              preserveAspectRatio="xMidYMid meet"
+            >
+              <defs>
+                <linearGradient
+                  id="servicesStrokeGrad"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="0%"
+                >
+                  <stop offset="0%" stop-color="#3e228e" />
+                  <stop offset="50%" stop-color="#653ade" />
+                  <stop offset="100%" stop-color="#3d228c" />
+                </linearGradient>
+              </defs>
+              <text
+                x="400"
+                y="105"
+                text-anchor="middle"
+                font-family="Jost, sans-serif"
+                font-size="110"
+                font-weight="700"
+                fill="transparent"
+                stroke="url(#servicesStrokeGrad)"
+                stroke-width="3"
+                stroke-linejoin="round"
+              >
+                Services
+              </text>
+            </svg>
+            <span class="services__title-fg">Hot right now</span>
+          </h2>
+        </div>
+
+        <div class="services__grid">
+          <article class="service-card">
+            <img
+              class="service-card__img"
+              src="./assets/images/services1.webp"
+              alt="GTA Online Cash+Cars Boost"
+            />
+            <div class="service-card__content">
+              <h3 class="service-card__name">
+                GTA Online Cash+ Cars Boost PS4/PS5
+              </h3>
+              <p class="service-card__price">$19.99</p>
+              <p class="service-card__old-price">$22.99</p>
+              <a href="#" class="service-card__btn">BUY NOW</a>
+            </div>
+          </article>
+
+          <article class="service-card">
+            <img
+              class="service-card__img"
+              src="./assets/images/services2.webp"
+              alt="GTA Online Cash+Cars Boost"
+            />
+            <div class="service-card__content">
+              <h3 class="service-card__name">
+                GTA Online Cash+ Cars Boost PS4/PS5
+              </h3>
+              <p class="service-card__price">$19.99</p>
+              <p class="service-card__old-price">$22.99</p>
+              <a href="#" class="service-card__btn">BUY NOW</a>
+            </div>
+          </article>
+
+          <article class="service-card">
+            <img
+              class="service-card__img"
+              src="./assets/images/services3.webp"
+              alt="GTA Online Cash+Cars Boost"
+            />
+            <div class="service-card__content">
+              <h3 class="service-card__name">
+                GTA Online Cash+ Cars Boost PS4/PS5
+              </h3>
+              <p class="service-card__price">$19.99</p>
+              <p class="service-card__old-price">$22.99</p>
+              <a href="#" class="service-card__btn">BUY NOW</a>
+            </div>
+          </article>
+
+          <article class="service-card">
+            <img
+              class="service-card__img"
+              src="./assets/images/services4.webp"
+              alt="GTA Online Cash+Cars Boost"
+            />
+            <div class="service-card__content">
+              <h3 class="service-card__name">
+                GTA Online Cash+ Cars Boost PS4/PS5
+              </h3>
+              <p class="service-card__price">$19.99</p>
+              <p class="service-card__old-price">$22.99</p>
+              <a href="#" class="service-card__btn">BUY NOW</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="how container" aria-label="How it's works">
+        <div class="how__head">
+          <h2 class="how__title" aria-label="How it's works">
+            <svg
+              class="how__title-bg"
+              aria-hidden="true"
+              focusable="false"
+              viewBox="0 0 900 140"
+              preserveAspectRatio="xMidYMid meet"
+            >
+              <defs>
+                <linearGradient
+                  id="howStrokeGrad"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="0%"
+                >
+                  <stop offset="0%" stop-color="#2de1fe" />
+                  <stop offset="35%" stop-color="#653ade" />
+                  <stop offset="70%" stop-color="#ca4ee0" />
+                  <stop offset="100%" stop-color="#3d228c" />
+                </linearGradient>
+              </defs>
+              <text
+                x="450"
+                y="105"
+                text-anchor="middle"
+                font-family="Jost, sans-serif"
+                font-size="110"
+                font-weight="700"
+                fill="transparent"
+                stroke="url(#howStrokeGrad)"
+                stroke-width="3"
+                stroke-linejoin="round"
+              >
+                How it's works
+              </text>
+            </svg>
+            <span class="how__title-fg">How it's works</span>
+          </h2>
+        </div>
+
+        <div class="how__steps">
+          <article class="how-step">
+            <svg
+              class="how-step__num"
+              viewBox="0 0 100 100"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <defs>
+                <linearGradient
+                  id="howStepGrad1"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="0%"
+                >
+                  <stop offset="0%" stop-color="#2de1fe" />
+                  <stop offset="35%" stop-color="#653ade" />
+                  <stop offset="70%" stop-color="#ca4ee0" />
+                  <stop offset="100%" stop-color="#3d228c" />
+                </linearGradient>
+              </defs>
+              <text
+                x="50"
+                y="88"
+                text-anchor="middle"
+                font-family="Jost, sans-serif"
+                font-size="96"
+                font-weight="700"
+                fill="transparent"
+                stroke="url(#howStepGrad1)"
+                stroke-width="2.6"
+              >
+                01
+              </text>
+            </svg>
+            <svg
+              class="how-step__up"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path d="M6 18L18 6" />
+              <path d="M9 6h9v9" />
+            </svg>
+            <p class="how-step__text">
+              <span>Choose</span> your<br />game &amp; service
+            </p>
+          </article>
+
+          <article class="how-step">
+            <svg
+              class="how-step__num"
+              viewBox="0 0 100 100"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <defs>
+                <linearGradient
+                  id="howStepGrad2"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="0%"
+                >
+                  <stop offset="0%" stop-color="#2de1fe" />
+                  <stop offset="35%" stop-color="#653ade" />
+                  <stop offset="70%" stop-color="#ca4ee0" />
+                  <stop offset="100%" stop-color="#3d228c" />
+                </linearGradient>
+              </defs>
+              <text
+                x="50"
+                y="88"
+                text-anchor="middle"
+                font-family="Jost, sans-serif"
+                font-size="96"
+                font-weight="700"
+                fill="transparent"
+                stroke="url(#howStepGrad2)"
+                stroke-width="2.6"
+              >
+                02
+              </text>
+            </svg>
+            <svg
+              class="how-step__up"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path d="M6 18L18 6" />
+              <path d="M9 6h9v9" />
+            </svg>
+            <p class="how-step__text"><span>Place</span> your order</p>
+          </article>
+
+          <article class="how-step">
+            <svg
+              class="how-step__num"
+              viewBox="0 0 100 100"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <defs>
+                <linearGradient
+                  id="howStepGrad3"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="0%"
+                >
+                  <stop offset="0%" stop-color="#2de1fe" />
+                  <stop offset="35%" stop-color="#653ade" />
+                  <stop offset="70%" stop-color="#ca4ee0" />
+                  <stop offset="100%" stop-color="#3d228c" />
+                </linearGradient>
+              </defs>
+              <text
+                x="50"
+                y="88"
+                text-anchor="middle"
+                font-family="Jost, sans-serif"
+                font-size="96"
+                font-weight="700"
+                fill="transparent"
+                stroke="url(#howStepGrad3)"
+                stroke-width="2.6"
+              >
+                03
+              </text>
+            </svg>
+            <svg
+              class="how-step__up"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path d="M6 18L18 6" />
+              <path d="M9 6h9v9" />
+            </svg>
+            <p class="how-step__text"><span>Get</span> your results</p>
+          </article>
+        </div>
+      </section>
+
+      <section
+        class="faq container"
+        id="faq"
+        aria-label="Frequently asked questions"
+      >
+        <div class="faq__head">
+          <h2 class="faq__title" aria-label="FAQ">
+            <svg
+              class="faq__title-bg"
+              aria-hidden="true"
+              focusable="false"
+              viewBox="0 0 480 140"
+              preserveAspectRatio="xMidYMid meet"
+            >
+              <text
+                x="240"
+                y="105"
+                text-anchor="middle"
+                font-family="LEMON MILK, Jost, sans-serif"
+                font-size="110"
+                font-weight="700"
+                fill="rgba(101, 58, 222, 0.14)"
+                stroke="#653ade"
+                stroke-width="2.6"
+                stroke-linejoin="round"
+              >
+                FAQ
+              </text>
+            </svg>
+            <span class="faq__title-fg">Got any questions?</span>
+          </h2>
+          <p class="faq__desc">
+            Here are the answers to the most common questions we’ve been asked
+          </p>
+        </div>
+
+        <div class="faq__list" role="list">
+          <article class="faq-item is-open" role="listitem">
+            <button
+              class="faq-item__trigger"
+              type="button"
+              id="faq-q1"
+              aria-expanded="true"
+              aria-controls="faq-a1"
+            >
+              <span class="faq-item__q">Is your boosting service safe?</span>
+              <svg
+                class="faq-item__chev"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path d="M6 14l6-6 6 6" />
+              </svg>
+            </button>
+            <div
+              class="faq-item__panel"
+              id="faq-a1"
+              role="region"
+              aria-labelledby="faq-q1"
+            >
+              <p class="faq-item__a">
+                Yes. We use professional boosters, secure connections, and
+                proven methods to minimize risks and protect your account.
+              </p>
+            </div>
+          </article>
+
+          <article class="faq-item" role="listitem">
+            <button
+              class="faq-item__trigger"
+              type="button"
+              id="faq-q2"
+              aria-expanded="false"
+              aria-controls="faq-a2"
+            >
+              <span class="faq-item__q">How does the order process work?</span>
+              <svg
+                class="faq-item__chev"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path d="M6 10l6 6 6-6" />
+              </svg>
+            </button>
+            <div
+              class="faq-item__panel"
+              id="faq-a2"
+              role="region"
+              aria-labelledby="faq-q2"
+            >
+              <p class="faq-item__a">
+                Choose a service, complete the payment, and our support team
+                will contact you to start the boost and confirm all details.
+              </p>
+            </div>
+          </article>
+
+          <article class="faq-item" role="listitem">
+            <button
+              class="faq-item__trigger"
+              type="button"
+              id="faq-q3"
+              aria-expanded="false"
+              aria-controls="faq-a3"
+            >
+              <span class="faq-item__q"
+                >Do I need to share my account details?</span
+              >
+              <svg
+                class="faq-item__chev"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path d="M6 10l6 6 6-6" />
+              </svg>
+            </button>
+            <div
+              class="faq-item__panel"
+              id="faq-a3"
+              role="region"
+              aria-labelledby="faq-q3"
+            >
+              <p class="faq-item__a">
+                Not always. Many services are available as carry or duo boosts
+                without sharing your login information.
+              </p>
+            </div>
+          </article>
+
+          <article class="faq-item" role="listitem">
+            <button
+              class="faq-item__trigger"
+              type="button"
+              id="faq-q4"
+              aria-expanded="false"
+              aria-controls="faq-a4"
+            >
+              <span class="faq-item__q">How long does boosting take?</span>
+              <svg
+                class="faq-item__chev"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path d="M6 10l6 6 6-6" />
+              </svg>
+            </button>
+            <div
+              class="faq-item__panel"
+              id="faq-a4"
+              role="region"
+              aria-labelledby="faq-q4"
+            >
+              <p class="faq-item__a">
+                The duration depends on the selected service and game. Estimated
+                completion times are shown on each service page.
+              </p>
+            </div>
+          </article>
+
+          <article class="faq-item" role="listitem">
+            <button
+              class="faq-item__trigger"
+              type="button"
+              id="faq-q5"
+              aria-expanded="false"
+              aria-controls="faq-a5"
+            >
+              <span class="faq-item__q"
+                >What if I need a custom boosting service?</span
+              >
+              <svg
+                class="faq-item__chev"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path d="M6 10l6 6 6-6" />
+              </svg>
+            </button>
+            <div
+              class="faq-item__panel"
+              id="faq-a5"
+              role="region"
+              aria-labelledby="faq-q5"
+            >
+              <p class="faq-item__a">
+                You can contact our support via Discord or email, and we’ll
+                create a custom order tailored to your needs.
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="testimonials container" aria-label="What say about us">
+        <div class="testimonials__head">
+          <h2 class="testimonials__title" aria-label="Testimonials">
+            <svg
+              class="testimonials__title-bg"
+              aria-hidden="true"
+              focusable="false"
+              viewBox="0 0 860 150"
+              preserveAspectRatio="xMidYMid meet"
+            >
+              <text
+                x="430"
+                y="114"
+                text-anchor="middle"
+                font-family="LEMON MILK, Jost, sans-serif"
+                font-size="118"
+                font-weight="700"
+                fill="rgba(101, 58, 222, 0.12)"
+                stroke="rgba(101, 58, 222, 0.8)"
+                stroke-width="2.2"
+                stroke-linejoin="round"
+              >
+                Testimonials
+              </text>
+            </svg>
+            <span class="testimonials__title-fg">What say about us</span>
+          </h2>
+        </div>
+
+        <div
+          class="testimonials__slider"
+          aria-roledescription="carousel"
+          aria-label="Customer testimonials"
+        >
+          <div class="testimonials__grid" role="list">
+            <svg width="0" height="0" aria-hidden="true" focusable="false">
+              <defs>
+                <linearGradient
+                  id="testimonialStarGradient"
+                  x1="0%"
+                  y1="100%"
+                  x2="100%"
+                  y2="0%"
+                >
+                  <stop offset="0%" stop-color="#2de1fe" />
+                  <stop offset="55%" stop-color="#6849fe" />
+                  <stop offset="100%" stop-color="#9d21fe" />
+                </linearGradient>
+              </defs>
+            </svg>
+
+            <article class="testimonial" role="listitem">
+              <div class="testimonial__stars" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
+                  />
+                </svg>
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
+                  />
+                </svg>
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
+                  />
+                </svg>
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
+                  />
+                </svg>
+                <svg class="is-dim" viewBox="0 0 24 24">
+                  <path
+                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
+                  />
+                </svg>
+              </div>
+              <p class="testimonial__text">
+                Ordered GTA Online money boost and everything went super smooth.
+                Delivery was fast, support answered instantly in Discord.
+                Definitely recommended!
+              </p>
+              <div class="testimonial__user">
+                <span class="testimonial__avatar" aria-hidden="true"></span>
+                <div class="testimonial__meta">
+                  <p class="testimonial__name">GhostRider77</p>
+                  <p class="testimonial__service">Money Boost</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="testimonial" role="listitem">
+              <div class="testimonial__stars" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
+                  />
+                </svg>
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
+                  />
+                </svg>
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
+                  />
+                </svg>
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
+                  />
+                </svg>
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
+                  />
+                </svg>
+              </div>
+              <p class="testimonial__text">
+                Great leveling service! My RP was boosted exactly as requested.
+                Booster was professional and kept me updated. Will use again.
+              </p>
+              <div class="testimonial__user">
+                <span class="testimonial__avatar" aria-hidden="true"></span>
+                <div class="testimonial__meta">
+                  <p class="testimonial__name">NeonHunterX</p>
+                  <p class="testimonial__service">RP / Level Boost</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="testimonial" role="listitem">
+              <div class="testimonial__stars" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
+                  />
+                </svg>
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
+                  />
+                </svg>
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
+                  />
+                </svg>
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
+                  />
+                </svg>
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
+                  />
+                </svg>
+              </div>
+              <p class="testimonial__text">
+                Did heist carry and it was amazing. Very skilled team, completed
+                everything without issues. Prices are fair compared to other
+                boosting sites.
+              </p>
+              <div class="testimonial__user">
+                <span class="testimonial__avatar" aria-hidden="true"></span>
+                <div class="testimonial__meta">
+                  <p class="testimonial__name">ToxicMercy</p>
+                  <p class="testimonial__service">Heist Carry</p>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div class="testimonials__nav">
+          <div
+            class="testimonials__dots"
+            role="tablist"
+            aria-label="Testimonial slides"
+          >
+            <span
+              class="testimonials__dot is-active"
+              role="tab"
+              aria-selected="true"
+              aria-label="Testimonial 1"
+              tabindex="0"
+            ></span>
+            <span
+              class="testimonials__dot"
+              role="tab"
+              aria-selected="false"
+              aria-label="Testimonial 2"
+              tabindex="-1"
+            ></span>
+            <span
+              class="testimonials__dot"
+              role="tab"
+              aria-selected="false"
+              aria-label="Testimonial 3"
+              tabindex="-1"
+            ></span>
+          </div>
+        </div>
+      </section>
+
+      <section class="boosting-info container" aria-label="GTA 5 boosting info">
+        <div class="boosting-info__head">
+          <h2 class="boosting-info__title" aria-label="GTA 5 Boosting Service">
+            <svg
+              class="boosting-info__title-bg"
+              aria-hidden="true"
+              focusable="false"
+              viewBox="0 0 980 150"
+              preserveAspectRatio="xMidYMid meet"
+            >
+              <text
+                x="490"
+                y="114"
+                text-anchor="middle"
+                font-family="LEMON MILK, Jost, sans-serif"
+                font-size="118"
+                font-weight="700"
+                fill="rgba(101, 58, 222, 0.12)"
+                stroke="rgba(101, 58, 222, 0.8)"
+                stroke-width="2.2"
+                stroke-linejoin="round"
+              >
+                Boosting
+              </text>
+            </svg>
+            <span class="boosting-info__title-fg">GTA 5 Boosting Service</span>
+          </h2>
+        </div>
+
+        <div class="boosting-info__card">
+          <div class="boosting-info__badges" aria-label="Highlights">
+            <span class="boosting-info__badge">Manual delivery</span>
+            <span class="boosting-info__badge">Fast turnaround</span>
+            <span class="boosting-info__badge">Secure &amp; safe</span>
+            <span class="boosting-info__badge">24/7 support</span>
+          </div>
+          <p class="boosting-info__p">
+            GTA 5 boosting services are designed to help players progress faster
+            in GTA Online and enjoy all game content without long grinding.
+            Whether you need money, RP levels, heist completion, unlock
+            services, or account-related services, our professional boosters
+            will complete your order quickly and efficiently.
+          </p>
+          <p class="boosting-info__p">
+            We provide a full range of GTA Online boosting options, including
+            money boost, RP and level boost, heist carry, unlock all services,
+            and account services for PC, PlayStation, and Xbox platforms. All
+            orders are performed manually by experienced players to ensure
+            quality, speed, and account safety.
+          </p>
+          <p class="boosting-info__p">
+            Our service is suitable for both new and experienced players who
+            want to save time and focus on gameplay. You can customize your
+            order, choose the amount of money or levels, select specific heists,
+            or combine multiple services in one package. We offer flexible
+            pricing, fast delivery, and real-time support via Discord.
+          </p>
+          <p class="boosting-info__p">
+            Privacy and security are our top priorities. We do not use bots,
+            cheats, or automated software. All boosting is done manually with
+            individual instructions for each client. Our support team is
+            available 24/7 to answer questions and help with your order.
+          </p>
+          <p class="boosting-info__cta">
+            Choose a reliable GTA 5 boosting service and start enjoying GTA
+            Online with maximum progress today.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer" id="contacts" aria-label="Footer">
+      <div class="container footer__inner">
+        <div class="footer__top">
+          <div class="footer__brand">
+            <a href="#" class="logo footer__logo" aria-label="Nanoboost home">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="logo__icon"
+                viewBox="0 0 208.11 302.92"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <defs>
+                  <linearGradient
+                    id="footerMainGradient"
+                    x1="0%"
+                    y1="100%"
+                    x2="100%"
+                    y2="0%"
+                  >
+                    <stop offset="0%" stop-color="#2de1fe" />
+                    <stop offset="50%" stop-color="#6849fe" />
+                    <stop offset="100%" stop-color="#9d21fe" />
+                  </linearGradient>
+                </defs>
+                <g>
+                  <path
+                    fill="url(#footerMainGradient)"
+                    d="M203.2,96.06l-.88-.88L108.73,1.59h0a7.06,7.06,0,0,0-8.85-.06l-.06.06L5.72,95.69A17.38,17.38,0,0,0,0,108.39V244a16.41,16.41,0,0,0,4.6,11.4l29.07,30.12,5.19,5.53a1.22,1.22,0,0,0,2.1-.83V198.8a2.92,2.92,0,0,1,5-2.07L150.49,301.26a6.48,6.48,0,0,0,8.65,0h0l45.69-47.35a11.69,11.69,0,0,0,3.27-8.11V107.93a16.78,16.78,0,0,0-4.91-11.87Zm-35,144.29A8.6,8.6,0,0,1,159.9,249a6.34,6.34,0,0,1-4.61-1.6L47,139a15.89,15.89,0,0,1,.22-22.48L98.72,65a7.37,7.37,0,0,1,10.42-.11l57.67,58.55a8.36,8.36,0,0,1,2.4,6l-1.05,110.92Z"
+                  />
+                  <circle
+                    cx="104.06"
+                    cy="151.46"
+                    r="19.39"
+                    fill="url(#footerMainGradient)"
+                  />
+                </g>
+              </svg>
+              <span class="logo__text">nanoboost</span>
+            </a>
+            <p class="footer__desc">
+              nanoboost provides professional GTA 5 boosting services. Our team
+              delivers fast and secure progress with 24/7 Discord support and
+              affordable prices.
+            </p>
+          </div>
+
+          <div class="footer__col">
+            <h3 class="footer__title">Games</h3>
+            <ul class="footer__list">
+              <li><a class="footer__link" href="#">GTA5 Online</a></li>
+              <li><a class="footer__link" href="#">Destiny 2</a></li>
+              <li><a class="footer__link" href="#">World of Warcraft</a></li>
+              <li><a class="footer__link" href="#">Arc Raiders</a></li>
+              <li><a class="footer__link" href="#">Battlefield 2</a></li>
+            </ul>
+          </div>
+
+          <div class="footer__col">
+            <h3 class="footer__title">Company</h3>
+            <ul class="footer__list">
+              <li><a class="footer__link" href="#">Why Us</a></li>
+              <li><a class="footer__link" href="#faq">FAQ</a></li>
+              <li><a class="footer__link" href="#contacts">Contacts</a></li>
+              <li><a class="footer__link" href="#">Support</a></li>
+            </ul>
+          </div>
+
+          <div class="footer__col footer__col--contact">
+            <h3 class="footer__title">Legal</h3>
+            <ul class="footer__list">
+              <li><a class="footer__link" href="#">Terms of Service</a></li>
+              <li><a class="footer__link" href="#">Privacy Policy</a></li>
+              <li><a class="footer__link" href="#">Refund Policy</a></li>
+            </ul>
+
+            <div class="footer__contacts" aria-label="Contact">
+              <a class="footer__contact" href="mailto:support@nanoboost.com">
+                <span class="footer__contact-ico" aria-hidden="true">
+                  <svg
+                    class="footer__icon"
+                    viewBox="0 0 512 512"
+                    width="20"
+                    height="20"
+                    aria-hidden="true"
+                    focusable="false"
+                  >
+                    <defs>
+                      <linearGradient
+                        id="footerMailGradient"
+                        x1="0%"
+                        y1="100%"
+                        x2="100%"
+                        y2="0%"
+                      >
+                        <stop offset="0%" stop-color="#2de1fe" />
+                        <stop offset="50%" stop-color="#6849fe" />
+                        <stop offset="100%" stop-color="#9d21fe" />
+                      </linearGradient>
+                    </defs>
+                    <path
+                      fill="url(#footerMailGradient)"
+                      d="M510.678,112.275c-2.308-11.626-7.463-22.265-14.662-31.054c-1.518-1.915-3.104-3.63-4.823-5.345c-12.755-12.818-30.657-20.814-50.214-20.814H71.021c-19.557,0-37.395,7.996-50.21,20.814c-1.715,1.715-3.301,3.43-4.823,5.345C8.785,90.009,3.63,100.649,1.386,112.275C0.464,116.762,0,121.399,0,126.087V385.92c0,9.968,2.114,19.55,5.884,28.203c3.497,8.26,8.653,15.734,14.926,22.001c1.59,1.586,3.169,3.044,4.892,4.494c12.286,10.175,28.145,16.32,45.319,16.32h369.958c17.18,0,33.108-6.145,45.323-16.384c1.718-1.386,3.305-2.844,4.891-4.43c6.27-6.267,11.425-13.741,14.994-22.001v-0.064c3.769-8.653,5.812-18.171,5.812-28.138V126.087C512,121.399,511.543,116.762,510.678,112.275z M46.509,101.571c6.345-6.338,14.866-10.175,24.512-10.175h369.958c9.646,0,18.242,3.837,24.512,10.175c1.122,1.129,2.179,2.387,3.112,3.637L274.696,274.203c-5.348,4.687-11.954,7.002-18.696,7.002c-6.674,0-13.276-2.315-18.695-7.002L43.472,105.136C44.33,103.886,45.387,102.7,46.509,101.571z M36.334,385.92V142.735L176.658,265.15L36.405,387.435C36.334,386.971,36.334,386.449,36.334,385.92z M440.979,420.597H71.021c-6.281,0-12.158-1.651-17.174-4.552l147.978-128.959l13.815,12.018c11.561,10.046,26.028,15.134,40.36,15.134c14.406,0,28.872-5.088,40.432-15.134l13.808-12.018l147.92,128.959C453.137,418.946,447.26,420.597,440.979,420.597z M475.666,385.92c0,0.529,0,1.051-0.068,1.515L335.346,265.221L475.666,142.8V385.92z"
+                    />
+                  </svg>
+                </span>
+                support@nanoboost.com
+              </a>
+              <a class="footer__contact" href="#" aria-label="Discord">
+                <span class="footer__contact-ico" aria-hidden="true">
+                  <svg
+                    class="footer__icon"
+                    viewBox="0 -28.5 256 256"
+                    width="20"
+                    height="20"
+                    aria-hidden="true"
+                    focusable="false"
+                  >
+                    <defs>
+                      <linearGradient
+                        id="footerDiscordGradient"
+                        x1="0%"
+                        y1="100%"
+                        x2="100%"
+                        y2="0%"
+                      >
+                        <stop offset="0%" stop-color="#2de1fe" />
+                        <stop offset="50%" stop-color="#6849fe" />
+                        <stop offset="100%" stop-color="#9d21fe" />
+                      </linearGradient>
+                    </defs>
+                    <path
+                      fill="url(#footerDiscordGradient)"
+                      d="M216.856339,16.5966031 C200.285002,8.84328665 182.566144,3.2084988 164.041564,0 C161.766523,4.11318106 159.108624,9.64549908 157.276099,14.0464379 C137.583995,11.0849896 118.072967,11.0849896 98.7430163,14.0464379 C96.9108417,9.64549908 94.1925838,4.11318106 91.8971895,0 C73.3526068,3.2084988 55.6133949,8.86399117 39.0420583,16.6376612 C5.61752293,67.146514 -3.4433191,116.400813 1.08711069,164.955721 C23.2560196,181.510915 44.7403634,191.567697 65.8621325,198.148576 C71.0772151,190.971126 75.7283628,183.341335 79.7352139,175.300261 C72.104019,172.400575 64.7949724,168.822202 57.8887866,164.667963 C59.7209612,163.310589 61.5131304,161.891452 63.2445898,160.431257 C105.36741,180.133187 151.134928,180.133187 192.754523,160.431257 C194.506336,161.891452 196.298154,163.310589 198.110326,164.667963 C191.183787,168.842556 183.854737,172.420929 176.223542,175.320965 C180.230393,183.341335 184.861538,190.991831 190.096624,198.16893 C211.238746,191.588051 232.743023,181.531619 254.911949,164.955721 C260.227747,108.668201 245.831087,59.8662432 216.856339,16.5966031 Z M85.4738752,135.09489 C72.8290281,135.09489 62.4592217,123.290155 62.4592217,108.914901 C62.4592217,94.5396472 72.607595,82.7145587 85.4738752,82.7145587 C98.3405064,82.7145587 108.709962,94.5189427 108.488529,108.914901 C108.508531,123.290155 98.3405064,135.09489 85.4738752,135.09489 Z M170.525237,135.09489 C157.88039,135.09489 147.510584,123.290155 147.510584,108.914901 C147.510584,94.5396472 157.658606,82.7145587 170.525237,82.7145587 C183.391518,82.7145587 193.761324,94.5189427 193.539891,108.914901 C193.539891,123.290155 183.391518,135.09489 170.525237,135.09489 Z"
+                    />
+                  </svg>
+                </span>
+                discord.gg/nanoboost
+              </a>
+            </div>
+
+            <div class="footer__chips" aria-label="Payments">
+              <span class="footer__chip" aria-label="PayPal">
+                <svg
+                  class="footer__pay-icon footer__pay-icon--paypal"
+                  viewBox="0 0 48 48"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  preserveAspectRatio="xMidYMid meet"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <defs>
+                    <linearGradient
+                      id="footerPayPalGradient"
+                      x1="0%"
+                      y1="100%"
+                      x2="100%"
+                      y2="0%"
+                    >
+                      <stop offset="0%" stop-color="#2de1fe" />
+                      <stop offset="50%" stop-color="#6849fe" />
+                      <stop offset="100%" stop-color="#9d21fe" />
+                    </linearGradient>
+                  </defs>
+                  <path
+                    d="M32.3305 18.0977C32.3082 18.24 32.2828 18.3856 32.2542 18.5351C31.2704 23.5861 27.9046 25.331 23.606 25.331H21.4173C20.8916 25.331 20.4486 25.7127 20.3667 26.2313L19.2461 33.3381L18.9288 35.3527C18.8755 35.693 19.1379 36 19.4815 36H23.3634C23.8231 36 24.2136 35.666 24.286 35.2127L24.3241 35.0154L25.055 30.3772L25.1019 30.1227C25.1735 29.6678 25.5648 29.3338 26.0245 29.3338H26.6051C30.3661 29.3338 33.3103 27.8068 34.1708 23.388C34.5303 21.5421 34.3442 20.0008 33.393 18.9168C33.1051 18.59 32.748 18.3188 32.3305 18.0977Z"
+                    fill="url(#footerPayPalGradient)"
+                    fill-opacity="0.62"
+                  />
+                  <path
+                    d="M31.3009 17.6871C31.1506 17.6434 30.9955 17.6036 30.8364 17.5678C30.6766 17.5328 30.5127 17.5018 30.3441 17.4748C29.754 17.3793 29.1074 17.334 28.4147 17.334H22.5676C22.4237 17.334 22.2869 17.3666 22.1644 17.4254C21.8948 17.5551 21.6944 17.8104 21.6459 18.1229L20.402 26.0013L20.3662 26.2311C20.4481 25.7126 20.8911 25.3308 21.4168 25.3308H23.6055C27.9041 25.3308 31.2699 23.5851 32.2537 18.5349C32.2831 18.3854 32.3078 18.2398 32.33 18.0975C32.0811 17.9655 31.8115 17.8525 31.5212 17.7563C31.4496 17.7324 31.3757 17.7094 31.3009 17.6871Z"
+                    fill="url(#footerPayPalGradient)"
+                    fill-opacity="0.82"
+                  />
+                  <path
+                    d="M21.6461 18.1231C21.6946 17.8105 21.895 17.5552 22.1646 17.4264C22.2879 17.3675 22.4239 17.3349 22.5678 17.3349H28.4149C29.1077 17.3349 29.7542 17.3803 30.3444 17.4757C30.513 17.5027 30.6768 17.5338 30.8367 17.5687C30.9957 17.6045 31.1508 17.6443 31.3011 17.688C31.3759 17.7103 31.4498 17.7334 31.5222 17.7564C31.8125 17.8527 32.0821 17.9664 32.331 18.0976C32.6237 16.231 32.3287 14.9601 31.3194 13.8093C30.2068 12.5424 28.1986 12 25.629 12H18.169C17.6441 12 17.1963 12.3817 17.1152 12.9011L14.0079 32.5969C13.9467 32.9866 14.2473 33.3381 14.6402 33.3381H19.2458L20.4022 26.0014L21.6461 18.1231Z"
+                    fill="url(#footerPayPalGradient)"
+                  />
+                </svg>
+              </span>
+              <span class="footer__chip" aria-label="Tether USDT">
+                <svg
+                  class="footer__pay-icon footer__pay-icon--tether"
+                  viewBox="0 0 32 32"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  preserveAspectRatio="xMidYMid meet"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <defs>
+                    <linearGradient
+                      id="footerTetherGradient"
+                      x1="0%"
+                      y1="100%"
+                      x2="100%"
+                      y2="0%"
+                    >
+                      <stop offset="0%" stop-color="#2de1fe" />
+                      <stop offset="50%" stop-color="#6849fe" />
+                      <stop offset="100%" stop-color="#9d21fe" />
+                    </linearGradient>
+                  </defs>
+                  <path
+                    fill="url(#footerTetherGradient)"
+                    d="M17.922 17.383v-.002c-.11.008-.677.042-1.942.042-1.01 0-1.721-.03-1.971-.042v.003c-3.888-.171-6.79-.848-6.79-1.658 0-.809 2.902-1.486 6.79-1.66v2.644c.254.018.982.061 1.988.061 1.207 0 1.812-.05 1.925-.06v-2.643c3.88.173 6.775.85 6.775 1.658 0 .81-2.895 1.485-6.775 1.657m0-3.59v-2.366h5.414V7.819H8.595v3.608h5.414v2.365c-4.4.202-7.709 1.074-7.709 2.118 0 1.044 3.309 1.915 7.709 2.118v7.582h3.913v-7.584c4.393-.202 7.694-1.073 7.694-2.116 0-1.043-3.301-1.914-7.694-2.117"
+                  />
+                </svg>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer__bottom">
+          <p class="footer__copy">© 2026 nanoboost. All rights reserved.</p>
+          <p class="footer__legal">
+            This website is not affiliated with Rockstar Games. GTA and GTA
+            Online are trademarks of Rockstar Games.
+          </p>
+          <p class="footer__legal footer__legal--muted">
+            All trademarks are property of their respective owners.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Floating Cart (768px va pastida) -->
+    <a href="#" class="cart-float" aria-label="Cart">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="26"
+        height="26"
+        viewBox="0 -0.5 25 25"
+        fill="none"
+      >
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M5.50063 16.1407C5.46273 18.2335 7.1278 19.9613 9.22063 20.0007H15.7806C17.8735 19.9613 19.5385 18.2335 19.5006 16.1407L19.0636 11.4527C18.9527 9.68529 17.716 8.19053 16.0006 7.75065C15.6432 7.64667 15.2729 7.59348 14.9006 7.59265H10.1006C9.72837 7.59348 9.35808 7.64667 9.00063 7.75065C7.28636 8.19067 6.05026 9.68433 5.93863 11.4507L5.50063 16.1407Z"
+          stroke="#ffffff"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M16.0006 9.38862V7.36762C15.9629 5.4718 14.3965 3.96493 12.5006 4.00062C10.6047 3.96493 9.03835 5.4718 9.00061 7.36762V9.38762"
+          stroke="#ffffff"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+      <span class="cart-float__badge">5</span>
+    </a>
+    <script src="script.js"></script>
+  </body>
+</html>
