@@ -2064,7 +2064,7 @@ a {
 ============================================= */
 
 .footer {
-  margin-top: 15rem;
+  margin-top: 10rem;
   position: relative;
   isolation: isolate;
   overflow: hidden;
@@ -2299,7 +2299,7 @@ a {
   }
 
   .game-card {
-    min-height: 46rem;
+    min-height: 50rem;
   }
 
   .services__title-bg {
@@ -2417,17 +2417,12 @@ a {
     grid-template-columns: 1.6fr 1fr;
     gap: 4.2rem 4.2rem;
   }
-
 }
 
 @media (max-width: 931px) {
   .games__grid {
     grid-template-columns: repeat(2, minmax(24rem, 31rem));
     justify-content: center;
-  }
-
-  .game-card {
-    min-height: 42rem;
   }
 }
 
@@ -2445,6 +2440,7 @@ a {
   }
 
   .how__title-bg {
+    transform: translate(-50%, -56%);
     width: min(54rem, 92vw);
     height: 10rem;
   }
@@ -2507,7 +2503,7 @@ a {
   .testimonials__title-bg {
     width: min(48rem, 92vw);
     height: 8.8rem;
-    transform: translate(-50%, -73%);
+    transform: translate(-50%, -53%);
   }
 
   .testimonials__title-fg {
@@ -2561,7 +2557,7 @@ a {
   .boosting-info__title-bg {
     width: min(48rem, 92vw);
     height: 8.8rem;
-    transform: translate(-50%, -73%);
+    transform: translate(-50%, -58%);
   }
 
   .boosting-info__title-fg {
@@ -2604,7 +2600,7 @@ a {
   }
 
   .footer__contacts {
-    align-items: center;
+    align-items: flex-start;
   }
 
   .footer__chips {
@@ -2629,7 +2625,7 @@ a {
   .faq__title-bg {
     width: min(34rem, 90vw);
     height: 8.6rem;
-    transform: translate(-50%, -76%);
+    transform: translate(-50%, -63%);
   }
 
   .faq__title-fg {
@@ -2693,6 +2689,7 @@ a {
   }
 
   .how-step__up {
+    left: calc(50% + (var(--how-num-width) / 2) + 0.4rem);
     top: 0.6rem;
     width: 1.6rem;
     height: 1.6rem;
@@ -2778,6 +2775,7 @@ a {
   }
 
   .services__title-bg {
+    transform: translate(-50%, -57%);
     width: min(52rem, 92vw);
     height: 9.4rem;
     opacity: 0.42;
