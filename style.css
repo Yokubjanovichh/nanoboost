@@ -34,7 +34,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Jost", sans-serif;
+  font-family: "Poppins", sans-serif;
   user-select: none;
 }
 
@@ -55,10 +55,6 @@ body {
   background-size: cover;
   background-position: top left;
 }
-
-/* =============================================
-   Scrollbar (Chrome/Edge/Safari + Firefox)
-============================================= */
 
 html {
   scrollbar-width: thin;
@@ -138,11 +134,11 @@ a {
 }
 
 .logo__text {
-  font-family: "Jost", sans-serif;
+  font-family: "Playfair Display", sans-serif;
   font-size: 3.2rem;
   font-weight: 600;
   color: #ffffff;
-  letter-spacing: 0.03em;
+  letter-spacing: -0.03em;
   white-space: nowrap;
 }
 
@@ -164,7 +160,7 @@ a {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  font-family: "Jost", sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 1.8rem;
   font-weight: 500;
   line-height: 1;
@@ -242,7 +238,7 @@ a {
   border-radius: 0.8rem;
   margin: 0 0.6rem;
   transition: background 0.15s ease;
-  font-family: "Jost", sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 1.6rem;
   font-weight: 400;
   color: #ffffff;
@@ -294,7 +290,7 @@ a {
   padding: 1.1rem 2rem;
   border-radius: 0.8rem;
   margin: 0 0.6rem;
-  font-family: "Jost", sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 1.6rem;
   font-weight: 400;
   color: rgba(255, 255, 255, 0.75);
@@ -348,14 +344,14 @@ a {
   align-items: center;
   gap: 2rem;
   border-bottom: 1.5px solid #2531d8;
-  padding-bottom: 0.4rem;
+  padding: 0 0.6rem 0.4rem 0.6rem;
 }
 
 .search__input {
   background: transparent;
   border: none;
   outline: none;
-  font-family: "Jost", sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 1.6rem;
   font-weight: 400;
   color: #ffffff;
@@ -403,7 +399,7 @@ a {
   border-radius: 50rem;
   background: linear-gradient(135deg, #2de1fe 0%, #6849fe 50%, #9d21fe 100%);
   color: #ffffff;
-  font-family: "Jost", sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 1rem;
   font-weight: 400;
   display: flex;
@@ -670,7 +666,7 @@ a {
     border-radius: 50rem;
     background: linear-gradient(135deg, #2de1fe 0%, #6849fe 50%, #9d21fe 100%);
     color: #ffffff;
-    font-family: "Jost", sans-serif;
+    font-family: "Poppins", sans-serif;
     font-size: 1.1rem;
     font-weight: 700;
     display: flex;
@@ -683,7 +679,7 @@ a {
    HERO
    ============================================= */
 .main {
-  padding: 2rem 2rem 4rem;
+  padding: 3rem 2rem 4rem;
 }
 
 .hero__top {
@@ -742,7 +738,7 @@ a {
 .hero__title-top {
   font-family: "LEMON MILK", sans-serif;
   font-size: 7.2rem;
-  font-weight: bold;
+  font-weight: 500;
   color: #ffffff;
   letter-spacing: 0.01em;
   text-transform: uppercase;
@@ -751,17 +747,17 @@ a {
 .hero__title-bottom {
   font-family: "LEMON MILK", sans-serif;
   font-size: 7.2rem;
-  font-weight: bold;
+  font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.02em;
-  -webkit-text-stroke: 2.5px #ffffff;
+  -webkit-text-stroke: 1px #ffffff;
   color: transparent;
   line-height: 0.95;
 }
 
 /* --- Tavsif --- */
 .hero__desc {
-  font-family: "Jost", sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 2.5rem;
   font-weight: 400;
   color: rgba(255, 255, 255, 0.85);
@@ -777,7 +773,7 @@ a {
   border-radius: 10rem;
   position: relative;
   isolation: isolate;
-  font-family: "Jost", sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 1.5rem;
   font-weight: 400;
   letter-spacing: 0.1em;
@@ -842,7 +838,7 @@ a {
   flex-direction: column;
   border-radius: 2.4rem;
   padding: 2.6rem 2.6rem 2.4rem;
-  background: rgba(11, 2, 40, 0.92);
+  padding-bottom: 5.5rem;
   border: 1px solid rgba(90, 20, 152, 0.28);
   box-shadow:
     0 28px 70px rgba(0, 0, 0, 0.62),
@@ -919,7 +915,7 @@ a {
 }
 
 .benefit__title {
-  font-family: "Jost", sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 2.1rem;
   font-weight: 500;
   color: #6849fe;
@@ -932,7 +928,7 @@ a {
 }
 
 .benefit__text {
-  font-family: "Jost", sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 1.6rem;
   font-weight: 400;
   color: rgba(255, 255, 255, 0.84);
@@ -945,7 +941,7 @@ a {
 
 .games {
   width: 100%;
-  margin-top: 10rem;
+  margin-top: 15rem;
 }
 
 .games__head {
@@ -1106,7 +1102,7 @@ a {
   position: relative;
   width: 100%;
   border-radius: 2.8rem;
-  font-family: "Jost", sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 1.8rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -1266,7 +1262,7 @@ a {
 
 .services {
   width: 100%;
-  margin-top: 10rem;
+  margin-top: 15rem;
 }
 
 .services__head {
@@ -1495,7 +1491,7 @@ a {
 ============================================= */
 
 .how {
-  margin-top: 20rem;
+  margin-top: 15rem;
   position: relative;
 }
 
@@ -1606,7 +1602,7 @@ a {
 
 .testimonials {
   width: 100%;
-  margin-top: 10rem;
+  margin-top: 15rem;
 }
 
 .testimonials__head {
@@ -1819,7 +1815,7 @@ a {
 ============================================= */
 
 .boosting-info {
-  margin-top: 10rem;
+  margin-top: 15rem;
   position: relative;
 }
 
@@ -2174,7 +2170,7 @@ a {
 ============================================= */
 
 .footer {
-  margin-top: 10rem;
+  margin-top: 15rem;
   position: relative;
   isolation: isolate;
   overflow: hidden;
@@ -2863,6 +2859,7 @@ a {
 
   .benefit {
     padding: 2.2rem 2.2rem 2rem;
+    padding-bottom: 3.5rem;
     border-radius: 2.4rem;
   }
 
@@ -3060,6 +3057,7 @@ a {
     row-gap: 0.5rem;
     align-items: center;
     padding: 1.8rem;
+    padding-bottom: 3.3rem;
   }
 
   .benefit__icon {
