@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>nanoboost</title>
+    <title>Nanoboost</title>
     <meta name="theme-color" content="#08071a" />
     <link rel="stylesheet" href="style.css" />
     <link rel="icon" href="./assets/icons/main-logo.svg" />
@@ -16,6 +16,12 @@
     <link
       rel="preload"
       as="image"
+      href="./assets/icons/logo-text.png"
+      fetchpriority="high"
+    />
+    <link
+      rel="preload"
+      as="image"
       href="./assets/images/gta5.webp"
       fetchpriority="high"
     />
@@ -23,10 +29,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
       rel="stylesheet"
     />
   </head>
@@ -67,7 +69,9 @@
               />
             </g>
           </svg>
-          <span class="logo__text">nanoboost</span>
+          <span class="logo__text">
+            <img src="./assets/icons/logo-text.webp" alt="Nanoboost Logo" />
+          </span>
         </a>
 
         <!-- Navigation -->
@@ -431,12 +435,12 @@
                 x="300"
                 y="105"
                 text-anchor="middle"
-                font-family="Poppins, sans-serif"
+                font-family="Jost"
                 font-size="110"
                 font-weight="700"
                 fill="transparent"
                 stroke="url(#gamesStrokeGrad)"
-                stroke-width="3"
+                stroke-width="1.5"
                 stroke-linejoin="round"
               >
                 Games
@@ -565,7 +569,7 @@
                 font-weight="700"
                 fill="transparent"
                 stroke="url(#servicesStrokeGrad)"
-                stroke-width="3"
+                stroke-width="1.5"
                 stroke-linejoin="round"
               >
                 Services
@@ -674,7 +678,7 @@
                 font-weight="700"
                 fill="transparent"
                 stroke="url(#howStrokeGrad)"
-                stroke-width="3"
+                stroke-width="1.5"
                 stroke-linejoin="round"
               >
                 How it's works
@@ -853,7 +857,7 @@
                 font-weight="700"
                 fill="rgba(101, 58, 222, 0.14)"
                 stroke="#653ade"
-                stroke-width="2.6"
+                stroke-width="1.5"
                 stroke-linejoin="round"
               >
                 FAQ
@@ -1047,7 +1051,7 @@
                 font-weight="700"
                 fill="rgba(101, 58, 222, 0.12)"
                 stroke="rgba(101, 58, 222, 0.8)"
-                stroke-width="2.2"
+                stroke-width="1.5"
                 stroke-linejoin="round"
               >
                 Testimonials
@@ -1238,34 +1242,6 @@
       </section>
 
       <section class="boosting-info container" aria-label="GTA 5 boosting info">
-        <div class="boosting-info__head">
-          <h2 class="boosting-info__title" aria-label="GTA 5 Boosting Service">
-            <svg
-              class="boosting-info__title-bg"
-              aria-hidden="true"
-              focusable="false"
-              viewBox="0 0 980 150"
-              preserveAspectRatio="xMidYMid meet"
-            >
-              <text
-                x="490"
-                y="114"
-                text-anchor="middle"
-                font-family="LEMON MILK, Poppins, sans-serif"
-                font-size="118"
-                font-weight="700"
-                fill="rgba(101, 58, 222, 0.12)"
-                stroke="rgba(101, 58, 222, 0.8)"
-                stroke-width="2.2"
-                stroke-linejoin="round"
-              >
-                Boosting
-              </text>
-            </svg>
-            <span class="boosting-info__title-fg">Boosting</span>
-          </h2>
-        </div>
-
         <div class="boosting-info__card">
           <p class="boosting-info__p">
             NanoBoost is built for players who value their time and want
@@ -1326,7 +1302,9 @@
                   />
                 </g>
               </svg>
-              <span class="logo__text">nanoboost</span>
+              <span class="logo__text">
+                <img src="./assets/icons/logo-text.webp" alt="Nanoboost Logo" />
+              </span>
             </a>
             <div class="footer__contacts" aria-label="Contact">
               <a class="footer__contact" href="mailto:support@nanoboost.com">
@@ -1429,10 +1407,33 @@
             <h3 class="footer__title">Games</h3>
             <ul class="footer__list">
               <li><a class="footer__link" href="#">GTA5 Online</a></li>
-              <li><a class="footer__link" href="#">Destiny 2</a></li>
-              <li><a class="footer__link" href="#">World of Warcraft</a></li>
-              <li><a class="footer__link" href="#">Arc Raiders</a></li>
-              <li><a class="footer__link" href="#">Battlefield 2</a></li>
+              <li>
+                <a
+                  class="footer__link"
+                  href="#"
+                  aria-disabled="true"
+                  tabindex="-1"
+                  >World of Warcraft</a
+                >
+              </li>
+              <li>
+                <a
+                  class="footer__link"
+                  href="#"
+                  aria-disabled="true"
+                  tabindex="-1"
+                  >Destiny 2</a
+                >
+              </li>
+              <li>
+                <a
+                  class="footer__link"
+                  href="#"
+                  aria-disabled="true"
+                  tabindex="-1"
+                  >League of Legends</a
+                >
+              </li>
             </ul>
           </div>
 

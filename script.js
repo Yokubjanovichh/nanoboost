@@ -103,6 +103,17 @@ if (faqItems.length) {
 }
 
 // =============================================
+// Disabled footer placeholder links
+// =============================================
+document.addEventListener("click", (e) => {
+  const disabledFooterLink = e.target.closest(
+    '.footer__link[aria-disabled="true"], .footer__contact[aria-disabled="true"]',
+  );
+  if (!disabledFooterLink) return;
+  e.preventDefault();
+});
+
+// =============================================
 // Testimonials carousel (infinite loop)
 // =============================================
 const testimonialsSection = document.querySelector(".testimonials");
@@ -110,7 +121,9 @@ const testimonialsTrack = document.querySelector(".testimonials__grid");
 const testimonialsSlider = document.querySelector(".testimonials__slider");
 
 if (testimonialsSection && testimonialsTrack) {
-  const dotsContainer = testimonialsSection.querySelector(".testimonials__dots");
+  const dotsContainer = testimonialsSection.querySelector(
+    ".testimonials__dots",
+  );
   let testimonialDots = [];
 
   const defsSvg = testimonialsTrack.querySelector('svg[width="0"][height="0"]');
@@ -229,12 +242,30 @@ if (testimonialsSection && testimonialsTrack) {
     // Start at first real item
     position = cloneCount;
 
-    const firstCard = testimonialsTrack.querySelector(".testimonial");
-    if (!firstCard) return;
-    const cardRect = firstCard.getBoundingClientRect();
-    const trackStyle = window.getComputedStyle(testimonialsTrack);
-    const gap = parseFloat(trackStyle.columnGap || trackStyle.gap || "0") || 0;
-    stepPx = cardRect.width + gap;
+    const cards = Array.from(
+      testimonialsTrack.querySelectorAll(".testimonial"),
+    );
+    if (!cards.length) return;
+
+    if (cards.length >= 2) {
+      const a = cards[0].getBoundingClientRect();
+      const b = cards[1].getBoundingClientRect();
+      stepPx = b.left - a.left;
+    }
+
+    if (!stepPx || stepPx <= 0) {
+      const firstCard = cards[0];
+      const cardRect = firstCard.getBoundingClientRect();
+      const trackStyle = window.getComputedStyle(testimonialsTrack);
+      const gap =
+        parseFloat(
+          trackStyle.columnGap ||
+            trackStyle.gap ||
+            trackStyle.getPropertyValue("gap") ||
+            "0",
+        ) || 0;
+      stepPx = cardRect.width + gap;
+    }
 
     setTransformForPosition(false);
     // Restore transition after the "jump"
@@ -322,7 +353,10 @@ if (testimonialsSection && testimonialsTrack) {
       if (!isHorizontal) {
         if (Math.abs(dx) > intentThreshold && Math.abs(dx) > Math.abs(dy)) {
           isHorizontal = true;
-        } else if (Math.abs(dy) > intentThreshold && Math.abs(dy) > Math.abs(dx)) {
+        } else if (
+          Math.abs(dy) > intentThreshold &&
+          Math.abs(dy) > Math.abs(dx)
+        ) {
           // user is scrolling vertically
           isDown = false;
         }
