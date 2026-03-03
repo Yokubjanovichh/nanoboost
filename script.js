@@ -139,6 +139,7 @@ if (testimonialsSection && testimonialsTrack) {
   const getVisibleCount = () => {
     if (window.innerWidth <= 430) return 1;
     if (window.innerWidth <= 768) return 2;
+    if (window.innerWidth >= 1600) return 4;
     return 3;
   };
 

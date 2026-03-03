@@ -92,15 +92,15 @@ a {
 }
 
 :root {
-  --container-max: 1680px;
-  --container-max-xl: 1750px;
+  --container-max: 1650px;
+  --container-max-xl: 1700px;
 }
 
 .container {
   width: 100%;
   margin-left: auto;
   margin-right: auto;
-  max-width: min(100%, clamp(1200px, 88vw, var(--container-max)));
+  max-width: min(100%, clamp(1200px, 86vw, var(--container-max)));
 }
 
 @media (min-width: 1600px) {
@@ -147,7 +147,7 @@ a {
 }
 
 .logo__text {
-  width: 20rem;
+  width: 18rem;
 }
 
 .logo__text img {
@@ -813,35 +813,6 @@ a {
   transform: translateY(-2px);
 }
 
-/* --- Slider nuqtalar --- */
-.hero__dots {
-  position: absolute;
-  bottom: 2.8rem;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 1.1rem;
-  z-index: 1;
-}
-
-.hero__dot {
-  width: 0.9rem;
-  height: 0.9rem;
-  border-radius: 50%;
-  background: #04011c;
-  transition:
-    background 0.25s ease,
-    transform 0.25s ease,
-    box-shadow 0.25s ease;
-  cursor: pointer;
-}
-
-.hero__dot.is-active {
-  background: #674edf;
-  box-shadow: 0 0 1.2rem rgba(103, 78, 223, 0.55);
-  transform: scale(1.2);
-}
-
 /* --- Hero bottom cards --- */
 .hero__bottom {
   width: 100%;
@@ -1023,6 +994,7 @@ a {
 .game-card {
   --border-size: 3px;
   width: 100%;
+  min-width: 0;
   position: relative;
   isolation: isolate;
   display: flex;
@@ -1351,6 +1323,7 @@ a {
   position: relative;
   display: flex;
   flex-direction: column;
+  min-width: 0;
   overflow: hidden;
   isolation: isolate;
   border-radius: 2.4rem;
@@ -1739,6 +1712,16 @@ a {
   flex-direction: column;
 }
 
+@media (min-width: 1600px) {
+  .testimonials__slider {
+    max-width: min(100%, clamp(980px, 78vw, var(--container-max-xl)));
+  }
+
+  .testimonial {
+    flex-basis: calc((100% - (3 * var(--t-gap)) - 2px) / 4);
+  }
+}
+
 .testimonial::after {
   content: "";
   position: absolute;
@@ -1864,77 +1847,6 @@ a {
   background: #6f4bff;
   border-color: #6f4bff;
   transform: scale(1.15);
-}
-
-/* =============================================
-   Boosting info
-============================================= */
-
-.boosting-info {
-  margin-top: clamp(8rem, 6vw, 14rem);
-  position: relative;
-}
-
-.boosting-info__title {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-
-.boosting-info__title-bg {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -59%);
-  width: min(78rem, 96vw);
-  height: 12.2rem;
-  opacity: 0.62;
-  pointer-events: none;
-}
-
-.boosting-info__title-fg {
-  position: relative;
-  z-index: 1;
-  font-size: 5.8rem;
-  font-weight: 500;
-  line-height: 1;
-  color: #ffffff;
-}
-
-.boosting-info__card {
-  margin: 0 auto;
-  max-width: min(100%, clamp(720px, 62vw, 980px));
-  padding: 0;
-  background: transparent;
-  border: 0;
-  border-radius: 0;
-  box-shadow: none;
-  overflow: visible;
-}
-
-.boosting-info__card::before {
-  content: none;
-}
-
-.boosting-info__card::after {
-  content: none;
-}
-
-.boosting-info__card > * {
-  position: static;
-}
-
-.boosting-info__p {
-  font-size: 1.8rem;
-  line-height: 1.65;
-  color: rgba(255, 255, 255, 0.88);
-  max-width: 100%;
-}
-
-.boosting-info__p + .boosting-info__p {
-  margin-top: clamp(1.6rem, 1.4vw, 2.2rem);
 }
 
 /* =============================================
@@ -2162,16 +2074,6 @@ a {
   height: 5.2rem;
 }
 
-.footer__logo .logo__text {
-  font-family: "Playfair Display", sans-serif;
-  font-size: 3.2rem;
-  font-weight: 600;
-  color: #ffffff;
-  letter-spacing: 0;
-  white-space: nowrap;
-  width: auto;
-}
-
 .footer__logo .logo__text img {
   width: auto;
   max-width: clamp(120px, 10vw, 160px);
@@ -2360,6 +2262,38 @@ a {
 }
 
 /* --- Responsive --- */
+/* Desktop: lock column count for the two product grids */
+@media (max-width: 1599.98px) {
+  .games__grid > .game-card:nth-child(5),
+  .services__grid > .service-card:nth-child(5) {
+    display: none;
+  }
+}
+
+@media (min-width: 981px) and (max-width: 1599.98px) {
+  .games__grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 981px) and (max-width: 1599.98px) {
+  .services__grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1600px) {
+  .games__grid,
+  .services__grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  .games__grid > .game-card:nth-child(5),
+  .services__grid > .service-card:nth-child(5) {
+    display: flex;
+  }
+}
+
 @media (max-width: 980px) {
   .hero__title-top {
     font-size: 5.6rem;
@@ -2443,22 +2377,6 @@ a {
   }
 
   .testimonial__text {
-    font-size: 1.7rem;
-  }
-
-  .boosting-info__title-fg {
-    font-size: 4.8rem;
-  }
-
-  .boosting-info__title-bg {
-    height: 10.8rem;
-  }
-
-  .boosting-info__card {
-    padding: 0;
-  }
-
-  .boosting-info__p {
     font-size: 1.7rem;
   }
 
@@ -2619,34 +2537,6 @@ a {
   .testimonials__dot {
     width: 12px;
     height: 12px;
-  }
-
-  .boosting-info {
-    margin-top: clamp(8rem, 6vw, 14rem);
-  }
-
-  .boosting-info__title-bg {
-    width: min(48rem, 92vw);
-    height: 8.8rem;
-    transform: translate(-50%, -58%);
-  }
-
-  .boosting-info__title-fg {
-    font-size: 3.2rem;
-  }
-
-  .boosting-info__card {
-    border-radius: 0;
-    padding: 0;
-  }
-
-  .boosting-info__p {
-    font-size: 1.45rem;
-    line-height: 1.55;
-  }
-
-  .boosting-info__p + .boosting-info__p {
-    margin-top: 1.6rem;
   }
 
   .footer {
