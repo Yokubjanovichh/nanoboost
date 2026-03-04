@@ -976,8 +976,7 @@ a {
 @supports (-webkit-touch-callout: none) {
   .games__title-bg text,
   .services__title-bg text,
-  .how__title-bg text,
-  .how-step__num text {
+  .how__title-bg text {
     stroke: #653ade !important;
   }
 }
