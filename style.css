@@ -986,6 +986,25 @@ a {
   paint-order: stroke;
 }
 
+/* Safari/iOS: gradient stroke on SVG <text> is unreliable.
+   Keep gradient in other browsers, but force a solid outline on WebKit. */
+.games__title-bg text,
+.services__title-bg text,
+.how__title-bg text,
+.how-step__num text {
+  fill: none;
+  text-rendering: geometricPrecision;
+}
+
+@supports (-webkit-touch-callout: none) {
+  .games__title-bg text,
+  .services__title-bg text,
+  .how__title-bg text,
+  .how-step__num text {
+    stroke: #653ade !important;
+  }
+}
+
 .games__title-fg {
   position: relative;
   z-index: 1;
