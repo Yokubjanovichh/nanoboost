@@ -131,6 +131,39 @@ if (testimonialsSection && testimonialsTrack) {
     testimonialsTrack.querySelectorAll(".testimonial"),
   );
 
+  let starGradientSerial = 0;
+
+  const localizeTestimonialStarGradients = () => {
+    const gradientTemplate = defsSvg?.querySelector("#testimonialStarGradient");
+    if (!gradientTemplate) return;
+
+    const starSvgs = testimonialsTrack.querySelectorAll(
+      ".testimonial__stars svg",
+    );
+    if (!starSvgs.length) return;
+
+    starSvgs.forEach((svg) => {
+      svg
+        .querySelectorAll('defs[data-nb-local="testimonialStarGradient"]')
+        .forEach((defs) => defs.remove());
+
+      const defs = document.createElementNS(
+        "http://www.w3.org/2000/svg",
+        "defs",
+      );
+      defs.setAttribute("data-nb-local", "testimonialStarGradient");
+
+      const gradient = gradientTemplate.cloneNode(true);
+      const localId = `testimonialStarGradient-local-${starGradientSerial++}`;
+      gradient.id = localId;
+      defs.appendChild(gradient);
+
+      svg.insertBefore(defs, svg.firstChild);
+      svg.style.stroke = `url(#${localId})`;
+      svg.style.fill = "none";
+    });
+  };
+
   let visibleCount = 1;
   let cloneCount = 0;
   let position = 0; // index inside (clones + originals + clones)
@@ -239,6 +272,10 @@ if (testimonialsSection && testimonialsTrack) {
       clone.setAttribute("aria-hidden", "true");
       testimonialsTrack.appendChild(clone);
     }
+
+    // Safari: cross-SVG url(#id) paint servers can fail.
+    // Make the gradient local to each star SVG so strokes always render.
+    localizeTestimonialStarGradients();
 
     // Start at first real item
     position = cloneCount;

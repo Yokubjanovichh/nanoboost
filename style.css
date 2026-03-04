@@ -464,36 +464,36 @@ a {
 /* --- 768px: kichik planshet --- */
 @media (max-width: 768px) {
   .header__inner {
-    height: 10rem;
+    height: 7rem;
     gap: 0;
     justify-content: space-between;
   }
 
   .logo__icon {
-    width: 7.2rem;
-    height: 7.2rem;
+    width: 4.6rem;
+    height: 4.6rem;
   }
 
   .logo__text {
-    font-size: 3.9rem;
+    font-size: 2.05rem;
   }
 
   body {
-    padding-top: 10rem;
+    padding-top: 7rem;
   }
 
   /* Nav va right — yashiriladi */
   .nav {
     display: flex;
     position: fixed;
-    top: 10rem;
+    top: 7rem;
     left: 0;
     width: 100%;
     background: rgba(8, 7, 26, 0.75);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border-bottom: 1px solid #2a273f;
-    padding: 2.4rem 2rem;
+    padding: 1.7rem 1.4rem;
     z-index: 99;
 
     /* transition uchun */
@@ -517,12 +517,12 @@ a {
   .nav__list {
     flex-direction: column;
     align-items: flex-start;
-    gap: 2.4rem;
+    gap: 1.7rem;
     width: 100%;
   }
 
   .nav__link {
-    font-size: 2rem;
+    font-size: 1.4rem;
     line-height: 1.1;
   }
 
@@ -536,13 +536,13 @@ a {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 0.8rem;
-    width: 7.8rem;
-    height: 7.8rem;
-    padding: 1.8rem;
+    gap: 0.6rem;
+    width: 5.5rem;
+    height: 5.5rem;
+    padding: 1.3rem;
     cursor: pointer;
     flex-shrink: 0;
-    border-radius: 2.1rem;
+    border-radius: 1.5rem;
     /* gradient border via background-clip trick */
     border: none;
     background:
@@ -553,7 +553,7 @@ a {
   }
 
   .burger__line {
-    width: 3.6rem;
+    width: 2.5rem;
     height: 2px;
     background: #ffffff;
     border-radius: 2px;
@@ -566,7 +566,7 @@ a {
 
   /* X animatsiyasi */
   .burger.is-open .burger__line:nth-child(1) {
-    transform: translateY(calc(0.8rem + 2px)) rotate(45deg);
+    transform: translateY(calc(0.6rem + 2px)) rotate(45deg);
   }
 
   .burger.is-open .burger__line:nth-child(2) {
@@ -575,7 +575,7 @@ a {
   }
 
   .burger.is-open .burger__line:nth-child(3) {
-    transform: translateY(calc(-0.8rem - 2px)) rotate(-45deg);
+    transform: translateY(calc(-0.6rem - 2px)) rotate(-45deg);
   }
 
   /* Dropdown: stack layout on small screens (prevents width overflow) */
@@ -608,34 +608,44 @@ a {
 /* --- 480px: kichik mobil --- */
 @media (max-width: 480px) {
   .header__inner {
-    height: 8.8rem;
+    height: 6.2rem;
   }
 
   .logo__icon {
-    width: 5.7rem;
-    height: 5.7rem;
+    width: 3.6rem;
+    height: 3.6rem;
   }
 
   .logo__text {
-    font-size: 3.3rem;
+    width: 14rem;
   }
 
   .nav {
-    top: 8.8rem;
+    top: 6.2rem;
   }
 
   .burger {
-    width: 6.9rem;
-    height: 6.9rem;
-    border-radius: 1.8rem;
+    width: 4.8rem;
+    height: 4.8rem;
+    border-radius: 1.25rem;
+    padding: 1.05rem;
+    gap: 0.5rem;
   }
 
   .burger__line {
-    width: 3rem;
+    width: 2.1rem;
+  }
+
+  .burger.is-open .burger__line:nth-child(1) {
+    transform: translateY(calc(0.5rem + 2px)) rotate(45deg);
+  }
+
+  .burger.is-open .burger__line:nth-child(3) {
+    transform: translateY(calc(-0.5rem - 2px)) rotate(-45deg);
   }
 
   body {
-    padding-top: 8.8rem;
+    padding-top: 6.2rem;
   }
 }
 /* =============================================
@@ -963,9 +973,16 @@ a {
   height: 13.5rem;
   opacity: 0.55;
   pointer-events: none;
+  overflow: visible;
+  display: block;
 }
 
-.games__title-bg text {
+.games__title-bg text,
+.services__title-bg text,
+.how__title-bg text,
+.faq__title-bg text,
+.testimonials__title-bg text,
+.how-step__num text {
   paint-order: stroke;
 }
 
@@ -1295,6 +1312,8 @@ a {
   height: 12.8rem;
   opacity: 0.46;
   pointer-events: none;
+  overflow: visible;
+  display: block;
 }
 
 .services__title-fg {
@@ -1544,6 +1563,8 @@ a {
   height: 12.8rem;
   opacity: 0.46;
   pointer-events: none;
+  overflow: visible;
+  display: block;
 }
 
 .how__title-fg {
@@ -1587,6 +1608,7 @@ a {
   height: 11.5rem;
   display: block;
   margin: 0 auto;
+  overflow: visible;
 }
 
 .how-step__up {
@@ -1656,6 +1678,8 @@ a {
   height: 12.2rem;
   opacity: 0.62;
   pointer-events: none;
+  overflow: visible;
+  display: block;
 }
 
 .testimonials__title-fg {
@@ -1751,7 +1775,7 @@ a {
   width: clamp(22px, 1.6vw, 28px);
   height: clamp(22px, 1.6vw, 28px);
   fill: none;
-  stroke: url(#testimonialStarGradient);
+  stroke: #ffffff;
   stroke-width: 1.8;
   opacity: 1;
 }
@@ -1931,6 +1955,8 @@ a {
   height: 12rem;
   opacity: 0.62;
   pointer-events: none;
+  overflow: visible;
+  display: block;
 }
 
 .faq__title-fg {
