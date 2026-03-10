@@ -172,14 +172,14 @@ body.page--service {
 
 .service-dropdown__trigger {
   width: 100%;
-  min-height: clamp(5.4rem, 4.1vw, 6.4rem);
+  min-height: clamp(6rem, 4.2vw, 7rem);
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1.6rem;
   padding: 0 clamp(1.6rem, 1.6vw, 2rem);
   border: 0;
-  border-radius: clamp(2.2rem, 2vw, 3rem);
+  border-radius: clamp(3rem, 2vw, 3.5rem);
   outline: none;
   background: #ffffff;
   color: #25213b;
@@ -235,7 +235,7 @@ body.page--service {
   overflow: hidden;
   border-bottom-left-radius: 2rem;
   border-bottom-right-radius: 2rem;
-  background: #ececec;
+  background: #ffffff;
   box-shadow: 0 24px 54px rgba(8, 6, 30, 0.34);
   opacity: 0;
   transform: translateY(-0.4rem);
@@ -286,9 +286,9 @@ body.page--service {
   --g1: #20ceff;
   --g2: #6c56ff;
   --g3: #d15aff;
-  min-height: clamp(5.4rem, 4.4vw, 6.8rem);
+  min-height: clamp(6rem, 4.4vw, 7rem);
   border: 0;
-  border-radius: clamp(2.2rem, 2vw, 3rem);
+  border-radius: clamp(3rem, 2vw, 3.5rem);
   position: relative;
   display: inline-flex;
   align-items: center;

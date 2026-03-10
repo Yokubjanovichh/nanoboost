@@ -1178,7 +1178,13 @@ a {
   font-size: clamp(2rem, 1.2vw, 2.9rem);
   font-weight: 500;
   line-height: 1.28;
-  margin-bottom: 1.2rem;
+  margin-bottom: 1.8rem;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  min-height: 2.56em;
+  max-height: 2.56em;
 }
 
 .service-card__price {
@@ -1199,7 +1205,7 @@ a {
 
 .service-card__amount {
   color: #7355ff;
-  font-size: clamp(3.8rem, 2.1vw, 6.6rem);
+  font-size: clamp(2.8rem, 1.6vw, 5.6rem);
   line-height: 1;
   font-weight: 600;
 }
@@ -1340,6 +1346,10 @@ a {
   bottom: 0;
   width: auto;
   min-width: 0;
+  white-space: nowrap;
+  text-wrap: nowrap;
+  padding: 0 1.6rem;
+  font-size: clamp(1.6rem, 1vw, 2.4rem);
 }
 
 @keyframes ctaShine {
@@ -2052,10 +2062,6 @@ a {
     font-size: 1.3rem;
   }
 
-  .service-card__amount {
-    font-size: 4.4rem;
-  }
-
   .service-card__btn {
     width: min(100%, 20rem);
     min-height: 5rem;
@@ -2300,7 +2306,13 @@ a {
   .service-card__name {
     font-size: 2.25rem;
     line-height: 1.22;
-    margin-bottom: 0.8rem;
+    margin-bottom: 1.7rem;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    min-height: 2.44em;
+    max-height: 2.44em;
   }
 
   .service-card__content--custom {
@@ -2322,7 +2334,7 @@ a {
 
   .service-card__price {
     gap: 0.6rem;
-    margin-bottom: 0.9rem;
+    margin-bottom: 1.7rem;
   }
 
   .service-card__from {
@@ -2330,19 +2342,20 @@ a {
   }
 
   .service-card__amount {
-    font-size: 5.4rem;
+    font-size: clamp(3.4rem, 2.5vw, 5.6rem);
     line-height: 0.98;
   }
 
   .service-card__btn {
     width: auto;
-    min-width: 12.6rem;
+    min-width: 15.6rem;
     min-height: 3.8rem;
     margin-top: 0.2rem;
     padding: 0 2rem;
-    font-size: 1.45rem;
+    font-size: 1.8rem;
     letter-spacing: 0.02em;
     border-radius: 999px;
+    margin: 0 auto;
   }
 
   .service-card__btn--custom {
