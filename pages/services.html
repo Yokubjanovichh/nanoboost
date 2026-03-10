@@ -3,27 +3,25 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Nanoboost</title>
+    <title>Nanoboost | GTA Cash & Cars Service</title>
     <meta name="theme-color" content="#08071a" />
-    <link rel="stylesheet" href="./style.css" />
-    <link rel="stylesheet" href="./styles/shared.css" />
-    <link rel="icon" href="./assets/icons/main-logo.svg" />
+    <link rel="icon" href="../assets/icons/main-logo.svg" />
     <link
       rel="preload"
       as="image"
-      href="./assets/images/mainBg.webp"
+      href="../assets/images/mainBg.webp"
       fetchpriority="high"
     />
     <link
       rel="preload"
       as="image"
-      href="./assets/icons/logo-text.png"
+      href="../assets/icons/logo-text.webp"
       fetchpriority="high"
     />
     <link
       rel="preload"
       as="image"
-      href="./assets/images/gta5.webp"
+      href="../assets/images/services1.webp"
       fetchpriority="high"
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -32,13 +30,15 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="../styles/shared.css" />
+    <link rel="stylesheet" href="../styles/service-page.css" />
   </head>
-  <body>
+  <body class="page page--service">
     <!-- ===== HEADER ===== -->
     <header class="header">
       <div class="container header__inner">
         <!-- Logo -->
-        <a href="#" class="logo">
+        <a href="../index.html" class="logo">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="logo__icon"
@@ -71,7 +71,7 @@
             </g>
           </svg>
           <span class="logo__text">
-            <img src="./assets/icons/logo-text.webp" alt="Nanoboost Logo" />
+            <img src="../assets/icons/logo-text.webp" alt="Nanoboost Logo" />
           </span>
         </a>
 
@@ -201,7 +201,6 @@
                 </div>
 
                 <div class="dropdown__sub">
-                  <!-- GTA5 -->
                   <ul class="dropdown__sublist is-active" data-for="gta5">
                     <li class="dropdown__subitem"><a href="#">cash</a></li>
                     <li class="dropdown__subitem dropdown__subitem--active">
@@ -212,7 +211,6 @@
                       <a href="#">modded account</a>
                     </li>
                   </ul>
-                  <!-- Destiny 2 -->
                   <ul class="dropdown__sublist" data-for="destiny2">
                     <li class="dropdown__subitem"><a href="#">boost</a></li>
                     <li class="dropdown__subitem"><a href="#">carry</a></li>
@@ -221,7 +219,6 @@
                       <a href="#">power level</a>
                     </li>
                   </ul>
-                  <!-- World Of Warcraft -->
                   <ul class="dropdown__sublist" data-for="wow">
                     <li class="dropdown__subitem"><a href="#">gold</a></li>
                     <li class="dropdown__subitem"><a href="#">leveling</a></li>
@@ -232,7 +229,6 @@
                       <a href="#">raid carry</a>
                     </li>
                   </ul>
-                  <!-- Arc Raiders -->
                   <ul class="dropdown__sublist" data-for="arc">
                     <li class="dropdown__subitem">
                       <a href="#">rank boost</a>
@@ -240,7 +236,6 @@
                     <li class="dropdown__subitem"><a href="#">resources</a></li>
                     <li class="dropdown__subitem"><a href="#">coaching</a></li>
                   </ul>
-                  <!-- CS2 -->
                   <ul class="dropdown__sublist" data-for="cs2">
                     <li class="dropdown__subitem">
                       <a href="#">rank boost</a>
@@ -249,7 +244,6 @@
                     <li class="dropdown__subitem"><a href="#">faceit</a></li>
                     <li class="dropdown__subitem"><a href="#">wingman</a></li>
                   </ul>
-                  <!-- WoW 2 -->
                   <ul class="dropdown__sublist" data-for="wow2">
                     <li class="dropdown__subitem"><a href="#">mythic+</a></li>
                     <li class="dropdown__subitem"><a href="#">pvp boost</a></li>
@@ -258,11 +252,15 @@
                 </div>
               </div>
             </li>
-            <li class="nav__item"><a href="#" class="nav__link">Why Us</a></li>
+            <li class="nav__item">
+              <a href="../index.html" class="nav__link">Why Us</a>
+            </li>
             <li class="nav__item">
               <a href="#contacts" class="nav__link">Contacts</a>
             </li>
-            <li class="nav__item"><a href="#faq" class="nav__link">FAQ</a></li>
+            <li class="nav__item">
+              <a href="../index.html#faq" class="nav__link">FAQ</a>
+            </li>
           </ul>
         </nav>
 
@@ -284,17 +282,17 @@
             <button class="search__btn" aria-label="Search">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="18"
-                height="18"
+                width="17"
+                height="17"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                stroke-width="2"
+                stroke-width="2.2"
                 stroke-linecap="round"
                 stroke-linejoin="round"
               >
-                <circle cx="11" cy="11" r="8" />
-                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                <circle cx="11" cy="11" r="7" />
+                <line x1="20" y1="20" x2="16.65" y2="16.65" />
               </svg>
             </button>
           </div>
@@ -302,8 +300,8 @@
           <a href="#" class="cart" aria-label="Cart">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="30"
-              height="30"
+              width="28"
+              height="28"
               viewBox="0 -0.5 25 25"
               fill="none"
             >
@@ -311,14 +309,14 @@
                 fill-rule="evenodd"
                 clip-rule="evenodd"
                 d="M5.50063 16.1407C5.46273 18.2335 7.1278 19.9613 9.22063 20.0007H15.7806C17.8735 19.9613 19.5385 18.2335 19.5006 16.1407L19.0636 11.4527C18.9527 9.68529 17.716 8.19053 16.0006 7.75065C15.6432 7.64667 15.2729 7.59348 14.9006 7.59265H10.1006C9.72837 7.59348 9.35808 7.64667 9.00063 7.75065C7.28636 8.19067 6.05026 9.68433 5.93863 11.4507L5.50063 16.1407Z"
-                stroke="#ffffff"
+                stroke="currentColor"
                 stroke-width="1.5"
                 stroke-linecap="round"
                 stroke-linejoin="round"
               />
               <path
                 d="M16.0006 9.38862V7.36762C15.9629 5.4718 14.3965 3.96493 12.5006 4.00062C10.6047 3.96493 9.03835 5.4718 9.00061 7.36762V9.38762"
-                stroke="#ffffff"
+                stroke="currentColor"
                 stroke-width="1.5"
                 stroke-linecap="round"
                 stroke-linejoin="round"
@@ -329,93 +327,211 @@
         </div>
       </div>
     </header>
-    <!-- ===== /HEADER ===== -->
 
     <main class="main">
-      <section class="hero container">
-        <div class="hero__top">
-          <div class="hero__bg">
-            <img
-              src="./assets/images/gta5.webp"
-              alt="GTA 5"
-              class="hero__img"
-              fetchpriority="high"
-              loading="eager"
-              decoding="async"
-            />
+      <section
+        class="service-hero container"
+        aria-labelledby="service-hero-title"
+      >
+        <div class="service-hero__shell">
+          <div class="service-hero__content">
+            <h1 class="service-hero__title" id="service-hero-title">
+              GTA Online Cash+<br />
+              Cars Boost PS4/PS5
+            </h1>
+
+            <form class="service-hero__purchase" action="#" method="get">
+              <label
+                class="service-hero__label"
+                id="service-option-label"
+                for="service-option"
+              >
+                Choose an Option
+              </label>
+              <div class="service-hero__select-wrap service-dropdown">
+                <input
+                  type="hidden"
+                  id="service-option"
+                  name="option"
+                  value="15 million - 19.99$"
+                />
+                <button
+                  type="button"
+                  class="service-dropdown__trigger"
+                  aria-haspopup="listbox"
+                  aria-expanded="false"
+                  aria-labelledby="service-option-label service-option-value"
+                >
+                  <span
+                    class="service-dropdown__value"
+                    id="service-option-value"
+                  >
+                    15 million - 19.99$
+                  </span>
+                  <span
+                    class="service-dropdown__icon"
+                    aria-hidden="true"
+                  ></span>
+                </button>
+                <div
+                  class="service-dropdown__menu"
+                  role="listbox"
+                  tabindex="-1"
+                >
+                  <button
+                    type="button"
+                    class="service-dropdown__option"
+                    role="option"
+                    data-value="15 million - 19.99$"
+                    aria-selected="true"
+                  >
+                    15 million - 19.99$
+                  </button>
+                  <button
+                    type="button"
+                    class="service-dropdown__option"
+                    role="option"
+                    data-value="25 million - 23.99$"
+                    aria-selected="false"
+                  >
+                    25 million - 23.99$
+                  </button>
+                  <button
+                    type="button"
+                    class="service-dropdown__option"
+                    role="option"
+                    data-value="30 million - 27.99$"
+                    aria-selected="false"
+                  >
+                    30 million - 27.99$
+                  </button>
+                  <button
+                    type="button"
+                    class="service-dropdown__option"
+                    role="option"
+                    data-value="50 million - 33.99$"
+                    aria-selected="false"
+                  >
+                    50 million - 33.99$
+                  </button>
+                  <button
+                    type="button"
+                    class="service-dropdown__option"
+                    role="option"
+                    data-value="75 million - 39.99$"
+                    aria-selected="false"
+                  >
+                    75 million - 39.99$
+                  </button>
+                  <button
+                    type="button"
+                    class="service-dropdown__option"
+                    role="option"
+                    data-value="100 million - 49.99$"
+                    aria-selected="false"
+                  >
+                    100 million - 49.99$
+                  </button>
+                  <button
+                    type="button"
+                    class="service-dropdown__option"
+                    role="option"
+                    data-value="150 million - 60.99$"
+                    aria-selected="false"
+                  >
+                    150 million - 60.99$
+                  </button>
+                  <button
+                    type="button"
+                    class="service-dropdown__option"
+                    role="option"
+                    data-value="200 million - 70.99$"
+                    aria-selected="false"
+                  >
+                    200 million - 70.99$
+                  </button>
+                  <button
+                    type="button"
+                    class="service-dropdown__option"
+                    role="option"
+                    data-value="300 million - 85.99$"
+                    aria-selected="false"
+                  >
+                    300 million - 85.99$
+                  </button>
+                  <button
+                    type="button"
+                    class="service-dropdown__option"
+                    role="option"
+                    data-value="500 million - 120.99$"
+                    aria-selected="false"
+                  >
+                    500 million - 120.99$
+                  </button>
+                  <button
+                    type="button"
+                    class="service-dropdown__option"
+                    role="option"
+                    data-value="750 million - 150.99$"
+                    aria-selected="false"
+                  >
+                    750 million - 150.99$
+                  </button>
+                  <button
+                    type="button"
+                    class="service-dropdown__option"
+                    role="option"
+                    data-value="1 Billion - 199.99$"
+                    aria-selected="false"
+                  >
+                    1 Billion - 199.99$
+                  </button>
+                </div>
+              </div>
+              <button
+                type="submit"
+                class="service-hero__button animated-border"
+              >
+                BUY NOW
+              </button>
+            </form>
           </div>
-          <div class="hero__inner">
-            <div class="hero__content">
-              <h1 class="hero__title">
-                <span class="hero__title-top">GTA 5 ONLINE</span>
-                <span class="hero__title-bottom">BOOSTING</span>
-              </h1>
-              <p class="hero__desc">
-                Level up fast. Earn more.<br />Unlock everything
-              </p>
-              <a href="#" class="hero__btn animated-border">SELECT A SERVICE</a>
+
+          <div class="service-hero__media">
+            <div class="service-hero__image-frame">
+              <img
+                src="../assets/images/services1.webp"
+                alt="GTA Online cash and cars boost"
+                class="service-hero__image"
+                fetchpriority="high"
+                loading="eager"
+                decoding="async"
+              />
             </div>
-          </div>
-        </div>
-
-        <div class="hero__bottom">
-          <div class="hero__benefits">
-            <article class="benefit">
-              <div class="benefit__icon" aria-hidden="true">
-                <img src="./assets/images/shield.webp" alt="shield" />
-              </div>
-              <h3 class="benefit__title">Safe &amp; Secure</h3>
-              <p class="benefit__text">
-                Only trusted methods.<br />Your account is protected.
-              </p>
-            </article>
-
-            <article class="benefit">
-              <div class="benefit__icon" aria-hidden="true">
-                <img src="./assets/images/rocket.webp" alt="rocket" />
-              </div>
-              <h3 class="benefit__title">Super-Fast Delivery</h3>
-              <p class="benefit__text">
-                Start within minutes.<br />We don't waste your time.
-              </p>
-            </article>
-
-            <article class="benefit">
-              <div class="benefit__icon" aria-hidden="true">
-                <img src="./assets/images/support.webp" alt="support" />
-              </div>
-              <h3 class="benefit__title">24/7 Support Team</h3>
-              <p class="benefit__text">
-                Always online — any question, any timezone.
-              </p>
-            </article>
-
-            <article class="benefit">
-              <div class="benefit__icon" aria-hidden="true">
-                <img src="./assets/images/buttons.webp" alt="buttons" />
-              </div>
-              <h3 class="benefit__title">Pro Players Only</h3>
-              <p class="benefit__text">
-                Experienced boosters with thousands of completed orders
-              </p>
-            </article>
           </div>
         </div>
       </section>
 
-      <section class="games container">
-        <div class="games__head">
-          <h2 class="games__title" aria-label="Games">
+      <section
+        class="service-details container"
+        aria-labelledby="service-details-title"
+      >
+        <div class="service-details__head">
+          <h2
+            class="service-details__title"
+            id="service-details-title"
+            aria-label="GTA Online Cash + Cars Boost PS4 / PS5"
+          >
             <svg
-              class="games__title-bg"
+              class="service-details__title-bg"
               aria-hidden="true"
               focusable="false"
-              viewBox="0 0 600 140"
+              viewBox="0 0 900 160"
               preserveAspectRatio="xMidYMid meet"
             >
               <defs>
                 <linearGradient
-                  id="gamesStrokeGrad"
+                  id="serviceDetailsStrokeGrad"
                   x1="0%"
                   y1="0%"
                   x2="100%"
@@ -427,122 +543,166 @@
                 </linearGradient>
               </defs>
               <text
-                x="300"
-                y="105"
+                x="450"
+                y="115"
                 text-anchor="middle"
                 font-family="Jost"
-                font-size="110"
+                font-size="120"
                 font-weight="700"
                 fill="none"
-                stroke="url(#gamesStrokeGrad)"
+                stroke="url(#serviceDetailsStrokeGrad)"
                 stroke-width="1.5"
                 stroke-linejoin="round"
               >
-                Games
+                GTA Online
               </text>
             </svg>
-            <span class="games__title-fg">Games</span>
+            <span class="service-details__title-fg">
+              GTA Online Cash + Cars Boost PS4 / PS5
+            </span>
           </h2>
         </div>
 
-        <div class="games__grid">
-          <article class="game-card">
-            <picture>
-              <source
-                media="(max-width: 430px)"
-                srcset="./assets/images/mobgames1.webp"
-              />
-              <img
-                class="game-card__img"
-                src="./assets/images/games1.webp"
-                alt="GTA5 Online"
-              />
-            </picture>
-            <div class="game-card__content">
-              <h3 class="game-card__title">GTA5 Online</h3>
-              <button class="game-card__cta" href="#">CHOOSE A SERVICE</button>
-            </div>
-          </article>
+        <div class="service-details__body">
+          <p class="service-details__text">
+            Upgrade your GTA Online account on PlayStation 4 or PlayStation 5
+            with our professional Cash + Cars Boost service.
+          </p>
+          <p class="service-details__text">
+            This package is built for players who want immediate financial
+            freedom and access to high-performance vehicles without spending
+            weeks grinding missions and low-paying activities.
+          </p>
+          <p class="service-details__text">
+            With Nanoboost, you receive a structured in-game upgrade that allows
+            you to enjoy premium GTA Online content right away.
+          </p>
+        </div>
+      </section>
 
-          <article class="game-card">
-            <picture>
-              <source
-                media="(max-width: 430px)"
-                srcset="./assets/images/mobgames2.webp"
-              />
-              <img
-                class="game-card__img"
-                src="./assets/images/games2.webp"
-                alt="WORLD OF WARCRAFT"
-              />
-            </picture>
-            <div class="game-card__content">
-              <h3 class="game-card__title">
-                WORLD <br />
-                OF WARCRAFT
-              </h3>
-              <button disabled class="game-card__cta" href="#">
-                Coming Soon
-              </button>
-            </div>
-          </article>
-
-          <article class="game-card">
-            <picture>
-              <source
-                media="(max-width: 430px)"
-                srcset="./assets/images/mobgames3.webp"
-              />
-              <img
-                class="game-card__img"
-                src="./assets/images/games3.webp"
-                alt="Destiny 2"
-              />
-            </picture>
-            <div class="game-card__content">
-              <h3 class="game-card__title">DESTINY 2</h3>
-              <button disabled class="game-card__cta" href="#">
-                Coming Soon
-              </button>
-            </div>
-          </article>
-
-          <article class="game-card">
-            <picture>
-              <source
-                media="(max-width: 430px)"
-                srcset="./assets/images/mobgames4.webp"
-              />
-              <img
-                class="game-card__img"
-                src="./assets/images/games4.webp"
-                alt="LEAGUE OF LEGENDS"
-              />
-            </picture>
-            <div class="game-card__content">
-              <h3 class="game-card__title">
-                LEAGUE <br />
-                OF LEGENDS
-              </h3>
-              <button disabled class="game-card__cta" href="#">
-                Coming soon
-              </button>
-            </div>
-          </article>
-
-          <article class="game-card game-card--custom">
-            <div class="game-card__content game-card__content--custom">
-              <h3 class="game-card__title game-card__title--custom">
-                DON'T SEE YOUR GAME OR PLATFORM?
-              </h3>
-              <p class="game-card__text">
-                Contact our support team and tell us what you need - we're
-                constantly growing our lineup.
-              </p>
-              <a href="#contacts" class="game-card__cta game-card__cta--custom"
-                >CONTACT SUPPORT</a
+      <section
+        class="service-what container"
+        aria-labelledby="service-what-title"
+      >
+        <div class="service-what__head">
+          <h2
+            class="service-what__title"
+            id="service-what-title"
+            aria-label="What You Get"
+          >
+            <svg
+              class="service-what__title-bg"
+              aria-hidden="true"
+              focusable="false"
+              viewBox="0 0 900 160"
+              preserveAspectRatio="xMidYMid meet"
+            >
+              <defs>
+                <linearGradient
+                  id="serviceWhatStrokeGrad"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="0%"
+                >
+                  <stop offset="0%" stop-color="#3e228e" />
+                  <stop offset="50%" stop-color="#653ade" />
+                  <stop offset="100%" stop-color="#3d228c" />
+                </linearGradient>
+              </defs>
+              <text
+                x="450"
+                y="115"
+                text-anchor="middle"
+                font-family="Jost"
+                font-size="120"
+                font-weight="700"
+                fill="none"
+                stroke="url(#serviceWhatStrokeGrad)"
+                stroke-width="1.5"
+                stroke-linejoin="round"
               >
-            </div>
+                What You Get
+              </text>
+            </svg>
+            <span class="service-what__title-fg">What You Get</span>
+          </h2>
+        </div>
+
+        <div class="service-what__grid" role="list">
+          <article class="service-what__card" role="listitem">
+            <h3 class="service-what__card-title">GTA Online Money Boost</h3>
+            <p class="service-what__card-lead">
+              A significant in-game cash upgrade that allows you to:
+            </p>
+            <ul class="service-what__list">
+              <li class="service-what__item">
+                Purchase businesses and properties
+              </li>
+              <li class="service-what__item">Unlock advanced equipment</li>
+              <li class="service-what__item">
+                Invest in vehicles and upgrades
+              </li>
+              <li class="service-what__item">
+                Access high-tier gameplay content
+              </li>
+            </ul>
+          </article>
+
+          <article class="service-what__card" role="listitem">
+            <h3 class="service-what__card-title">Premium Cars Setup</h3>
+            <p class="service-what__card-lead">
+              Depending on the selected package, your account will receive:
+            </p>
+            <ul class="service-what__list">
+              <li class="service-what__item">High-performance vehicles</li>
+              <li class="service-what__item">
+                Fully upgraded engine and performance parts
+              </li>
+              <li class="service-what__item">Armor and handling upgrades</li>
+              <li class="service-what__item">Custom configuration options</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="service-what__sections">
+          <article class="service-what__section">
+            <h3 class="service-what__section-title">
+              Designed for PlayStation Players
+            </h3>
+            <p class="service-what__section-text">
+              This service is optimized specifically for PS4 and PS5 accounts.
+              We ensure compatibility, smooth execution, and proper in-game
+              handling for PlayStation users.
+            </p>
+          </article>
+
+          <article class="service-what__section">
+            <h3 class="service-what__section-title">Service Format</h3>
+            <p class="service-what__section-text">
+              After checkout, the upgrade process begins according to your
+              selected package. Execution time depends on the amount of cash and
+              vehicle configuration chosen. You will receive your account fully
+              prepared and ready for gameplay.
+            </p>
+          </article>
+
+          <article class="service-what__section">
+            <h3 class="service-what__section-title">Play Without Limits</h3>
+            <p class="service-what__section-text">
+              GTA Online becomes significantly more enjoyable when financial
+              barriers are removed.
+            </p>
+            <p class="service-what__section-text">
+              With the right balance and a strong garage setup, you unlock the
+              full experience of Los Santos — businesses, heists, customization,
+              and competitive gameplay.
+            </p>
+            <p class="service-what__section-text">
+              If you're ready to upgrade your PS4 or PS5 account, this Cash +
+              Cars Boost gives you the foundation to dominate the game on your
+              terms.
+            </p>
           </article>
         </div>
       </section>
@@ -593,7 +753,7 @@
           <article class="service-card">
             <img
               class="service-card__img"
-              src="./assets/images/services1.webp"
+              src="../assets/images/services1.webp"
               alt="GTA Online Cash+Cars Boost"
             />
             <div class="service-card__content">
@@ -605,18 +765,19 @@
                 <span class="service-card__amount">$15.99</span>
               </p>
               <a
-                href="./pages/services.html?service=gta-cash-cars#service-hero-title"
+                href="?service=gta-cash-cars#service-hero-title"
                 class="service-card__btn"
                 data-service="gta-cash-cars"
-                >BUY NOW</a
               >
+                BUY NOW
+              </a>
             </div>
           </article>
 
           <article class="service-card">
             <img
               class="service-card__img"
-              src="./assets/images/services2.webp"
+              src="../assets/images/services2.webp"
               alt="GTA Online Cash+Cars Boost"
             />
             <div class="service-card__content">
@@ -626,7 +787,7 @@
                 <span class="service-card__amount">$19.99</span>
               </p>
               <a
-                href="./pages/services.html?service=gta-cash#service-hero-title"
+                href="?service=gta-cash#service-hero-title"
                 class="service-card__btn"
                 data-service="gta-cash"
               >
@@ -638,7 +799,7 @@
           <article class="service-card">
             <img
               class="service-card__img"
-              src="./assets/images/services3.webp"
+              src="../assets/images/services3.webp"
               alt="GTA Online Cash+Cars Boost"
             />
             <div class="service-card__content">
@@ -648,7 +809,7 @@
                 <span class="service-card__amount">$29.99</span>
               </p>
               <a
-                href="./pages/services.html?service=gta-level#service-hero-title"
+                href="?service=gta-level#service-hero-title"
                 class="service-card__btn"
                 data-service="gta-level"
               >
@@ -660,7 +821,7 @@
           <article class="service-card">
             <img
               class="service-card__img"
-              src="./assets/images/services4.webp"
+              src="../assets/images/services4.webp"
               alt="GTA Online Cash+Cars Boost"
             />
             <div class="service-card__content">
@@ -672,7 +833,7 @@
                 <span class="service-card__amount">$29.99</span>
               </p>
               <a
-                href="./pages/services.html?service=gta-modded#service-hero-title"
+                href="?service=gta-modded#service-hero-title"
                 class="service-card__btn"
                 data-service="gta-modded"
               >
@@ -693,26 +854,27 @@
               <a
                 href="#contacts"
                 class="service-card__btn service-card__btn--custom"
-                >CONTACT SUPPORT</a
               >
+                CONTACT SUPPORT
+              </a>
             </div>
           </article>
         </div>
       </section>
 
-      <section class="how container" aria-label="How it's works">
-        <div class="how__head">
-          <h2 class="how__title" aria-label="How it's works">
+      <section class="why container" aria-labelledby="why-title">
+        <div class="why__head">
+          <h2 class="why__title" id="why-title" aria-label="Why us">
             <svg
-              class="how__title-bg"
+              class="why__title-bg"
               aria-hidden="true"
               focusable="false"
-              viewBox="0 0 900 140"
+              viewBox="0 0 800 140"
               preserveAspectRatio="xMidYMid meet"
             >
               <defs>
                 <linearGradient
-                  id="howStrokeGrad"
+                  id="whyStrokeGradServices"
                   x1="0%"
                   y1="0%"
                   x2="100%"
@@ -724,432 +886,66 @@
                 </linearGradient>
               </defs>
               <text
-                x="450"
+                x="400"
                 y="105"
                 text-anchor="middle"
                 font-family="Poppins, sans-serif"
                 font-size="110"
                 font-weight="700"
                 fill="none"
-                stroke="url(#howStrokeGrad)"
+                stroke="url(#whyStrokeGradServices)"
                 stroke-width="1.5"
                 stroke-linejoin="round"
               >
-                How it's works
+                Why us
               </text>
             </svg>
-            <span class="how__title-fg">How it's works</span>
+            <span class="why__title-fg">Why us</span>
           </h2>
         </div>
 
-        <div class="how__steps">
-          <article class="how-step">
-            <svg
-              class="how-step__num"
-              viewBox="0 0 100 100"
-              overflow="visible"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <defs>
-                <linearGradient
-                  id="howStepGrad1"
-                  x1="0%"
-                  y1="0%"
-                  x2="100%"
-                  y2="0%"
-                >
-                  <stop offset="0%" stop-color="#2de1fe" />
-                  <stop offset="35%" stop-color="#653ade" />
-                  <stop offset="70%" stop-color="#ca4ee0" />
-                  <stop offset="100%" stop-color="#3d228c" />
-                </linearGradient>
-                <mask
-                  id="howStepMask1"
-                  maskUnits="userSpaceOnUse"
-                  maskContentUnits="userSpaceOnUse"
-                  x="-12"
-                  y="-12"
-                  width="124"
-                  height="124"
-                >
-                  <rect x="-12" y="-12" width="124" height="124" fill="#000" />
-                  <text
-                    x="50"
-                    y="88"
-                    text-anchor="middle"
-                    font-family="Poppins, sans-serif"
-                    font-size="96"
-                    font-weight="700"
-                    fill="none"
-                    stroke="#fff"
-                    stroke-width="1"
-                    stroke-linejoin="round"
-                    text-rendering="geometricPrecision"
-                  >
-                    01
-                  </text>
-                </mask>
-              </defs>
-              <rect
-                x="-12"
-                y="-12"
-                width="124"
-                height="124"
-                fill="url(#howStepGrad1)"
-                mask="url(#howStepMask1)"
-              />
-            </svg>
-            <svg
-              class="how-step__up"
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <path d="M6 18L18 6" />
-              <path d="M9 6h9v9" />
-            </svg>
-            <p class="how-step__text">
-              <span>Choose</span> your<br />game &amp; service
-            </p>
-          </article>
-
-          <article class="how-step">
-            <svg
-              class="how-step__num"
-              viewBox="0 0 100 100"
-              overflow="visible"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <defs>
-                <linearGradient
-                  id="howStepGrad2"
-                  x1="0%"
-                  y1="0%"
-                  x2="100%"
-                  y2="0%"
-                >
-                  <stop offset="0%" stop-color="#2de1fe" />
-                  <stop offset="35%" stop-color="#653ade" />
-                  <stop offset="70%" stop-color="#ca4ee0" />
-                  <stop offset="100%" stop-color="#3d228c" />
-                </linearGradient>
-                <mask
-                  id="howStepMask2"
-                  maskUnits="userSpaceOnUse"
-                  maskContentUnits="userSpaceOnUse"
-                  x="-12"
-                  y="-12"
-                  width="124"
-                  height="124"
-                >
-                  <rect x="-12" y="-12" width="124" height="124" fill="#000" />
-                  <text
-                    x="50"
-                    y="88"
-                    text-anchor="middle"
-                    font-family="Poppins, sans-serif"
-                    font-size="96"
-                    font-weight="700"
-                    fill="none"
-                    stroke="#fff"
-                    stroke-width="1"
-                    stroke-linejoin="round"
-                    text-rendering="geometricPrecision"
-                  >
-                    02
-                  </text>
-                </mask>
-              </defs>
-              <rect
-                x="-12"
-                y="-12"
-                width="124"
-                height="124"
-                fill="url(#howStepGrad2)"
-                mask="url(#howStepMask2)"
-              />
-            </svg>
-            <svg
-              class="how-step__up"
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <path d="M6 18L18 6" />
-              <path d="M9 6h9v9" />
-            </svg>
-            <p class="how-step__text"><span>Place</span> your order</p>
-          </article>
-
-          <article class="how-step">
-            <svg
-              class="how-step__num"
-              viewBox="0 0 100 100"
-              overflow="visible"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <defs>
-                <linearGradient
-                  id="howStepGrad3"
-                  x1="0%"
-                  y1="0%"
-                  x2="100%"
-                  y2="0%"
-                >
-                  <stop offset="0%" stop-color="#2de1fe" />
-                  <stop offset="35%" stop-color="#653ade" />
-                  <stop offset="70%" stop-color="#ca4ee0" />
-                  <stop offset="100%" stop-color="#3d228c" />
-                </linearGradient>
-                <mask
-                  id="howStepMask3"
-                  maskUnits="userSpaceOnUse"
-                  maskContentUnits="userSpaceOnUse"
-                  x="-12"
-                  y="-12"
-                  width="124"
-                  height="124"
-                >
-                  <rect x="-12" y="-12" width="124" height="124" fill="#000" />
-                  <text
-                    x="50"
-                    y="88"
-                    text-anchor="middle"
-                    font-family="Poppins, sans-serif"
-                    font-size="96"
-                    font-weight="700"
-                    fill="none"
-                    stroke="#fff"
-                    stroke-width="1"
-                    stroke-linejoin="round"
-                    text-rendering="geometricPrecision"
-                  >
-                    03
-                  </text>
-                </mask>
-              </defs>
-              <rect
-                x="-12"
-                y="-12"
-                width="124"
-                height="124"
-                fill="url(#howStepGrad3)"
-                mask="url(#howStepMask3)"
-              />
-            </svg>
-            <svg
-              class="how-step__up"
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <path d="M6 18L18 6" />
-              <path d="M9 6h9v9" />
-            </svg>
-            <p class="how-step__text"><span>Get</span> your results</p>
-          </article>
-        </div>
-      </section>
-
-      <section
-        class="faq container"
-        id="faq"
-        aria-label="Frequently asked questions"
-      >
-        <div class="faq__head">
-          <h2 class="faq__title" aria-label="FAQ">
-            <svg
-              class="faq__title-bg"
-              aria-hidden="true"
-              focusable="false"
-              viewBox="0 0 480 140"
-              preserveAspectRatio="xMidYMid meet"
-            >
-              <text
-                x="240"
-                y="105"
-                text-anchor="middle"
-                font-family="LEMON MILK, Poppins, sans-serif"
-                font-size="110"
-                font-weight="700"
-                fill="#653ade"
-                fill-opacity="0.14"
-                stroke="#653ade"
-                stroke-width="1.5"
-                stroke-linejoin="round"
-              >
-                FAQ
-              </text>
-            </svg>
-            <span class="faq__title-fg">Got any questions?</span>
-          </h2>
-          <p class="faq__desc">
-            Here are the answers to the most common questions we’ve been asked
-          </p>
-        </div>
-
-        <div class="faq__list" role="list">
-          <article class="faq-item is-open" role="listitem">
-            <button
-              class="faq-item__trigger"
-              type="button"
-              id="faq-q1"
-              aria-expanded="true"
-              aria-controls="faq-a1"
-            >
-              <span class="faq-item__q">Is your boosting service safe?</span>
-              <svg
-                class="faq-item__chev"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <path d="M6 10l6 6 6-6" />
-              </svg>
-            </button>
-            <div
-              class="faq-item__panel"
-              id="faq-a1"
-              role="region"
-              aria-labelledby="faq-q1"
-            >
-              <p class="faq-item__a">
-                Yes. We use professional boosters, secure connections, and
-                proven methods to minimize risks and protect your account.
+        <div class="hero__bottom">
+          <div class="hero__benefits">
+            <article class="benefit">
+              <div class="benefit__icon" aria-hidden="true">
+                <img src="../assets/images/shield.webp" alt="shield" />
+              </div>
+              <h3 class="benefit__title">Safe &amp; Secure</h3>
+              <p class="benefit__text">
+                Only trusted methods.<br />Your account is protected.
               </p>
-            </div>
-          </article>
+            </article>
 
-          <article class="faq-item" role="listitem">
-            <button
-              class="faq-item__trigger"
-              type="button"
-              id="faq-q2"
-              aria-expanded="false"
-              aria-controls="faq-a2"
-            >
-              <span class="faq-item__q">How does the order process work?</span>
-              <svg
-                class="faq-item__chev"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <path d="M6 10l6 6 6-6" />
-              </svg>
-            </button>
-            <div
-              class="faq-item__panel"
-              id="faq-a2"
-              role="region"
-              aria-labelledby="faq-q2"
-            >
-              <p class="faq-item__a">
-                Choose a service, complete the payment, and our support team
-                will contact you to start the boost and confirm all details.
+            <article class="benefit">
+              <div class="benefit__icon" aria-hidden="true">
+                <img src="../assets/images/rocket.webp" alt="rocket" />
+              </div>
+              <h3 class="benefit__title">Super-Fast Delivery</h3>
+              <p class="benefit__text">
+                Start within minutes.<br />We don't waste your time.
               </p>
-            </div>
-          </article>
+            </article>
 
-          <article class="faq-item" role="listitem">
-            <button
-              class="faq-item__trigger"
-              type="button"
-              id="faq-q3"
-              aria-expanded="false"
-              aria-controls="faq-a3"
-            >
-              <span class="faq-item__q"
-                >Do I need to share my account details?</span
-              >
-              <svg
-                class="faq-item__chev"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <path d="M6 10l6 6 6-6" />
-              </svg>
-            </button>
-            <div
-              class="faq-item__panel"
-              id="faq-a3"
-              role="region"
-              aria-labelledby="faq-q3"
-            >
-              <p class="faq-item__a">
-                Not always. Many services are available as carry or duo boosts
-                without sharing your login information.
+            <article class="benefit">
+              <div class="benefit__icon" aria-hidden="true">
+                <img src="../assets/images/support.webp" alt="support" />
+              </div>
+              <h3 class="benefit__title">24/7 Support Team</h3>
+              <p class="benefit__text">
+                Always online — any question, any timezone.
               </p>
-            </div>
-          </article>
+            </article>
 
-          <article class="faq-item" role="listitem">
-            <button
-              class="faq-item__trigger"
-              type="button"
-              id="faq-q4"
-              aria-expanded="false"
-              aria-controls="faq-a4"
-            >
-              <span class="faq-item__q">How long does boosting take?</span>
-              <svg
-                class="faq-item__chev"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <path d="M6 10l6 6 6-6" />
-              </svg>
-            </button>
-            <div
-              class="faq-item__panel"
-              id="faq-a4"
-              role="region"
-              aria-labelledby="faq-q4"
-            >
-              <p class="faq-item__a">
-                The duration depends on the selected service and game. Estimated
-                completion times are shown on each service page.
+            <article class="benefit">
+              <div class="benefit__icon" aria-hidden="true">
+                <img src="../assets/images/buttons.webp" alt="buttons" />
+              </div>
+              <h3 class="benefit__title">Pro Players Only</h3>
+              <p class="benefit__text">
+                Experienced boosters with thousands of completed orders
               </p>
-            </div>
-          </article>
-
-          <article class="faq-item" role="listitem">
-            <button
-              class="faq-item__trigger"
-              type="button"
-              id="faq-q5"
-              aria-expanded="false"
-              aria-controls="faq-a5"
-            >
-              <span class="faq-item__q"
-                >What if I need a custom boosting service?</span
-              >
-              <svg
-                class="faq-item__chev"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <path d="M6 10l6 6 6-6" />
-              </svg>
-            </button>
-            <div
-              class="faq-item__panel"
-              id="faq-a5"
-              role="region"
-              aria-labelledby="faq-q5"
-            >
-              <p class="faq-item__a">
-                You can contact our support via Discord or email, and we’ll
-                create a custom order tailored to your needs.
-              </p>
-            </div>
-          </article>
+            </article>
+          </div>
         </div>
       </section>
 
@@ -1363,13 +1159,216 @@
           </div>
         </div>
       </section>
+
+      <section
+        class="faq container"
+        id="faq"
+        aria-label="Frequently asked questions"
+      >
+        <div class="faq__head">
+          <h2 class="faq__title" aria-label="FAQ">
+            <svg
+              class="faq__title-bg"
+              aria-hidden="true"
+              focusable="false"
+              viewBox="0 0 480 140"
+              preserveAspectRatio="xMidYMid meet"
+            >
+              <text
+                x="240"
+                y="105"
+                text-anchor="middle"
+                font-family="LEMON MILK, Poppins, sans-serif"
+                font-size="110"
+                font-weight="700"
+                fill="#653ade"
+                fill-opacity="0.14"
+                stroke="#653ade"
+                stroke-width="1.5"
+                stroke-linejoin="round"
+              >
+                FAQ
+              </text>
+            </svg>
+            <span class="faq__title-fg">Got any questions?</span>
+          </h2>
+          <p class="faq__desc">
+            Here are the answers to the most common questions we’ve been asked
+          </p>
+        </div>
+
+        <div class="faq__list" role="list">
+          <article class="faq-item is-open" role="listitem">
+            <button
+              class="faq-item__trigger"
+              type="button"
+              id="faq-q1"
+              aria-expanded="true"
+              aria-controls="faq-a1"
+            >
+              <span class="faq-item__q">Is your boosting service safe?</span>
+              <svg
+                class="faq-item__chev"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path d="M6 10l6 6 6-6" />
+              </svg>
+            </button>
+            <div
+              class="faq-item__panel"
+              id="faq-a1"
+              role="region"
+              aria-labelledby="faq-q1"
+            >
+              <p class="faq-item__a">
+                Yes. We use professional boosters, secure connections, and
+                proven methods to minimize risks and protect your account.
+              </p>
+            </div>
+          </article>
+
+          <article class="faq-item" role="listitem">
+            <button
+              class="faq-item__trigger"
+              type="button"
+              id="faq-q2"
+              aria-expanded="false"
+              aria-controls="faq-a2"
+            >
+              <span class="faq-item__q">How does the order process work?</span>
+              <svg
+                class="faq-item__chev"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path d="M6 10l6 6 6-6" />
+              </svg>
+            </button>
+            <div
+              class="faq-item__panel"
+              id="faq-a2"
+              role="region"
+              aria-labelledby="faq-q2"
+            >
+              <p class="faq-item__a">
+                Choose a service, complete the payment, and our support team
+                will contact you to start the boost and confirm all details.
+              </p>
+            </div>
+          </article>
+
+          <article class="faq-item" role="listitem">
+            <button
+              class="faq-item__trigger"
+              type="button"
+              id="faq-q3"
+              aria-expanded="false"
+              aria-controls="faq-a3"
+            >
+              <span class="faq-item__q"
+                >Do I need to share my account details?</span
+              >
+              <svg
+                class="faq-item__chev"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path d="M6 10l6 6 6-6" />
+              </svg>
+            </button>
+            <div
+              class="faq-item__panel"
+              id="faq-a3"
+              role="region"
+              aria-labelledby="faq-q3"
+            >
+              <p class="faq-item__a">
+                Not always. Many services are available as carry or duo boosts
+                without sharing your login information.
+              </p>
+            </div>
+          </article>
+
+          <article class="faq-item" role="listitem">
+            <button
+              class="faq-item__trigger"
+              type="button"
+              id="faq-q4"
+              aria-expanded="false"
+              aria-controls="faq-a4"
+            >
+              <span class="faq-item__q">How long does boosting take?</span>
+              <svg
+                class="faq-item__chev"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path d="M6 10l6 6 6-6" />
+              </svg>
+            </button>
+            <div
+              class="faq-item__panel"
+              id="faq-a4"
+              role="region"
+              aria-labelledby="faq-q4"
+            >
+              <p class="faq-item__a">
+                The duration depends on the selected service and game. Estimated
+                completion times are shown on each service page.
+              </p>
+            </div>
+          </article>
+
+          <article class="faq-item" role="listitem">
+            <button
+              class="faq-item__trigger"
+              type="button"
+              id="faq-q5"
+              aria-expanded="false"
+              aria-controls="faq-a5"
+            >
+              <span class="faq-item__q"
+                >What if I need a custom boosting service?</span
+              >
+              <svg
+                class="faq-item__chev"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path d="M6 10l6 6 6-6" />
+              </svg>
+            </button>
+            <div
+              class="faq-item__panel"
+              id="faq-a5"
+              role="region"
+              aria-labelledby="faq-q5"
+            >
+              <p class="faq-item__a">
+                You can contact our support via Discord or email, and we’ll
+                create a custom order tailored to your needs.
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
     </main>
 
     <footer class="footer" id="contacts" aria-label="Footer">
       <div class="container footer__inner">
         <div class="footer__top">
           <div class="footer__brand">
-            <a href="#" class="logo footer__logo" aria-label="Nanoboost home">
+            <a
+              href="../index.html"
+              class="logo footer__logo"
+              aria-label="Nanoboost home"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="logo__icon"
@@ -1404,7 +1403,10 @@
                 </g>
               </svg>
               <span class="logo__text">
-                <img src="./assets/icons/logo-text.webp" alt="Nanoboost Logo" />
+                <img
+                  src="../assets/icons/logo-text.webp"
+                  alt="Nanoboost Logo"
+                />
               </span>
             </a>
             <div class="footer__contacts" aria-label="Contact">
@@ -1541,8 +1543,8 @@
           <div class="footer__col">
             <h3 class="footer__title">Company</h3>
             <ul class="footer__list">
-              <li><a class="footer__link" href="#">Why Us</a></li>
-              <li><a class="footer__link" href="#faq">FAQ</a></li>
+              <li><a class="footer__link" href="../index.html">Why Us</a></li>
+              <li><a class="footer__link" href="../index.html#faq">FAQ</a></li>
               <li><a class="footer__link" href="#contacts">Contacts</a></li>
               <li><a class="footer__link" href="#">Support</a></li>
             </ul>
@@ -1670,7 +1672,8 @@
       </svg>
       <span class="cart-float__badge">5</span>
     </a>
-    <script src="scripts/shared.js"></script>
-    <script src="scripts/home.js"></script>
+
+    <script src="../scripts/shared.js"></script>
+    <script src="../scripts/service-page.js"></script>
   </body>
 </html>
