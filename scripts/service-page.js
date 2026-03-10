@@ -23,22 +23,40 @@ const SERVICE_CONFIG = {
     titleHtml: "GTA Online Cash Boost<br />PS4/PS5",
     imageSrc: "../assets/images/services2.webp",
     imageAlt: "GTA Online cash boost",
-    options: ["Cash Boost - From 19.99$"],
-    defaultOption: "Cash Boost - From 19.99$",
+    options: [
+      "10 million - 19.99$",
+      "20 million - 24.99$",
+      "35 million - 32.99$",
+      "50 million - 39.99$",
+      "100 million - 59.99$",
+    ],
+    defaultOption: "10 million - 19.99$",
   },
   "gta-level": {
     titleHtml: "GTA Online Level Boost<br />PS4/PS5",
     imageSrc: "../assets/images/services3.webp",
     imageAlt: "GTA Online level boost",
-    options: ["Level Boost - From 29.99$"],
-    defaultOption: "Level Boost - From 29.99$",
+    options: [
+      "Rank 50 - 29.99$",
+      "Rank 100 - 39.99$",
+      "Rank 150 - 49.99$",
+      "Rank 200 - 59.99$",
+      "Rank 300 - 79.99$",
+    ],
+    defaultOption: "Rank 50 - 29.99$",
   },
   "gta-modded": {
     titleHtml: "GTA Online Modded Account<br />PS4/PS5",
     imageSrc: "../assets/images/services4.webp",
     imageAlt: "GTA Online modded account",
-    options: ["Modded Account - From 29.99$"],
-    defaultOption: "Modded Account - From 29.99$",
+    options: [
+      "Modded Basic - 29.99$",
+      "Modded Standard - 39.99$",
+      "Modded Pro - 49.99$",
+      "Modded Ultra - 69.99$",
+      "Modded Legend - 89.99$",
+    ],
+    defaultOption: "Modded Basic - 29.99$",
   },
 };
 
@@ -197,7 +215,6 @@ const applyServiceToHero = (serviceId, { updateUrl = false } = {}) => {
   if (updateUrl) {
     const nextUrl = new URL(window.location.href);
     nextUrl.searchParams.set("service", serviceId);
-    nextUrl.hash = "service-hero-title";
     window.history.pushState({ service: serviceId }, "", nextUrl);
   }
 

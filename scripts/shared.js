@@ -1,6 +1,21 @@
 const burger = document.getElementById("burger");
 const nav = document.querySelector(".nav");
 
+// =============================================
+// Always start from top on page navigation
+// (but respect deep-links that include a hash)
+// =============================================
+if ("scrollRestoration" in history) {
+  history.scrollRestoration = "manual";
+}
+
+window.addEventListener("pageshow", () => {
+  if (window.location.hash) return;
+  requestAnimationFrame(() => {
+    window.scrollTo(0, 0);
+  });
+});
+
 // Burger — navigatsiyani ochish/yopish
 if (burger && nav) {
   burger.addEventListener("click", () => {
