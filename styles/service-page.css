@@ -62,7 +62,7 @@ body.page--service {
 
 .service-hero {
   position: relative;
-  z-index: 1;
+  z-index: 10;
 }
 
 .service-hero__shell {
@@ -231,6 +231,7 @@ body.page--service {
   top: calc(100% + 0.2rem);
   left: 0;
   right: 0;
+  z-index: 20;
   max-height: 0;
   overflow: hidden;
   border-bottom-left-radius: 2rem;
