@@ -1,6 +1,8 @@
 const burger = document.getElementById("burger");
 const nav = document.querySelector(".nav");
 
+const isMobileNav = () => window.matchMedia("(max-width: 980px)").matches;
+
 // =============================================
 // Always start from top on page navigation
 // (but respect deep-links that include a hash)
@@ -21,6 +23,12 @@ if (burger && nav) {
   burger.addEventListener("click", () => {
     burger.classList.toggle("is-open");
     nav.classList.toggle("is-open");
+
+    if (isMobileNav()) {
+      const isOpen = nav.classList.contains("is-open");
+      if (isOpen) dropdownItem?.classList.add("is-open");
+      else dropdownItem?.classList.remove("is-open");
+    }
   });
 
   // Tashqariga bosilsa — yopiladi
@@ -28,6 +36,10 @@ if (burger && nav) {
     if (!burger.contains(e.target) && !nav.contains(e.target)) {
       burger.classList.remove("is-open");
       nav.classList.remove("is-open");
+
+      if (isMobileNav()) {
+        dropdownItem?.classList.remove("is-open");
+      }
     }
   });
 }
@@ -41,11 +53,17 @@ const dropdownLink = dropdownItem?.querySelector(".nav__link");
 if (dropdownLink) {
   dropdownLink.addEventListener("click", (e) => {
     e.preventDefault();
+    if (isMobileNav()) {
+      dropdownItem.classList.add("is-open");
+      return;
+    }
+
     dropdownItem.classList.toggle("is-open");
   });
 
   // Tashqariga bosish — dropdown yopiladi
   document.addEventListener("click", (e) => {
+    if (isMobileNav()) return;
     if (!dropdownItem.contains(e.target)) {
       dropdownItem.classList.remove("is-open");
     }
@@ -53,42 +71,133 @@ if (dropdownLink) {
 }
 
 // =============================================
-// Dropdown — o'yin hover → sub-list almashish
+// Dropdown — Platform → Games → Services
 // =============================================
-const gameItems = document.querySelectorAll(".dropdown__item[data-game]");
-const subLists = document.querySelectorAll(".dropdown__sublist[data-for]");
-const subItems = document.querySelectorAll(".dropdown__subitem a");
+const dropdownRoot = dropdownItem?.querySelector(".dropdown");
+const platformItems = dropdownRoot?.querySelectorAll(
+  ".dropdown__item[data-platform]",
+);
+const gameLists = dropdownRoot?.querySelectorAll(
+  ".dropdown__game-list[data-for-platform]",
+);
+const subLists = dropdownRoot?.querySelectorAll(".dropdown__sublist[data-for]");
+const subItems = dropdownRoot?.querySelectorAll(".dropdown__subitem a");
 
-gameItems.forEach((item) => {
-  item.addEventListener("mouseenter", () => {
-    const game = item.dataset.game;
+const setActiveSublist = (gameId) => {
+  if (!subLists?.length) return;
+  subLists.forEach((list) => list.classList.remove("is-active"));
+  const target = dropdownRoot?.querySelector(
+    `.dropdown__sublist[data-for="${gameId}"]`,
+  );
+  if (target) target.classList.add("is-active");
+};
 
-    // Barcha game itemlardan is-active olib tashlash
-    gameItems.forEach((el) => el.classList.remove("is-active"));
-    item.classList.add("is-active");
+const setActiveGame = (gameId) => {
+  if (!dropdownRoot) return;
+  const activeGameList = dropdownRoot.querySelector(
+    ".dropdown__game-list.is-active",
+  );
+  if (!activeGameList) return;
 
-    // Barcha sub-listlarni yashirib, mos listni ko'rsatish
-    subLists.forEach((list) => list.classList.remove("is-active"));
-    const target = document.querySelector(
-      `.dropdown__sublist[data-for="${game}"]`,
-    );
-    if (target) target.classList.add("is-active");
+  const gameItems = activeGameList.querySelectorAll(
+    ".dropdown__item[data-game]",
+  );
+  gameItems.forEach((el) => el.classList.remove("is-active"));
+  const activeItem = activeGameList.querySelector(
+    `.dropdown__item[data-game="${gameId}"]`,
+  );
+  if (activeItem) activeItem.classList.add("is-active");
+
+  setActiveSublist(gameId);
+};
+
+const setActivePlatform = (platformId) => {
+  if (!dropdownRoot || !platformItems?.length || !gameLists?.length) return;
+
+  platformItems.forEach((el) => el.classList.remove("is-active"));
+  const activePlatform = dropdownRoot.querySelector(
+    `.dropdown__item[data-platform="${platformId}"]`,
+  );
+  if (activePlatform) activePlatform.classList.add("is-active");
+
+  gameLists.forEach((list) => list.classList.remove("is-active"));
+  const targetGameList = dropdownRoot.querySelector(
+    `.dropdown__game-list[data-for-platform="${platformId}"]`,
+  );
+  if (targetGameList) targetGameList.classList.add("is-active");
+
+  const firstGame = targetGameList?.querySelector(".dropdown__item[data-game]");
+  const firstGameId = firstGame?.dataset?.game;
+  if (firstGameId) setActiveGame(firstGameId);
+};
+
+// Platform interactions (hover + click + keyboard)
+platformItems?.forEach((item) => {
+  const platformId = item.dataset.platform;
+  if (!platformId) return;
+
+  item.addEventListener("mouseenter", () => setActivePlatform(platformId));
+  item.addEventListener("click", () => setActivePlatform(platformId));
+  item.addEventListener("keydown", (e) => {
+    if (e.key !== "Enter" && e.key !== " ") return;
+    e.preventDefault();
+    setActivePlatform(platformId);
   });
 });
 
-// Sub-item bosishda active holat
-subItems.forEach((link) => {
+// Game interactions
+dropdownRoot?.querySelectorAll(".dropdown__item[data-game]").forEach((item) => {
+  const gameId = item.dataset.game;
+  if (!gameId) return;
+
+  const shouldHandle = () => {
+    const parentList = item.closest(".dropdown__game-list");
+    return parentList?.classList.contains("is-active");
+  };
+
+  item.addEventListener("mouseenter", () => {
+    if (!shouldHandle()) return;
+    setActiveGame(gameId);
+  });
+
+  item.addEventListener("click", () => {
+    if (!shouldHandle()) return;
+    setActiveGame(gameId);
+  });
+
+  item.addEventListener("keydown", (e) => {
+    if (e.key !== "Enter" && e.key !== " ") return;
+    if (!shouldHandle()) return;
+    e.preventDefault();
+    setActiveGame(gameId);
+  });
+});
+
+// Sub-item click: active state + close dropdown
+subItems?.forEach((link) => {
   link.addEventListener("click", (e) => {
     e.preventDefault();
     const parentList = link.closest(".dropdown__sublist");
     parentList
-      .querySelectorAll(".dropdown__subitem")
+      ?.querySelectorAll(".dropdown__subitem")
       .forEach((li) => li.classList.remove("dropdown__subitem--active"));
     link
       .closest(".dropdown__subitem")
-      .classList.add("dropdown__subitem--active");
+      ?.classList.add("dropdown__subitem--active");
+
+    if (!isMobileNav()) {
+      dropdownItem?.classList.remove("is-open");
+    }
   });
 });
+
+// Ensure initial state is consistent
+if (dropdownRoot && platformItems?.length) {
+  const initialPlatform = dropdownRoot.querySelector(
+    ".dropdown__item[data-platform].is-active",
+  )?.dataset?.platform;
+  setActivePlatform(initialPlatform || platformItems[0].dataset.platform);
+}
 
 // =============================================
 // FAQ accordion
