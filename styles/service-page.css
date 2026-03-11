@@ -385,10 +385,10 @@ body.page--service {
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -62%);
-  width: min(92rem, 100%);
-  height: 16rem;
-  opacity: 0.4;
+  transform: translate(-50%, -59%);
+  width: 70rem;
+  height: 12.8rem;
+  opacity: 0.46;
   pointer-events: none;
   overflow: visible;
   display: block;
@@ -409,13 +409,12 @@ body.page--service {
 .service-details__title-fg {
   position: relative;
   z-index: 1;
-  font-size: clamp(3.2rem, 3vw, 5.6rem);
+  font-size: 4.8rem;
   font-weight: 500;
-  line-height: 1.15;
+  line-height: 1;
   color: #ffffff;
   letter-spacing: 0.01em;
   text-transform: none;
-  text-wrap: balance;
 }
 
 .service-details__body {
@@ -456,10 +455,10 @@ body.page--service {
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -62%);
-  width: min(92rem, 100%);
-  height: 16rem;
-  opacity: 0.4;
+  transform: translate(-50%, -59%);
+  width: 70rem;
+  height: 12.8rem;
+  opacity: 0.46;
   pointer-events: none;
   overflow: visible;
   display: block;
@@ -480,7 +479,7 @@ body.page--service {
 .service-what__title-fg {
   position: relative;
   z-index: 1;
-  font-size: clamp(3.6rem, 3vw, 5.6rem);
+  font-size: 4.8rem;
   font-weight: 500;
   line-height: 1;
   color: #ffffff;
@@ -649,15 +648,19 @@ body.page--service {
   }
 }
 
-@media (max-width: 430px) {
-  .service-details__head {
-    margin-bottom: 2.4rem;
+@media (max-width: 980px) {
+  .service-details__title-bg,
+  .service-what__title-bg {
+    transform: translate(-50%, -57%);
+    width: min(52rem, 92vw);
+    height: 9.4rem;
+    opacity: 0.42;
   }
 
-  .service-details__title-bg {
-    height: 12.8rem;
-    opacity: 0.32;
-    transform: translate(-50%, -60%);
+  .service-details__title-fg,
+  .service-what__title-fg {
+    font-size: 3.8rem;
+    line-height: 1.05;
   }
 }
 
@@ -723,9 +726,8 @@ body.page--service {
     font-size: 2rem;
   }
 
+  .service-details__title-bg,
   .service-what__title-bg {
-    height: 12.8rem;
-    opacity: 0.32;
-    transform: translate(-50%, -60%);
+    transform: translate(-50%, -60%) !important;
   }
 }
