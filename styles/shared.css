@@ -217,7 +217,8 @@ a {
   left: 0;
   display: flex;
   gap: 0;
-  min-width: 62rem;
+  width: fit-content;
+  min-width: 0;
   background: #0b0228;
   border-radius: 1.6rem;
   overflow: hidden;
@@ -240,6 +241,26 @@ a {
   pointer-events: all;
 }
 
+/* Step flow (all devices): Platforms -> Games -> Services */
+.dropdown:not(.has-platform) .dropdown__games,
+.dropdown:not(.has-platform) .dropdown__sub {
+  max-width: 0;
+  opacity: 0;
+  transform: translateX(-0.6rem);
+  padding: 0;
+  border-left: 0;
+  pointer-events: none;
+}
+
+.dropdown.has-platform:not(.has-game) .dropdown__sub {
+  max-width: 0;
+  opacity: 0;
+  transform: translateX(-0.6rem);
+  padding: 0;
+  border-left: 0;
+  pointer-events: none;
+}
+
 /* --- Chap ustun: o'yin ro'yxati --- */
 .dropdown__platforms {
   width: 20rem;
@@ -248,8 +269,18 @@ a {
 
 .dropdown__games {
   width: 22rem;
+  max-width: 22rem;
   padding: 1.2rem 0;
   border-left: 1px solid rgba(255, 255, 255, 0.07);
+  overflow: hidden;
+  opacity: 1;
+  transform: translateX(0);
+  transition:
+    max-width 0.22s ease,
+    opacity 0.22s ease,
+    transform 0.22s ease,
+    padding 0.22s ease,
+    border-left-width 0.22s ease;
 }
 
 .dropdown__game-list {
@@ -306,9 +337,19 @@ a {
 /* --- O'ng ustun: sub-elementlar --- */
 .dropdown__sub {
   width: 20rem;
+  max-width: 20rem;
   background: transparent;
   border-left: 1px solid rgba(255, 255, 255, 0.07);
   padding: 1.2rem 0;
+  overflow: hidden;
+  opacity: 1;
+  transform: translateX(0);
+  transition:
+    max-width 0.22s ease,
+    opacity 0.22s ease,
+    transform 0.22s ease,
+    padding 0.22s ease,
+    border-left-width 0.22s ease;
 }
 
 .dropdown__sublist {
@@ -450,7 +491,7 @@ a {
 /* --- 768px: kichik planshet --- */
 @media (max-width: 980px) {
   .header {
-    padding: 0.5rem 2rem;
+    padding: 0 2rem;
   }
 
   .header__inner {
@@ -479,7 +520,8 @@ a {
     top: 5.95rem;
     right: 0;
     left: auto;
-    width: 85vw;
+    width: 320px;
+    max-width: 85vw;
     height: calc(100vh - 5.95rem);
     height: calc(100dvh - 5.95rem);
     max-height: calc(100vh - 5.95rem);
@@ -522,9 +564,9 @@ a {
   }
 
   .header .nav__link {
-    font-size: clamp(1.5rem, 4.2vw, 1.8rem);
-    line-height: 1.25;
-    padding: 0.65rem 0.4rem;
+    font-size: clamp(1.8rem, 5.2vw, 2.2rem);
+    line-height: 1.2;
+    padding: 0.85rem 0.55rem;
     width: 100%;
   }
 
@@ -598,6 +640,7 @@ a {
   }
 
   .dropdown {
+    display: flex;
     position: static;
     top: auto;
     left: auto;
@@ -606,8 +649,25 @@ a {
     max-width: 100%;
     flex-direction: column;
     border-radius: 1.2rem;
+    margin-top: 0;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    pointer-events: none;
+    transform: translateY(-0.4rem);
+    transition:
+      max-height 0.25s ease,
+      opacity 0.2s ease,
+      transform 0.25s ease,
+      margin-top 0.25s ease;
+  }
+
+  .nav__item--dropdown.is-open .dropdown {
     margin-top: 0.85rem;
-    transform: none;
+    max-height: 120rem;
+    opacity: 1;
+    pointer-events: all;
+    transform: translateY(0);
   }
 
   .dropdown__platforms,
@@ -616,24 +676,74 @@ a {
     padding: 0.85rem 0;
   }
 
+  .dropdown__platforms {
+    width: 100%;
+  }
+
+  .dropdown__platforms .dropdown__list {
+    width: 100%;
+  }
+
   .dropdown__games {
     width: 100%;
+    max-width: none;
     border-left: 0;
     border-top: 1px solid rgba(255, 255, 255, 0.07);
+    max-height: 60rem;
+    opacity: 1;
+    transform: translateY(0);
+    overflow: hidden;
+    transition:
+      max-height 0.22s ease,
+      opacity 0.22s ease,
+      transform 0.22s ease,
+      padding 0.22s ease,
+      border-top-width 0.22s ease;
   }
 
   .dropdown__item,
   .dropdown__subitem a {
-    padding: 0.9rem 1.4rem;
-    margin: 0 0.45rem;
-    font-size: 1.35rem;
+    padding: 1.05rem 1.6rem;
+    margin: 0 0.55rem;
+    font-size: clamp(1.55rem, 4.6vw, 1.8rem);
     border-radius: 0.75rem;
   }
 
   .dropdown__sub {
     width: 100%;
+    max-width: none;
     border-left: 0;
     border-top: 1px solid rgba(255, 255, 255, 0.07);
+    max-height: 60rem;
+    opacity: 1;
+    transform: translateY(0);
+    overflow: hidden;
+    transition:
+      max-height 0.22s ease,
+      opacity 0.22s ease,
+      transform 0.22s ease,
+      padding 0.22s ease,
+      border-top-width 0.22s ease;
+  }
+
+  /* Mobile step flow transitions (stacked): collapse by height */
+  .dropdown:not(.has-platform) .dropdown__games,
+  .dropdown:not(.has-platform) .dropdown__sub {
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(-0.4rem);
+    padding: 0;
+    border-top: 0;
+    pointer-events: none;
+  }
+
+  .dropdown.has-platform:not(.has-game) .dropdown__sub {
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(-0.4rem);
+    padding: 0;
+    border-top: 0;
+    pointer-events: none;
   }
 
   .dropdown__item,

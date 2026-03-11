@@ -26,8 +26,13 @@ if (burger && nav) {
 
     if (isMobileNav()) {
       const isOpen = nav.classList.contains("is-open");
-      if (isOpen) dropdownItem?.classList.add("is-open");
-      else dropdownItem?.classList.remove("is-open");
+      if (isOpen) {
+        dropdownItem?.classList.add("is-open");
+        resetDropdownSteps();
+      } else {
+        dropdownItem?.classList.remove("is-open");
+        resetDropdownSteps();
+      }
     }
   });
 
@@ -39,6 +44,7 @@ if (burger && nav) {
 
       if (isMobileNav()) {
         dropdownItem?.classList.remove("is-open");
+        resetDropdownSteps();
       }
     }
   });
@@ -50,22 +56,35 @@ if (burger && nav) {
 const dropdownItem = document.querySelector(".nav__item--dropdown");
 const dropdownLink = dropdownItem?.querySelector(".nav__link");
 
+const dropdownRoot = dropdownItem?.querySelector(".dropdown");
+
+const resetDropdownSteps = () => {
+  if (!dropdownRoot) return;
+  dropdownRoot.classList.remove("has-platform", "has-game");
+
+  dropdownRoot
+    .querySelectorAll(".dropdown__item[data-game]")
+    .forEach((el) => el.classList.remove("is-active"));
+
+  dropdownRoot
+    .querySelectorAll(".dropdown__sublist[data-for]")
+    .forEach((list) => list.classList.remove("is-active"));
+};
+
 if (dropdownLink) {
   dropdownLink.addEventListener("click", (e) => {
     e.preventDefault();
-    if (isMobileNav()) {
-      dropdownItem.classList.add("is-open");
-      return;
-    }
-
     dropdownItem.classList.toggle("is-open");
+    if (dropdownItem.classList.contains("is-open")) {
+      resetDropdownSteps();
+    }
   });
 
   // Tashqariga bosish — dropdown yopiladi
   document.addEventListener("click", (e) => {
-    if (isMobileNav()) return;
     if (!dropdownItem.contains(e.target)) {
       dropdownItem.classList.remove("is-open");
+      resetDropdownSteps();
     }
   });
 }
@@ -73,7 +92,6 @@ if (dropdownLink) {
 // =============================================
 // Dropdown — Platform → Games → Services
 // =============================================
-const dropdownRoot = dropdownItem?.querySelector(".dropdown");
 const platformItems = dropdownRoot?.querySelectorAll(
   ".dropdown__item[data-platform]",
 );
@@ -86,6 +104,7 @@ const subItems = dropdownRoot?.querySelectorAll(".dropdown__subitem a");
 const setActiveSublist = (gameId) => {
   if (!subLists?.length) return;
   subLists.forEach((list) => list.classList.remove("is-active"));
+  if (!gameId) return;
   const target = dropdownRoot?.querySelector(
     `.dropdown__sublist[data-for="${gameId}"]`,
   );
@@ -108,11 +127,15 @@ const setActiveGame = (gameId) => {
   );
   if (activeItem) activeItem.classList.add("is-active");
 
+  dropdownRoot.classList.add("has-game");
   setActiveSublist(gameId);
 };
 
 const setActivePlatform = (platformId) => {
   if (!dropdownRoot || !platformItems?.length || !gameLists?.length) return;
+
+  dropdownRoot.classList.add("has-platform");
+  dropdownRoot.classList.remove("has-game");
 
   platformItems.forEach((el) => el.classList.remove("is-active"));
   const activePlatform = dropdownRoot.querySelector(
@@ -126,9 +149,11 @@ const setActivePlatform = (platformId) => {
   );
   if (targetGameList) targetGameList.classList.add("is-active");
 
-  const firstGame = targetGameList?.querySelector(".dropdown__item[data-game]");
-  const firstGameId = firstGame?.dataset?.game;
-  if (firstGameId) setActiveGame(firstGameId);
+  // Step flow: don't auto-select a game. User picks a game, then services appear.
+  targetGameList
+    ?.querySelectorAll(".dropdown__item[data-game]")
+    .forEach((el) => el.classList.remove("is-active"));
+  setActiveSublist(null);
 };
 
 // Platform interactions (hover + click + keyboard)
@@ -136,11 +161,24 @@ platformItems?.forEach((item) => {
   const platformId = item.dataset.platform;
   if (!platformId) return;
 
-  item.addEventListener("mouseenter", () => setActivePlatform(platformId));
-  item.addEventListener("click", () => setActivePlatform(platformId));
+  item.addEventListener("mouseenter", () => {
+    if (isMobileNav()) return;
+    setActivePlatform(platformId);
+  });
+
+  item.addEventListener("click", () => {
+    setActivePlatform(platformId);
+  });
+
   item.addEventListener("keydown", (e) => {
     if (e.key !== "Enter" && e.key !== " ") return;
     e.preventDefault();
+
+    if (isMobileNav()) {
+      setActivePlatform(platformId);
+      return;
+    }
+
     setActivePlatform(platformId);
   });
 });
@@ -157,6 +195,7 @@ dropdownRoot?.querySelectorAll(".dropdown__item[data-game]").forEach((item) => {
 
   item.addEventListener("mouseenter", () => {
     if (!shouldHandle()) return;
+    if (isMobileNav()) return;
     setActiveGame(gameId);
   });
 
@@ -193,10 +232,7 @@ subItems?.forEach((link) => {
 
 // Ensure initial state is consistent
 if (dropdownRoot && platformItems?.length) {
-  const initialPlatform = dropdownRoot.querySelector(
-    ".dropdown__item[data-platform].is-active",
-  )?.dataset?.platform;
-  setActivePlatform(initialPlatform || platformItems[0].dataset.platform);
+  resetDropdownSteps();
 }
 
 // =============================================
