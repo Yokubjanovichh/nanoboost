@@ -680,6 +680,14 @@ body.page--service {
     width: min(100%, 42rem);
   }
 
+  .service-dropdown__option {
+    font-size: 2.5rem;
+  }
+
+  .service-dropdown__value {
+    font-size: 2.6rem;
+  }
+
   .service-hero__select-wrap,
   .service-hero__button {
     width: 100%;
