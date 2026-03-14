@@ -112,16 +112,11 @@ body.page--gta5 {
   z-index: 10;
 }
 
-/* Make this banner wider than the default `.container` clamp */
-.page--gta5 .gta5-offer.container {
-  max-width: min(100%, clamp(1200px, 94vw, var(--container-max-xl)));
-}
-
 .gta5-offer__shell {
   position: relative;
   overflow: hidden;
+  height: clamp(32rem, 38vw, 48rem);
   border-radius: 2.4rem;
-  min-height: clamp(40rem, 32vw, 60rem);
 }
 
 .gta5-offer__bg {

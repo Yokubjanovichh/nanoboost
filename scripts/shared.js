@@ -241,9 +241,21 @@ if (dropdownRoot && platformItems?.length) {
 const faqItems = document.querySelectorAll(".faq-item");
 
 if (faqItems.length) {
+  const firstOpenItem = Array.from(faqItems).find((item) =>
+    item.classList.contains("is-open"),
+  );
+
   faqItems.forEach((item) => {
     const trigger = item.querySelector(".faq-item__trigger");
     if (!trigger) return;
+
+    if (firstOpenItem && item !== firstOpenItem) {
+      item.classList.remove("is-open");
+    }
+    trigger.setAttribute(
+      "aria-expanded",
+      item.classList.contains("is-open") ? "true" : "false",
+    );
 
     trigger.addEventListener("click", () => {
       const isOpen = item.classList.contains("is-open");

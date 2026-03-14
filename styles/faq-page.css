@@ -1,0 +1,49 @@
+body.page--faq {
+  overflow-x: hidden;
+}
+
+.page--faq .main {
+  padding-top: 8rem;
+}
+
+@media (max-width: 980px) {
+  .page--faq .main {
+    padding-top: 2.4rem;
+  }
+}
+
+.page--faq .faq {
+  margin-top: clamp(2.4rem, 3.6vw, 6.2rem);
+}
+
+.faq__groups {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2.6rem, 3vw, 4.2rem);
+}
+
+.faq-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.faq-group__title {
+  margin: 0;
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+  font-size: clamp(2.8rem, 2.2vw, 3.6rem);
+  font-weight: 500;
+  line-height: 1.1;
+  color: #ffffff;
+}
+
+.faq-group .faq__list {
+  margin-top: 0;
+}
+
+.faq-group .faq-item:first-child {
+  border-top: 1px solid rgba(101, 58, 222, 0.26);
+}
