@@ -1479,6 +1479,14 @@ a {
   font-weight: 600;
   margin-bottom: 1.6rem;
   line-height: 1.08;
+
+  display: block;
+  overflow: visible;
+  -webkit-line-clamp: unset;
+  line-clamp: unset;
+  -webkit-box-orient: unset;
+  min-height: 0;
+  max-height: none;
 }
 
 .service-card__text {
