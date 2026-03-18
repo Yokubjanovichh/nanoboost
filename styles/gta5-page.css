@@ -186,7 +186,7 @@ body.page--gta5 {
 .gta5-offer__desc {
   margin: 0;
   max-width: 100%;
-  font-size: clamp(1.9rem, 1.25vw, 2.6rem);
+  font-size: clamp(1.5rem, 1.25vw, 2.6rem);
   font-weight: 500;
   line-height: 1.55;
   color: rgba(255, 255, 255, 0.86);
@@ -196,6 +196,31 @@ body.page--gta5 {
   margin-top: clamp(0.8rem, 1vw, 1.6rem);
   font-size: clamp(1.6rem, 1.35vw, 2.4rem);
   padding: clamp(1.6rem, 1.6vw, 2.9rem) clamp(3.6rem, 4.8vw, 9.3rem);
+}
+
+/* Cap GTA5 offer typography/CTA at 1600px.
+   Below 1600px it stays responsive via clamp(). */
+@media (min-width: 1600px) {
+  .gta5-offer__inner {
+    padding: 5.05rem;
+  }
+
+  .gta5-offer__eyebrow {
+    font-size: 3.37rem;
+  }
+
+  .gta5-offer__title {
+    font-size: 6.91rem;
+  }
+
+  .gta5-offer__desc {
+    font-size: 2.11rem;
+  }
+
+  .gta5-offer__btn {
+    font-size: 2.27rem;
+    padding: 2.69rem 8.08rem;
+  }
 }
 
 .gta5-article {
@@ -230,7 +255,7 @@ body.page--gta5 {
 
 @media (max-width: 980px) {
   .page--gta5 .main {
-    padding-top: 2.4rem;
+    padding-top: 5rem;
   }
 
   .gta5-offer__content {
@@ -283,13 +308,29 @@ body.page--gta5 {
     padding: 2.6rem 2rem;
   }
 
+  .gta5-offer__eyebrow {
+    font-size: 1.8rem;
+  }
+
   .gta5-offer__title {
     gap: 0.8rem;
+    font-size: 3.4rem;
+    line-height: 1.1;
+  }
+
+  .gta5-offer__desc {
+    font-size: 1.4rem;
+    line-height: 1.5;
+  }
+
+  .gta5-offer__desc br {
+    display: none;
   }
 
   .gta5-offer__btn {
-    font-size: clamp(1.4rem, 4.2vw, 2.2rem);
-    padding: clamp(1.4rem, 3.4vw, 2.4rem) clamp(2.4rem, 7.2vw, 6.6rem);
+    font-size: 1.35rem;
+    padding: 1.2rem 2.2rem;
+    letter-spacing: 0.06em;
   }
 
   .gta5-intro__title-fg {
