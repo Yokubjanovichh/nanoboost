@@ -2095,6 +2095,10 @@ a {
   border-bottom: 1px solid rgba(101, 58, 222, 0.26);
 }
 
+.faq-item:last-child {
+  border: none;
+}
+
 .faq-item__trigger {
   width: 100%;
   border: 0;

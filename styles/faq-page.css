@@ -21,7 +21,8 @@ body.page--faq {
   z-index: 1;
   display: flex;
   flex-direction: column;
-  gap: clamp(2.6rem, 3vw, 4.2rem);
+  gap: clamp(6rem, 6vw, 8rem);
+  padding: 0 clamp(0rem, 4vw, 6rem);
 }
 
 .faq-group {
@@ -44,6 +45,49 @@ body.page--faq {
   margin-top: 0;
 }
 
-.faq-group .faq-item:first-child {
-  border-top: 1px solid rgba(101, 58, 222, 0.26);
+/* =============================================
+   FAQ page overrides
+   The FAQ page uses a full-width list layout (no "card" wrapper)
+   while still reusing shared FAQ accordion styles.
+============================================= */
+
+.page--faq .faq {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 0;
+  overflow: visible;
+}
+
+.page--faq .faq::before,
+.page--faq .faq::after {
+  display: none;
+}
+
+.page--faq .faq__head,
+.page--faq .faq__list {
+  max-width: 100%;
+}
+
+.page--faq .faq__groups,
+.page--faq .faq-group,
+.page--faq .faq__list {
+  width: 100%;
+}
+
+.page--faq .faq-item__q {
+  max-width: none;
+}
+
+.page--faq .faq-item__a {
+  max-width: none;
+}
+
+.faq__title-bg {
+  transform: translate(-50%, -62%);
+}
+
+.faq__head {
+  margin-bottom: clamp(4rem, 4vw, 5rem);
 }
