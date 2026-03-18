@@ -3,9 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Nanoboost | Contact</title>
+    <title>Nanoboost | Why Us</title>
     <meta name="theme-color" content="#08071a" />
     <link rel="icon" href="../assets/icons/main-logo.svg" />
+
     <link
       rel="preload"
       as="image"
@@ -18,16 +19,19 @@
       href="../assets/icons/logo-text.webp"
       fetchpriority="high"
     />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
       rel="stylesheet"
     />
+
     <link rel="stylesheet" href="../styles/shared.css" />
-    <link rel="stylesheet" href="../styles/contact-page.css" />
+    <link rel="stylesheet" href="../styles/why-us-page.css" />
   </head>
-  <body class="page page--contact">
+
+  <body class="page page--why-us">
     <!-- ===== HEADER ===== -->
     <header class="header">
       <div class="container header__inner">
@@ -209,56 +213,8 @@
                     class="dropdown__list dropdown__game-list"
                     data-for-platform="pc"
                   >
-                    <li class="dropdown__item" data-game="gta5">
-                      <span>GTA5</span>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="10"
-                        height="10"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <polyline points="9 18 15 12 9 6" />
-                      </svg>
-                    </li>
-                    <li class="dropdown__item" data-game="destiny2">
-                      <span>Destiny 2</span>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="10"
-                        height="10"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <polyline points="9 18 15 12 9 6" />
-                      </svg>
-                    </li>
-                    <li class="dropdown__item" data-game="wow">
+                    <li class="dropdown__item is-active" data-game="wow">
                       <span>World Of Warcraft</span>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="10"
-                        height="10"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <polyline points="9 18 15 12 9 6" />
-                      </svg>
-                    </li>
-                    <li class="dropdown__item" data-game="arc">
-                      <span>Arc Raiders</span>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="10"
@@ -311,6 +267,22 @@
                     class="dropdown__list dropdown__game-list"
                     data-for-platform="xbox"
                   >
+                    <li class="dropdown__item is-active" data-game="bf">
+                      <span>Battlefield 2</span>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="10"
+                        height="10"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <polyline points="9 18 15 12 9 6" />
+                      </svg>
+                    </li>
                     <li class="dropdown__item" data-game="gta5">
                       <span>GTA5</span>
                       <svg
@@ -327,96 +299,74 @@
                         <polyline points="9 18 15 12 9 6" />
                       </svg>
                     </li>
-                    <li class="dropdown__item" data-game="destiny2">
-                      <span>Destiny 2</span>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="10"
-                        height="10"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <polyline points="9 18 15 12 9 6" />
-                      </svg>
-                    </li>
-                    <li class="dropdown__item" data-game="arc">
-                      <span>Arc Raiders</span>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="10"
-                        height="10"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <polyline points="9 18 15 12 9 6" />
-                      </svg>
-                    </li>
                   </ul>
-                </div>
 
-                <div class="dropdown__sub">
-                  <!-- GTA5 -->
-                  <ul class="dropdown__sublist is-active" data-for="gta5">
-                    <li class="dropdown__subitem"><a href="#">cash</a></li>
-                    <li class="dropdown__subitem dropdown__subitem--active">
-                      <a href="#">cash&amp;cars</a>
-                    </li>
-                    <li class="dropdown__subitem"><a href="#">level</a></li>
-                    <li class="dropdown__subitem">
-                      <a href="#">modded account</a>
-                    </li>
-                  </ul>
-                  <!-- Destiny 2 -->
-                  <ul class="dropdown__sublist" data-for="destiny2">
-                    <li class="dropdown__subitem"><a href="#">boost</a></li>
-                    <li class="dropdown__subitem"><a href="#">carry</a></li>
-                    <li class="dropdown__subitem"><a href="#">coaching</a></li>
-                    <li class="dropdown__subitem">
-                      <a href="#">power level</a>
-                    </li>
-                  </ul>
-                  <!-- World Of Warcraft -->
-                  <ul class="dropdown__sublist" data-for="wow">
-                    <li class="dropdown__subitem"><a href="#">gold</a></li>
-                    <li class="dropdown__subitem"><a href="#">leveling</a></li>
-                    <li class="dropdown__subitem">
-                      <a href="#">gear boost</a>
-                    </li>
-                    <li class="dropdown__subitem">
-                      <a href="#">raid carry</a>
-                    </li>
-                  </ul>
-                  <!-- Arc Raiders -->
-                  <ul class="dropdown__sublist" data-for="arc">
-                    <li class="dropdown__subitem">
-                      <a href="#">rank boost</a>
-                    </li>
-                    <li class="dropdown__subitem"><a href="#">resources</a></li>
-                    <li class="dropdown__subitem"><a href="#">coaching</a></li>
-                  </ul>
-                  <!-- CS2 -->
-                  <ul class="dropdown__sublist" data-for="cs2">
-                    <li class="dropdown__subitem">
-                      <a href="#">rank boost</a>
-                    </li>
-                    <li class="dropdown__subitem"><a href="#">premier</a></li>
-                    <li class="dropdown__subitem"><a href="#">faceit</a></li>
-                    <li class="dropdown__subitem"><a href="#">wingman</a></li>
-                  </ul>
-                  <!-- WoW 2 -->
-                  <ul class="dropdown__sublist" data-for="wow2">
-                    <li class="dropdown__subitem"><a href="#">mythic+</a></li>
-                    <li class="dropdown__subitem"><a href="#">pvp boost</a></li>
-                    <li class="dropdown__subitem"><a href="#">arena</a></li>
-                  </ul>
+                  <div class="dropdown__sub">
+                    <!-- GTA5 -->
+                    <ul class="dropdown__sublist is-active" data-for="gta5">
+                      <li class="dropdown__subitem"><a href="#">cash</a></li>
+                      <li class="dropdown__subitem dropdown__subitem--active">
+                        <a href="#">cash&amp;cars</a>
+                      </li>
+                      <li class="dropdown__subitem"><a href="#">level</a></li>
+                      <li class="dropdown__subitem">
+                        <a href="#">modded account</a>
+                      </li>
+                    </ul>
+                    <!-- Destiny 2 -->
+                    <ul class="dropdown__sublist" data-for="destiny2">
+                      <li class="dropdown__subitem"><a href="#">boost</a></li>
+                      <li class="dropdown__subitem"><a href="#">carry</a></li>
+                      <li class="dropdown__subitem">
+                        <a href="#">coaching</a>
+                      </li>
+                      <li class="dropdown__subitem">
+                        <a href="#">power level</a>
+                      </li>
+                    </ul>
+                    <!-- World Of Warcraft -->
+                    <ul class="dropdown__sublist" data-for="wow">
+                      <li class="dropdown__subitem"><a href="#">gold</a></li>
+                      <li class="dropdown__subitem">
+                        <a href="#">leveling</a>
+                      </li>
+                      <li class="dropdown__subitem">
+                        <a href="#">gear boost</a>
+                      </li>
+                      <li class="dropdown__subitem">
+                        <a href="#">raid carry</a>
+                      </li>
+                    </ul>
+                    <!-- Arc Raiders -->
+                    <ul class="dropdown__sublist" data-for="arc">
+                      <li class="dropdown__subitem">
+                        <a href="#">rank boost</a>
+                      </li>
+                      <li class="dropdown__subitem">
+                        <a href="#">resources</a>
+                      </li>
+                      <li class="dropdown__subitem">
+                        <a href="#">coaching</a>
+                      </li>
+                    </ul>
+                    <!-- CS2 -->
+                    <ul class="dropdown__sublist" data-for="cs2">
+                      <li class="dropdown__subitem">
+                        <a href="#">rank boost</a>
+                      </li>
+                      <li class="dropdown__subitem"><a href="#">premier</a></li>
+                      <li class="dropdown__subitem"><a href="#">faceit</a></li>
+                      <li class="dropdown__subitem"><a href="#">wingman</a></li>
+                    </ul>
+                    <!-- WoW 2 -->
+                    <ul class="dropdown__sublist" data-for="wow2">
+                      <li class="dropdown__subitem"><a href="#">mythic+</a></li>
+                      <li class="dropdown__subitem">
+                        <a href="#">pvp boost</a>
+                      </li>
+                      <li class="dropdown__subitem"><a href="#">arena</a></li>
+                    </ul>
+                  </div>
                 </div>
               </div>
             </li>
@@ -450,17 +400,17 @@
             <button class="search__btn" aria-label="Search">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="18"
-                height="18"
+                width="17"
+                height="17"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                stroke-width="2"
+                stroke-width="2.2"
                 stroke-linecap="round"
                 stroke-linejoin="round"
               >
-                <circle cx="11" cy="11" r="8" />
-                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                <circle cx="11" cy="11" r="7" />
+                <line x1="20" y1="20" x2="16.65" y2="16.65" />
               </svg>
             </button>
           </div>
@@ -468,8 +418,8 @@
           <a href="./checkout.html" class="cart" aria-label="Cart">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="30"
-              height="30"
+              width="28"
+              height="28"
               viewBox="0 -0.5 25 25"
               fill="none"
             >
@@ -477,14 +427,14 @@
                 fill-rule="evenodd"
                 clip-rule="evenodd"
                 d="M5.50063 16.1407C5.46273 18.2335 7.1278 19.9613 9.22063 20.0007H15.7806C17.8735 19.9613 19.5385 18.2335 19.5006 16.1407L19.0636 11.4527C18.9527 9.68529 17.716 8.19053 16.0006 7.75065C15.6432 7.64667 15.2729 7.59348 14.9006 7.59265H10.1006C9.72837 7.59348 9.35808 7.64667 9.00063 7.75065C7.28636 8.19067 6.05026 9.68433 5.93863 11.4507L5.50063 16.1407Z"
-                stroke="#ffffff"
+                stroke="currentColor"
                 stroke-width="1.5"
                 stroke-linecap="round"
                 stroke-linejoin="round"
               />
               <path
                 d="M16.0006 9.38862V7.36762C15.9629 5.4718 14.3965 3.96493 12.5006 4.00062C10.6047 3.96493 9.03835 5.4718 9.00061 7.36762V9.38762"
-                stroke="#ffffff"
+                stroke="currentColor"
                 stroke-width="1.5"
                 stroke-linecap="round"
                 stroke-linejoin="round"
@@ -495,22 +445,25 @@
         </div>
       </div>
     </header>
-    <!-- ===== /HEADER ===== -->
 
     <main class="main">
-      <section class="contact container" aria-label="Contact">
-        <div class="contact__head">
-          <h1 class="services__title" aria-label="Contact Us">
+      <section class="why-us container" aria-labelledby="why-us-title">
+        <div class="why-us__head">
+          <h1
+            class="why__title"
+            id="why-us-title"
+            aria-label="Why choose nanoboost?"
+          >
             <svg
-              class="services__title-bg"
+              class="why__title-bg"
               aria-hidden="true"
               focusable="false"
-              viewBox="0 0 980 160"
+              viewBox="0 0 900 140"
               preserveAspectRatio="xMidYMid meet"
             >
               <defs>
                 <linearGradient
-                  id="contactStrokeGrad"
+                  id="whyUsStrokeGrad"
                   x1="0%"
                   y1="0%"
                   x2="100%"
@@ -522,170 +475,591 @@
                 </linearGradient>
               </defs>
               <text
-                x="490"
-                y="122"
+                x="450"
+                y="105"
                 text-anchor="middle"
                 font-family="Poppins, sans-serif"
-                font-size="132"
+                font-size="110"
                 font-weight="700"
                 fill="none"
-                stroke="url(#contactStrokeGrad)"
-                stroke-width="1.6"
+                stroke="url(#whyUsStrokeGrad)"
+                stroke-width="1.5"
                 stroke-linejoin="round"
               >
-                Contact Us
+                Why choose nanoboost?
               </text>
             </svg>
-            <span class="services__title-fg">Contact Us</span>
+            <span class="why__title-fg">Why choose nanoboost?</span>
           </h1>
-          <p class="contact__subtitle">
-            We want to hear from you! Share your thoughts on how we can help you
-            better.
+        </div>
+
+        <p class="why-us__subtitle">Built for players who expect results</p>
+
+        <div class="why-us__copy">
+          <p>
+            Nanoboost was created to solve one simple problem — unreliable
+            boosting services that waste your time and put accounts at risk. We
+            focus on transparency, speed, and professional execution so you
+            always know what you’re paying for and what result you will receive.
+          </p>
+          <p>
+            Every service on Nanoboost is designed with real players in mind. No
+            automated systems, no random performers, no risky shortcuts. Only
+            manual boosting performed by experienced players who understand the
+            game mechanics, progression systems and account safety.
           </p>
         </div>
 
-        <div class="contact__grid" role="list">
-          <article class="contact-card contact-card--apps" role="listitem">
-            <h2 class="contact-card__title">Connect in Apps</h2>
-            <div class="contact-card__apps" aria-label="Connect in apps">
-              <a
-                class="contact-app animated-border"
-                href="#"
-                data-contact="discord"
-                aria-label="Connect with Discord"
-              >
-                <span class="contact-app__ico" aria-hidden="true">
-                  <svg
-                    class="contact-app__svg"
-                    viewBox="0 -28.5 256 256"
-                    width="20"
-                    height="20"
-                    aria-hidden="true"
-                    focusable="false"
-                  >
-                    <defs>
-                      <linearGradient
-                        id="contactDiscordGradient"
-                        x1="0%"
-                        y1="100%"
-                        x2="100%"
-                        y2="0%"
-                      >
-                        <stop offset="0%" stop-color="#2de1fe" />
-                        <stop offset="50%" stop-color="#6849fe" />
-                        <stop offset="100%" stop-color="#9d21fe" />
-                      </linearGradient>
-                    </defs>
-                    <path
-                      fill="url(#contactDiscordGradient)"
-                      d="M216.856339,16.5966031 C200.285002,8.84328665 182.566144,3.2084988 164.041564,0 C161.766523,4.11318106 159.108624,9.64549908 157.276099,14.0464379 C137.583995,11.0849896 118.072967,11.0849896 98.7430163,14.0464379 C96.9108417,9.64549908 94.1925838,4.11318106 91.8971895,0 C73.3526068,3.2084988 55.6133949,8.86399117 39.0420583,16.6376612 C5.61752293,67.146514 -3.4433191,116.400813 1.08711069,164.955721 C23.2560196,181.510915 44.7403634,191.567697 65.8621325,198.148576 C71.0772151,190.971126 75.7283628,183.341335 79.7352139,175.300261 C72.104019,172.400575 64.7949724,168.822202 57.8887866,164.667963 C59.7209612,163.310589 61.5131304,161.891452 63.2445898,160.431257 C105.36741,180.133187 151.134928,180.133187 192.754523,160.431257 C194.506336,161.891452 196.298154,163.310589 198.110326,164.667963 C191.183787,168.842556 183.854737,172.420929 176.223542,175.320965 C180.230393,183.341335 184.861538,190.991831 190.096624,198.16893 C211.238746,191.588051 232.743023,181.531619 254.911949,164.955721 C260.227747,108.668201 245.831087,59.8662432 216.856339,16.5966031 Z M85.4738752,135.09489 C72.8290281,135.09489 62.4592217,123.290155 62.4592217,108.914901 C62.4592217,94.5396472 72.607595,82.7145587 85.4738752,82.7145587 C98.3405064,82.7145587 108.709962,94.5189427 108.488529,108.914901 C108.508531,123.290155 98.3405064,135.09489 85.4738752,135.09489 Z M170.525237,135.09489 C157.88039,135.09489 147.510584,123.290155 147.510584,108.914901 C147.510584,94.5396472 157.658606,82.7145587 170.525237,82.7145587 C183.391518,82.7145587 193.761324,94.5189427 193.539891,108.914901 C193.539891,123.290155 183.391518,135.09489 170.525237,135.09489 Z"
-                    />
-                  </svg>
-                </span>
-                <span class="contact-app__text">Connect with Discord</span>
-              </a>
-
-              <a
-                class="contact-app animated-border"
-                href="#"
-                data-contact="whatsapp"
-                aria-label="Connect with WhatsApp"
-              >
-                <span class="contact-app__ico" aria-hidden="true">
-                  <svg
-                    class="contact-app__svg"
-                    viewBox="0 0 24 24"
-                    width="20"
-                    height="20"
-                    aria-hidden="true"
-                    focusable="false"
-                  >
-                    <defs>
-                      <linearGradient
-                        id="contactWhatsAppGradient"
-                        x1="0%"
-                        y1="100%"
-                        x2="100%"
-                        y2="0%"
-                      >
-                        <stop offset="0%" stop-color="#2de1fe" />
-                        <stop offset="50%" stop-color="#6849fe" />
-                        <stop offset="100%" stop-color="#9d21fe" />
-                      </linearGradient>
-                    </defs>
-                    <path
-                      fill="url(#contactWhatsAppGradient)"
-                      d="M12.04 2C6.56 2 2.11 6.36 2.11 11.72c0 1.72.46 3.4 1.33 4.88L2 22l5.55-1.38c1.42.77 3.03 1.18 4.65 1.18h.01c5.48 0 9.93-4.36 9.93-9.72C22.14 6.36 17.69 2 12.04 2Zm5.76 14.08c-.24.67-1.41 1.26-1.94 1.34-.49.07-1.11.1-1.79-.11-.41-.13-.94-.3-1.62-.59-2.85-1.22-4.7-4.05-4.84-4.24-.13-.2-1.16-1.52-1.16-2.9 0-1.38.75-2.05 1.01-2.33.25-.27.55-.34.73-.34.18 0 .36 0 .52.01.17.01.39-.06.61.46.24.56.79 1.94.86 2.08.07.14.11.31.02.49-.09.18-.14.31-.28.47-.14.16-.3.36-.43.48-.14.13-.28.26-.12.51.16.26.71 1.14 1.53 1.84 1.05.9 1.94 1.18 2.2 1.31.26.13.41.11.56-.07.15-.18.65-.74.82-1 .17-.25.34-.21.57-.13.23.08 1.47.69 1.72.81.25.12.42.18.48.28.06.11.06.6-.18 1.27Z"
-                    />
-                  </svg>
-                </span>
-                <span class="contact-app__text">Connect with WhatsApp</span>
-              </a>
+        <div class="why-us__cards" role="list">
+          <article class="benefit why-us__card" role="listitem">
+            <div class="benefit__icon" aria-hidden="true">
+              <img
+                src="../assets/images/shield.webp"
+                alt="shield"
+                loading="lazy"
+              />
+            </div>
+            <div class="why-us__card-body">
+              <h3 class="benefit__title">Safe &amp; Secure</h3>
+              <p class="benefit__text">
+                Your account security is our top priority. All boosting services
+                are completed using only trusted methods that comply with
+                in-game mechanics and minimize any potential risks.
+              </p>
+              <p class="benefit__text">
+                We never use bots, cheats or suspicious software. Access to your
+                account is limited strictly to the assigned booster and all data
+                is handled confidentially. Your progress, items and reputation
+                remain protected throughout the entire process.
+              </p>
             </div>
           </article>
 
-          <article class="contact-card contact-card--form" role="listitem">
-            <h2 class="contact-card__title">Have questions?</h2>
-            <form class="contact-form" id="contact-form" novalidate>
-              <label class="contact-form__label" for="contact-discord"
-                >Discord</label
-              >
-              <input
-                class="contact-form__input"
-                id="contact-discord"
-                name="discord"
-                type="text"
-                placeholder="DiscordName#0000 or username"
-                autocomplete="off"
+          <article class="benefit why-us__card" role="listitem">
+            <div class="benefit__icon" aria-hidden="true">
+              <img
+                src="../assets/images/rocket.webp"
+                alt="rocket"
+                loading="lazy"
               />
-
-              <label class="contact-form__label" for="contact-email"
-                >Email</label
-              >
-              <input
-                class="contact-form__input"
-                id="contact-email"
-                name="email"
-                type="email"
-                placeholder="Enter Your Email"
-                autocomplete="email"
-              />
-
-              <label class="contact-form__label" for="contact-comment"
-                >Comment</label
-              >
-              <textarea
-                class="contact-form__textarea"
-                id="contact-comment"
-                name="comment"
-                placeholder="Your comment"
-                rows="3"
-              ></textarea>
-
-              <button class="contact-form__btn animated-border" type="submit">
-                SEND
-              </button>
-              <p
-                class="contact-form__hint"
-                aria-live="polite"
-                id="contact-form-hint"
-              ></p>
-            </form>
+            </div>
+            <div class="why-us__card-body">
+              <h3 class="benefit__title">Super-fast Delivery</h3>
+              <p class="benefit__text">
+                We respect your time. Most orders start within minutes after
+                confirmation, without unnecessary waiting or delays.
+              </p>
+              <p class="benefit__text">
+                Our boosters work efficiently and follow a clear execution plan,
+                allowing us to deliver results faster than most competitors —
+                without sacrificing quality or safety. You get exactly what you
+                ordered on time.
+              </p>
+            </div>
           </article>
 
-          <article class="contact-card contact-card--email" role="listitem">
-            <h2 class="contact-card__title">Email us</h2>
-            <p class="contact-email__text">
-              We look forward to helping you with your inquiry.
-            </p>
-            <p class="contact-email__text">
-              While not as quick as Live Chat, we respond to messages in the
-              order that they are received, and will respond to your email as
-              quickly as possible.
-            </p>
-            <a class="contact-email__link" href="mailto:support@nanoboost.com"
-              >support@nanoboost.com</a
+          <article class="benefit why-us__card" role="listitem">
+            <div class="benefit__icon" aria-hidden="true">
+              <img
+                src="../assets/images/support.webp"
+                alt="support"
+                loading="lazy"
+              />
+            </div>
+            <div class="why-us__card-body">
+              <h3 class="benefit__title">Support Team 24/7</h3>
+              <p class="benefit__text">
+                Questions, updates or special requests — our support team is
+                always available. We operate 24/7, covering all time zones, so
+                you are never left without answers.
+              </p>
+              <p class="benefit__text">
+                You can contact us at any stage of your order and receive real
+                help from real people who understand the service and your needs.
+              </p>
+            </div>
+          </article>
+
+          <article class="benefit why-us__card" role="listitem">
+            <div class="benefit__icon" aria-hidden="true">
+              <img
+                src="../assets/images/buttons.webp"
+                alt="buttons"
+                loading="lazy"
+              />
+            </div>
+            <div class="why-us__card-body">
+              <h3 class="benefit__title">Pro Players Only</h3>
+              <p class="benefit__text">
+                Nanoboost works exclusively with experienced and verified
+                boosters. Every player on our team has thousands of completed
+                orders and deep knowledge of the games they boost.
+              </p>
+              <p class="benefit__text">
+                We carefully select our boosters based on skill, reliability and
+                professionalism. This ensures consistent results, smooth
+                communication and a premium service experience for every client.
+              </p>
+            </div>
+          </article>
+        </div>
+
+        <p class="why-us__closing">
+          A boosting service that you trust. Nanoboost is not about shortcuts —
+          it’s about doing things right. If you value safety, speed and
+          predictable results you’re in the right place.
+        </p>
+      </section>
+
+      <section class="how container" aria-label="How it's works">
+        <div class="how__head">
+          <h2 class="how__title" aria-label="How it's works">
+            <svg
+              class="how__title-bg"
+              aria-hidden="true"
+              focusable="false"
+              viewBox="0 0 900 140"
+              preserveAspectRatio="xMidYMid meet"
             >
+              <defs>
+                <linearGradient
+                  id="howStrokeGrad"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="0%"
+                >
+                  <stop offset="0%" stop-color="#3e228e" />
+                  <stop offset="50%" stop-color="#653ade" />
+                  <stop offset="100%" stop-color="#3d228c" />
+                </linearGradient>
+              </defs>
+              <text
+                x="450"
+                y="105"
+                text-anchor="middle"
+                font-family="Poppins, sans-serif"
+                font-size="110"
+                font-weight="700"
+                fill="none"
+                stroke="url(#howStrokeGrad)"
+                stroke-width="1.5"
+                stroke-linejoin="round"
+              >
+                How it's works
+              </text>
+            </svg>
+            <span class="how__title-fg">How it's works</span>
+          </h2>
+        </div>
+
+        <div class="how__steps">
+          <article class="how-step">
+            <svg
+              class="how-step__num"
+              viewBox="0 0 100 100"
+              overflow="visible"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <defs>
+                <linearGradient
+                  id="howStepGrad1"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="0%"
+                >
+                  <stop offset="0%" stop-color="#2de1fe" />
+                  <stop offset="35%" stop-color="#653ade" />
+                  <stop offset="70%" stop-color="#ca4ee0" />
+                  <stop offset="100%" stop-color="#3d228c" />
+                </linearGradient>
+                <mask
+                  id="howStepMask1"
+                  maskUnits="userSpaceOnUse"
+                  maskContentUnits="userSpaceOnUse"
+                  x="-12"
+                  y="-12"
+                  width="124"
+                  height="124"
+                >
+                  <rect x="-12" y="-12" width="124" height="124" fill="#000" />
+                  <text
+                    x="50"
+                    y="88"
+                    text-anchor="middle"
+                    font-family="Poppins, sans-serif"
+                    font-size="96"
+                    font-weight="700"
+                    fill="none"
+                    stroke="#fff"
+                    stroke-width="1"
+                    stroke-linejoin="round"
+                    text-rendering="geometricPrecision"
+                  >
+                    01
+                  </text>
+                </mask>
+              </defs>
+              <rect
+                x="-12"
+                y="-12"
+                width="124"
+                height="124"
+                fill="url(#howStepGrad1)"
+                mask="url(#howStepMask1)"
+              />
+            </svg>
+            <svg
+              class="how-step__up"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path d="M6 18L18 6" />
+              <path d="M9 6h9v9" />
+            </svg>
+            <p class="how-step__text">
+              <span>Choose</span> your game &amp; service
+            </p>
+          </article>
+
+          <article class="how-step">
+            <svg
+              class="how-step__num"
+              viewBox="0 0 100 100"
+              overflow="visible"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <defs>
+                <linearGradient
+                  id="howStepGrad2"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="0%"
+                >
+                  <stop offset="0%" stop-color="#2de1fe" />
+                  <stop offset="35%" stop-color="#653ade" />
+                  <stop offset="70%" stop-color="#ca4ee0" />
+                  <stop offset="100%" stop-color="#3d228c" />
+                </linearGradient>
+                <mask
+                  id="howStepMask2"
+                  maskUnits="userSpaceOnUse"
+                  maskContentUnits="userSpaceOnUse"
+                  x="-12"
+                  y="-12"
+                  width="124"
+                  height="124"
+                >
+                  <rect x="-12" y="-12" width="124" height="124" fill="#000" />
+                  <text
+                    x="50"
+                    y="88"
+                    text-anchor="middle"
+                    font-family="Poppins, sans-serif"
+                    font-size="96"
+                    font-weight="700"
+                    fill="none"
+                    stroke="#fff"
+                    stroke-width="1"
+                    stroke-linejoin="round"
+                    text-rendering="geometricPrecision"
+                  >
+                    02
+                  </text>
+                </mask>
+              </defs>
+              <rect
+                x="-12"
+                y="-12"
+                width="124"
+                height="124"
+                fill="url(#howStepGrad2)"
+                mask="url(#howStepMask2)"
+              />
+            </svg>
+            <svg
+              class="how-step__up"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path d="M6 18L18 6" />
+              <path d="M9 6h9v9" />
+            </svg>
+            <p class="how-step__text"><span>Place</span> your order</p>
+          </article>
+
+          <article class="how-step">
+            <svg
+              class="how-step__num"
+              viewBox="0 0 100 100"
+              overflow="visible"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <defs>
+                <linearGradient
+                  id="howStepGrad3"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="0%"
+                >
+                  <stop offset="0%" stop-color="#2de1fe" />
+                  <stop offset="35%" stop-color="#653ade" />
+                  <stop offset="70%" stop-color="#ca4ee0" />
+                  <stop offset="100%" stop-color="#3d228c" />
+                </linearGradient>
+                <mask
+                  id="howStepMask3"
+                  maskUnits="userSpaceOnUse"
+                  maskContentUnits="userSpaceOnUse"
+                  x="-12"
+                  y="-12"
+                  width="124"
+                  height="124"
+                >
+                  <rect x="-12" y="-12" width="124" height="124" fill="#000" />
+                  <text
+                    x="50"
+                    y="88"
+                    text-anchor="middle"
+                    font-family="Poppins, sans-serif"
+                    font-size="96"
+                    font-weight="700"
+                    fill="none"
+                    stroke="#fff"
+                    stroke-width="1"
+                    stroke-linejoin="round"
+                    text-rendering="geometricPrecision"
+                  >
+                    03
+                  </text>
+                </mask>
+              </defs>
+              <rect
+                x="-12"
+                y="-12"
+                width="124"
+                height="124"
+                fill="url(#howStepGrad3)"
+                mask="url(#howStepMask3)"
+              />
+            </svg>
+            <svg
+              class="how-step__up"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path d="M6 18L18 6" />
+              <path d="M9 6h9v9" />
+            </svg>
+            <p class="how-step__text"><span>Get</span> your results</p>
+          </article>
+        </div>
+      </section>
+
+      <section
+        class="faq container"
+        id="faq"
+        aria-label="Frequently asked questions"
+      >
+        <div class="faq__head">
+          <h2 class="faq__title" aria-label="FAQ">
+            <svg
+              class="faq__title-bg"
+              aria-hidden="true"
+              focusable="false"
+              viewBox="0 0 480 140"
+              preserveAspectRatio="xMidYMid meet"
+            >
+              <text
+                x="240"
+                y="105"
+                text-anchor="middle"
+                font-family="LEMON MILK, Poppins, sans-serif"
+                font-size="110"
+                font-weight="700"
+                fill="#653ade"
+                fill-opacity="0.14"
+                stroke="#653ade"
+                stroke-width="1.5"
+                stroke-linejoin="round"
+              >
+                FAQ
+              </text>
+            </svg>
+            <span class="faq__title-fg">Got any questions?</span>
+          </h2>
+          <p class="faq__desc">
+            Here are the answers to the most common questions we’ve been asked
+          </p>
+        </div>
+
+        <div class="faq__list" role="list">
+          <article class="faq-item is-open" role="listitem">
+            <button
+              class="faq-item__trigger"
+              type="button"
+              id="faq-q1"
+              aria-expanded="true"
+              aria-controls="faq-a1"
+            >
+              <span class="faq-item__q">Is your boosting service safe?</span>
+              <svg
+                class="faq-item__chev"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path d="M6 10l6 6 6-6" />
+              </svg>
+            </button>
+            <div
+              class="faq-item__panel"
+              id="faq-a1"
+              role="region"
+              aria-labelledby="faq-q1"
+            >
+              <p class="faq-item__a">
+                Yes. We use professional boosters, secure connections, and
+                proven methods to minimize risks and protect your account.
+              </p>
+            </div>
+          </article>
+
+          <article class="faq-item" role="listitem">
+            <button
+              class="faq-item__trigger"
+              type="button"
+              id="faq-q2"
+              aria-expanded="false"
+              aria-controls="faq-a2"
+            >
+              <span class="faq-item__q">How does the order process work?</span>
+              <svg
+                class="faq-item__chev"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path d="M6 10l6 6 6-6" />
+              </svg>
+            </button>
+            <div
+              class="faq-item__panel"
+              id="faq-a2"
+              role="region"
+              aria-labelledby="faq-q2"
+            >
+              <p class="faq-item__a">
+                Choose a service, complete the payment, and our support team
+                will contact you to start the boost and confirm all details.
+              </p>
+            </div>
+          </article>
+
+          <article class="faq-item" role="listitem">
+            <button
+              class="faq-item__trigger"
+              type="button"
+              id="faq-q3"
+              aria-expanded="false"
+              aria-controls="faq-a3"
+            >
+              <span class="faq-item__q"
+                >Do I need to share my account details?</span
+              >
+              <svg
+                class="faq-item__chev"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path d="M6 10l6 6 6-6" />
+              </svg>
+            </button>
+            <div
+              class="faq-item__panel"
+              id="faq-a3"
+              role="region"
+              aria-labelledby="faq-q3"
+            >
+              <p class="faq-item__a">
+                Not always. Many services are available as carry or duo boosts
+                without sharing your login information.
+              </p>
+            </div>
+          </article>
+
+          <article class="faq-item" role="listitem">
+            <button
+              class="faq-item__trigger"
+              type="button"
+              id="faq-q4"
+              aria-expanded="false"
+              aria-controls="faq-a4"
+            >
+              <span class="faq-item__q">How long does boosting take?</span>
+              <svg
+                class="faq-item__chev"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path d="M6 10l6 6 6-6" />
+              </svg>
+            </button>
+            <div
+              class="faq-item__panel"
+              id="faq-a4"
+              role="region"
+              aria-labelledby="faq-q4"
+            >
+              <p class="faq-item__a">
+                The duration depends on the selected service and game. Estimated
+                completion times are shown on each service page.
+              </p>
+            </div>
+          </article>
+
+          <article class="faq-item" role="listitem">
+            <button
+              class="faq-item__trigger"
+              type="button"
+              id="faq-q5"
+              aria-expanded="false"
+              aria-controls="faq-a5"
+            >
+              <span class="faq-item__q"
+                >What if I need a custom boosting service?</span
+              >
+              <svg
+                class="faq-item__chev"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path d="M6 10l6 6 6-6" />
+              </svg>
+            </button>
+            <div
+              class="faq-item__panel"
+              id="faq-a5"
+              role="region"
+              aria-labelledby="faq-q5"
+            >
+              <p class="faq-item__a">
+                You can contact our support via Discord or email, and we’ll
+                create a custom order tailored to your needs.
+              </p>
+            </div>
           </article>
         </div>
       </section>
@@ -741,7 +1115,6 @@
                 />
               </span>
             </a>
-
             <div class="footer__contacts" aria-label="Contact">
               <a class="footer__contact" href="mailto:support@nanoboost.com">
                 <span class="footer__contact-ico" aria-hidden="true">
@@ -883,7 +1256,9 @@
               <li>
                 <a class="footer__link" href="./contact.html">Contacts</a>
               </li>
-              <li><a class="footer__link" href="./contact.html">Support</a></li>
+              <li>
+                <a class="footer__link" href="./contact.html">Support</a>
+              </li>
             </ul>
           </div>
 
@@ -896,9 +1271,9 @@
                 >
               </li>
               <li>
-                <a class="footer__link" href="./privacy-policy.html"
-                  >Privacy Policy</a
-                >
+                <a class="footer__link" href="./privacy-policy.html">
+                  Privacy Policy
+                </a>
               </li>
               <li>
                 <a class="footer__link" href="./privacy-policy.html"
@@ -993,7 +1368,35 @@
       </div>
     </footer>
 
+    <!-- Floating Cart (768px va pastida) -->
+    <a href="./checkout.html" class="cart-float" aria-label="Cart">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="26"
+        height="26"
+        viewBox="0 -0.5 25 25"
+        fill="none"
+      >
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M5.50063 16.1407C5.46273 18.2335 7.1278 19.9613 9.22063 20.0007H15.7806C17.8735 19.9613 19.5385 18.2335 19.5006 16.1407L19.0636 11.4527C18.9527 9.68529 17.716 8.19053 16.0006 7.75065C15.6432 7.64667 15.2729 7.59348 14.9006 7.59265H10.1006C9.72837 7.59348 9.35808 7.64667 9.00063 7.75065C7.28636 8.19067 6.05026 9.68433 5.93863 11.4507L5.50063 16.1407Z"
+          stroke="#ffffff"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M16.0006 9.38862V7.36762C15.9629 5.4718 14.3965 3.96493 12.5006 4.00062C10.6047 3.96493 9.03835 5.4718 9.00061 7.36762V9.38762"
+          stroke="#ffffff"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+      <span class="cart-float__badge">5</span>
+    </a>
+
     <script src="../scripts/shared.js"></script>
-    <script src="../scripts/contact-page.js"></script>
   </body>
 </html>
