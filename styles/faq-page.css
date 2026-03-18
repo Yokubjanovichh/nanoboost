@@ -28,7 +28,7 @@ body.page--faq {
 .faq-group {
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
+  gap: 3rem;
 }
 
 .faq-group__title {
@@ -89,5 +89,5 @@ body.page--faq {
 }
 
 .faq__head {
-  margin-bottom: clamp(4rem, 4vw, 5rem);
+  margin-bottom: clamp(6rem, 6vw, 8rem);
 }
