@@ -3,10 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Nanoboost | GTA 5 Online</title>
+    <title>Nanoboost | Checkout</title>
     <meta name="theme-color" content="#08071a" />
     <link rel="icon" href="../assets/icons/main-logo.svg" />
-
     <link
       rel="preload"
       as="image"
@@ -19,20 +18,16 @@
       href="../assets/icons/logo-text.webp"
       fetchpriority="high"
     />
-
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
       rel="stylesheet"
     />
-
-    <link rel="stylesheet" href="../style.css" />
     <link rel="stylesheet" href="../styles/shared.css" />
-    <link rel="stylesheet" href="../styles/gta5-page.css" />
+    <link rel="stylesheet" href="../styles/checkout-page.css" />
   </head>
-
-  <body class="page page--gta5">
+  <body class="page page--checkout">
     <!-- ===== HEADER ===== -->
     <header class="header">
       <div class="container header__inner">
@@ -278,6 +273,38 @@
                         <polyline points="9 18 15 12 9 6" />
                       </svg>
                     </li>
+                    <li class="dropdown__item" data-game="cs2">
+                      <span>CS2</span>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="10"
+                        height="10"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <polyline points="9 18 15 12 9 6" />
+                      </svg>
+                    </li>
+                    <li class="dropdown__item" data-game="wow2">
+                      <span>World Of Warcraft</span>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="10"
+                        height="10"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <polyline points="9 18 15 12 9 6" />
+                      </svg>
+                    </li>
                   </ul>
 
                   <ul
@@ -316,22 +343,6 @@
                         <polyline points="9 18 15 12 9 6" />
                       </svg>
                     </li>
-                    <li class="dropdown__item" data-game="wow2">
-                      <span>World Of Warcraft 2</span>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="10"
-                        height="10"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <polyline points="9 18 15 12 9 6" />
-                      </svg>
-                    </li>
                     <li class="dropdown__item" data-game="arc">
                       <span>Arc Raiders</span>
                       <svg
@@ -354,21 +365,35 @@
                 <div class="dropdown__sub">
                   <!-- GTA5 -->
                   <ul class="dropdown__sublist is-active" data-for="gta5">
+                    <li class="dropdown__subitem"><a href="#">cash</a></li>
                     <li class="dropdown__subitem dropdown__subitem--active">
-                      <a href="./gta5.html">services</a>
+                      <a href="#">cash&amp;cars</a>
+                    </li>
+                    <li class="dropdown__subitem"><a href="#">level</a></li>
+                    <li class="dropdown__subitem">
+                      <a href="#">modded account</a>
                     </li>
                   </ul>
-
                   <!-- Destiny 2 -->
                   <ul class="dropdown__sublist" data-for="destiny2">
+                    <li class="dropdown__subitem"><a href="#">boost</a></li>
+                    <li class="dropdown__subitem"><a href="#">carry</a></li>
+                    <li class="dropdown__subitem"><a href="#">coaching</a></li>
                     <li class="dropdown__subitem">
-                      <a href="#">rank boost</a>
+                      <a href="#">power level</a>
+                    </li>
+                  </ul>
+                  <!-- World Of Warcraft -->
+                  <ul class="dropdown__sublist" data-for="wow">
+                    <li class="dropdown__subitem"><a href="#">gold</a></li>
+                    <li class="dropdown__subitem"><a href="#">leveling</a></li>
+                    <li class="dropdown__subitem">
+                      <a href="#">gear boost</a>
                     </li>
                     <li class="dropdown__subitem">
                       <a href="#">raid carry</a>
                     </li>
                   </ul>
-
                   <!-- Arc Raiders -->
                   <ul class="dropdown__sublist" data-for="arc">
                     <li class="dropdown__subitem">
@@ -377,14 +402,15 @@
                     <li class="dropdown__subitem"><a href="#">resources</a></li>
                     <li class="dropdown__subitem"><a href="#">coaching</a></li>
                   </ul>
-
-                  <!-- WoW -->
-                  <ul class="dropdown__sublist" data-for="wow">
-                    <li class="dropdown__subitem"><a href="#">mythic+</a></li>
-                    <li class="dropdown__subitem"><a href="#">pvp boost</a></li>
-                    <li class="dropdown__subitem"><a href="#">arena</a></li>
+                  <!-- CS2 -->
+                  <ul class="dropdown__sublist" data-for="cs2">
+                    <li class="dropdown__subitem">
+                      <a href="#">rank boost</a>
+                    </li>
+                    <li class="dropdown__subitem"><a href="#">premier</a></li>
+                    <li class="dropdown__subitem"><a href="#">faceit</a></li>
+                    <li class="dropdown__subitem"><a href="#">wingman</a></li>
                   </ul>
-
                   <!-- WoW 2 -->
                   <ul class="dropdown__sublist" data-for="wow2">
                     <li class="dropdown__subitem"><a href="#">mythic+</a></li>
@@ -394,10 +420,7 @@
                 </div>
               </div>
             </li>
-
-            <li class="nav__item">
-              <a href="../index.html" class="nav__link">Why Us</a>
-            </li>
+            <li class="nav__item"><a href="#" class="nav__link">Why Us</a></li>
             <li class="nav__item">
               <a href="./contact.html" class="nav__link">Contacts</a>
             </li>
@@ -425,17 +448,17 @@
             <button class="search__btn" aria-label="Search">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="17"
-                height="17"
+                width="18"
+                height="18"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                stroke-width="2.2"
+                stroke-width="2"
                 stroke-linecap="round"
                 stroke-linejoin="round"
               >
-                <circle cx="11" cy="11" r="7" />
-                <line x1="20" y1="20" x2="16.65" y2="16.65" />
+                <circle cx="11" cy="11" r="8" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
               </svg>
             </button>
           </div>
@@ -443,8 +466,8 @@
           <a href="./checkout.html" class="cart" aria-label="Cart">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="28"
-              height="28"
+              width="30"
+              height="30"
               viewBox="0 -0.5 25 25"
               fill="none"
             >
@@ -452,891 +475,251 @@
                 fill-rule="evenodd"
                 clip-rule="evenodd"
                 d="M5.50063 16.1407C5.46273 18.2335 7.1278 19.9613 9.22063 20.0007H15.7806C17.8735 19.9613 19.5385 18.2335 19.5006 16.1407L19.0636 11.4527C18.9527 9.68529 17.716 8.19053 16.0006 7.75065C15.6432 7.64667 15.2729 7.59348 14.9006 7.59265H10.1006C9.72837 7.59348 9.35808 7.64667 9.00063 7.75065C7.28636 8.19067 6.05026 9.68433 5.93863 11.4507L5.50063 16.1407Z"
-                stroke="currentColor"
+                stroke="#ffffff"
                 stroke-width="1.5"
                 stroke-linecap="round"
                 stroke-linejoin="round"
               />
               <path
                 d="M16.0006 9.38862V7.36762C15.9629 5.4718 14.3965 3.96493 12.5006 4.00062C10.6047 3.96493 9.03835 5.4718 9.00061 7.36762V9.38762"
-                stroke="currentColor"
+                stroke="#ffffff"
                 stroke-width="1.5"
                 stroke-linecap="round"
                 stroke-linejoin="round"
               />
             </svg>
-            <span class="cart__badge">5</span>
+            <span class="cart__badge">2</span>
           </a>
         </div>
       </div>
     </header>
-    <!-- ===== /HEADER ===== -->
 
     <main class="main">
-      <section class="gta5-intro container" aria-labelledby="gta5-title">
-        <div class="gta5-intro__head">
-          <h1
-            class="gta5-intro__title"
-            id="gta5-title"
-            aria-label="GTA 5 ONLINE"
-          >
-            <svg
-              class="gta5-intro__title-bg"
-              aria-hidden="true"
-              focusable="false"
-              viewBox="0 0 860 150"
-              preserveAspectRatio="xMidYMid meet"
-            >
-              <text
-                x="430"
-                y="114"
-                text-anchor="middle"
-                font-family="LEMON MILK, Poppins, sans-serif"
-                font-size="118"
-                font-weight="700"
-                fill="#653ade"
-                fill-opacity="0.12"
-                stroke="#653ade"
-                stroke-opacity="0.8"
-                stroke-width="1.5"
-                stroke-linejoin="round"
+      <section class="checkout" aria-label="Checkout">
+        <div class="container">
+          <div class="services__head">
+            <h1 class="services__title" aria-label="Checkout">
+              <svg
+                class="services__title-bg"
+                aria-hidden="true"
+                focusable="false"
+                viewBox="0 0 800 140"
+                preserveAspectRatio="xMidYMid meet"
               >
-                Boosting
-              </text>
-            </svg>
-            <span class="gta5-intro__title-fg">GTA 5 ONLINE</span>
-          </h1>
-          <div
-            class="gta5-intro__tabs"
-            role="tablist"
-            aria-label="Choose platform"
-          >
-            <button
-              type="button"
-              class="gta5-intro__tab is-active"
-              role="tab"
-              aria-selected="true"
-              data-platform="ps"
-            >
-              Playstation 4/5
-            </button>
-            <button
-              type="button"
-              class="gta5-intro__tab"
-              role="tab"
-              aria-selected="false"
-              data-platform="pc"
-            >
-              PC
-            </button>
-            <button
-              type="button"
-              class="gta5-intro__tab"
-              role="tab"
-              aria-selected="false"
-              data-platform="xbox"
-            >
-              XBOX One/Series
-            </button>
-          </div>
-        </div>
-
-        <div class="services__grid" id="gta5-services-grid" aria-live="polite">
-          <!-- Rendered by scripts/gta5-page.js -->
-        </div>
-      </section>
-
-      <section class="how container" aria-label="How it's works">
-        <div class="how__head">
-          <h2 class="how__title" aria-label="How it's works">
-            <svg
-              class="how__title-bg"
-              aria-hidden="true"
-              focusable="false"
-              viewBox="0 0 900 140"
-              preserveAspectRatio="xMidYMid meet"
-            >
-              <defs>
-                <linearGradient
-                  id="howStrokeGrad"
-                  x1="0%"
-                  y1="0%"
-                  x2="100%"
-                  y2="0%"
-                >
-                  <stop offset="0%" stop-color="#3e228e" />
-                  <stop offset="50%" stop-color="#653ade" />
-                  <stop offset="100%" stop-color="#3d228c" />
-                </linearGradient>
-              </defs>
-              <text
-                x="450"
-                y="105"
-                text-anchor="middle"
-                font-family="Poppins, sans-serif"
-                font-size="110"
-                font-weight="700"
-                fill="none"
-                stroke="url(#howStrokeGrad)"
-                stroke-width="1.5"
-                stroke-linejoin="round"
-              >
-                How it's works
-              </text>
-            </svg>
-            <span class="how__title-fg">How it's works</span>
-          </h2>
-        </div>
-
-        <div class="how__steps">
-          <article class="how-step">
-            <svg
-              class="how-step__num"
-              viewBox="0 0 100 100"
-              overflow="visible"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <defs>
-                <linearGradient
-                  id="howStepGrad1"
-                  x1="0%"
-                  y1="0%"
-                  x2="100%"
-                  y2="0%"
-                >
-                  <stop offset="0%" stop-color="#2de1fe" />
-                  <stop offset="35%" stop-color="#653ade" />
-                  <stop offset="70%" stop-color="#ca4ee0" />
-                  <stop offset="100%" stop-color="#3d228c" />
-                </linearGradient>
-                <mask
-                  id="howStepMask1"
-                  maskUnits="userSpaceOnUse"
-                  maskContentUnits="userSpaceOnUse"
-                  x="-12"
-                  y="-12"
-                  width="124"
-                  height="124"
-                >
-                  <rect x="-12" y="-12" width="124" height="124" fill="#000" />
-                  <text
-                    x="50"
-                    y="88"
-                    text-anchor="middle"
-                    font-family="Poppins, sans-serif"
-                    font-size="96"
-                    font-weight="700"
-                    fill="none"
-                    stroke="#fff"
-                    stroke-width="1"
-                    stroke-linejoin="round"
-                    text-rendering="geometricPrecision"
+                <defs>
+                  <linearGradient
+                    id="servicesStrokeGrad"
+                    x1="0%"
+                    y1="0%"
+                    x2="100%"
+                    y2="0%"
                   >
-                    01
-                  </text>
-                </mask>
-              </defs>
-              <rect
-                x="-12"
-                y="-12"
-                width="124"
-                height="124"
-                fill="url(#howStepGrad1)"
-                mask="url(#howStepMask1)"
-              />
-            </svg>
-            <svg
-              class="how-step__up"
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <path d="M6 18L18 6" />
-              <path d="M9 6h9v9" />
-            </svg>
-            <p class="how-step__text">
-              <span>Choose</span> your<br />game &amp; service
-            </p>
-          </article>
+                    <stop offset="0%" stop-color="#3e228e" />
+                    <stop offset="50%" stop-color="#653ade" />
+                    <stop offset="100%" stop-color="#3d228c" />
+                  </linearGradient>
+                </defs>
+                <text
+                  x="400"
+                  y="105"
+                  text-anchor="middle"
+                  font-family="Poppins, sans-serif"
+                  font-size="110"
+                  font-weight="700"
+                  fill="none"
+                  stroke="url(#servicesStrokeGrad)"
+                  stroke-width="1.5"
+                  stroke-linejoin="round"
+                >
+                  Checkout
+                </text>
+              </svg>
+              <span class="services__title-fg">Checkout</span>
+            </h1>
+          </div>
 
-          <article class="how-step">
-            <svg
-              class="how-step__num"
-              viewBox="0 0 100 100"
-              overflow="visible"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <defs>
-                <linearGradient
-                  id="howStepGrad2"
-                  x1="0%"
-                  y1="0%"
-                  x2="100%"
-                  y2="0%"
+          <div class="checkout__grid">
+            <form class="checkout-form" id="checkout-form" novalidate>
+              <label class="checkout-form__label" for="checkout-email"
+                >Email</label
+              >
+              <input
+                class="checkout-form__input"
+                id="checkout-email"
+                name="email"
+                type="email"
+                placeholder="Enter Your Email"
+                autocomplete="email"
+                required
+              />
+
+              <label class="checkout-form__label" for="checkout-discord"
+                >Discord</label
+              >
+              <input
+                class="checkout-form__input"
+                id="checkout-discord"
+                name="discord"
+                type="text"
+                placeholder="DiscordName#0000 or username"
+                autocomplete="off"
+                required
+              />
+
+              <label
+                class="checkout-form__label"
+                id="checkout-payment-label"
+                for="checkout-payment-btn"
+                >Payment Method</label
+              >
+              <div class="checkout-form__select-wrap">
+                <input
+                  type="hidden"
+                  id="checkout-payment"
+                  name="payment"
+                  value=""
+                />
+                <button
+                  class="checkout-form__select"
+                  id="checkout-payment-btn"
+                  type="button"
+                  aria-haspopup="listbox"
+                  aria-expanded="false"
+                  aria-labelledby="checkout-payment-label checkout-payment-btn"
                 >
-                  <stop offset="0%" stop-color="#2de1fe" />
-                  <stop offset="35%" stop-color="#653ade" />
-                  <stop offset="70%" stop-color="#ca4ee0" />
-                  <stop offset="100%" stop-color="#3d228c" />
-                </linearGradient>
-                <mask
-                  id="howStepMask2"
-                  maskUnits="userSpaceOnUse"
-                  maskContentUnits="userSpaceOnUse"
-                  x="-12"
-                  y="-12"
-                  width="124"
-                  height="124"
-                >
-                  <rect x="-12" y="-12" width="124" height="124" fill="#000" />
-                  <text
-                    x="50"
-                    y="88"
-                    text-anchor="middle"
-                    font-family="Poppins, sans-serif"
-                    font-size="96"
-                    font-weight="700"
-                    fill="none"
-                    stroke="#fff"
-                    stroke-width="1"
-                    stroke-linejoin="round"
-                    text-rendering="geometricPrecision"
+                  <span class="checkout-form__select-text"
+                    >Choose your payment method</span
                   >
-                    02
-                  </text>
-                </mask>
-              </defs>
-              <rect
-                x="-12"
-                y="-12"
-                width="124"
-                height="124"
-                fill="url(#howStepGrad2)"
-                mask="url(#howStepMask2)"
-              />
-            </svg>
-            <svg
-              class="how-step__up"
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <path d="M6 18L18 6" />
-              <path d="M9 6h9v9" />
-            </svg>
-            <p class="how-step__text"><span>Place</span> your order</p>
-          </article>
-
-          <article class="how-step">
-            <svg
-              class="how-step__num"
-              viewBox="0 0 100 100"
-              overflow="visible"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <defs>
-                <linearGradient
-                  id="howStepGrad3"
-                  x1="0%"
-                  y1="0%"
-                  x2="100%"
-                  y2="0%"
+                </button>
+                <ul
+                  class="checkout-form__select-menu"
+                  id="checkout-payment-menu"
+                  role="listbox"
+                  aria-label="Payment methods"
                 >
-                  <stop offset="0%" stop-color="#2de1fe" />
-                  <stop offset="35%" stop-color="#653ade" />
-                  <stop offset="70%" stop-color="#ca4ee0" />
-                  <stop offset="100%" stop-color="#3d228c" />
-                </linearGradient>
-                <mask
-                  id="howStepMask3"
-                  maskUnits="userSpaceOnUse"
-                  maskContentUnits="userSpaceOnUse"
-                  x="-12"
-                  y="-12"
-                  width="124"
-                  height="124"
-                >
-                  <rect x="-12" y="-12" width="124" height="124" fill="#000" />
-                  <text
-                    x="50"
-                    y="88"
-                    text-anchor="middle"
-                    font-family="Poppins, sans-serif"
-                    font-size="96"
-                    font-weight="700"
-                    fill="none"
-                    stroke="#fff"
-                    stroke-width="1"
-                    stroke-linejoin="round"
-                    text-rendering="geometricPrecision"
+                  <li
+                    class="checkout-form__select-option"
+                    role="option"
+                    aria-selected="false"
+                    data-value="PayPal"
+                    tabindex="0"
                   >
-                    03
-                  </text>
-                </mask>
-              </defs>
-              <rect
-                x="-12"
-                y="-12"
-                width="124"
-                height="124"
-                fill="url(#howStepGrad3)"
-                mask="url(#howStepMask3)"
-              />
-            </svg>
-            <svg
-              class="how-step__up"
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <path d="M6 18L18 6" />
-              <path d="M9 6h9v9" />
-            </svg>
-            <p class="how-step__text"><span>Get</span> your results</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="gta5-offer container" aria-labelledby="gta5-offer-title">
-        <div class="gta5-offer__shell">
-          <div class="gta5-offer__bg" aria-hidden="true">
-            <img
-              class="gta5-offer__img"
-              src="../assets/images/custom-service.webp"
-              alt=""
-              loading="lazy"
-              decoding="async"
-            />
-          </div>
-
-          <div class="gta5-offer__inner">
-            <div class="gta5-offer__content">
-              <p class="gta5-offer__eyebrow">Can’t find what you need?</p>
-              <h2 class="gta5-offer__title" id="gta5-offer-title">
-                <span class="gta5-offer__title-solid">GET PERSONALIZED</span>
-                <span class="gta5-offer__title-outline">OFFER</span>
-              </h2>
-              <p class="gta5-offer__desc">
-                Contact us and we’ll find the best deal or create a
-                personalized<br />
-                order for you at a lower price with an immediately<br />
-                contact with PRO player
-              </p>
-              <a
-                href="#contacts"
-                class="hero__btn animated-border gta5-offer__btn"
-              >
-                CREATE CUSTOM ORDER
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section
-        class="gta5-article container"
-        aria-label="GTA 5 boosting information"
-      >
-        <div class="gta5-article__shell">
-          <div class="gta5-article__content">
-            <p class="gta5-article__text">
-              GTA 5 boosting services are designed to help players progress
-              faster in GTA Online and enjoy all game content without long
-              grinding. Whether you need money, RP levels, heist completion,
-              unlock services, or account-related services, our professional
-              boosters will complete your order quickly and efficiently.
-            </p>
-            <p class="gta5-article__text">
-              We provide a full range of GTA Online boosting options, including
-              money boost, RP and level boost, heist carry, unlock all services,
-              and account services for PC, PlayStation, and Xbox platforms. All
-              orders are performed manually by experienced players to ensure
-              quality, speed, and account safety.
-            </p>
-            <p class="gta5-article__text">
-              Our service is suitable for both new and experienced players who
-              want to save time and focus on gameplay. You can customize your
-              order, choose the amount of money or levels, select specific
-              heists, or combine multiple services in one package. We offer
-              flexible pricing, fast delivery, and real-time support via
-              Discord.
-            </p>
-            <p class="gta5-article__text">
-              Privacy and security are our top priorities. We do not use bots,
-              cheats, or automated software. All boosting is done manually with
-              individual instructions for each client. Our support team is
-              available 24/7 to answer questions and help with your order.
-            </p>
-            <p class="gta5-article__text">
-              Choose a reliable GTA 5 boosting service and start enjoying GTA
-              Online with maximum progress today.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section class="testimonials container" aria-label="What say about us">
-        <div class="testimonials__head">
-          <h2 class="testimonials__title" aria-label="Testimonials">
-            <svg
-              class="testimonials__title-bg"
-              aria-hidden="true"
-              focusable="false"
-              viewBox="0 0 860 150"
-              preserveAspectRatio="xMidYMid meet"
-            >
-              <text
-                x="430"
-                y="114"
-                text-anchor="middle"
-                font-family="LEMON MILK, Poppins, sans-serif"
-                font-size="118"
-                font-weight="700"
-                fill="#653ade"
-                fill-opacity="0.12"
-                stroke="#653ade"
-                stroke-opacity="0.8"
-                stroke-width="1.5"
-                stroke-linejoin="round"
-              >
-                Testimonials
-              </text>
-            </svg>
-            <span class="testimonials__title-fg">What say about us</span>
-          </h2>
-        </div>
-
-        <div class="testimonials__slider" aria-label="Customer testimonials">
-          <div class="testimonials__grid" role="list">
-            <svg width="0" height="0" aria-hidden="true" focusable="false">
-              <defs>
-                <linearGradient
-                  id="testimonialStarGradient"
-                  x1="0%"
-                  y1="100%"
-                  x2="100%"
-                  y2="0%"
+                    PayPal
+                  </li>
+                  <li
+                    class="checkout-form__select-option"
+                    role="option"
+                    aria-selected="false"
+                    data-value="USDT"
+                    tabindex="-1"
+                  >
+                    Tether (USDT)
+                  </li>
+                </ul>
+                <svg
+                  class="checkout-form__select-ico"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
                 >
-                  <stop offset="0%" stop-color="#2de1fe" />
-                  <stop offset="55%" stop-color="#6849fe" />
-                  <stop offset="100%" stop-color="#9d21fe" />
-                </linearGradient>
-              </defs>
-            </svg>
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </div>
 
-            <article class="testimonial" role="listitem">
-              <div class="testimonial__stars" aria-hidden="true">
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
-                  />
-                </svg>
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
-                  />
-                </svg>
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
-                  />
-                </svg>
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
-                  />
-                </svg>
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
-                  />
-                </svg>
-              </div>
-              <p class="testimonial__text">
-                Ordered GTA Online money boost and everything went super smooth.
-                Delivery was fast, support answered instantly in Discord.
-                Definitely recommended!
-              </p>
-              <div class="testimonial__user">
-                <span class="testimonial__avatar" aria-hidden="true"></span>
-                <div class="testimonial__meta">
-                  <p class="testimonial__name">GhostRider77</p>
-                  <p class="testimonial__service">Money Boost</p>
-                </div>
-              </div>
-            </article>
+              <label class="checkout-form__label" for="checkout-comment"
+                >Comment</label
+              >
+              <textarea
+                class="checkout-form__textarea"
+                id="checkout-comment"
+                name="comment"
+                placeholder="Your comment"
+                rows="3"
+              ></textarea>
 
-            <article class="testimonial" role="listitem">
-              <div class="testimonial__stars" aria-hidden="true">
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
-                  />
-                </svg>
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
-                  />
-                </svg>
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
-                  />
-                </svg>
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
-                  />
-                </svg>
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
-                  />
-                </svg>
-              </div>
-              <p class="testimonial__text">
-                Great leveling service! My RP was boosted exactly as requested.
-                Booster was professional and kept me updated. Will use again.
-              </p>
-              <div class="testimonial__user">
-                <span class="testimonial__avatar" aria-hidden="true"></span>
-                <div class="testimonial__meta">
-                  <p class="testimonial__name">NeonHunterX</p>
-                  <p class="testimonial__service">RP / Level Boost</p>
-                </div>
-              </div>
-            </article>
+              <label class="checkout-form__agree">
+                <input
+                  class="checkout-form__checkbox"
+                  type="checkbox"
+                  name="agree"
+                  required
+                />
+                <span class="checkout-form__agree-text">
+                  I have read and agree to the website terms and conditions
+                </span>
+              </label>
 
-            <article class="testimonial" role="listitem">
-              <div class="testimonial__stars" aria-hidden="true">
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
-                  />
-                </svg>
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
-                  />
-                </svg>
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
-                  />
-                </svg>
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
-                  />
-                </svg>
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
-                  />
-                </svg>
-              </div>
-              <p class="testimonial__text">
-                Needed a fast unlock + quick setup for my account. They
-                explained everything clearly, delivered on time, and the process
-                felt safe and professional from start to finish.
-              </p>
-              <div class="testimonial__user">
-                <span class="testimonial__avatar" aria-hidden="true"></span>
-                <div class="testimonial__meta">
-                  <p class="testimonial__name">SilentNova</p>
-                  <p class="testimonial__service">Unlock / Setup</p>
-                </div>
-              </div>
-            </article>
+              <button class="checkout-form__btn animated-border" type="submit">
+                SUBMIT ORDER
+              </button>
 
-            <article class="testimonial" role="listitem">
-              <div class="testimonial__stars" aria-hidden="true">
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
+              <p
+                class="checkout-form__hint"
+                aria-live="polite"
+                id="checkout-form-hint"
+              ></p>
+            </form>
+
+            <aside class="order" aria-label="Your Order">
+              <h2 class="order__head">Your Order</h2>
+
+              <ul class="order__list" aria-label="Order items">
+                <li
+                  class="order-item"
+                  data-name="GTA Online Cash+ Cars Boost"
+                  data-platform="PS4 / PS5"
+                  data-price="19.99"
+                >
+                  <img
+                    class="order-item__img"
+                    src="../assets/images/gta5.webp"
+                    alt="GTA 5"
+                    loading="lazy"
                   />
-                </svg>
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
+                  <div class="order-item__info">
+                    <p class="order-item__name">GTA Online Cash+ Cars Boost</p>
+                    <p class="order-item__meta">PS4 / PS5</p>
+                    <p class="order-item__qty">x1</p>
+                  </div>
+                  <p class="order-item__price">$19.99</p>
+                </li>
+
+                <li
+                  class="order-item"
+                  data-name="GTA Online Cash+ Cars Boost"
+                  data-platform="PS4 / PS5"
+                  data-price="19.99"
+                >
+                  <img
+                    class="order-item__img"
+                    src="../assets/images/gta5.webp"
+                    alt="GTA 5"
+                    loading="lazy"
                   />
-                </svg>
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
-                  />
-                </svg>
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
-                  />
-                </svg>
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
-                  />
-                </svg>
+                  <div class="order-item__info">
+                    <p class="order-item__name">GTA Online Cash+</p>
+                    <p class="order-item__meta">Cars Boost PS4 / PS5</p>
+                    <p class="order-item__qty">x1</p>
+                  </div>
+                  <p class="order-item__price">$19.99</p>
+                </li>
+              </ul>
+
+              <div class="order__subtotal" aria-label="Subtotal">
+                <span class="order__subtotal-label">Subtotal</span>
+                <span class="order__subtotal-value" id="order-subtotal"
+                  >$39.98</span
+                >
               </div>
-              <p class="testimonial__text">
-                Did heist carry and it was amazing. Very skilled team, completed
-                everything without issues. Prices are fair compared to other
-                boosting sites.
-              </p>
-              <div class="testimonial__user">
-                <span class="testimonial__avatar" aria-hidden="true"></span>
-                <div class="testimonial__meta">
-                  <p class="testimonial__name">ToxicMercy</p>
-                  <p class="testimonial__service">Heist Carry</p>
-                </div>
-              </div>
-            </article>
+            </aside>
           </div>
-        </div>
-      </section>
-
-      <section
-        class="faq container"
-        id="faq"
-        aria-label="Frequently asked questions"
-      >
-        <div class="faq__head">
-          <h2 class="faq__title" aria-label="FAQ">
-            <svg
-              class="faq__title-bg"
-              aria-hidden="true"
-              focusable="false"
-              viewBox="0 0 480 140"
-              preserveAspectRatio="xMidYMid meet"
-            >
-              <text
-                x="240"
-                y="105"
-                text-anchor="middle"
-                font-family="LEMON MILK, Poppins, sans-serif"
-                font-size="110"
-                font-weight="700"
-                fill="#653ade"
-                fill-opacity="0.14"
-                stroke="#653ade"
-                stroke-width="1.5"
-                stroke-linejoin="round"
-              >
-                FAQ
-              </text>
-            </svg>
-            <span class="faq__title-fg">Got any questions?</span>
-          </h2>
-          <p class="faq__desc">
-            Here are the answers to the most common questions we’ve been asked
-          </p>
-        </div>
-
-        <div class="faq__list" role="list">
-          <article class="faq-item is-open" role="listitem">
-            <button
-              class="faq-item__trigger"
-              type="button"
-              id="faq-q1"
-              aria-expanded="true"
-              aria-controls="faq-a1"
-            >
-              <span class="faq-item__q">Is GTA Online boosting safe?</span>
-              <svg
-                class="faq-item__chev"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <path d="M6 10l6 6 6-6" />
-              </svg>
-            </button>
-            <div
-              class="faq-item__panel"
-              id="faq-a1"
-              role="region"
-              aria-labelledby="faq-q1"
-            >
-              <p class="faq-item__a">
-                Yes. Our GTA Online boosting services are performed using safe
-                and controlled methods designed to protect your account. We
-                handle every order carefully to ensure a secure experience for
-                our customers.
-              </p>
-            </div>
-          </article>
-
-          <article class="faq-item" role="listitem">
-            <button
-              class="faq-item__trigger"
-              type="button"
-              id="faq-q2"
-              aria-expanded="false"
-              aria-controls="faq-a2"
-            >
-              <span class="faq-item__q">
-                How long does GTA Online boosting take?
-              </span>
-              <svg
-                class="faq-item__chev"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <path d="M6 10l6 6 6-6" />
-              </svg>
-            </button>
-            <div
-              class="faq-item__panel"
-              id="faq-a2"
-              role="region"
-              aria-labelledby="faq-q2"
-            >
-              <p class="faq-item__a">
-                The completion time depends on the selected service and package
-                size. Smaller boosts can be completed faster, while larger
-                upgrades may require more time to ensure proper execution.
-              </p>
-            </div>
-          </article>
-
-          <article class="faq-item" role="listitem">
-            <button
-              class="faq-item__trigger"
-              type="button"
-              id="faq-q3"
-              aria-expanded="false"
-              aria-controls="faq-a3"
-            >
-              <span class="faq-item__q">
-                Do I need to give my account details?
-              </span>
-              <svg
-                class="faq-item__chev"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <path d="M6 10l6 6 6-6" />
-              </svg>
-            </button>
-            <div
-              class="faq-item__panel"
-              id="faq-a3"
-              role="region"
-              aria-labelledby="faq-q3"
-            >
-              <p class="faq-item__a">
-                For most GTA Online services, temporary account access may be
-                required to complete the boost. Your account information is
-                handled securely and used only for the duration of the service.
-              </p>
-            </div>
-          </article>
-
-          <article class="faq-item" role="listitem">
-            <button
-              class="faq-item__trigger"
-              type="button"
-              id="faq-q4"
-              aria-expanded="false"
-              aria-controls="faq-a4"
-            >
-              <span class="faq-item__q">
-                Will I be able to play during the boost?
-              </span>
-              <svg
-                class="faq-item__chev"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <path d="M6 10l6 6 6-6" />
-              </svg>
-            </button>
-            <div
-              class="faq-item__panel"
-              id="faq-a4"
-              role="region"
-              aria-labelledby="faq-q4"
-            >
-              <p class="faq-item__a">
-                In most cases, we recommend not logging into the account while
-                the service is being completed. This helps avoid interruptions
-                and allows our team to finish the boost efficiently.
-              </p>
-            </div>
-          </article>
-
-          <article class="faq-item" role="listitem">
-            <button
-              class="faq-item__trigger"
-              type="button"
-              id="faq-q5"
-              aria-expanded="false"
-              aria-controls="faq-a5"
-            >
-              <span class="faq-item__q">
-                What happens after the boost is completed?
-              </span>
-              <svg
-                class="faq-item__chev"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <path d="M6 10l6 6 6-6" />
-              </svg>
-            </button>
-            <div
-              class="faq-item__panel"
-              id="faq-a5"
-              role="region"
-              aria-labelledby="faq-q5"
-            >
-              <p class="faq-item__a">
-                Once the service is finished, your account will be fully
-                prepared with the selected upgrades. You can immediately log in
-                and enjoy the improved balance, vehicles, or level progression.
-              </p>
-            </div>
-          </article>
-
-          <article class="faq-item" role="listitem">
-            <button
-              class="faq-item__trigger"
-              type="button"
-              id="faq-q6"
-              aria-expanded="false"
-              aria-controls="faq-a6"
-            >
-              <span class="faq-item__q">Which platforms do you support?</span>
-              <svg
-                class="faq-item__chev"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <path d="M6 10l6 6 6-6" />
-              </svg>
-            </button>
-            <div
-              class="faq-item__panel"
-              id="faq-a6"
-              role="region"
-              aria-labelledby="faq-q6"
-            >
-              <p class="faq-item__a">
-                Our GTA Online boosting services currently support:<br />
-                <br />
-                PlayStation (PS4 / PS5)<br />
-                Xbox (Xbox One / Xbox Series)<br />
-                PC
-              </p>
-            </div>
-          </article>
         </div>
       </section>
     </main>
@@ -1391,6 +774,7 @@
                 />
               </span>
             </a>
+
             <div class="footer__contacts" aria-label="Contact">
               <a class="footer__contact" href="mailto:support@nanoboost.com">
                 <span class="footer__contact-ico" aria-hidden="true">
@@ -1545,9 +929,9 @@
                 >
               </li>
               <li>
-                <a class="footer__link" href="./privacy-policy.html">
-                  Privacy Policy
-                </a>
+                <a class="footer__link" href="./privacy-policy.html"
+                  >Privacy Policy</a
+                >
               </li>
               <li>
                 <a class="footer__link" href="./privacy-policy.html"
@@ -1642,37 +1026,7 @@
       </div>
     </footer>
 
-    <!-- Floating Cart (768px va pastida) -->
-    <a href="./checkout.html" class="cart-float" aria-label="Cart">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="26"
-        height="26"
-        viewBox="0 -0.5 25 25"
-        fill="none"
-      >
-        <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
-          d="M5.50063 16.1407C5.46273 18.2335 7.1278 19.9613 9.22063 20.0007H15.7806C17.8735 19.9613 19.5385 18.2335 19.5006 16.1407L19.0636 11.4527C18.9527 9.68529 17.716 8.19053 16.0006 7.75065C15.6432 7.64667 15.2729 7.59348 14.9006 7.59265H10.1006C9.72837 7.59348 9.35808 7.64667 9.00063 7.75065C7.28636 8.19067 6.05026 9.68433 5.93863 11.4507L5.50063 16.1407Z"
-          stroke="#ffffff"
-          stroke-width="1.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
-        <path
-          d="M16.0006 9.38862V7.36762C15.9629 5.4718 14.3965 3.96493 12.5006 4.00062C10.6047 3.96493 9.03835 5.4718 9.00061 7.36762V9.38762"
-          stroke="#ffffff"
-          stroke-width="1.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
-      </svg>
-      <span class="cart-float__badge">5</span>
-    </a>
-
     <script src="../scripts/shared.js"></script>
-    <script src="../scripts/services-data.js"></script>
-    <script src="../scripts/gta5-page.js"></script>
+    <script src="../scripts/checkout-page.js"></script>
   </body>
 </html>
