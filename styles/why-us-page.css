@@ -5,6 +5,14 @@
   margin-top: clamp(0rem, 6vw, 14rem);
 }
 
+/* Match index.html games__title-bg sizing */
+.page--why-us .why__title-bg {
+  transform: translate(-50%, -63%);
+  width: 58rem;
+  height: 13.5rem;
+  opacity: 0.55;
+}
+
 .why-us__head {
   display: flex;
   justify-content: center;
@@ -123,6 +131,12 @@
 @media (max-width: 430px) {
   .why-us__cards {
     gap: 2.2rem;
+  }
+
+  .page--why-us .why__title-bg {
+    width: min(44rem, 90vw);
+    height: 10.4rem;
+    transform: translate(-50%, -63%) !important;
   }
 
   .why-us__card {

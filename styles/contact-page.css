@@ -126,7 +126,7 @@
 .page--contact .contact-card__title {
   text-align: center;
   font-size: clamp(3.1rem, 2.15vw, 4.3rem);
-  font-weight: 600;
+  font-weight: 400;
   color: rgba(255, 255, 255, 0.95);
   margin-bottom: 2.6rem;
 }
@@ -141,7 +141,6 @@
 }
 
 .page--contact .contact-app {
-  --border-size: 3px;
   --speed: 3.2s;
 
   display: grid;
@@ -209,6 +208,7 @@
   text-transform: none;
   color: rgba(111, 75, 255, 0.62);
   margin-bottom: 0.9rem;
+  padding-left: 1.5rem;
 }
 
 .page--contact .contact-form__label[for="contact-discord"]::after,
@@ -265,7 +265,6 @@
 }
 
 .page--contact .contact-form__btn {
-  --border-size: 3px;
   --speed: 3.2s;
   width: 100%;
   min-height: 7.2rem;
@@ -313,7 +312,6 @@
 }
 
 .page--contact .contact-email__link {
-  margin-top: auto;
   display: inline-flex;
   width: fit-content;
   align-self: flex-start;
