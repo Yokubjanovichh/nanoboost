@@ -2,6 +2,7 @@
   const form = document.querySelector("#checkout-form");
   const hint = document.querySelector("#checkout-form-hint");
   const subtotalEl = document.querySelector("#order-subtotal");
+  const orderList = document.querySelector("#order-list");
 
   const paymentInput = document.querySelector("#checkout-payment");
   const paymentBtn = document.querySelector("#checkout-payment-btn");
@@ -10,38 +11,99 @@
     ? paymentBtn.closest(".checkout-form__select-wrap")
     : null;
 
-  const items = Array.from(document.querySelectorAll(".order-item"));
-
   const safeValue = (value) => String(value || "").trim();
   const toNumber = (value) => {
     const num = Number(String(value || "").replace(/[^0-9.]/g, ""));
     return Number.isFinite(num) ? num : 0;
   };
 
-  const getQty = (itemEl) => {
-    const qtyEl = itemEl.querySelector(".order-item__qty");
-    const text = safeValue(qtyEl ? qtyEl.textContent : "");
-    const match = text.match(/x\s*(\d+)/i);
-    const qty = match ? Number(match[1]) : 1;
-    return Number.isFinite(qty) && qty > 0 ? qty : 1;
+  // =============================================
+  // Cart dan order ni render qilish
+  // =============================================
+  const NB_CART_KEY = "nb_cart";
+
+  const getCart = () => {
+    try {
+      return JSON.parse(localStorage.getItem(NB_CART_KEY) || "[]");
+    } catch {
+      return [];
+    }
   };
 
-  const updateSubtotal = () => {
-    const subtotal = items.reduce((sum, itemEl) => {
-      const price = toNumber(itemEl.getAttribute("data-price"));
-      const qty = getQty(itemEl);
-      return sum + price * qty;
-    }, 0);
+  const cart = getCart();
 
-    if (subtotalEl) {
-      subtotalEl.textContent = `$${subtotal.toFixed(2)}`;
+  const renderOrderItems = () => {
+    if (!orderList) return;
+    orderList.innerHTML = "";
+
+    if (!cart.length) {
+      const emptyLi = document.createElement("li");
+      emptyLi.className = "order-item";
+      emptyLi.style.cssText =
+        "text-align:center;color:rgba(255,255,255,0.5);padding:2rem 0;display:block;";
+      emptyLi.textContent = "Your cart is empty";
+      orderList.appendChild(emptyLi);
+      if (subtotalEl) subtotalEl.textContent = "$0.00";
+      return;
     }
 
-    return subtotal;
+    let subtotal = 0;
+
+    cart.forEach((item) => {
+      const price = Number(item.price) || 0;
+      const qty = item.qty || 1;
+      subtotal += price * qty;
+
+      const li = document.createElement("li");
+      li.className = "order-item";
+      li.setAttribute("data-name", item.name || "");
+      li.setAttribute("data-price", price.toFixed(2));
+      li.setAttribute("data-qty", qty);
+      if (item.option) li.setAttribute("data-option", item.option);
+
+      const img = document.createElement("img");
+      img.className = "order-item__img";
+      img.src = item.image || "";
+      img.alt = item.name || "";
+      img.loading = "lazy";
+
+      const info = document.createElement("div");
+      info.className = "order-item__info";
+
+      const nameEl = document.createElement("p");
+      nameEl.className = "order-item__name";
+      nameEl.textContent = item.name || "";
+
+      const metaEl = document.createElement("p");
+      metaEl.className = "order-item__meta";
+      metaEl.textContent = item.option || "";
+
+      const qtyEl = document.createElement("p");
+      qtyEl.className = "order-item__qty";
+      qtyEl.textContent = "x" + qty;
+
+      info.appendChild(nameEl);
+      if (item.option) info.appendChild(metaEl);
+      info.appendChild(qtyEl);
+
+      const priceEl = document.createElement("p");
+      priceEl.className = "order-item__price";
+      priceEl.textContent = "$" + (price * qty).toFixed(2);
+
+      li.appendChild(img);
+      li.appendChild(info);
+      li.appendChild(priceEl);
+      orderList.appendChild(li);
+    });
+
+    if (subtotalEl) subtotalEl.textContent = "$" + subtotal.toFixed(2);
   };
 
-  const subtotal = updateSubtotal();
+  renderOrderItems();
 
+  // =============================================
+  // Custom payment select
+  // =============================================
   const setupCustomPaymentSelect = () => {
     if (!paymentInput || !paymentBtn || !paymentMenu || !paymentWrap) return;
 
@@ -187,6 +249,9 @@
 
   setupCustomPaymentSelect();
 
+  // =============================================
+  // Form submit
+  // =============================================
   if (!form) return;
 
   form.addEventListener("submit", (event) => {
@@ -209,15 +274,20 @@
       return;
     }
 
+    if (!cart.length) {
+      if (hint) hint.textContent = "Your cart is empty.";
+      return;
+    }
+
     const subject = "Nanoboost Checkout Order";
 
-    const itemLines = items.map((itemEl) => {
-      const name = safeValue(itemEl.getAttribute("data-name"));
-      const platform = safeValue(itemEl.getAttribute("data-platform"));
-      const qty = getQty(itemEl);
-      const price = toNumber(itemEl.getAttribute("data-price"));
-      const label = [name, platform].filter(Boolean).join(" ");
-      return `- ${label} x${qty}: $${price.toFixed(2)}`;
+    let subtotal = 0;
+    const itemLines = cart.map((item) => {
+      const price = Number(item.price) || 0;
+      const qty = item.qty || 1;
+      subtotal += price * qty;
+      const option = item.option ? ` (${item.option})` : "";
+      return `- ${item.name || "Service"}${option} x${qty}: $${(price * qty).toFixed(2)}`;
     });
 
     const bodyLines = [
@@ -244,7 +314,7 @@
     )}&body=${encodeURIComponent(bodyLines.join("\n"))}`;
 
     if (hint) {
-      hint.textContent = "Opening your email app…";
+      hint.textContent = "Opening your email app\u2026";
     }
 
     window.location.href = mailto;

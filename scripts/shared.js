@@ -275,6 +275,241 @@ if (faqItems.length) {
 }
 
 // =============================================
+// Cart Widget
+// =============================================
+const NB_CART_KEY = "nb_cart";
+
+const nbGetCart = () => {
+  try {
+    return JSON.parse(localStorage.getItem(NB_CART_KEY) || "[]");
+  } catch {
+    return [];
+  }
+};
+
+const nbSaveCart = (cart) => {
+  localStorage.setItem(NB_CART_KEY, JSON.stringify(cart));
+};
+
+/** Add item to cart: { id, name, price, image, option } */
+window.NB_addToCart = (item) => {
+  const cart = nbGetCart();
+  // Xuddi shu id + option bo'lsa qty ni oshirish
+  const key = (item.id || "") + "|" + (item.option || "");
+  const existing = cart.find(
+    (c) => (c.id || "") + "|" + (c.option || "") === key,
+  );
+  if (existing) {
+    existing.qty = (existing.qty || 1) + 1;
+  } else {
+    cart.push({ ...item, qty: 1 });
+  }
+  nbSaveCart(cart);
+  nbUpdateCartBadges();
+  nbRenderCartWidget();
+  nbOpenCartWidget();
+};
+
+const nbIsInPages = () =>
+  window.location.pathname.replace(/\\/g, "/").includes("/pages/");
+
+const nbCheckoutUrl = () =>
+  nbIsInPages() ? "./checkout.html" : "./pages/checkout.html";
+
+const nbImageUrl = (storedPath) => {
+  if (!storedPath) return "";
+  if (nbIsInPages()) return storedPath;
+  // storedPath is relative to pages/ (e.g. "../assets/images/services1.webp")
+  // from root we need "./assets/images/..."
+  return storedPath.replace(/^\.\.\//g, "./");
+};
+
+const nbEscapeHtml = (str) => {
+  const d = document.createElement("div");
+  d.textContent = str;
+  return d.innerHTML;
+};
+
+const nbCartTotalQty = () =>
+  nbGetCart().reduce((sum, item) => sum + (item.qty || 1), 0);
+
+const nbUpdateCartBadges = () => {
+  const totalQty = nbCartTotalQty();
+  document.querySelectorAll(".cart__badge, .cart-float__badge").forEach((b) => {
+    b.textContent = totalQty;
+    b.style.display = totalQty > 0 ? "flex" : "none";
+  });
+
+  // cart-float faqat cart bo'sh bo'lmaganda ko'rinadi
+  document.querySelectorAll(".cart-float").forEach((btn) => {
+    btn.style.display = totalQty > 0 ? "" : "none";
+  });
+};
+
+const nbRenderCartWidget = () => {
+  const itemsEl = document.getElementById("cart-widget-items");
+  const subtotalEl = document.getElementById("cart-widget-subtotal");
+  const countEl = document.getElementById("cart-widget-count");
+  if (!itemsEl) return;
+
+  const cart = nbGetCart();
+  const checkoutHref = nbCheckoutUrl();
+
+  // Update checkout links
+  document
+    .querySelectorAll(
+      ".cart-widget__checkout-btn, .cart-widget__display-link",
+    )
+    .forEach((a) => {
+      a.href = checkoutHref;
+    });
+
+  // Checkout linklar — cart bo'sh bo'lsa o'tkazmasin
+  const checkoutLinks = document.querySelectorAll(
+    ".cart-widget__checkout-btn, .cart-widget__display-link",
+  );
+
+  if (!cart.length) {
+    itemsEl.innerHTML =
+      '<p class="cart-widget__empty">Your cart is empty</p>';
+    if (subtotalEl) subtotalEl.textContent = "$0.00";
+    if (countEl) countEl.textContent = "0 items";
+    checkoutLinks.forEach((a) => {
+      a.removeAttribute("href");
+      a.style.opacity = "0.4";
+      a.style.pointerEvents = "none";
+    });
+    return;
+  }
+
+  // Cart to'la — linklar faol
+  checkoutLinks.forEach((a) => {
+    a.href = checkoutHref;
+    a.style.opacity = "";
+    a.style.pointerEvents = "";
+  });
+
+  let subtotal = 0;
+  let totalQty = 0;
+  itemsEl.innerHTML = "";
+
+  cart.forEach((item, i) => {
+    const price = Number(item.price) || 0;
+    const qty = item.qty || 1;
+    subtotal += price * qty;
+    totalQty += qty;
+
+    const row = document.createElement("div");
+    row.className = "cart-widget__item";
+
+    const img = document.createElement("img");
+    img.className = "cart-widget__item-img";
+    img.src = nbImageUrl(item.image);
+    img.alt = item.name || "";
+
+    const info = document.createElement("div");
+    info.className = "cart-widget__item-info";
+
+    const name = document.createElement("p");
+    name.className = "cart-widget__item-name";
+    name.textContent = item.name || "";
+
+    if (qty > 1) {
+      const qtyEl = document.createElement("span");
+      qtyEl.className = "cart-widget__item-qty";
+      qtyEl.textContent = "x" + qty;
+      info.appendChild(name);
+      info.appendChild(qtyEl);
+    } else {
+      info.appendChild(name);
+    }
+
+    const priceEl = document.createElement("span");
+    priceEl.className = "cart-widget__item-price";
+    priceEl.textContent = "$" + (price * qty).toFixed(2);
+    info.appendChild(priceEl);
+
+    const removeBtn = document.createElement("button");
+    removeBtn.className = "cart-widget__item-remove";
+    removeBtn.setAttribute("aria-label", "Remove");
+    removeBtn.textContent = "\u2715";
+    removeBtn.addEventListener("click", () => {
+      const c = nbGetCart();
+      if (c[i] && c[i].qty > 1) {
+        c[i].qty -= 1;
+      } else {
+        c.splice(i, 1);
+      }
+      nbSaveCart(c);
+      nbUpdateCartBadges();
+      nbRenderCartWidget();
+    });
+
+    row.appendChild(img);
+    row.appendChild(info);
+    row.appendChild(removeBtn);
+    itemsEl.appendChild(row);
+  });
+
+  if (subtotalEl) subtotalEl.textContent = "$" + subtotal.toFixed(2);
+  if (countEl)
+    countEl.textContent =
+      totalQty + " item" + (totalQty !== 1 ? "s" : "");
+};
+
+const nbGetScrollbarWidth = () =>
+  window.innerWidth - document.documentElement.clientWidth;
+
+const nbOpenCartWidget = () => {
+  const widget = document.getElementById("cart-widget");
+  if (!widget) return;
+  nbRenderCartWidget();
+
+  // Scrollbar yo'qolganda layout shift oldini olish
+  const scrollbarW = nbGetScrollbarWidth();
+  const headerEl = document.querySelector(".header");
+  document.body.style.paddingRight = scrollbarW + "px";
+  if (headerEl) headerEl.style.width = "calc(100% - " + scrollbarW + "px)";
+  document.body.style.overflow = "hidden";
+
+  widget.classList.add("is-open");
+};
+
+const nbCloseCartWidget = () => {
+  const widget = document.getElementById("cart-widget");
+  if (!widget) return;
+  widget.classList.remove("is-open");
+  document.body.style.overflow = "";
+  document.body.style.paddingRight = "";
+  const headerEl = document.querySelector(".header");
+  if (headerEl) headerEl.style.width = "";
+};
+
+// Open cart: header cart + floating cart
+document.querySelectorAll("[data-open-cart]").forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+    e.preventDefault();
+    nbOpenCartWidget();
+  });
+});
+
+// Close cart
+document
+  .getElementById("cart-widget-close")
+  ?.addEventListener("click", nbCloseCartWidget);
+document
+  .querySelector(".cart-widget__overlay")
+  ?.addEventListener("click", nbCloseCartWidget);
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") nbCloseCartWidget();
+});
+
+// Initialize badges and widget
+nbUpdateCartBadges();
+nbRenderCartWidget();
+
+// =============================================
 // Disabled footer placeholder links
 // =============================================
 document.addEventListener("click", (e) => {

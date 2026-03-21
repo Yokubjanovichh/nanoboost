@@ -193,3 +193,39 @@ document.addEventListener("click", (e) => {
       ?.scrollIntoView({ block: "start", behavior: "smooth" });
   }
 });
+
+// =============================================
+// "BUY NOW" form — add selected option to cart
+// =============================================
+const purchaseForm = document.querySelector(".service-hero__purchase");
+if (purchaseForm) {
+  purchaseForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const serviceId = getServiceFromUrl() || "gta-cash-cars";
+    const config = SERVICE_CONFIG[serviceId];
+    if (!config) return;
+
+    const optionInput = purchaseForm.querySelector('input[name="option"]');
+    const selectedOption = optionInput?.value || config.defaultOption || "";
+
+    // Parse price from option string like "15 million - 19.99$"
+    const priceMatch = selectedOption.match(/([\d.]+)\$$/);
+    const price = priceMatch ? parseFloat(priceMatch[1]) : 0;
+
+    // Build clean name from title (strip HTML tags)
+    const tempDiv = document.createElement("div");
+    tempDiv.innerHTML = config.titleHtml || "";
+    const name = tempDiv.textContent.trim();
+
+    if (typeof window.NB_addToCart === "function") {
+      window.NB_addToCart({
+        id: serviceId,
+        name: name,
+        price: price,
+        image: config.imageSrc || "",
+        option: selectedOption,
+      });
+    }
+  });
+}
