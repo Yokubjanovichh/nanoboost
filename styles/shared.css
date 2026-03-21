@@ -518,12 +518,11 @@ a {
     display: flex;
     position: fixed;
     top: 5.95rem;
-    right: 0;
-    left: auto;
+    left: 0;
+    right: auto;
     width: 320px;
     max-width: 85vw;
-    height: calc(100vh - 5.95rem);
-    height: calc(100dvh - 5.95rem);
+    height: max-content;
     max-height: calc(100vh - 5.95rem);
     max-height: calc(100dvh - 5.95rem);
     overflow-y: auto;
@@ -533,7 +532,8 @@ a {
     background: #0b0228;
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border-left: 1px solid #2a273f;
+    border-left: 0;
+    border-right: 1px solid #2a273f;
     padding: 1.47rem 1.19rem;
     z-index: 99;
     justify-content: flex-start;
@@ -541,7 +541,7 @@ a {
     /* transition uchun */
     opacity: 0;
     visibility: hidden;
-    transform: translateX(100%);
+    transform: translateX(-100%);
     transition:
       opacity 0.3s ease,
       transform 0.3s ease,
@@ -769,8 +769,6 @@ a {
 
   .header .nav {
     top: 5.215rem;
-    height: calc(100vh - 5.215rem);
-    height: calc(100dvh - 5.215rem);
     max-height: calc(100vh - 5.215rem);
     max-height: calc(100dvh - 5.215rem);
   }

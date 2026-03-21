@@ -15,23 +15,6 @@
   align-items: start;
 }
 
-.page--checkout .checkout__grid::before {
-  content: "";
-  position: absolute;
-  left: -22rem;
-  top: 12rem;
-  width: 40rem;
-  height: 40rem;
-  border-radius: 50%;
-  border: 2px solid rgba(207, 67, 219, 0.42);
-  box-shadow:
-    0 0 0 10px rgba(104, 73, 254, 0.05),
-    0 0 0 26px rgba(104, 73, 254, 0.03),
-    0 40px 90px rgba(0, 0, 0, 0.55);
-  pointer-events: none;
-  z-index: 0;
-}
-
 /* ===== Left: Form ===== */
 
 .page--checkout .checkout-form {
@@ -180,8 +163,8 @@
 .page--checkout .checkout-form__agree {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 1.1rem;
-  padding-left: 2.1rem;
   margin-bottom: 2.6rem;
 }
 
@@ -247,8 +230,6 @@
 }
 
 .page--checkout .checkout-form__btn {
-  --border-size: 3px;
-  --speed: 3.2s;
   width: 100%;
   max-width: 34rem;
   min-height: 7.2rem;
@@ -402,13 +383,6 @@
 
   .page--checkout .order {
     margin-top: 0;
-  }
-
-  .page--checkout .checkout__grid::before {
-    left: -28rem;
-    top: 18rem;
-    width: 44rem;
-    height: 44rem;
   }
 
   .page--checkout .checkout-form {
