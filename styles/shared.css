@@ -40,6 +40,7 @@
 
 html {
   font-size: clamp(7px, 1.5vw, 9.5px);
+  scroll-behavior: smooth;
 }
 
 body {
@@ -537,8 +538,6 @@ a {
     -webkit-overflow-scrolling: touch;
     overscroll-behavior: contain;
     background: #0b0228;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
     border-left: 0;
     border-right: 1px solid #2a273f;
     padding: 1.47rem 1.19rem;
@@ -798,8 +797,8 @@ a {
     justify-content: center;
     position: fixed;
     bottom: 2.4rem;
-    left: 50%;
-    transform: translateX(-50%);
+    right: 2rem;
+    left: auto;
     z-index: 9999;
     width: 5.6rem;
     height: 5.6rem;
@@ -874,7 +873,13 @@ a {
   max-width: 100%;
   display: flex;
   flex-direction: column;
-  background: #12113a;
+  background: linear-gradient(
+    180deg,
+    rgba(65, 18, 132, 0.96) 0%,
+    rgba(38, 6, 79, 0.98) 48%,
+    rgba(29, 4, 63, 0.98) 100%
+  );
+  border-left: 1px solid rgba(134, 89, 233, 0.32);
   border-radius: 1.2rem 0 0 1.2rem;
   transform: translateX(100%);
   transition: transform 0.3s ease;
@@ -965,7 +970,7 @@ a {
 
 .cart-widget__item-name {
   font-family: "LEMONMILK", sans-serif;
-  font-size: 1.05rem;
+  font-size: 1.8rem;
   font-weight: 500;
   color: #fff;
   margin: 0 0 0.6rem;
@@ -1034,24 +1039,76 @@ a {
 }
 
 .cart-widget__checkout-btn {
+  position: relative;
   display: block;
   width: 100%;
   padding: 1.4rem;
   border: none;
-  border-radius: 1rem;
-  background: linear-gradient(135deg, #b47dff 0%, #e06bff 50%, #ff8ce0 100%);
+  border-radius: 999px;
+  background: linear-gradient(90deg, #5e6bff 0%, #c053e6 100%);
   color: #fff;
   font-family: "Poppins", sans-serif;
   font-size: 2.6rem;
-  font-weight: 600;
+  font-weight: 500;
   text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
   text-decoration: none;
   cursor: pointer;
-  transition: opacity 0.25s;
+  overflow: hidden;
+  z-index: 3;
 }
 
-.cart-widget__checkout-btn:hover {
-  opacity: 0.9;
+.cart-widget__checkout-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    105deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.08) 35%,
+    rgba(255, 255, 255, 0.25) 50%,
+    rgba(255, 255, 255, 0.08) 65%,
+    transparent 80%
+  );
+  transform: skewX(-20deg);
+  transition: none;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.cart-widget__checkout-btn:hover::before {
+  animation: ctaShine 0.8s ease forwards;
+}
+
+.cart-widget__checkout-btn::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  padding: 2px;
+  background: linear-gradient(90deg, #2de1fe, #6849fe, #ca4ee0, #2de1fe);
+  background-size: 300% 100%;
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+
+.cart-widget__checkout-btn:hover::after {
+  opacity: 1;
+  animation: ctaBorderGlow 2s linear infinite;
 }
 
 .cart-widget__display-link {
@@ -1085,6 +1142,19 @@ a {
   .cart-widget__item-img {
     width: 7rem;
     height: 7rem;
+  }
+
+  /* Performance: mobileda backdrop-filter olib tashlash */
+  .header {
+    background: rgba(8, 7, 26, 0.92);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .footer {
+    background: rgba(8, 7, 26, 0.95);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 }
 
@@ -1124,7 +1194,7 @@ a {
   }
 
   .cart-widget__item-name {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
   }
 
   .cart-widget__item-qty {
@@ -1163,6 +1233,15 @@ a {
 
 .main {
   padding: var(--gap-header-main) 2rem 0;
+}
+
+/* Performance: offscreen sectionlarni render qilishni kechiktirish */
+.how,
+.faq,
+.testimonials,
+.why-us {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 600px;
 }
 
 /* Birinchi/oxirgi section marginlari main padding bilan conflict qilmasin */
@@ -1618,12 +1697,11 @@ a {
   height: 46%;
   border-radius: 50%;
   background: radial-gradient(
-    65% 110% at 50% 100%,
-    rgba(207, 67, 219, 0.52) 0%,
-    rgba(207, 67, 219, 0.3) 38%,
-    rgba(49, 11, 104, 0) 78%
+    75% 120% at 50% 100%,
+    rgba(207, 67, 219, 0.42) 0%,
+    rgba(207, 67, 219, 0.22) 44%,
+    rgba(49, 11, 104, 0) 86%
   );
-  filter: blur(10px);
   opacity: 0.95;
   z-index: 0;
   pointer-events: none;
@@ -1641,7 +1719,6 @@ a {
   margin: 0 auto 1.8rem;
   transform: scale(1);
   transition: transform 300ms ease;
-  will-change: transform;
 }
 
 .service-card:hover .service-card__img,
@@ -2752,7 +2829,6 @@ a {
 .faq-item__panel {
   max-height: 0;
   overflow: hidden;
-  will-change: max-height;
   transition:
     max-height 0.35s ease,
     padding-bottom 0.35s ease;

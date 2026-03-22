@@ -17,7 +17,7 @@
     <link
       rel="preload"
       as="image"
-      href="./assets/icons/logo-text.png"
+      href="./assets/icons/logo-text.webp"
       fetchpriority="high"
     />
     <link
@@ -26,10 +26,11 @@
       href="./assets/images/gta5.webp"
       fetchpriority="high"
     />
+    <link rel="preload" as="font" type="font/woff" href="./assets/fonts/LEMONMILK-Medium.woff" crossorigin />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
   </head>
@@ -586,7 +587,7 @@
               <p class="hero__desc">
                 Level up fast. Earn more.<br />Unlock everything
               </p>
-              <a href="#" class="hero__btn animated-border">SELECT A SERVICE</a>
+              <a href="#services" class="hero__btn animated-border">SELECT A SERVICE</a>
             </div>
           </div>
         </div>
@@ -802,7 +803,7 @@
         </div>
       </section>
 
-      <section class="services container">
+      <section id="services" class="services container">
         <div class="services__head">
           <h2 class="services__title" aria-label="Hot right now">
             <svg
@@ -2094,12 +2095,12 @@
             <h3 class="footer__title">Legal</h3>
             <ul class="footer__list">
               <li>
-                <a class="footer__link" href="./pages/privacy-policy.html"
+                <a class="footer__link" href="./pages/terms-of-service.html"
                   >Terms of Service</a
                 >
               </li>
               <li>
-                <a class="footer__link" href="./pages/privacy-policy.html"
+                <a class="footer__link" href="./pages/refund-policy.html"
                   >Refund Policy</a
                 >
               </li>
@@ -2279,7 +2280,7 @@
       </div>
     </div>
 
-    <script src="scripts/shared.js"></script>
-    <script src="scripts/home.js"></script>
+    <script src="scripts/shared.js" defer></script>
+    <script src="scripts/home.js" defer></script>
   </body>
 </html>

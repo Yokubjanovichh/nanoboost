@@ -735,3 +735,23 @@ if (testimonialsSection && testimonialsSlider && testimonialsTrack) {
     });
   }
 }
+
+// =============================================
+// Performance: pause offscreen animations
+// =============================================
+{
+  const animEls = document.querySelectorAll(".animated-border");
+  if (animEls.length) {
+    const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          e.target.style.animationPlayState = e.isIntersecting
+            ? "running"
+            : "paused";
+        });
+      },
+      { rootMargin: "100px" },
+    );
+    animEls.forEach((el) => obs.observe(el));
+  }
+}

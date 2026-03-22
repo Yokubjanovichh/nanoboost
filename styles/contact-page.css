@@ -105,12 +105,11 @@
   height: 46%;
   border-radius: 50%;
   background: radial-gradient(
-    65% 110% at 50% 100%,
-    rgba(207, 67, 219, 0.56) 0%,
-    rgba(207, 67, 219, 0.26) 38%,
-    rgba(49, 11, 104, 0) 78%
+    75% 120% at 50% 100%,
+    rgba(207, 67, 219, 0.45) 0%,
+    rgba(207, 67, 219, 0.2) 44%,
+    rgba(49, 11, 104, 0) 86%
   );
-  filter: blur(11px);
   opacity: 0.95;
   z-index: 0;
   pointer-events: none;

@@ -15,7 +15,7 @@ body.page--service {
 .page--service::before,
 .page--service::after {
   content: "";
-  position: fixed;
+  position: absolute;
   pointer-events: none;
   z-index: 0;
 }
@@ -28,11 +28,10 @@ body.page--service {
   border-radius: 50%;
   background: radial-gradient(
     circle,
-    rgba(122, 46, 255, 0.22) 0%,
-    rgba(122, 46, 255, 0.08) 42%,
-    rgba(122, 46, 255, 0) 72%
+    rgba(122, 46, 255, 0.18) 0%,
+    rgba(122, 46, 255, 0.06) 48%,
+    rgba(122, 46, 255, 0) 80%
   );
-  filter: blur(18px);
 }
 
 .page--service::after {
@@ -652,6 +651,13 @@ body.page--service {
   .service-what__title-fg {
     font-size: 3.8rem;
     line-height: 1.05;
+  }
+
+  /* Performance: mobileda backdrop-filter olib tashlash */
+  .service-hero__shell {
+    background: rgba(8, 7, 26, 0.94);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 }
 
