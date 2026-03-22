@@ -510,7 +510,7 @@ document.querySelectorAll("[data-open-cart]").forEach((btn) => {
 
 // Close cart
 document
-  .getElementById("cart-widget-close")
+  .querySelector(".cart-widget__header")
   ?.addEventListener("click", nbCloseCartWidget);
 document
   .querySelector(".cart-widget__overlay")
