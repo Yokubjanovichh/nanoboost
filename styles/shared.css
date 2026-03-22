@@ -1235,13 +1235,13 @@ a {
   padding: var(--gap-header-main) 2rem 0;
 }
 
-/* Performance: offscreen sectionlarni render qilishni kechiktirish */
+/* Performance: sectionlarga containment (paint yo'q — title-bg overflow uchun) */
+.services,
 .how,
 .faq,
 .testimonials,
 .why-us {
-  content-visibility: auto;
-  contain-intrinsic-size: auto 600px;
+  contain: layout style;
 }
 
 /* Birinchi/oxirgi section marginlari main padding bilan conflict qilmasin */
