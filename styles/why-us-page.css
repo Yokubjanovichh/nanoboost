@@ -2,7 +2,7 @@
    Keep visuals consistent with existing shared styles. */
 
 .why-us {
-  margin-top: clamp(0rem, 6vw, 14rem);
+  margin-top: 0;
 }
 
 /* Match index.html games__title-bg sizing */
@@ -48,7 +48,7 @@
 }
 
 .why-us__card {
-  --why-us-icon-size: 14rem;
+  --why-us-icon-size: 10.5rem;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -102,7 +102,7 @@
 
 @media (max-width: 980px) {
   .why-us__card {
-    --why-us-icon-size: 14.3rem;
+    --why-us-icon-size: 10.5rem;
     padding: 2.6rem;
     min-height: 32rem;
   }
@@ -141,7 +141,7 @@
   }
 
   .why-us__card {
-    --why-us-icon-size: 11rem;
+    --why-us-icon-size: 8.25rem;
     flex-direction: column;
     align-items: stretch;
     gap: 1.8rem;

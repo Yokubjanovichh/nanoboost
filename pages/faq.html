@@ -97,273 +97,101 @@
 
               <!-- Dropdown modal -->
               <div class="dropdown">
-                <div class="dropdown__platforms">
+                <div class="dropdown__games">
                   <ul class="dropdown__list">
-                    <li class="dropdown__item is-active" data-platform="ps">
-                      <span>PlayStation 4 / 5</span>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="10"
-                        height="10"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <polyline points="9 18 15 12 9 6" />
-                      </svg>
+                    <li class="dropdown__item" data-game="gta5">
+                      <span>GTA5</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6" /></svg>
                     </li>
-                    <li class="dropdown__item" data-platform="pc">
-                      <span>PC</span>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="10"
-                        height="10"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <polyline points="9 18 15 12 9 6" />
-                      </svg>
+                    <li class="dropdown__item" data-game="destiny2">
+                      <span>Destiny 2</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6" /></svg>
                     </li>
-                    <li class="dropdown__item" data-platform="xbox">
-                      <span>Xbox One / Series</span>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="10"
-                        height="10"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <polyline points="9 18 15 12 9 6" />
-                      </svg>
+                    <li class="dropdown__item" data-game="wow">
+                      <span>World Of Warcraft</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6" /></svg>
+                    </li>
+                    <li class="dropdown__item" data-game="arc">
+                      <span>Arc Raiders</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6" /></svg>
+                    </li>
+                    <li class="dropdown__item" data-game="cs2">
+                      <span>CS2</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6" /></svg>
+                    </li>
+                    <li class="dropdown__item" data-game="wow2">
+                      <span>World Of Warcraft</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6" /></svg>
                     </li>
                   </ul>
                 </div>
 
-                <div class="dropdown__games">
-                  <ul
-                    class="dropdown__list dropdown__game-list is-active"
-                    data-for-platform="ps"
-                  >
-                    <li class="dropdown__item is-active" data-game="gta5">
-                      <span>GTA5</span>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="10"
-                        height="10"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <polyline points="9 18 15 12 9 6" />
-                      </svg>
+                <div class="dropdown__platforms">
+                  <ul class="dropdown__list dropdown__platform-list" data-for-game="gta5">
+                    <li class="dropdown__item" data-platform="ps">
+                      <span>PlayStation 4 / 5</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6" /></svg>
                     </li>
-                    <li class="dropdown__item" data-game="destiny2">
-                      <span>Destiny 2</span>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="10"
-                        height="10"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <polyline points="9 18 15 12 9 6" />
-                      </svg>
+                    <li class="dropdown__item" data-platform="pc">
+                      <span>PC</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6" /></svg>
                     </li>
-                    <li class="dropdown__item" data-game="arc">
-                      <span>Arc Raiders</span>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="10"
-                        height="10"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <polyline points="9 18 15 12 9 6" />
-                      </svg>
+                    <li class="dropdown__item" data-platform="xbox">
+                      <span>Xbox One / Series</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6" /></svg>
                     </li>
                   </ul>
-
-                  <ul
-                    class="dropdown__list dropdown__game-list"
-                    data-for-platform="pc"
-                  >
-                    <li class="dropdown__item" data-game="gta5">
-                      <span>GTA5</span>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="10"
-                        height="10"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <polyline points="9 18 15 12 9 6" />
-                      </svg>
+                  <ul class="dropdown__list dropdown__platform-list" data-for-game="destiny2">
+                    <li class="dropdown__item" data-platform="ps">
+                      <span>PlayStation 4 / 5</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6" /></svg>
                     </li>
-                    <li class="dropdown__item" data-game="destiny2">
-                      <span>Destiny 2</span>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="10"
-                        height="10"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <polyline points="9 18 15 12 9 6" />
-                      </svg>
+                    <li class="dropdown__item" data-platform="pc">
+                      <span>PC</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6" /></svg>
                     </li>
-                    <li class="dropdown__item" data-game="wow">
-                      <span>World Of Warcraft</span>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="10"
-                        height="10"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <polyline points="9 18 15 12 9 6" />
-                      </svg>
-                    </li>
-                    <li class="dropdown__item" data-game="arc">
-                      <span>Arc Raiders</span>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="10"
-                        height="10"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <polyline points="9 18 15 12 9 6" />
-                      </svg>
-                    </li>
-                    <li class="dropdown__item" data-game="cs2">
-                      <span>CS2</span>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="10"
-                        height="10"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <polyline points="9 18 15 12 9 6" />
-                      </svg>
-                    </li>
-                    <li class="dropdown__item" data-game="wow2">
-                      <span>World Of Warcraft</span>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="10"
-                        height="10"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <polyline points="9 18 15 12 9 6" />
-                      </svg>
+                    <li class="dropdown__item" data-platform="xbox">
+                      <span>Xbox One / Series</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6" /></svg>
                     </li>
                   </ul>
-
-                  <ul
-                    class="dropdown__list dropdown__game-list"
-                    data-for-platform="xbox"
-                  >
-                    <li class="dropdown__item" data-game="gta5">
-                      <span>GTA5</span>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="10"
-                        height="10"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <polyline points="9 18 15 12 9 6" />
-                      </svg>
+                  <ul class="dropdown__list dropdown__platform-list" data-for-game="wow">
+                    <li class="dropdown__item" data-platform="pc">
+                      <span>PC</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6" /></svg>
                     </li>
-                    <li class="dropdown__item" data-game="destiny2">
-                      <span>Destiny 2</span>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="10"
-                        height="10"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <polyline points="9 18 15 12 9 6" />
-                      </svg>
+                  </ul>
+                  <ul class="dropdown__list dropdown__platform-list" data-for-game="arc">
+                    <li class="dropdown__item" data-platform="ps">
+                      <span>PlayStation 4 / 5</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6" /></svg>
                     </li>
-                    <li class="dropdown__item" data-game="arc">
-                      <span>Arc Raiders</span>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="10"
-                        height="10"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <polyline points="9 18 15 12 9 6" />
-                      </svg>
+                    <li class="dropdown__item" data-platform="pc">
+                      <span>PC</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6" /></svg>
+                    </li>
+                    <li class="dropdown__item" data-platform="xbox">
+                      <span>Xbox One / Series</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6" /></svg>
+                    </li>
+                  </ul>
+                  <ul class="dropdown__list dropdown__platform-list" data-for-game="cs2">
+                    <li class="dropdown__item" data-platform="pc">
+                      <span>PC</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6" /></svg>
+                    </li>
+                  </ul>
+                  <ul class="dropdown__list dropdown__platform-list" data-for-game="wow2">
+                    <li class="dropdown__item" data-platform="pc">
+                      <span>PC</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6" /></svg>
                     </li>
                   </ul>
                 </div>
 
                 <div class="dropdown__sub">
-                  <ul class="dropdown__sublist is-active" data-for="gta5">
+                  <!-- GTA5 -->
+                  <ul class="dropdown__sublist" data-for="gta5">
                     <li class="dropdown__subitem"><a href="#">cash</a></li>
                     <li class="dropdown__subitem dropdown__subitem--active">
                       <a href="#">cash&amp;cars</a>
@@ -373,6 +201,7 @@
                       <a href="#">modded account</a>
                     </li>
                   </ul>
+                  <!-- Destiny 2 -->
                   <ul class="dropdown__sublist" data-for="destiny2">
                     <li class="dropdown__subitem"><a href="#">boost</a></li>
                     <li class="dropdown__subitem"><a href="#">carry</a></li>
@@ -381,6 +210,7 @@
                       <a href="#">power level</a>
                     </li>
                   </ul>
+                  <!-- World Of Warcraft -->
                   <ul class="dropdown__sublist" data-for="wow">
                     <li class="dropdown__subitem"><a href="#">gold</a></li>
                     <li class="dropdown__subitem"><a href="#">leveling</a></li>
@@ -391,6 +221,7 @@
                       <a href="#">raid carry</a>
                     </li>
                   </ul>
+                  <!-- Arc Raiders -->
                   <ul class="dropdown__sublist" data-for="arc">
                     <li class="dropdown__subitem">
                       <a href="#">rank boost</a>
@@ -398,6 +229,7 @@
                     <li class="dropdown__subitem"><a href="#">resources</a></li>
                     <li class="dropdown__subitem"><a href="#">coaching</a></li>
                   </ul>
+                  <!-- CS2 -->
                   <ul class="dropdown__sublist" data-for="cs2">
                     <li class="dropdown__subitem">
                       <a href="#">rank boost</a>
@@ -406,6 +238,7 @@
                     <li class="dropdown__subitem"><a href="#">faceit</a></li>
                     <li class="dropdown__subitem"><a href="#">wingman</a></li>
                   </ul>
+                  <!-- WoW 2 -->
                   <ul class="dropdown__sublist" data-for="wow2">
                     <li class="dropdown__subitem"><a href="#">mythic+</a></li>
                     <li class="dropdown__subitem"><a href="#">pvp boost</a></li>
@@ -498,19 +331,31 @@
               class="faq__title-bg"
               aria-hidden="true"
               focusable="false"
-              viewBox="0 0 480 140"
+              viewBox="0 0 600 140"
               preserveAspectRatio="xMidYMid meet"
             >
+              <defs>
+                <linearGradient
+                  id="faqStrokeGrad"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="0%"
+                >
+                  <stop offset="0%" stop-color="#3e228e" />
+                  <stop offset="50%" stop-color="#653ade" />
+                  <stop offset="100%" stop-color="#3d228c" />
+                </linearGradient>
+              </defs>
               <text
-                x="240"
+                x="300"
                 y="105"
                 text-anchor="middle"
-                font-family="LEMON MILK, Poppins, sans-serif"
+                font-family="Jost"
                 font-size="110"
                 font-weight="700"
-                fill="#653ade"
-                fill-opacity="0.14"
-                stroke="#653ade"
+                fill="none"
+                stroke="url(#faqStrokeGrad)"
                 stroke-width="1.5"
                 stroke-linejoin="round"
               >
@@ -538,7 +383,9 @@
                   aria-expanded="true"
                   aria-controls="faq-a1"
                 >
-                  <span class="faq-item__q">How does GTA 5 boosting work?</span>
+                  <span class="faq-item__q"
+                    >What payment methods do you accept?</span
+                  >
                   <svg
                     class="faq-item__chev"
                     viewBox="0 0 24 24"
@@ -555,10 +402,9 @@
                   aria-labelledby="faq-q1"
                 >
                   <p class="faq-item__a">
-                    After placing an order, you’ll receive instructions to
-                    connect with our booster via Discord. We confirm your
-                    requirements, platform, and delivery time, then complete the
-                    service and notify you when finished.
+                    We accept major payment methods including PayPal, crypto
+                    USDT, and other options available at checkout. The exact
+                    payment methods are displayed during the checkout process.
                   </p>
                 </div>
               </article>
@@ -572,7 +418,7 @@
                   aria-controls="faq-a2"
                 >
                   <span class="faq-item__q"
-                    >How long does GTA Online boosting take?</span
+                    >When do I need to pay for the boost?</span
                   >
                   <svg
                     class="faq-item__chev"
@@ -590,8 +436,9 @@
                   aria-labelledby="faq-q2"
                 >
                   <p class="faq-item__a">
-                    Timing depends on the selected service and package size.
-                    We’ll confirm an estimate after order details are provided.
+                    Payment is required before the boost starts. Once the
+                    payment is confirmed, your order is placed in the queue and
+                    processed by our team.
                   </p>
                 </div>
               </article>
@@ -605,7 +452,7 @@
                   aria-controls="faq-a3"
                 >
                   <span class="faq-item__q"
-                    >Do I need to give my account details?</span
+                    >Are there any hidden fees?</span
                   >
                   <svg
                     class="faq-item__chev"
@@ -623,8 +470,9 @@
                   aria-labelledby="faq-q3"
                 >
                   <p class="faq-item__a">
-                    For most services, temporary account access may be required.
-                    Your details are used only for completing the order.
+                    No. The price you see on the service page is the final price
+                    unless you choose extra options such as express delivery or
+                    specific boosters.
                   </p>
                 </div>
               </article>
@@ -638,7 +486,7 @@
                   aria-controls="faq-a4"
                 >
                   <span class="faq-item__q"
-                    >What platforms do you support?</span
+                    >Can I cancel my order?</span
                   >
                   <svg
                     class="faq-item__chev"
@@ -656,7 +504,9 @@
                   aria-labelledby="faq-q4"
                 >
                   <p class="faq-item__a">
-                    We support PlayStation (PS4/PS5), Xbox (One/Series), and PC.
+                    Yes, you can request a cancellation if the boost has not
+                    started yet. If the service is already in progress, a
+                    partial refund may be issued depending on the completed work.
                   </p>
                 </div>
               </article>
@@ -670,7 +520,7 @@
                   aria-controls="faq-a5"
                 >
                   <span class="faq-item__q"
-                    >Can I customize my boosting order?</span
+                    >Do you offer discounts or promo codes?</span
                   >
                   <svg
                     class="faq-item__chev"
@@ -688,8 +538,9 @@
                   aria-labelledby="faq-q5"
                 >
                   <p class="faq-item__a">
-                    Yes — we can discuss options and tailor the service where
-                    possible. Contact us after ordering.
+                    Yes. We regularly offer promotions, seasonal discounts, and
+                    special offers. Follow our Discord or contact support to
+                    receive current deals.
                   </p>
                 </div>
               </article>
@@ -709,7 +560,9 @@
                   aria-expanded="false"
                   aria-controls="faq-a6"
                 >
-                  <span class="faq-item__q">How does GTA 5 boosting work?</span>
+                  <span class="faq-item__q"
+                    >Is boosting safe for my account?</span
+                  >
                   <svg
                     class="faq-item__chev"
                     viewBox="0 0 24 24"
@@ -726,11 +579,13 @@
                   aria-labelledby="faq-q6"
                 >
                   <p class="faq-item__a">
-                    We complete orders manually using safe methods and keep you
-                    updated during the process.
+                    We use experienced boosters, secure connections, and safe
+                    methods to minimize risks. However, boosting always carries a
+                    small inherent risk, as with any third-party service.
                   </p>
                 </div>
               </article>
+
               <article class="faq-item" role="listitem">
                 <button
                   class="faq-item__trigger"
@@ -740,7 +595,7 @@
                   aria-controls="faq-a7"
                 >
                   <span class="faq-item__q"
-                    >How long does GTA Online boosting take?</span
+                    >Do you use VPN protection?</span
                   >
                   <svg
                     class="faq-item__chev"
@@ -758,11 +613,12 @@
                   aria-labelledby="faq-q7"
                 >
                   <p class="faq-item__a">
-                    It depends on the service; we’ll confirm an ETA after we
-                    review your order details.
+                    Yes. When account access is required, we use region-matched
+                    VPN connections to avoid suspicious logins.
                   </p>
                 </div>
               </article>
+
               <article class="faq-item" role="listitem">
                 <button
                   class="faq-item__trigger"
@@ -772,7 +628,7 @@
                   aria-controls="faq-a8"
                 >
                   <span class="faq-item__q"
-                    >Do I need to give my account details?</span
+                    >Will I get banned for using your service?</span
                   >
                   <svg
                     class="faq-item__chev"
@@ -790,11 +646,13 @@
                   aria-labelledby="faq-q8"
                 >
                   <p class="faq-item__a">
-                    If access is required, it’s used only to complete the boost
-                    and is kept confidential.
+                    Bans are extremely rare when using professional boosters and
+                    safe methods. While no service can guarantee 100% safety, we
+                    take all possible precautions.
                   </p>
                 </div>
               </article>
+
               <article class="faq-item" role="listitem">
                 <button
                   class="faq-item__trigger"
@@ -804,7 +662,7 @@
                   aria-controls="faq-a9"
                 >
                   <span class="faq-item__q"
-                    >What platforms do you support?</span
+                    >Who will have access to my account?</span
                   >
                   <svg
                     class="faq-item__chev"
@@ -822,10 +680,13 @@
                   aria-labelledby="faq-q9"
                 >
                   <p class="faq-item__a">
-                    PlayStation (PS4/PS5), Xbox (One/Series), and PC.
+                    Only a verified professional booster assigned to your order.
+                    All boosters are experienced and work under strict security
+                    policies.
                   </p>
                 </div>
               </article>
+
               <article class="faq-item" role="listitem">
                 <button
                   class="faq-item__trigger"
@@ -835,7 +696,7 @@
                   aria-controls="faq-a10"
                 >
                   <span class="faq-item__q"
-                    >Can I customize my boosting order?</span
+                    >Do you store my account data?</span
                   >
                   <svg
                     class="faq-item__chev"
@@ -853,8 +714,8 @@
                   aria-labelledby="faq-q10"
                 >
                   <p class="faq-item__a">
-                    Yes, customization is available for many services — message
-                    us to confirm.
+                    No. We do not store account passwords. All sensitive
+                    information is used only for the duration of the order.
                   </p>
                 </div>
               </article>
@@ -872,7 +733,9 @@
                   aria-expanded="false"
                   aria-controls="faq-a11"
                 >
-                  <span class="faq-item__q">How does GTA 5 boosting work?</span>
+                  <span class="faq-item__q"
+                    >How does the boosting process work?</span
+                  >
                   <svg
                     class="faq-item__chev"
                     viewBox="0 0 24 24"
@@ -889,11 +752,14 @@
                   aria-labelledby="faq-q11"
                 >
                   <p class="faq-item__a">
-                    We confirm your order, schedule the boost, complete it, and
-                    notify you once it’s done.
+                    1. You choose a service and complete the payment.
+                    2. Our support team contacts you.
+                    3. A professional booster is assigned.
+                    4. The boost is completed within the estimated time.
                   </p>
                 </div>
               </article>
+
               <article class="faq-item" role="listitem">
                 <button
                   class="faq-item__trigger"
@@ -903,7 +769,7 @@
                   aria-controls="faq-a12"
                 >
                   <span class="faq-item__q"
-                    >How long does GTA Online boosting take?</span
+                    >How long does a boost take?</span
                   >
                   <svg
                     class="faq-item__chev"
@@ -921,11 +787,12 @@
                   aria-labelledby="faq-q12"
                 >
                   <p class="faq-item__a">
-                    Time varies by package size and current queue — we’ll
-                    provide an ETA.
+                    The time depends on the game and service type. Estimated
+                    completion times are shown on each service page.
                   </p>
                 </div>
               </article>
+
               <article class="faq-item" role="listitem">
                 <button
                   class="faq-item__trigger"
@@ -935,7 +802,7 @@
                   aria-controls="faq-a13"
                 >
                   <span class="faq-item__q"
-                    >Do I need to give my account details?</span
+                    >Can I play while the boost is active?</span
                   >
                   <svg
                     class="faq-item__chev"
@@ -953,11 +820,13 @@
                   aria-labelledby="faq-q13"
                 >
                   <p class="faq-item__a">
-                    If required, we’ll request only the details needed to
-                    perform the boost.
+                    This depends on the service. For account-sharing boosts, you
+                    should not log in during the process. For duo or carry
+                    boosts, you can play together with the booster.
                   </p>
                 </div>
               </article>
+
               <article class="faq-item" role="listitem">
                 <button
                   class="faq-item__trigger"
@@ -967,7 +836,7 @@
                   aria-controls="faq-a14"
                 >
                   <span class="faq-item__q"
-                    >What platforms do you support?</span
+                    >Can I track my order progress?</span
                   >
                   <svg
                     class="faq-item__chev"
@@ -984,9 +853,13 @@
                   role="region"
                   aria-labelledby="faq-q14"
                 >
-                  <p class="faq-item__a">PlayStation, Xbox, and PC.</p>
+                  <p class="faq-item__a">
+                    Yes. You can contact support anytime via Discord or email to
+                    receive updates on your order.
+                  </p>
                 </div>
               </article>
+
               <article class="faq-item" role="listitem">
                 <button
                   class="faq-item__trigger"
@@ -996,7 +869,7 @@
                   aria-controls="faq-a15"
                 >
                   <span class="faq-item__q"
-                    >Can I customize my boosting order?</span
+                    >What if I need a custom boost?</span
                   >
                   <svg
                     class="faq-item__chev"
@@ -1014,7 +887,8 @@
                   aria-labelledby="faq-q15"
                 >
                   <p class="faq-item__a">
-                    Yes — we can tailor details depending on the service.
+                    You can request a custom order through Discord or email.
+                    We’ll create a personalized offer based on your needs.
                   </p>
                 </div>
               </article>
@@ -1034,7 +908,9 @@
                   aria-expanded="false"
                   aria-controls="faq-a16"
                 >
-                  <span class="faq-item__q">How does GTA 5 boosting work?</span>
+                  <span class="faq-item__q"
+                    >How can I contact support?</span
+                  >
                   <svg
                     class="faq-item__chev"
                     viewBox="0 0 24 24"
@@ -1051,11 +927,12 @@
                   aria-labelledby="faq-q16"
                 >
                   <p class="faq-item__a">
-                    We coordinate with you via Discord and keep communication
-                    clear from start to finish.
+                    You can reach us through Discord or Email. Our support team
+                    responds as quickly as possible.
                   </p>
                 </div>
               </article>
+
               <article class="faq-item" role="listitem">
                 <button
                   class="faq-item__trigger"
@@ -1065,7 +942,7 @@
                   aria-controls="faq-a17"
                 >
                   <span class="faq-item__q"
-                    >How long does GTA Online boosting take?</span
+                    >What are your support hours?</span
                   >
                   <svg
                     class="faq-item__chev"
@@ -1083,11 +960,12 @@
                   aria-labelledby="faq-q17"
                 >
                   <p class="faq-item__a">
-                    We’ll confirm timing on Discord after you share order
-                    details.
+                    Our support is available daily. Response times may vary
+                    depending on the time zone and workload.
                   </p>
                 </div>
               </article>
+
               <article class="faq-item" role="listitem">
                 <button
                   class="faq-item__trigger"
@@ -1097,7 +975,7 @@
                   aria-controls="faq-a18"
                 >
                   <span class="faq-item__q"
-                    >Do I need to give my account details?</span
+                    >Do you offer live chat?</span
                   >
                   <svg
                     class="faq-item__chev"
@@ -1115,11 +993,12 @@
                   aria-labelledby="faq-q18"
                 >
                   <p class="faq-item__a">
-                    If access is required, we’ll explain exactly what’s needed
-                    and how it’s used.
+                    Yes. Discord is our main live support channel for fast
+                    communication.
                   </p>
                 </div>
               </article>
+
               <article class="faq-item" role="listitem">
                 <button
                   class="faq-item__trigger"
@@ -1129,7 +1008,7 @@
                   aria-controls="faq-a19"
                 >
                   <span class="faq-item__q"
-                    >What platforms do you support?</span
+                    >What if there is a problem with my order?</span
                   >
                   <svg
                     class="faq-item__chev"
@@ -1146,38 +1025,10 @@
                   role="region"
                   aria-labelledby="faq-q19"
                 >
-                  <p class="faq-item__a">PlayStation, Xbox, and PC.</p>
-                </div>
-              </article>
-              <article class="faq-item" role="listitem">
-                <button
-                  class="faq-item__trigger"
-                  type="button"
-                  id="faq-q20"
-                  aria-expanded="false"
-                  aria-controls="faq-a20"
-                >
-                  <span class="faq-item__q"
-                    >Can I customize my boosting order?</span
-                  >
-                  <svg
-                    class="faq-item__chev"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                    focusable="false"
-                  >
-                    <path d="M6 10l6 6 6-6" />
-                  </svg>
-                </button>
-                <div
-                  class="faq-item__panel"
-                  id="faq-a20"
-                  role="region"
-                  aria-labelledby="faq-q20"
-                >
                   <p class="faq-item__a">
-                    Yes — reach out via Discord to discuss customization
-                    options.
+                    Contact support immediately. We will review the issue and
+                    offer a solution, such as a correction, compensation, or
+                    refund if applicable.
                   </p>
                 </div>
               </article>
@@ -1386,18 +1237,18 @@
             <h3 class="footer__title">Legal</h3>
             <ul class="footer__list">
               <li>
-                <a class="footer__link" href="./privacy-policy.html"
+                <a class="footer__link" href="./terms-of-service.html"
                   >Terms of Service</a
                 >
               </li>
               <li>
-                <a class="footer__link" href="./privacy-policy.html">
-                  Privacy Policy
-                </a>
+                <a class="footer__link" href="./refund-policy.html"
+                  >Refund Policy</a
+                >
               </li>
               <li>
                 <a class="footer__link" href="./privacy-policy.html"
-                  >Refund Policy</a
+                  >Privacy Policy</a
                 >
               </li>
             </ul>

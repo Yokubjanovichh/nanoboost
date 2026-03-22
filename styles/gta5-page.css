@@ -2,10 +2,6 @@ body.page--gta5 {
   overflow-x: hidden;
 }
 
-.page--gta5 .main {
-  padding-top: 8rem;
-}
-
 .page--gta5 .main > section.container + section.container {
   margin-top: clamp(8rem, 6vw, 14rem);
 }
@@ -35,9 +31,9 @@ body.page--gta5 {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -59%);
-  width: 70rem;
-  height: 12.8rem;
-  opacity: 0.46;
+  width: 58rem;
+  height: 13.5rem;
+  opacity: 0.55;
   pointer-events: none;
   overflow: visible;
   display: block;
@@ -254,10 +250,6 @@ body.page--gta5 {
 }
 
 @media (max-width: 980px) {
-  .page--gta5 .main {
-    padding-top: 5rem;
-  }
-
   .gta5-offer__content {
     max-width: 100%;
   }
@@ -298,10 +290,8 @@ body.page--gta5 {
 
 @media (max-width: 430px) {
   .gta5-intro__title-bg {
-    transform: translate(-50%, -57%);
-    width: min(52rem, 92vw);
-    height: 9.4rem;
-    opacity: 0.42;
+    width: min(44rem, 90vw);
+    height: 10.4rem;
   }
 
   .gta5-offer__inner {

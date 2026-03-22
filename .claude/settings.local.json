@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(for page:*)",
+      "Bash(do echo:*)",
+      "Read(//c/Users/Yokubjanovich/Desktop/Nanoboos/pages/**)",
+      "Bash(done)",
+      "Bash(node -e \":*)"
+    ]
+  }
+}

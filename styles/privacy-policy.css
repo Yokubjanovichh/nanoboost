@@ -2,16 +2,6 @@ body.page--privacy {
   overflow-x: hidden;
 }
 
-.page--privacy .main {
-  padding-top: 8rem;
-}
-
-@media (max-width: 980px) {
-  .page--privacy .main {
-    padding-top: 5rem;
-  }
-}
-
 .policy {
   width: 100%;
 }

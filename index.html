@@ -103,118 +103,8 @@
 
               <!-- Dropdown modal -->
               <div class="dropdown">
-                <div class="dropdown__platforms">
-                  <ul class="dropdown__list">
-                    <li class="dropdown__item is-active" data-platform="ps">
-                      <span>PlayStation 4 / 5</span>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="10"
-                        height="10"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <polyline points="9 18 15 12 9 6" />
-                      </svg>
-                    </li>
-                    <li class="dropdown__item" data-platform="pc">
-                      <span>PC</span>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="10"
-                        height="10"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <polyline points="9 18 15 12 9 6" />
-                      </svg>
-                    </li>
-                    <li class="dropdown__item" data-platform="xbox">
-                      <span>Xbox One / Series</span>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="10"
-                        height="10"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <polyline points="9 18 15 12 9 6" />
-                      </svg>
-                    </li>
-                  </ul>
-                </div>
-
                 <div class="dropdown__games">
-                  <ul
-                    class="dropdown__list dropdown__game-list is-active"
-                    data-for-platform="ps"
-                  >
-                    <li class="dropdown__item is-active" data-game="gta5">
-                      <span>GTA5</span>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="10"
-                        height="10"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <polyline points="9 18 15 12 9 6" />
-                      </svg>
-                    </li>
-                    <li class="dropdown__item" data-game="destiny2">
-                      <span>Destiny 2</span>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="10"
-                        height="10"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <polyline points="9 18 15 12 9 6" />
-                      </svg>
-                    </li>
-                    <li class="dropdown__item" data-game="arc">
-                      <span>Arc Raiders</span>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="10"
-                        height="10"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <polyline points="9 18 15 12 9 6" />
-                      </svg>
-                    </li>
-                  </ul>
-
-                  <ul
-                    class="dropdown__list dropdown__game-list"
-                    data-for-platform="pc"
-                  >
+                  <ul class="dropdown__list">
                     <li class="dropdown__item" data-game="gta5">
                       <span>GTA5</span>
                       <svg
@@ -312,13 +202,15 @@
                       </svg>
                     </li>
                   </ul>
+                </div>
 
+                <div class="dropdown__platforms">
                   <ul
-                    class="dropdown__list dropdown__game-list"
-                    data-for-platform="xbox"
+                    class="dropdown__list dropdown__platform-list"
+                    data-for-game="gta5"
                   >
-                    <li class="dropdown__item" data-game="gta5">
-                      <span>GTA5</span>
+                    <li class="dropdown__item" data-platform="ps">
+                      <span>PlayStation 4 / 5</span>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="10"
@@ -333,8 +225,8 @@
                         <polyline points="9 18 15 12 9 6" />
                       </svg>
                     </li>
-                    <li class="dropdown__item" data-game="destiny2">
-                      <span>Destiny 2</span>
+                    <li class="dropdown__item" data-platform="pc">
+                      <span>PC</span>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="10"
@@ -349,8 +241,177 @@
                         <polyline points="9 18 15 12 9 6" />
                       </svg>
                     </li>
-                    <li class="dropdown__item" data-game="arc">
-                      <span>Arc Raiders</span>
+                    <li class="dropdown__item" data-platform="xbox">
+                      <span>Xbox One / Series</span>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="10"
+                        height="10"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <polyline points="9 18 15 12 9 6" />
+                      </svg>
+                    </li>
+                  </ul>
+                  <ul
+                    class="dropdown__list dropdown__platform-list"
+                    data-for-game="destiny2"
+                  >
+                    <li class="dropdown__item" data-platform="ps">
+                      <span>PlayStation 4 / 5</span>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="10"
+                        height="10"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <polyline points="9 18 15 12 9 6" />
+                      </svg>
+                    </li>
+                    <li class="dropdown__item" data-platform="pc">
+                      <span>PC</span>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="10"
+                        height="10"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <polyline points="9 18 15 12 9 6" />
+                      </svg>
+                    </li>
+                    <li class="dropdown__item" data-platform="xbox">
+                      <span>Xbox One / Series</span>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="10"
+                        height="10"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <polyline points="9 18 15 12 9 6" />
+                      </svg>
+                    </li>
+                  </ul>
+                  <ul
+                    class="dropdown__list dropdown__platform-list"
+                    data-for-game="wow"
+                  >
+                    <li class="dropdown__item" data-platform="pc">
+                      <span>PC</span>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="10"
+                        height="10"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <polyline points="9 18 15 12 9 6" />
+                      </svg>
+                    </li>
+                  </ul>
+                  <ul
+                    class="dropdown__list dropdown__platform-list"
+                    data-for-game="arc"
+                  >
+                    <li class="dropdown__item" data-platform="ps">
+                      <span>PlayStation 4 / 5</span>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="10"
+                        height="10"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <polyline points="9 18 15 12 9 6" />
+                      </svg>
+                    </li>
+                    <li class="dropdown__item" data-platform="pc">
+                      <span>PC</span>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="10"
+                        height="10"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <polyline points="9 18 15 12 9 6" />
+                      </svg>
+                    </li>
+                    <li class="dropdown__item" data-platform="xbox">
+                      <span>Xbox One / Series</span>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="10"
+                        height="10"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <polyline points="9 18 15 12 9 6" />
+                      </svg>
+                    </li>
+                  </ul>
+                  <ul
+                    class="dropdown__list dropdown__platform-list"
+                    data-for-game="cs2"
+                  >
+                    <li class="dropdown__item" data-platform="pc">
+                      <span>PC</span>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="10"
+                        height="10"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <polyline points="9 18 15 12 9 6" />
+                      </svg>
+                    </li>
+                  </ul>
+                  <ul
+                    class="dropdown__list dropdown__platform-list"
+                    data-for-game="wow2"
+                  >
+                    <li class="dropdown__item" data-platform="pc">
+                      <span>PC</span>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="10"
@@ -370,7 +431,7 @@
 
                 <div class="dropdown__sub">
                   <!-- GTA5 -->
-                  <ul class="dropdown__sublist is-active" data-for="gta5">
+                  <ul class="dropdown__sublist" data-for="gta5">
                     <li class="dropdown__subitem"><a href="#">cash</a></li>
                     <li class="dropdown__subitem dropdown__subitem--active">
                       <a href="#">cash&amp;cars</a>
@@ -748,7 +809,7 @@
               class="services__title-bg"
               aria-hidden="true"
               focusable="false"
-              viewBox="0 0 800 140"
+              viewBox="0 0 600 140"
               preserveAspectRatio="xMidYMid meet"
             >
               <defs>
@@ -765,10 +826,10 @@
                 </linearGradient>
               </defs>
               <text
-                x="400"
+                x="300"
                 y="105"
                 text-anchor="middle"
-                font-family="Poppins, sans-serif"
+                font-family="Jost"
                 font-size="110"
                 font-weight="700"
                 fill="none"
@@ -905,7 +966,7 @@
               class="how__title-bg"
               aria-hidden="true"
               focusable="false"
-              viewBox="0 0 900 140"
+              viewBox="0 0 600 140"
               preserveAspectRatio="xMidYMid meet"
             >
               <defs>
@@ -922,10 +983,10 @@
                 </linearGradient>
               </defs>
               <text
-                x="450"
+                x="300"
                 y="105"
                 text-anchor="middle"
-                font-family="Poppins, sans-serif"
+                font-family="Jost"
                 font-size="110"
                 font-weight="700"
                 fill="none"
@@ -1163,19 +1224,31 @@
               class="faq__title-bg"
               aria-hidden="true"
               focusable="false"
-              viewBox="0 0 480 140"
+              viewBox="0 0 600 140"
               preserveAspectRatio="xMidYMid meet"
             >
+              <defs>
+                <linearGradient
+                  id="faqStrokeGrad"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="0%"
+                >
+                  <stop offset="0%" stop-color="#3e228e" />
+                  <stop offset="50%" stop-color="#653ade" />
+                  <stop offset="100%" stop-color="#3d228c" />
+                </linearGradient>
+              </defs>
               <text
-                x="240"
+                x="300"
                 y="105"
                 text-anchor="middle"
-                font-family="LEMON MILK, Poppins, sans-serif"
+                font-family="Jost"
                 font-size="110"
                 font-weight="700"
-                fill="#653ade"
-                fill-opacity="0.14"
-                stroke="#653ade"
+                fill="none"
+                stroke="url(#faqStrokeGrad)"
                 stroke-width="1.5"
                 stroke-linejoin="round"
               >
@@ -2026,13 +2099,13 @@
                 >
               </li>
               <li>
-                <a class="footer__link" href="./pages/privacy-policy.html">
-                  Privacy Policy
-                </a>
+                <a class="footer__link" href="./pages/privacy-policy.html"
+                  >Refund Policy</a
+                >
               </li>
               <li>
                 <a class="footer__link" href="./pages/privacy-policy.html"
-                  >Refund Policy</a
+                  >Privacy Policy</a
                 >
               </li>
             </ul>
@@ -2157,8 +2230,22 @@
       <div class="cart-widget__overlay"></div>
       <div class="cart-widget__panel">
         <div class="cart-widget__header">
-          <button class="cart-widget__back" id="cart-widget-close" type="button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <button
+            class="cart-widget__back"
+            id="cart-widget-close"
+            type="button"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
               <polyline points="15 18 9 12 15 6" />
             </svg>
             Continue Shopping
@@ -2167,16 +2254,26 @@
         <div class="cart-widget__body">
           <div class="cart-widget__title-row">
             <h2 class="cart-widget__title">Shopping Cart</h2>
-            <span class="cart-widget__count" id="cart-widget-count">0 items</span>
+            <span class="cart-widget__count" id="cart-widget-count"
+              >0 items</span
+            >
           </div>
           <div class="cart-widget__items" id="cart-widget-items"></div>
           <div class="cart-widget__footer">
             <div class="cart-widget__subtotal">
               <span>Subtotal</span>
-              <span class="cart-widget__subtotal-price" id="cart-widget-subtotal">$0.00</span>
+              <span
+                class="cart-widget__subtotal-price"
+                id="cart-widget-subtotal"
+                >$0.00</span
+              >
             </div>
-            <a href="./pages/checkout.html" class="cart-widget__checkout-btn">Go to Checkout</a>
-            <a href="./pages/checkout.html" class="cart-widget__display-link">Display shopping cart</a>
+            <a href="./pages/checkout.html" class="cart-widget__checkout-btn"
+              >Go to Checkout</a
+            >
+            <a href="./pages/checkout.html" class="cart-widget__display-link"
+              >Display shopping cart</a
+            >
           </div>
         </div>
       </div>

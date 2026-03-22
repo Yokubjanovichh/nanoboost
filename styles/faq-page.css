@@ -2,18 +2,8 @@ body.page--faq {
   overflow-x: hidden;
 }
 
-.page--faq .main {
-  padding-top: 8rem;
-}
-
-@media (max-width: 980px) {
-  .page--faq .main {
-    padding-top: 5rem;
-  }
-}
-
 .page--faq .faq {
-  margin-top: clamp(2.4rem, 3.6vw, 6.2rem);
+  margin-top: 0;
 }
 
 .faq__groups {

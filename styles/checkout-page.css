@@ -2,8 +2,6 @@
 
 .page--checkout .checkout {
   width: 100%;
-  margin-top: clamp(6rem, 5vw, 10rem);
-  margin-bottom: clamp(8rem, 6vw, 14rem);
 }
 
 .page--checkout .checkout__grid {

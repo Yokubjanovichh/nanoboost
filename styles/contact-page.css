@@ -2,8 +2,6 @@
 
 .page--contact .contact {
   width: 100%;
-  margin-top: clamp(6rem, 5vw, 10rem);
-  margin-bottom: clamp(8rem, 6vw, 14rem);
 }
 
 .page--contact .contact__head {
@@ -17,9 +15,9 @@
 }
 
 .page--contact .services__title-bg {
-  width: min(92rem, 92vw);
-  height: clamp(10rem, 10vw, 13.5rem);
-  opacity: 0.34;
+  width: 58rem;
+  height: 13.5rem;
+  opacity: 0.55;
 }
 
 .services__title-bg {

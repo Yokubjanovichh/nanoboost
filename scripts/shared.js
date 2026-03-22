@@ -60,11 +60,19 @@ const dropdownRoot = dropdownItem?.querySelector(".dropdown");
 
 const resetDropdownSteps = () => {
   if (!dropdownRoot) return;
-  dropdownRoot.classList.remove("has-platform", "has-game");
+  dropdownRoot.classList.remove("has-game", "has-platform");
 
   dropdownRoot
     .querySelectorAll(".dropdown__item[data-game]")
     .forEach((el) => el.classList.remove("is-active"));
+
+  dropdownRoot
+    .querySelectorAll(".dropdown__item[data-platform]")
+    .forEach((el) => el.classList.remove("is-active"));
+
+  dropdownRoot
+    .querySelectorAll(".dropdown__platform-list[data-for-game]")
+    .forEach((list) => list.classList.remove("is-active"));
 
   dropdownRoot
     .querySelectorAll(".dropdown__sublist[data-for]")
@@ -90,13 +98,13 @@ if (dropdownLink) {
 }
 
 // =============================================
-// Dropdown — Platform → Games → Services
+// Dropdown — Games → Platforms → Services
 // =============================================
-const platformItems = dropdownRoot?.querySelectorAll(
-  ".dropdown__item[data-platform]",
+const gameItems = dropdownRoot?.querySelectorAll(
+  ".dropdown__item[data-game]",
 );
-const gameLists = dropdownRoot?.querySelectorAll(
-  ".dropdown__game-list[data-for-platform]",
+const platformLists = dropdownRoot?.querySelectorAll(
+  ".dropdown__platform-list[data-for-game]",
 );
 const subLists = dropdownRoot?.querySelectorAll(".dropdown__sublist[data-for]");
 const subItems = dropdownRoot?.querySelectorAll(".dropdown__subitem a");
@@ -111,106 +119,113 @@ const setActiveSublist = (gameId) => {
   if (target) target.classList.add("is-active");
 };
 
+// Step 1: User picks a game → show platforms for that game
 const setActiveGame = (gameId) => {
-  if (!dropdownRoot) return;
-  const activeGameList = dropdownRoot.querySelector(
-    ".dropdown__game-list.is-active",
-  );
-  if (!activeGameList) return;
-
-  const gameItems = activeGameList.querySelectorAll(
-    ".dropdown__item[data-game]",
-  );
-  gameItems.forEach((el) => el.classList.remove("is-active"));
-  const activeItem = activeGameList.querySelector(
-    `.dropdown__item[data-game="${gameId}"]`,
-  );
-  if (activeItem) activeItem.classList.add("is-active");
+  if (!dropdownRoot || !platformLists?.length) return;
 
   dropdownRoot.classList.add("has-game");
-  setActiveSublist(gameId);
-};
+  dropdownRoot.classList.remove("has-platform");
 
-const setActivePlatform = (platformId) => {
-  if (!dropdownRoot || !platformItems?.length || !gameLists?.length) return;
-
-  dropdownRoot.classList.add("has-platform");
-  dropdownRoot.classList.remove("has-game");
-
-  platformItems.forEach((el) => el.classList.remove("is-active"));
-  const activePlatform = dropdownRoot.querySelector(
-    `.dropdown__item[data-platform="${platformId}"]`,
+  // Highlight active game
+  gameItems?.forEach((el) => el.classList.remove("is-active"));
+  const activeGame = dropdownRoot.querySelector(
+    `.dropdown__item[data-game="${gameId}"]`,
   );
-  if (activePlatform) activePlatform.classList.add("is-active");
+  if (activeGame) activeGame.classList.add("is-active");
 
-  gameLists.forEach((list) => list.classList.remove("is-active"));
-  const targetGameList = dropdownRoot.querySelector(
-    `.dropdown__game-list[data-for-platform="${platformId}"]`,
+  // Show platform list for this game
+  platformLists.forEach((list) => list.classList.remove("is-active"));
+  const targetPlatformList = dropdownRoot.querySelector(
+    `.dropdown__platform-list[data-for-game="${gameId}"]`,
   );
-  if (targetGameList) targetGameList.classList.add("is-active");
+  if (targetPlatformList) targetPlatformList.classList.add("is-active");
 
-  // Step flow: don't auto-select a game. User picks a game, then services appear.
-  targetGameList
-    ?.querySelectorAll(".dropdown__item[data-game]")
+  // Don't auto-select a platform. User picks a platform, then services appear.
+  targetPlatformList
+    ?.querySelectorAll(".dropdown__item[data-platform]")
     .forEach((el) => el.classList.remove("is-active"));
   setActiveSublist(null);
 };
 
-// Platform interactions (hover + click + keyboard)
-platformItems?.forEach((item) => {
-  const platformId = item.dataset.platform;
-  if (!platformId) return;
+// Step 2: User picks a platform → show services for the selected game
+const setActivePlatform = (platformId) => {
+  if (!dropdownRoot) return;
 
-  item.addEventListener("mouseenter", () => {
-    if (isMobileNav()) return;
-    setActivePlatform(platformId);
-  });
+  const activePlatformList = dropdownRoot.querySelector(
+    ".dropdown__platform-list.is-active",
+  );
+  if (!activePlatformList) return;
 
-  item.addEventListener("click", () => {
-    setActivePlatform(platformId);
-  });
+  // Highlight active platform
+  const platformItems = activePlatformList.querySelectorAll(
+    ".dropdown__item[data-platform]",
+  );
+  platformItems.forEach((el) => el.classList.remove("is-active"));
+  const activeItem = activePlatformList.querySelector(
+    `.dropdown__item[data-platform="${platformId}"]`,
+  );
+  if (activeItem) activeItem.classList.add("is-active");
 
-  item.addEventListener("keydown", (e) => {
-    if (e.key !== "Enter" && e.key !== " ") return;
-    e.preventDefault();
+  dropdownRoot.classList.add("has-platform");
 
-    if (isMobileNav()) {
-      setActivePlatform(platformId);
-      return;
-    }
+  // Show sublist for the currently active game
+  const activeGame = dropdownRoot.querySelector(
+    ".dropdown__item[data-game].is-active",
+  );
+  if (activeGame) setActiveSublist(activeGame.dataset.game);
+};
 
-    setActivePlatform(platformId);
-  });
-});
-
-// Game interactions
-dropdownRoot?.querySelectorAll(".dropdown__item[data-game]").forEach((item) => {
+// Game interactions (hover + click + keyboard) — Step 1
+gameItems?.forEach((item) => {
   const gameId = item.dataset.game;
   if (!gameId) return;
 
-  const shouldHandle = () => {
-    const parentList = item.closest(".dropdown__game-list");
-    return parentList?.classList.contains("is-active");
-  };
-
   item.addEventListener("mouseenter", () => {
-    if (!shouldHandle()) return;
     if (isMobileNav()) return;
     setActiveGame(gameId);
   });
 
   item.addEventListener("click", () => {
-    if (!shouldHandle()) return;
     setActiveGame(gameId);
   });
 
   item.addEventListener("keydown", (e) => {
     if (e.key !== "Enter" && e.key !== " ") return;
-    if (!shouldHandle()) return;
     e.preventDefault();
     setActiveGame(gameId);
   });
 });
+
+// Platform interactions — Step 2
+dropdownRoot
+  ?.querySelectorAll(".dropdown__item[data-platform]")
+  .forEach((item) => {
+    const platformId = item.dataset.platform;
+    if (!platformId) return;
+
+    const shouldHandle = () => {
+      const parentList = item.closest(".dropdown__platform-list");
+      return parentList?.classList.contains("is-active");
+    };
+
+    item.addEventListener("mouseenter", () => {
+      if (!shouldHandle()) return;
+      if (isMobileNav()) return;
+      setActivePlatform(platformId);
+    });
+
+    item.addEventListener("click", () => {
+      if (!shouldHandle()) return;
+      setActivePlatform(platformId);
+    });
+
+    item.addEventListener("keydown", (e) => {
+      if (e.key !== "Enter" && e.key !== " ") return;
+      if (!shouldHandle()) return;
+      e.preventDefault();
+      setActivePlatform(platformId);
+    });
+  });
 
 // Sub-item click: active state + close dropdown
 subItems?.forEach((link) => {
@@ -231,7 +246,7 @@ subItems?.forEach((link) => {
 });
 
 // Ensure initial state is consistent
-if (dropdownRoot && platformItems?.length) {
+if (dropdownRoot && gameItems?.length) {
   resetDropdownSteps();
 }
 

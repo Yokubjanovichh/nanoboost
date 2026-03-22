@@ -582,9 +582,9 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -58%);
-  width: 70rem;
-  height: 12.8rem;
-  opacity: 0.46;
+  width: 58rem;
+  height: 13.5rem;
+  opacity: 0.55;
   pointer-events: none;
   overflow: visible;
   display: block;
@@ -756,8 +756,8 @@
   }
 
   .testimonials__title-bg {
-    width: 60rem;
-    height: 10.8rem;
+    width: 58rem;
+    height: 13.5rem;
   }
 
   .testimonials__title-fg {
@@ -790,9 +790,8 @@
   }
 
   .how__title-bg {
-    transform: translate(-50%, -56%);
-    width: min(54rem, 92vw);
-    height: 10rem;
+    width: min(44rem, 90vw);
+    height: 10.4rem;
   }
 
   .how__title-fg {
