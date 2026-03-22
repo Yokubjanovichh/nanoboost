@@ -98,7 +98,7 @@ a {
   --container-max-xl: 1700px;
   --hero-shell-height: clamp(32rem, 38vw, 48rem);
   --hero-shell-radius: 2.4rem;
-  --gap-header-main: clamp(3rem, 3.5vw, 6rem);
+  --gap-header-main: clamp(5rem, 4.5vw, 8rem);
   --gap-main-footer: clamp(6rem, 6vw, 14rem);
   --hero-shell-pad-x-lg: 5.6rem;
   --hero-shell-pad-x-sm: 2rem;
@@ -808,8 +808,7 @@ a {
       linear-gradient(rgba(8, 7, 26, 1), rgba(8, 7, 26, 1)) padding-box,
       linear-gradient(135deg, #2de1fe 0%, #6849fe 50%, #9d21fe 100%) border-box;
     border: 2px solid transparent;
-    transition:
-      box-shadow 0.25s ease;
+    transition: box-shadow 0.25s ease;
     box-shadow: 0 8px 32px rgba(104, 73, 254, 0.35);
   }
 
