@@ -98,7 +98,7 @@ a {
   --container-max-xl: 1700px;
   --hero-shell-height: clamp(32rem, 38vw, 48rem);
   --hero-shell-radius: 2.4rem;
-  --gap-header-main: clamp(5rem, 4.5vw, 8rem);
+  --gap-header-main: clamp(6rem, 6vw, 10rem);
   --gap-main-footer: clamp(6rem, 6vw, 14rem);
   --hero-shell-pad-x-lg: 5.6rem;
   --hero-shell-pad-x-sm: 2rem;
