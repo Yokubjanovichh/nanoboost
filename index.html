@@ -3,8 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Nanoboost</title>
+    <title>Nanoboost — GTA 5 Online Boosting & Game Services</title>
+    <meta name="description" content="Nanoboost offers fast, safe GTA 5 Online boosting services — cash, cars, levels & modded accounts. 24/7 support, pro players, instant delivery." />
     <meta name="theme-color" content="#08071a" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Nanoboost — GTA 5 Online Boosting & Game Services" />
+    <meta property="og:description" content="Level up fast. Earn more. Unlock everything. Professional GTA 5 Online boosting with 24/7 support." />
+    <meta property="og:image" content="./assets/images/mainBg.webp" />
+    <meta property="og:url" content="https://nanoboost.gg/" />
+    <link rel="canonical" href="https://nanoboost.gg/" />
     <link rel="stylesheet" href="./style.css" />
     <link rel="stylesheet" href="./styles/shared.css" />
     <link rel="icon" href="./assets/icons/main-logo.svg" />
@@ -514,6 +521,7 @@
               type="text"
               class="search__input"
               placeholder="Search services"
+              aria-label="Search services"
             />
             <button class="search__btn" aria-label="Search">
               <svg
@@ -572,7 +580,7 @@
             <img
               src="./assets/images/gta5.webp"
               alt="GTA 5"
-              class="hero__img"
+              class="hero__img skeleton"
               fetchpriority="high"
               loading="eager"
               decoding="async"
@@ -602,7 +610,7 @@
                   loading="lazy"
                 />
               </div>
-              <h3 class="benefit__title">Safe &amp; Secure</h3>
+              <h2 class="benefit__title">Safe &amp; Secure</h2>
               <p class="benefit__text">
                 Only trusted methods.<br />Your account is protected.
               </p>
@@ -616,7 +624,7 @@
                   loading="lazy"
                 />
               </div>
-              <h3 class="benefit__title">Super-Fast Delivery</h3>
+              <h2 class="benefit__title">Super-Fast Delivery</h2>
               <p class="benefit__text">
                 Start within minutes.<br />We don't waste your time.
               </p>
@@ -630,7 +638,7 @@
                   loading="lazy"
                 />
               </div>
-              <h3 class="benefit__title">24/7 Support Team</h3>
+              <h2 class="benefit__title">24/7 Support Team</h2>
               <p class="benefit__text">
                 Always online — any question, any timezone.
               </p>
@@ -644,7 +652,7 @@
                   loading="lazy"
                 />
               </div>
-              <h3 class="benefit__title">Pro Players Only</h3>
+              <h2 class="benefit__title">Pro Players Only</h2>
               <p class="benefit__text">
                 Experienced boosters with thousands of completed orders
               </p>
@@ -703,9 +711,11 @@
                 srcset="./assets/images/mobgames1.webp"
               />
               <img
-                class="game-card__img"
+                class="game-card__img skeleton"
                 src="./assets/images/games1.webp"
                 alt="GTA5 Online"
+                width="810"
+                height="1464"
                 loading="lazy"
               />
             </picture>
@@ -724,9 +734,11 @@
                 srcset="./assets/images/mobgames2.webp"
               />
               <img
-                class="game-card__img"
+                class="game-card__img skeleton"
                 src="./assets/images/games2.webp"
                 alt="WORLD OF WARCRAFT"
+                width="810"
+                height="1464"
                 loading="lazy"
               />
             </picture>
@@ -735,7 +747,7 @@
                 WORLD <br />
                 OF WARCRAFT
               </h3>
-              <button disabled class="game-card__cta" href="#">
+              <button disabled class="game-card__cta">
                 Coming Soon
               </button>
             </div>
@@ -748,15 +760,17 @@
                 srcset="./assets/images/mobgames3.webp"
               />
               <img
-                class="game-card__img"
+                class="game-card__img skeleton"
                 src="./assets/images/games3.webp"
                 alt="Destiny 2"
+                width="810"
+                height="1464"
                 loading="lazy"
               />
             </picture>
             <div class="game-card__content">
               <h3 class="game-card__title">DESTINY 2</h3>
-              <button disabled class="game-card__cta" href="#">
+              <button disabled class="game-card__cta">
                 Coming Soon
               </button>
             </div>
@@ -769,9 +783,11 @@
                 srcset="./assets/images/mobgames4.webp"
               />
               <img
-                class="game-card__img"
+                class="game-card__img skeleton"
                 src="./assets/images/games4.webp"
                 alt="LEAGUE OF LEGENDS"
+                width="810"
+                height="1464"
                 loading="lazy"
               />
             </picture>
@@ -780,7 +796,7 @@
                 LEAGUE <br />
                 OF LEGENDS
               </h3>
-              <button disabled class="game-card__cta" href="#">
+              <button disabled class="game-card__cta">
                 Coming soon
               </button>
             </div>
@@ -848,7 +864,7 @@
         <div class="services__grid">
           <article class="service-card">
             <img
-              class="service-card__img"
+              class="service-card__img skeleton"
               src="./assets/images/services1.webp"
               alt="GTA Online Cash+Cars Boost"
               loading="lazy"
@@ -872,9 +888,9 @@
 
           <article class="service-card">
             <img
-              class="service-card__img"
+              class="service-card__img skeleton"
               src="./assets/images/services2.webp"
-              alt="GTA Online Cash+Cars Boost"
+              alt="GTA Online Cash Boost"
               loading="lazy"
             />
             <div class="service-card__content">
@@ -895,9 +911,9 @@
 
           <article class="service-card">
             <img
-              class="service-card__img"
+              class="service-card__img skeleton"
               src="./assets/images/services3.webp"
-              alt="GTA Online Cash+Cars Boost"
+              alt="GTA Online Level Boost"
               loading="lazy"
             />
             <div class="service-card__content">
@@ -918,9 +934,9 @@
 
           <article class="service-card">
             <img
-              class="service-card__img"
+              class="service-card__img skeleton"
               src="./assets/images/services4.webp"
-              alt="GTA Online Cash+Cars Boost"
+              alt="GTA Online Modded Account"
               loading="lazy"
             />
             <div class="service-card__content">
@@ -2280,6 +2296,21 @@
       </div>
     </div>
 
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Nanoboost",
+      "url": "https://nanoboost.gg",
+      "logo": "https://nanoboost.gg/assets/icons/main-logo.svg",
+      "description": "Professional GTA 5 Online boosting services — cash, cars, levels & modded accounts.",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer support",
+        "availableLanguage": "English"
+      }
+    }
+    </script>
     <script src="scripts/shared.js" defer></script>
     <script src="scripts/home.js" defer></script>
   </body>

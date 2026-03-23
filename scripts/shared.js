@@ -350,14 +350,19 @@ const nbCartTotalQty = () =>
 
 const nbUpdateCartBadges = () => {
   const totalQty = nbCartTotalQty();
-  document.querySelectorAll(".cart__badge, .cart-float__badge").forEach((b) => {
-    b.textContent = totalQty;
-    b.style.display = totalQty > 0 ? "flex" : "none";
-  });
+  const show = totalQty > 0;
+  const badgeDisplay = show ? "flex" : "none";
+  const floatDisplay = show ? "" : "none";
 
-  // cart-float faqat cart bo'sh bo'lmaganda ko'rinadi
-  document.querySelectorAll(".cart-float").forEach((btn) => {
-    btn.style.display = totalQty > 0 ? "" : "none";
+  // Bitta requestAnimationFrame ichida barcha DOM o'zgarishlarni batch qilish
+  requestAnimationFrame(() => {
+    document.querySelectorAll(".cart__badge, .cart-float__badge").forEach((b) => {
+      b.textContent = totalQty;
+      b.style.display = badgeDisplay;
+    });
+    document.querySelectorAll(".cart-float").forEach((btn) => {
+      btn.style.display = floatDisplay;
+    });
   });
 };
 
@@ -406,7 +411,9 @@ const nbRenderCartWidget = () => {
 
   let subtotal = 0;
   let totalQty = 0;
-  itemsEl.innerHTML = "";
+
+  // DocumentFragment — DOM ga faqat 1 marta yoziladi, reflow 1 ta
+  const frag = document.createDocumentFragment();
 
   cart.forEach((item, i) => {
     const price = Number(item.price) || 0;
@@ -463,8 +470,11 @@ const nbRenderCartWidget = () => {
     row.appendChild(img);
     row.appendChild(info);
     row.appendChild(removeBtn);
-    itemsEl.appendChild(row);
+    frag.appendChild(row);
   });
+
+  itemsEl.innerHTML = "";
+  itemsEl.appendChild(frag);
 
   if (subtotalEl) subtotalEl.textContent = "$" + subtotal.toFixed(2);
   if (countEl)
@@ -484,8 +494,8 @@ const nbOpenCartWidget = () => {
   const scrollbarW = nbGetScrollbarWidth();
   const headerEl = document.querySelector(".header");
   document.body.style.paddingRight = scrollbarW + "px";
-  if (headerEl) headerEl.style.width = "calc(100% - " + scrollbarW + "px)";
   document.body.style.overflow = "hidden";
+  if (headerEl) headerEl.style.width = "calc(100% - " + scrollbarW + "px)";
 
   widget.classList.add("is-open");
 };
@@ -755,3 +765,16 @@ if (testimonialsSection && testimonialsSlider && testimonialsTrack) {
     animEls.forEach((el) => obs.observe(el));
   }
 }
+
+// =============================================
+// Skeleton: rasm yuklangach skeleton olib tashlash
+// =============================================
+document.querySelectorAll("img.skeleton").forEach((img) => {
+  const remove = () => img.classList.remove("skeleton");
+  if (img.complete) {
+    remove();
+  } else {
+    img.addEventListener("load", remove, { once: true });
+    img.addEventListener("error", remove, { once: true });
+  }
+});
