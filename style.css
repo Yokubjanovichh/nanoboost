@@ -117,7 +117,7 @@
   transform: translateY(-2px);
 }
 
-.main {
+body:not([class]) .main {
   padding-top: clamp(3rem, 3.5vw, 6rem) !important;
 }
 /* =============================================
