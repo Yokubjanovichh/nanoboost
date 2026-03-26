@@ -740,3 +740,47 @@ body.page--service {
     height: 10.4rem;
   }
 }
+
+/* Phone landscape: keep 2-col hero layout */
+@media (orientation: landscape) and (max-height: 500px) {
+  .service-hero__shell {
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+    height: clamp(26rem, 50vh, 36rem);
+  }
+
+  .service-hero__content {
+    order: unset;
+    padding: 2rem 1.8rem;
+    --service-hero-flow-gap: 1.4rem;
+  }
+
+  .service-hero__title {
+    font-size: clamp(2.6rem, 3.5vh, 4rem);
+  }
+
+  .service-hero__purchase {
+    width: min(100%, 28rem);
+  }
+
+  .service-hero__label {
+    font-size: 1.6rem;
+  }
+
+  .service-hero__button {
+    min-height: 4.6rem;
+    font-size: 1.7rem;
+  }
+
+  .service-hero__media {
+    order: unset;
+    height: 100%;
+    border-top-left-radius: 0;
+    border-top-right-radius: 3.2rem;
+    border-bottom-right-radius: 3.2rem;
+    border-bottom-left-radius: 0;
+  }
+
+  .service-hero__image-frame {
+    height: 100%;
+  }
+}
