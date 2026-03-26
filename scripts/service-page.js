@@ -213,6 +213,99 @@ const renderServiceContent = (config, serviceId) => {
   }
 };
 
+// =============================================
+// Render related services in "Hot right now" grid
+// =============================================
+const renderRelatedServices = (currentServiceId) => {
+  const grid = document.querySelector("#related-services-grid");
+  if (!grid) return;
+
+  const currentConfig = SERVICE_CONFIG[currentServiceId];
+  if (!currentConfig) return;
+
+  const currentPlatform = currentConfig.platform || "";
+
+  // Extract service "type" from ID (e.g. "gta-cash-ps" → "cash")
+  const getServiceType = (id) => {
+    return id
+      .replace(/^gta-/, "")
+      .replace(/-(ps|xbox|pc)$/, "");
+  };
+
+  const currentType = getServiceType(currentServiceId);
+
+  // Score each service for relevance
+  const scored = Object.entries(SERVICE_CONFIG)
+    .filter(([id]) => id !== currentServiceId)
+    .map(([id, cfg]) => {
+      let score = 0;
+      const type = getServiceType(id);
+
+      // Same platform = highest priority
+      if (cfg.platform === currentPlatform) score += 10;
+
+      // Same service type on different platform = good recommendation
+      if (type === currentType) score += 5;
+
+      // Same game (all are GTA for now) = base relevance
+      score += 1;
+
+      return { id, cfg, score };
+    })
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 4);
+
+  // Extract "from" price
+  const getFromPrice = (cfg) => {
+    const first = (cfg.options || [])[0] || "";
+    const m = first.match(/\$([\d.]+)/);
+    return m ? `$${m[1]}` : "";
+  };
+
+  let html = scored
+    .map(
+      ({ id, cfg }) => `
+    <article class="service-card">
+      <img
+        class="service-card__img"
+        src="${cfg.imageSrc || ""}"
+        alt="${cfg.imageAlt || ""}"
+        loading="lazy"
+      />
+      <div class="service-card__content">
+        <h3 class="service-card__name">${(cfg.titleHtml || "").replace(/<br\s*\/?>/g, " ")}</h3>
+        <p class="service-card__price">
+          <span class="service-card__from">From</span>
+          <span class="service-card__amount">${getFromPrice(cfg)}</span>
+        </p>
+        <a href="?service=${id}" class="service-card__btn" data-service="${id}">
+          BUY NOW
+        </a>
+      </div>
+    </article>`,
+    )
+    .join("");
+
+  // Add custom service card at the end
+  html += `
+    <article class="service-card service-card--custom">
+      <div class="service-card__content service-card__content--custom">
+        <h3 class="service-card__name service-card__name--custom">
+          NEED A CUSTOM SERVICE?
+        </h3>
+        <p class="service-card__text">
+          Tell our support team exactly what you want - we'll build a
+          personalized order around your goals.
+        </p>
+        <a href="./contact.html" class="service-card__btn service-card__btn--custom">
+          CONTACT SUPPORT
+        </a>
+      </div>
+    </article>`;
+
+  grid.innerHTML = html;
+};
+
 const applyServiceToHero = (serviceId, { updateUrl = false } = {}) => {
   const config = SERVICE_CONFIG[serviceId];
   if (!config) return false;
@@ -235,6 +328,9 @@ const applyServiceToHero = (serviceId, { updateUrl = false } = {}) => {
 
   // Render description and whatYouGet content
   renderServiceContent(config, serviceId);
+
+  // Render related services in "Hot right now"
+  renderRelatedServices(serviceId);
 
   if (updateUrl) {
     const nextUrl = new URL(window.location.href);

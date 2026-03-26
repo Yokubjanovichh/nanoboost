@@ -1017,6 +1017,63 @@ if (testimonialsSection && testimonialsSlider && testimonialsTrack) {
         renderResults(searchInput.value);
       }
     });
+
+    // ── Typing placeholder animation ──
+    const typingPhrases = [
+      "Cash Boost from $9.99",
+      "Unlock All for PC",
+      "Level Boost PS4/PS5",
+      "Modded Account Xbox",
+      "Cash + Cars Boost",
+      "1 Billion GTA Cash",
+    ];
+
+    let phraseIdx = 0;
+    let charIdx = 0;
+    let isDeleting = false;
+    let typingTimer = null;
+
+    const typeStep = () => {
+      if (document.activeElement === searchInput || searchInput.value) return;
+
+      const phrase = typingPhrases[phraseIdx];
+
+      if (!isDeleting) {
+        charIdx++;
+        if (charIdx > phrase.length) {
+          isDeleting = true;
+          typingTimer = setTimeout(typeStep, 1800);
+          return;
+        }
+      } else {
+        charIdx--;
+        if (charIdx <= 0) {
+          isDeleting = false;
+          phraseIdx = (phraseIdx + 1) % typingPhrases.length;
+          typingTimer = setTimeout(typeStep, 400);
+          return;
+        }
+      }
+
+      searchInput.setAttribute("placeholder", phrase.slice(0, charIdx));
+      typingTimer = setTimeout(typeStep, isDeleting ? 35 : 75);
+    };
+
+    const stopTyping = () => {
+      clearTimeout(typingTimer);
+      searchInput.setAttribute("placeholder", "");
+    };
+
+    const resumeTyping = () => {
+      if (!searchInput.value) {
+        typingTimer = setTimeout(typeStep, 600);
+      }
+    };
+
+    searchInput.addEventListener("focus", stopTyping);
+    searchInput.addEventListener("blur", resumeTyping);
+
+    typingTimer = setTimeout(typeStep, 1000);
   }
 }
 

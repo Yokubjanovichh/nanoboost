@@ -497,10 +497,10 @@ a {
 }
 
 .search__input::-webkit-input-placeholder {
-  color: #ffffff;
+  color: rgba(255, 255, 255, 0.5);
 }
 .search__input::placeholder {
-  color: #ffffff;
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .search__btn {
