@@ -326,6 +326,19 @@ const applyServiceToHero = (serviceId, { updateUrl = false } = {}) => {
     dropdownApi.setOptions(config.options, config.defaultOption);
   }
 
+  // Update page SEO meta tags dynamically
+  if (config.seoTitle) {
+    document.title = config.seoTitle;
+    const ogTitle = document.querySelector('meta[property="og:title"]');
+    if (ogTitle) ogTitle.setAttribute("content", config.seoTitle);
+  }
+  if (config.seoDescription) {
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) metaDesc.setAttribute("content", config.seoDescription);
+    const ogDesc = document.querySelector('meta[property="og:description"]');
+    if (ogDesc) ogDesc.setAttribute("content", config.seoDescription);
+  }
+
   // Render description and whatYouGet content
   renderServiceContent(config, serviceId);
 

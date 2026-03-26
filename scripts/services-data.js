@@ -4,9 +4,11 @@
 window.NB_SERVICE_CONFIG = {
   // ========== PS4/PS5 ==========
   "gta-cash-cars-ps": {
+    seoTitle: "GTA Online Cash & Cars Boost PS4 / PS5 | Fast & Secure | NanoBoost",
+    seoDescription: "Buy GTA Online cash and cars boost for PS4 & PS5. Get money, vehicles, and upgrades fast with secure boosting service.",
     titleHtml: "GTA Online Cash +<br>Cars Boost PS4/PS5",
     imageSrc: "../assets/images/services1.webp",
-    imageAlt: "GTA Online cash and cars boost",
+    imageAlt: "Buy GTA Online cash and cars boost for PS4 PS5 — fast safe delivery",
     platform: "PS4/PS5",
     options: [
       "20 million - $15.99",
@@ -78,9 +80,11 @@ window.NB_SERVICE_CONFIG = {
   },
 
   "gta-cash-ps": {
+    seoTitle: "GTA Online Cash Boost PS4 / PS5 | Fast Money Boost | NanoBoost",
+    seoDescription: "Get GTA Online cash boost for PS4 & PS5. Increase your balance fast and unlock content with our secure boosting service.",
     titleHtml: "GTA Online Cash Boost<br>PS4/PS5",
     imageSrc: "../assets/images/services2.webp",
-    imageAlt: "GTA Online cash boost",
+    imageAlt: "Buy GTA Online cash boost PS4 PS5 — millions delivered instantly",
     platform: "PS4/PS5",
     options: [
       "20 million - $19.99",
@@ -128,9 +132,11 @@ window.NB_SERVICE_CONFIG = {
   },
 
   "gta-level-ps": {
+    seoTitle: "GTA Online Level Boost PS4 / PS5 | Rank Up Fast | NanoBoost",
+    seoDescription: "Boost your GTA Online level on PS4 & PS5. Unlock ranks, weapons, and features quickly with safe boosting service.",
     titleHtml: "GTA Online Level Boost<br>PS4/PS5",
     imageSrc: "../assets/images/services3.webp",
-    imageAlt: "GTA Online level boost",
+    imageAlt: "GTA Online level boost PS4 PS5 — rank up fast with pro boosters",
     platform: "PS4/PS5",
     options: [
       "50 level - $29.99",
@@ -181,9 +187,11 @@ window.NB_SERVICE_CONFIG = {
   },
 
   "gta-modded-ps": {
+    seoTitle: "GTA Online Modded Account PS4 / PS5 | Ready to Play | NanoBoost",
+    seoDescription: "Buy GTA Online modded accounts for PS4 & PS5. Start with money, level, and vehicles. Fast delivery and secure setup.",
     titleHtml: "GTA Online Modded Account<br>PS4/PS5",
     imageSrc: "../assets/images/services4.webp",
-    imageAlt: "GTA Online modded account",
+    imageAlt: "Buy GTA Online modded account PS4 PS5 — fully loaded ready to play",
     platform: "PS4/PS5",
     options: [
       "level 100 + 15 million - $29.99",
@@ -235,9 +243,11 @@ window.NB_SERVICE_CONFIG = {
 
   // ========== Xbox One/Series ==========
   "gta-cash-cars-xbox": {
+    seoTitle: "GTA Online Cash & Cars Boost Xbox One / Series | Fast | NanoBoost",
+    seoDescription: "Get GTA Online cash and cars boost for Xbox One & Series. Fast upgrades, secure process, and instant gameplay access.",
     titleHtml: "GTA Online Cash +<br>Cars Boost Xbox One/Series",
     imageSrc: "../assets/images/services1.webp",
-    imageAlt: "GTA Online cash and cars boost",
+    imageAlt: "Buy GTA Online cash and cars boost Xbox One Series — fast safe delivery",
     platform: "Xbox One/Series",
     options: [
       "20 million - $15.99",
@@ -296,9 +306,11 @@ window.NB_SERVICE_CONFIG = {
   },
 
   "gta-cash-xbox": {
+    seoTitle: "GTA Online Cash Boost Xbox One / Series | Fast Money | NanoBoost",
+    seoDescription: "Buy GTA Online cash boost for Xbox. Increase your balance quickly and unlock content with safe boosting service.",
     titleHtml: "GTA Online Cash Boost<br>Xbox One/Series",
     imageSrc: "../assets/images/services2.webp",
-    imageAlt: "GTA Online cash boost",
+    imageAlt: "Buy GTA Online cash boost Xbox One Series — millions delivered instantly",
     platform: "Xbox One/Series",
     options: [
       "20 million - $19.99",
@@ -339,9 +351,11 @@ window.NB_SERVICE_CONFIG = {
   },
 
   "gta-level-xbox": {
+    seoTitle: "GTA Online Level Boost Xbox One / Series | Rank Boost | NanoBoost",
+    seoDescription: "Boost your GTA Online level on Xbox. Unlock ranks, weapons, and features faster with secure boosting service.",
     titleHtml: "GTA Online Level Boost<br>Xbox One/Series",
     imageSrc: "../assets/images/services3.webp",
-    imageAlt: "GTA Online level boost",
+    imageAlt: "GTA Online level boost Xbox One Series — rank up fast with pro boosters",
     platform: "Xbox One/Series",
     options: [
       "50 level - $29.99",
@@ -386,9 +400,11 @@ window.NB_SERVICE_CONFIG = {
   },
 
   "gta-modded-xbox": {
+    seoTitle: "GTA Online Modded Account Xbox One / Series | Ready | NanoBoost",
+    seoDescription: "Buy GTA Online modded accounts for Xbox One & Series. Start with money, rank, and vehicles. Fast and secure setup.",
     titleHtml: "GTA Online Modded Account<br>Xbox One/Series",
     imageSrc: "../assets/images/services4.webp",
-    imageAlt: "GTA Online modded account",
+    imageAlt: "Buy GTA Online modded account Xbox One Series — fully loaded ready to play",
     platform: "Xbox One/Series",
     options: [
       "level 100 + 15 million - $29.99",
@@ -433,9 +449,11 @@ window.NB_SERVICE_CONFIG = {
 
   // ========== PC ==========
   "gta-cash-pc": {
+    seoTitle: "GTA Online Cash Boost PC | Fast Money Boost | NanoBoost",
+    seoDescription: "Get GTA Online cash boost for PC. Increase your balance fast and unlock businesses, vehicles, and upgrades.",
     titleHtml: "GTA Online Cash Boost<br>PC",
     imageSrc: "../assets/images/services2.webp",
-    imageAlt: "GTA Online cash boost",
+    imageAlt: "Buy GTA Online cash boost PC — instant delivery safe method",
     platform: "PC",
     options: [
       "50 million - $29.99",
@@ -487,9 +505,11 @@ window.NB_SERVICE_CONFIG = {
   },
 
   "gta-level-pc": {
+    seoTitle: "GTA Online Level Boost PC | Rank Up Fast | NanoBoost",
+    seoDescription: "Boost your GTA Online level on PC. Unlock ranks, weapons, and features quickly with safe boosting service.",
     titleHtml: "GTA Online Level Boost<br>PC",
     imageSrc: "../assets/images/services3.webp",
-    imageAlt: "GTA Online level boost",
+    imageAlt: "GTA Online level boost PC — rank up fast with pro boosters",
     platform: "PC",
     options: [
       "120 level - $19.99",
@@ -538,9 +558,11 @@ window.NB_SERVICE_CONFIG = {
   },
 
   "gta-unlock-pc": {
+    seoTitle: "GTA Online Unlock All PC | Full Account Upgrade | NanoBoost",
+    seoDescription: "Unlock everything in GTA Online for PC. Max stats, all weapons, vehicles, and achievements. Instant full account upgrade.",
     titleHtml: "GTA Online Unlock All<br>PC",
     imageSrc: "../assets/images/unlock-all.png",
-    imageAlt: "GTA Online unlock all",
+    imageAlt: "GTA Online unlock all PC — weapons vehicles achievements unlocked instantly",
     platform: "PC",
     options: ["Unlock All - $29.99"],
     defaultOption: "Unlock All - $29.99",
@@ -623,28 +645,28 @@ window.NB_GTA5_SERVICES = {
     {
       serviceParam: "gta-cash-cars-ps",
       imageSrc: "../assets/images/services1.webp",
-      imageAlt: "GTA Online Cash + Cars Boost",
+      imageAlt: "Buy GTA Online cash and cars boost PS4 PS5 — fast safe delivery",
       title: "GTA Online Cash + Cars Boost PS4/PS5",
       priceNow: "$15.99",
     },
     {
       serviceParam: "gta-cash-ps",
       imageSrc: "../assets/images/services2.webp",
-      imageAlt: "GTA Online Cash Boost",
+      imageAlt: "Buy GTA Online cash boost PS4 PS5 — millions delivered instantly",
       title: "GTA Online Cash Boost PS4/PS5",
       priceNow: "$19.99",
     },
     {
       serviceParam: "gta-level-ps",
       imageSrc: "../assets/images/services3.webp",
-      imageAlt: "GTA Online Level Boost",
+      imageAlt: "GTA Online level boost PS4 PS5 — rank up fast with pro boosters",
       title: "GTA Online Level Boost PS4/PS5",
       priceNow: "$29.99",
     },
     {
       serviceParam: "gta-modded-ps",
       imageSrc: "../assets/images/services4.webp",
-      imageAlt: "GTA Online Modded Account",
+      imageAlt: "Buy GTA Online modded account PS4 PS5 — fully loaded ready to play",
       title: "GTA Online Modded Account PS4/PS5",
       priceNow: "$29.99",
     },
@@ -654,28 +676,28 @@ window.NB_GTA5_SERVICES = {
     {
       serviceParam: "gta-cash-cars-xbox",
       imageSrc: "../assets/images/services1.webp",
-      imageAlt: "GTA Online Cash + Cars Boost",
+      imageAlt: "Buy GTA Online cash and cars boost Xbox — fast safe delivery",
       title: "GTA Online Cash + Cars Boost Xbox One/Series",
       priceNow: "$15.99",
     },
     {
       serviceParam: "gta-cash-xbox",
       imageSrc: "../assets/images/services2.webp",
-      imageAlt: "GTA Online Cash Boost",
+      imageAlt: "Buy GTA Online cash boost Xbox — millions delivered instantly",
       title: "GTA Online Cash Boost Xbox One/Series",
       priceNow: "$19.99",
     },
     {
       serviceParam: "gta-level-xbox",
       imageSrc: "../assets/images/services3.webp",
-      imageAlt: "GTA Online Level Boost",
+      imageAlt: "GTA Online level boost Xbox — rank up fast with pro boosters",
       title: "GTA Online Level Boost Xbox One/Series",
       priceNow: "$29.99",
     },
     {
       serviceParam: "gta-modded-xbox",
       imageSrc: "../assets/images/services4.webp",
-      imageAlt: "GTA Online Modded Account",
+      imageAlt: "Buy GTA Online modded account Xbox — fully loaded ready to play",
       title: "GTA Online Modded Account Xbox One/Series",
       priceNow: "$29.99",
     },
@@ -685,21 +707,21 @@ window.NB_GTA5_SERVICES = {
     {
       serviceParam: "gta-cash-pc",
       imageSrc: "../assets/images/services2.webp",
-      imageAlt: "GTA Online Cash Boost",
+      imageAlt: "Buy GTA Online cash boost PC — instant delivery safe method",
       title: "GTA Online Cash Boost PC",
       priceNow: "$29.99",
     },
     {
       serviceParam: "gta-level-pc",
       imageSrc: "../assets/images/services3.webp",
-      imageAlt: "GTA Online Level Boost",
+      imageAlt: "GTA Online level boost PC — rank up fast with pro boosters",
       title: "GTA Online Level Boost PC",
       priceNow: "$19.99",
     },
     {
       serviceParam: "gta-unlock-pc",
       imageSrc: "../assets/images/unlock-all.png",
-      imageAlt: "GTA Online Unlock All",
+      imageAlt: "GTA Online unlock all PC — every weapon vehicle achievement unlocked",
       title: "GTA Online Unlock All PC",
       priceNow: "$29.99",
     },

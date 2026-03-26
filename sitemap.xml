@@ -12,6 +12,58 @@
     <loc>https://nanoboost.gg/pages/services.html</loc>
     <priority>0.9</priority>
   </url>
+
+  <!-- PS4/PS5 Services -->
+  <url>
+    <loc>https://nanoboost.gg/pages/services.html?service=gta-cash-cars-ps</loc>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://nanoboost.gg/pages/services.html?service=gta-cash-ps</loc>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://nanoboost.gg/pages/services.html?service=gta-level-ps</loc>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://nanoboost.gg/pages/services.html?service=gta-modded-ps</loc>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- Xbox One/Series Services -->
+  <url>
+    <loc>https://nanoboost.gg/pages/services.html?service=gta-cash-cars-xbox</loc>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://nanoboost.gg/pages/services.html?service=gta-cash-xbox</loc>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://nanoboost.gg/pages/services.html?service=gta-level-xbox</loc>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://nanoboost.gg/pages/services.html?service=gta-modded-xbox</loc>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- PC Services -->
+  <url>
+    <loc>https://nanoboost.gg/pages/services.html?service=gta-cash-pc</loc>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://nanoboost.gg/pages/services.html?service=gta-level-pc</loc>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://nanoboost.gg/pages/services.html?service=gta-unlock-pc</loc>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- Info Pages -->
   <url>
     <loc>https://nanoboost.gg/pages/why-us.html</loc>
     <priority>0.7</priority>
@@ -28,6 +80,8 @@
     <loc>https://nanoboost.gg/pages/checkout.html</loc>
     <priority>0.6</priority>
   </url>
+
+  <!-- Legal Pages -->
   <url>
     <loc>https://nanoboost.gg/pages/terms-of-service.html</loc>
     <priority>0.3</priority>
