@@ -804,7 +804,7 @@ a {
 }
 
 /* --- 480px: kichik mobil --- */
-@media (max-width: 480px) {
+@media (max-width: 480px), (orientation: landscape) and (max-height: 500px) {
   .header__inner {
     height: 5.215rem;
   }
@@ -1206,7 +1206,7 @@ a {
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 480px), (orientation: landscape) and (max-height: 500px) {
   .cart-widget__panel {
     width: 80%;
   }
@@ -1552,7 +1552,7 @@ a {
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 480px), (orientation: landscape) and (max-height: 500px) {
   .footer {
     margin-top: var(--gap-main-footer);
   }
@@ -1687,7 +1687,7 @@ a {
   }
 }
 
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 480px), (orientation: landscape) and (max-height: 500px) {
   .services__title-bg {
     transform: translate(-50%, -63%) !important;
   }
@@ -2044,7 +2044,7 @@ a {
   }
 }
 
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 480px), (orientation: landscape) and (max-height: 500px) {
   .how__title-bg {
     transform: translate(-50%, -63%) !important;
   }
@@ -2136,7 +2136,7 @@ a {
   }
 }
 
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 480px), (orientation: landscape) and (max-height: 500px) {
   .how-step:nth-child(2) .how-step__up,
   .how-step:nth-child(3) .how-step__up {
     left: calc(46.5% + (var(--how-num-width) / 2) + 0.4rem);
@@ -2170,7 +2170,7 @@ a {
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 480px), (orientation: landscape) and (max-height: 500px) {
   .how {
     margin-top: clamp(8rem, 6vw, 14rem);
   }
@@ -2306,7 +2306,7 @@ a {
   text-rendering: geometricPrecision;
 }
 
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 480px), (orientation: landscape) and (max-height: 500px) {
   .why__title-bg {
     transform: translate(-50%, -63%) !important;
   }
@@ -2495,7 +2495,7 @@ a {
   }
 }
 
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 480px), (orientation: landscape) and (max-height: 500px) {
   .testimonials__title-bg {
     transform: translate(-50%, -63%) !important;
   }
@@ -2801,7 +2801,7 @@ a {
   text-rendering: geometricPrecision;
 }
 
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 480px), (orientation: landscape) and (max-height: 500px) {
   .faq__title-bg {
     transform: translate(-50%, -63%) !important;
   }
@@ -3023,7 +3023,7 @@ a {
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 480px), (orientation: landscape) and (max-height: 500px) {
   .testimonials {
     margin-top: clamp(8rem, 6vw, 14rem);
   }

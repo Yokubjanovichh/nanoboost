@@ -289,7 +289,7 @@ body.page--gta5 {
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 480px), (orientation: landscape) and (max-height: 500px) {
   .gta5-intro__title-bg {
     width: min(44rem, 90vw);
     height: 10.4rem;
@@ -347,7 +347,7 @@ body.page--gta5 {
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 480px), (orientation: landscape) and (max-height: 500px) {
   .page--gta5 .services__grid > .service-card:nth-child(5) {
     display: grid;
   }

@@ -721,7 +721,7 @@ body.page--service {
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 480px), (orientation: landscape) and (max-height: 500px) {
   .service-hero__title {
     font-size: clamp(3.2rem, 8vw, 4.2rem);
   }

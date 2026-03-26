@@ -368,7 +368,7 @@
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 480px), (orientation: landscape) and (max-height: 500px) {
   .page--contact .services__title-bg {
     width: min(44rem, 90vw);
     height: 10.4rem;

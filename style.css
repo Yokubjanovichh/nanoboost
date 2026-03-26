@@ -596,7 +596,7 @@ body:not([class]) .main {
   display: block;
 }
 
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 480px), (orientation: landscape) and (max-height: 500px) {
   .how__title-bg {
     transform: translate(-50%, -63%) !important;
   }
@@ -688,7 +688,7 @@ body:not([class]) .main {
   }
 }
 
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 480px), (orientation: landscape) and (max-height: 500px) {
   .how-step:nth-child(2) .how-step__up,
   .how-step:nth-child(3) .how-step__up {
     left: calc(46.5% + (var(--how-num-width) / 2) + 0.4rem);
@@ -797,7 +797,7 @@ body:not([class]) .main {
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 480px), (orientation: landscape) and (max-height: 500px) {
   .games__grid {
     grid-template-columns: minmax(24rem, 1fr);
   }
@@ -923,7 +923,7 @@ body:not([class]) .main {
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 480px), (orientation: landscape) and (max-height: 500px) {
   .hero__inner {
     padding-left: 2rem;
     padding-right: 2rem;

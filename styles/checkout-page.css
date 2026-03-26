@@ -398,7 +398,7 @@
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 480px), (orientation: landscape) and (max-height: 500px) {
   .page--checkout .checkout-form__label {
     padding-left: 1.7rem;
   }

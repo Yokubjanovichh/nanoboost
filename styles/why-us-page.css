@@ -129,7 +129,7 @@
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 480px), (orientation: landscape) and (max-height: 500px) {
   .why-us__cards {
     gap: 2.2rem;
   }
