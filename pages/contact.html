@@ -286,7 +286,6 @@
                 href="https://discord.gg/VwFyntnk"
                 target="_blank"
                 rel="noopener noreferrer"
-                data-contact="discord"
                 aria-label="Connect with Discord"
               >
                 <span class="contact-app__ico" aria-hidden="true">
@@ -325,7 +324,6 @@
                 href="https://t.me/nanoboost_io"
                 target="_blank"
                 rel="noopener noreferrer"
-                data-contact="telegram"
                 aria-label="Connect with Telegram"
               >
                 <span class="contact-app__ico" aria-hidden="true">
@@ -364,7 +362,6 @@
                 href="https://wa.me/380936414741"
                 target="_blank"
                 rel="noopener noreferrer"
-                data-contact="whatsapp"
                 aria-label="Connect with WhatsApp"
               >
                 <span class="contact-app__ico" aria-hidden="true">
@@ -403,20 +400,40 @@
           <article class="contact-card contact-card--form" role="listitem">
             <h2 class="contact-card__title">Have questions?</h2>
             <form class="contact-form" id="contact-form" novalidate>
-              <label class="contact-form__label" for="contact-discord"
-                >Discord</label
+              <label class="contact-form__label" for="contact-social-input"
+                >Preferred Contact *</label
               >
+              <div class="contact-dropdown" id="contact-dropdown">
+                <button
+                  class="contact-dropdown__trigger"
+                  type="button"
+                  aria-haspopup="listbox"
+                  aria-expanded="false"
+                >
+                  <span class="contact-dropdown__value">Discord</span>
+                  <span class="contact-dropdown__icon" aria-hidden="true">
+                    <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
+                      <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </span>
+                </button>
+                <div class="contact-dropdown__menu" role="listbox">
+                  <button class="contact-dropdown__option" type="button" role="option" data-value="discord" aria-selected="true">Discord</button>
+                  <button class="contact-dropdown__option" type="button" role="option" data-value="telegram" aria-selected="false">Telegram</button>
+                  <button class="contact-dropdown__option" type="button" role="option" data-value="whatsapp" aria-selected="false">WhatsApp</button>
+                </div>
+              </div>
               <input
                 class="contact-form__input"
-                id="contact-discord"
-                name="discord"
+                id="contact-social-input"
+                name="social"
                 type="text"
                 placeholder="DiscordName#0000 or username"
                 autocomplete="off"
               />
 
               <label class="contact-form__label" for="contact-email"
-                >Email</label
+                >Email *</label
               >
               <input
                 class="contact-form__input"

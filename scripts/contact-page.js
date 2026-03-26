@@ -1,72 +1,114 @@
 (function () {
   const form = document.querySelector("#contact-form");
   const hint = document.querySelector("#contact-form-hint");
+  const dropdown = document.querySelector("#contact-dropdown");
+  const socialInput = document.querySelector("#contact-social-input");
 
-  const contactButtons = Array.from(
-    document.querySelectorAll(".contact-card--apps .contact-app[data-contact]"),
-  );
-  const contactLabel = document.querySelector(
-    '.contact-form__label[for="contact-discord"]',
-  );
-  const contactInput = document.querySelector("#contact-discord");
+  if (!form || !dropdown) return;
 
-  let preferredContact = "discord";
+  const trigger = dropdown.querySelector(".contact-dropdown__trigger");
+  const valueLabel = dropdown.querySelector(".contact-dropdown__value");
+  const menu = dropdown.querySelector(".contact-dropdown__menu");
+  const options = dropdown.querySelectorAll(".contact-dropdown__option");
 
-  if (!form) return;
+  const contactMeta = {
+    discord: {
+      label: "Discord",
+      type: "text",
+      autocomplete: "off",
+      placeholder: "DiscordName#0000 or username",
+    },
+    telegram: {
+      label: "Telegram",
+      type: "text",
+      autocomplete: "off",
+      placeholder: "@username",
+    },
+    whatsapp: {
+      label: "WhatsApp",
+      type: "tel",
+      autocomplete: "tel",
+      placeholder: "Enter your WhatsApp number",
+    },
+  };
+
+  let selected = "discord";
 
   const safeValue = (value) => String(value || "").trim();
 
-  const contactMeta = {
-    discord:  { label: "Discord",  type: "text", autocomplete: "off", placeholder: "DiscordName#0000 or username" },
-    telegram: { label: "Telegram", type: "text", autocomplete: "off", placeholder: "@username" },
-    whatsapp: { label: "WhatsApp", type: "tel",  autocomplete: "tel", placeholder: "Enter your WhatsApp number" },
+  // Dropdown open/close
+  const openDropdown = () => {
+    dropdown.classList.add("is-open");
+    trigger.setAttribute("aria-expanded", "true");
   };
 
-  const applyPreferredContact = (channel) => {
-    preferredContact = contactMeta[channel] ? channel : "discord";
-    const meta = contactMeta[preferredContact];
+  const closeDropdown = () => {
+    dropdown.classList.remove("is-open");
+    trigger.setAttribute("aria-expanded", "false");
+  };
 
-    if (contactLabel) contactLabel.textContent = meta.label;
+  const selectOption = (value) => {
+    selected = contactMeta[value] ? value : "discord";
+    const meta = contactMeta[selected];
 
-    if (contactInput) {
-      contactInput.type = meta.type;
-      contactInput.autocomplete = meta.autocomplete;
-      contactInput.placeholder = meta.placeholder;
+    valueLabel.textContent = meta.label;
+
+    options.forEach((opt) => {
+      opt.setAttribute(
+        "aria-selected",
+        opt.dataset.value === selected ? "true" : "false",
+      );
+    });
+
+    if (socialInput) {
+      socialInput.type = meta.type;
+      socialInput.autocomplete = meta.autocomplete;
+      socialInput.placeholder = meta.placeholder;
     }
 
-    contactButtons.forEach((button) => {
-      const isActive = button.getAttribute("data-contact") === preferredContact;
-      button.setAttribute("aria-current", isActive ? "true" : "false");
-    });
+    closeDropdown();
   };
 
-  if (contactButtons.length) {
-    contactButtons.forEach((button) => {
-      button.addEventListener("click", (event) => {
-        event.preventDefault();
-        const channel = button.getAttribute("data-contact");
-        applyPreferredContact(channel);
-        if (contactInput) contactInput.focus();
-      });
-    });
-  }
+  trigger.addEventListener("click", () => {
+    dropdown.classList.contains("is-open") ? closeDropdown() : openDropdown();
+  });
 
-  applyPreferredContact(preferredContact);
+  menu.addEventListener("click", (e) => {
+    const opt = e.target.closest(".contact-dropdown__option");
+    if (!opt) return;
+    selectOption(opt.dataset.value);
+    trigger.focus();
+  });
 
+  // Keyboard nav
+  dropdown.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      closeDropdown();
+      trigger.focus();
+    }
+  });
+
+  // Close on outside click
+  document.addEventListener("click", (e) => {
+    if (!dropdown.contains(e.target)) closeDropdown();
+  });
+
+  // Form submit
   form.addEventListener("submit", (event) => {
     event.preventDefault();
 
     const formData = new FormData(form);
-    const contactHandle = safeValue(formData.get("discord"));
+    const contactHandle = safeValue(formData.get("social"));
     const email = safeValue(formData.get("email"));
     const comment = safeValue(formData.get("comment"));
 
+    const meta = contactMeta[selected];
     const subject = "Nanoboost Contact Request";
     const bodyLines = [
       "New message from Contact page:",
       "",
-      `Preferred contact: ${contactMeta[preferredContact].label}`,
-      `${contactMeta[preferredContact].label}: ${contactHandle || "-"}`,
+      `Preferred contact: ${meta.label}`,
+      `${meta.label}: ${contactHandle || "-"}`,
       `Email: ${email || "-"}`,
       "",
       "Comment:",

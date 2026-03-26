@@ -209,11 +209,107 @@
   padding-left: 1.5rem;
 }
 
-.page--contact .contact-form__label[for="contact-discord"]::after,
-.page--contact .contact-form__label[for="contact-email"]::after {
-  content: "*";
-  margin-left: 0.25rem;
-  color: rgba(111, 75, 255, 0.75);
+/* Contact dropdown */
+
+.page--contact .contact-dropdown {
+  position: relative;
+  margin-bottom: 1.6rem;
+}
+
+.page--contact .contact-dropdown__trigger {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.8rem 2.1rem;
+  border-radius: 2.2rem;
+  border: 0;
+  background: #ffffff;
+  color: rgba(8, 7, 26, 0.52);
+  font-family: "Poppins", sans-serif;
+  font-size: 1.85rem;
+  font-weight: 400;
+  line-height: 1.2;
+  cursor: pointer;
+  box-shadow:
+    0 18px 34px rgba(0, 0, 0, 0.32),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  transition:
+    box-shadow 0.2s ease,
+    border-radius 0.2s ease;
+}
+
+.page--contact .contact-dropdown.is-open .contact-dropdown__trigger {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  box-shadow:
+    0 18px 34px rgba(0, 0, 0, 0.32),
+    0 0 0 3px rgba(111, 75, 255, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+.page--contact .contact-dropdown__icon {
+  flex-shrink: 0;
+  color: rgba(8, 7, 26, 0.5);
+  transition: transform 0.2s ease;
+}
+
+.page--contact .contact-dropdown.is-open .contact-dropdown__icon {
+  transform: rotate(180deg);
+}
+
+.page--contact .contact-dropdown__menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  background: #ffffff;
+  border-bottom-left-radius: 2.2rem;
+  border-bottom-right-radius: 2.2rem;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  box-shadow: 0 18px 34px rgba(0, 0, 0, 0.32);
+  transition:
+    max-height 0.25s ease,
+    opacity 0.2s ease;
+}
+
+.page--contact .contact-dropdown.is-open .contact-dropdown__menu {
+  max-height: 20rem;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.page--contact .contact-dropdown__option {
+  -webkit-appearance: none;
+  appearance: none;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 1.4rem 2.1rem;
+  border: 0;
+  background: transparent;
+  color: rgba(8, 7, 26, 0.8);
+  font-family: "Poppins", sans-serif;
+  font-size: 1.7rem;
+  font-weight: 400;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.page--contact .contact-dropdown__option:hover {
+  background: rgba(111, 75, 255, 0.08);
+}
+
+.page--contact .contact-dropdown__option[aria-selected="true"] {
+  font-weight: 600;
+  color: rgba(111, 75, 255, 0.9);
 }
 
 .page--contact .contact-form__input,
@@ -386,5 +482,27 @@
   .page--contact .contact-form__textarea {
     border-radius: 1.4rem;
     padding: 1.25rem 1.4rem;
+    font-size: 1.5rem;
+  }
+
+  .page--contact .contact-dropdown__trigger {
+    padding: 1.25rem 1.4rem;
+    border-radius: 1.4rem;
+    font-size: 1.5rem;
+  }
+
+  .page--contact .contact-dropdown.is-open .contact-dropdown__trigger {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .page--contact .contact-dropdown__menu {
+    border-bottom-left-radius: 1.4rem;
+    border-bottom-right-radius: 1.4rem;
+  }
+
+  .page--contact .contact-dropdown__option {
+    padding: 1.1rem 1.4rem;
+    font-size: 1.4rem;
   }
 }
