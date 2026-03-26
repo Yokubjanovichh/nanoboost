@@ -3,6 +3,7 @@
   const hint = document.querySelector("#contact-form-hint");
   const dropdown = document.querySelector("#contact-dropdown");
   const socialInput = document.querySelector("#contact-social-input");
+  const emailInput = document.querySelector("#contact-email");
 
   if (!form || !dropdown) return;
 
@@ -35,8 +36,71 @@
   let selected = "discord";
 
   const safeValue = (value) => String(value || "").trim();
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-  // Dropdown open/close
+  // ── Validation helpers ──
+  const showError = (input, errorId, message) => {
+    const errorEl = document.querySelector("#" + errorId);
+    if (input) input.classList.add("is-invalid");
+    if (errorEl) {
+      errorEl.textContent = message;
+      errorEl.classList.add("is-visible");
+    }
+  };
+
+  const clearError = (input, errorId) => {
+    const errorEl = document.querySelector("#" + errorId);
+    if (input) input.classList.remove("is-invalid");
+    if (errorEl) {
+      errorEl.textContent = "";
+      errorEl.classList.remove("is-visible");
+    }
+  };
+
+  const validateSocial = () => {
+    const val = safeValue(socialInput?.value);
+    if (!val) {
+      showError(socialInput, "contact-social-error", `Please enter your ${contactMeta[selected].label}`);
+      return false;
+    }
+    clearError(socialInput, "contact-social-error");
+    return true;
+  };
+
+  const validateEmail = () => {
+    const val = safeValue(emailInput?.value);
+    if (!val) {
+      showError(emailInput, "contact-email-error", "Please enter your email address");
+      return false;
+    }
+    if (!emailRegex.test(val)) {
+      showError(emailInput, "contact-email-error", "Please enter a valid email address");
+      return false;
+    }
+    clearError(emailInput, "contact-email-error");
+    return true;
+  };
+
+  // Real-time validation on blur
+  if (socialInput) {
+    socialInput.addEventListener("blur", () => {
+      if (socialInput.value) validateSocial();
+    });
+    socialInput.addEventListener("input", () => {
+      if (socialInput.classList.contains("is-invalid")) validateSocial();
+    });
+  }
+
+  if (emailInput) {
+    emailInput.addEventListener("blur", () => {
+      if (emailInput.value) validateEmail();
+    });
+    emailInput.addEventListener("input", () => {
+      if (emailInput.classList.contains("is-invalid")) validateEmail();
+    });
+  }
+
+  // ── Dropdown ──
   const openDropdown = () => {
     dropdown.classList.add("is-open");
     trigger.setAttribute("aria-expanded", "true");
@@ -64,6 +128,7 @@
       socialInput.type = meta.type;
       socialInput.autocomplete = meta.autocomplete;
       socialInput.placeholder = meta.placeholder;
+      if (socialInput.classList.contains("is-invalid")) validateSocial();
     }
 
     closeDropdown();
@@ -80,7 +145,6 @@
     trigger.focus();
   });
 
-  // Keyboard nav
   dropdown.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
       closeDropdown();
@@ -88,19 +152,26 @@
     }
   });
 
-  // Close on outside click
   document.addEventListener("click", (e) => {
     if (!dropdown.contains(e.target)) closeDropdown();
   });
 
-  // Form submit
+  // ── Form submit ──
   form.addEventListener("submit", (event) => {
     event.preventDefault();
 
-    const formData = new FormData(form);
-    const contactHandle = safeValue(formData.get("social"));
-    const email = safeValue(formData.get("email"));
-    const comment = safeValue(formData.get("comment"));
+    const socialValid = validateSocial();
+    const emailValid = validateEmail();
+
+    if (!socialValid || !emailValid) {
+      const firstInvalid = form.querySelector(".is-invalid");
+      if (firstInvalid) firstInvalid.focus();
+      return;
+    }
+
+    const contactHandle = safeValue(socialInput?.value);
+    const email = safeValue(emailInput?.value);
+    const comment = safeValue(form.querySelector("#contact-comment")?.value);
 
     const meta = contactMeta[selected];
     const subject = "Nanoboost Contact Request";
@@ -122,10 +193,7 @@
       subject,
     )}&body=${encodeURIComponent(bodyLines.join("\n"))}`;
 
-    if (hint) {
-      hint.textContent = "Opening your email app…";
-    }
-
+    if (hint) hint.textContent = "Opening your email app\u2026";
     window.location.href = mailto;
   });
 })();

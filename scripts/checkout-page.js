@@ -250,27 +250,138 @@
   setupCustomPaymentSelect();
 
   // =============================================
-  // Form submit
+  // Validation
   // =============================================
   if (!form) return;
 
+  const emailInput = document.querySelector("#checkout-email");
+  const discordInput = document.querySelector("#checkout-discord");
+  const agreeLabel = form.querySelector(".checkout-form__agree");
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  const showError = (el, errorId, message) => {
+    if (el) el.classList.add("is-invalid");
+    const errorEl = document.querySelector("#" + errorId);
+    if (errorEl) {
+      errorEl.textContent = message;
+      errorEl.classList.add("is-visible");
+    }
+  };
+
+  const clearError = (el, errorId) => {
+    if (el) el.classList.remove("is-invalid");
+    const errorEl = document.querySelector("#" + errorId);
+    if (errorEl) {
+      errorEl.textContent = "";
+      errorEl.classList.remove("is-visible");
+    }
+  };
+
+  const validateEmail = () => {
+    const val = safeValue(emailInput?.value);
+    if (!val) {
+      showError(emailInput, "checkout-email-error", "Please enter your email address");
+      return false;
+    }
+    if (!emailRegex.test(val)) {
+      showError(emailInput, "checkout-email-error", "Please enter a valid email address");
+      return false;
+    }
+    clearError(emailInput, "checkout-email-error");
+    return true;
+  };
+
+  const validateDiscord = () => {
+    const val = safeValue(discordInput?.value);
+    if (!val) {
+      showError(discordInput, "checkout-discord-error", "Please enter your Discord username");
+      return false;
+    }
+    clearError(discordInput, "checkout-discord-error");
+    return true;
+  };
+
+  const validatePayment = () => {
+    const val = safeValue(paymentInput?.value);
+    if (!val) {
+      showError(paymentWrap, "checkout-payment-error", "Please select a payment method");
+      return false;
+    }
+    clearError(paymentWrap, "checkout-payment-error");
+    return true;
+  };
+
+  const validateAgree = () => {
+    const checked = form.querySelector('.checkout-form__checkbox')?.checked;
+    if (!checked) {
+      if (agreeLabel) agreeLabel.classList.add("is-invalid");
+      return false;
+    }
+    if (agreeLabel) agreeLabel.classList.remove("is-invalid");
+    return true;
+  };
+
+  // Real-time validation on blur
+  if (emailInput) {
+    emailInput.addEventListener("blur", () => {
+      if (emailInput.value) validateEmail();
+    });
+    emailInput.addEventListener("input", () => {
+      if (emailInput.classList.contains("is-invalid")) validateEmail();
+    });
+  }
+
+  if (discordInput) {
+    discordInput.addEventListener("blur", () => {
+      if (discordInput.value) validateDiscord();
+    });
+    discordInput.addEventListener("input", () => {
+      if (discordInput.classList.contains("is-invalid")) validateDiscord();
+    });
+  }
+
+  // Clear payment error on selection
+  if (paymentWrap) {
+    const observer = new MutationObserver(() => {
+      if (paymentInput?.value && paymentWrap.classList.contains("is-invalid")) {
+        clearError(paymentWrap, "checkout-payment-error");
+      }
+    });
+    observer.observe(paymentInput, { attributes: true, attributeFilter: ["value"] });
+
+    paymentMenu?.addEventListener("click", () => {
+      setTimeout(() => {
+        if (paymentInput?.value) clearError(paymentWrap, "checkout-payment-error");
+      }, 50);
+    });
+  }
+
+  if (agreeLabel) {
+    const checkbox = form.querySelector('.checkout-form__checkbox');
+    if (checkbox) {
+      checkbox.addEventListener("change", () => {
+        if (checkbox.checked) agreeLabel.classList.remove("is-invalid");
+      });
+    }
+  }
+
+  // =============================================
+  // Form submit
+  // =============================================
   form.addEventListener("submit", (event) => {
     event.preventDefault();
 
-    const formData = new FormData(form);
-    const email = safeValue(formData.get("email"));
-    const discord = safeValue(formData.get("discord"));
-    const payment = safeValue(formData.get("payment"));
-    const comment = safeValue(formData.get("comment"));
-    const agree = formData.get("agree") === "on";
+    const emailValid = validateEmail();
+    const discordValid = validateDiscord();
+    const paymentValid = validatePayment();
+    const agreeValid = validateAgree();
 
-    if (!agree) {
-      if (hint) hint.textContent = "Please accept the terms and conditions.";
-      return;
-    }
-
-    if (!email || !discord || !payment) {
-      if (hint) hint.textContent = "Please fill required fields.";
+    if (!emailValid || !discordValid || !paymentValid || !agreeValid) {
+      const firstInvalid = form.querySelector(".is-invalid");
+      if (firstInvalid) {
+        const focusable = firstInvalid.querySelector("input, button") || firstInvalid;
+        focusable.focus();
+      }
       return;
     }
 
@@ -278,6 +389,12 @@
       if (hint) hint.textContent = "Your cart is empty.";
       return;
     }
+
+    const formData = new FormData(form);
+    const email = safeValue(formData.get("email"));
+    const discord = safeValue(formData.get("discord"));
+    const payment = safeValue(formData.get("payment"));
+    const comment = safeValue(formData.get("comment"));
 
     const subject = "Nanoboost Checkout Order";
 
