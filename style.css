@@ -1020,3 +1020,9 @@ body:not([class]) .main {
     gap: 2rem;
   }
 }
+
+@media (orientation: landscape) and (max-height: 500px) {
+  .games__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
