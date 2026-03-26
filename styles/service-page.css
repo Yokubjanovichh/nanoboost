@@ -199,10 +199,12 @@ body.page--service {
 }
 
 .service-dropdown__value {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.2rem;
   min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  flex: 1;
 }
 
 .service-dropdown__icon {
@@ -251,6 +253,10 @@ body.page--service {
 }
 
 .service-dropdown__option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.2rem;
   width: 100%;
   min-height: clamp(3.8rem, 3vw, 4.2rem);
   padding: 0 clamp(1.3rem, 1.2vw, 1.6rem);
@@ -266,6 +272,11 @@ body.page--service {
   transition:
     background-color 0.15s ease,
     color 0.15s ease;
+}
+
+.service-dropdown__price {
+  flex-shrink: 0;
+  font-weight: 600;
 }
 
 .service-dropdown__option:hover {

@@ -31,7 +31,18 @@ const initServiceDropdown = (serviceDropdown) => {
       );
     });
     if (hiddenInput) hiddenInput.value = nextValue;
-    if (valueLabel) valueLabel.textContent = nextValue;
+    if (valueLabel) {
+      const dashIdx = nextValue.lastIndexOf(" - ");
+      if (dashIdx !== -1) {
+        const label = nextValue.slice(0, dashIdx);
+        const price = nextValue.slice(dashIdx + 3);
+        valueLabel.innerHTML =
+          `<span class="service-dropdown__label">${label}</span>` +
+          `<span class="service-dropdown__price">${price}</span>`;
+      } else {
+        valueLabel.textContent = nextValue;
+      }
+    }
   };
 
   const setOptions = (values, selectedValue) => {
@@ -52,7 +63,16 @@ const initServiceDropdown = (serviceDropdown) => {
       optionButton.className = "service-dropdown__option";
       optionButton.setAttribute("role", "option");
       optionButton.dataset.value = value;
-      optionButton.textContent = value;
+      const dashIdx = value.lastIndexOf(" - ");
+      if (dashIdx !== -1) {
+        const label = value.slice(0, dashIdx);
+        const price = value.slice(dashIdx + 3);
+        optionButton.innerHTML =
+          `<span class="service-dropdown__label">${label}</span>` +
+          `<span class="service-dropdown__price">${price}</span>`;
+      } else {
+        optionButton.textContent = value;
+      }
       optionButton.setAttribute(
         "aria-selected",
         value === nextSelected ? "true" : "false",
