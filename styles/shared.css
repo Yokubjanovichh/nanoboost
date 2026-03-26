@@ -87,6 +87,19 @@ body {
   background-position: top left;
 }
 
+html.nb-no-scroll,
+html.nb-no-scroll body {
+  overflow: hidden;
+}
+
+html.nb-no-scroll body {
+  padding-right: var(--nb-scrollbar-w, 0px);
+}
+
+html.nb-no-scroll .header {
+  padding-right: calc(2rem + var(--nb-scrollbar-w, 0px));
+}
+
 html {
   scrollbar-width: thin;
   scrollbar-color: rgba(111, 75, 255, 0.85) rgba(8, 7, 26, 0.75);

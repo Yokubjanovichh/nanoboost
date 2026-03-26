@@ -490,13 +490,9 @@ const nbOpenCartWidget = () => {
   if (!widget) return;
   nbRenderCartWidget();
 
-  // Scrollbar yo'qolganda layout shift oldini olish
   const scrollbarW = nbGetScrollbarWidth();
-  const headerEl = document.querySelector(".header");
-  document.body.style.paddingRight = scrollbarW + "px";
-  document.body.style.overflow = "hidden";
-  if (headerEl) headerEl.style.width = "calc(100% - " + scrollbarW + "px)";
-
+  document.documentElement.style.setProperty("--nb-scrollbar-w", scrollbarW + "px");
+  document.documentElement.classList.add("nb-no-scroll");
   widget.classList.add("is-open");
 };
 
@@ -504,10 +500,7 @@ const nbCloseCartWidget = () => {
   const widget = document.getElementById("cart-widget");
   if (!widget) return;
   widget.classList.remove("is-open");
-  document.body.style.overflow = "";
-  document.body.style.paddingRight = "";
-  const headerEl = document.querySelector(".header");
-  if (headerEl) headerEl.style.width = "";
+  document.documentElement.classList.remove("nb-no-scroll");
 };
 
 // Open cart: header cart + floating cart
