@@ -3168,10 +3168,6 @@ a {
   .hero__benefits {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-
-  .services__grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
 }
 
 @media (max-width: 480px), (orientation: landscape) and (max-height: 500px) {
@@ -3340,5 +3336,33 @@ a {
   .footer__contacts > * + * {
     margin-left: 0;
     margin-top: 1.2rem;
+  }
+}
+
+/* Phone landscape: 2-column grids override (must be last) */
+@media (orientation: landscape) and (max-height: 500px) {
+  .services__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 1.4rem;
+  }
+
+  .service-card {
+    display: flex;
+    flex-direction: column;
+    min-height: auto;
+  }
+
+  .service-card__img {
+    grid-column: unset;
+    grid-row: unset;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 13;
+    margin: 0 auto 1rem;
+  }
+
+  .service-card__content {
+    text-align: center;
+    align-items: center;
   }
 }
