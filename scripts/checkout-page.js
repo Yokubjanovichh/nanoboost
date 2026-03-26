@@ -397,45 +397,68 @@
     const payment = safeValue(formData.get("payment"));
     const comment = safeValue(formData.get("comment"));
 
-    const subject = "Nanoboost Checkout Order";
-
     let subtotal = 0;
-    const itemLines = cart.map((item) => {
+    const items = cart.map((item) => {
       const price = Number(item.price) || 0;
       const qty = item.qty || 1;
       subtotal += price * qty;
-      const option = item.option ? ` (${item.option})` : "";
-      return `- ${item.name || "Service"}${option} x${qty}: $${(price * qty).toFixed(2)}`;
+      return {
+        name: item.name || "Service",
+        option: item.option || "",
+        qty,
+        price: (price * qty).toFixed(2),
+      };
     });
 
-    const bodyLines = [
-      "New checkout request:",
-      "",
-      `Email: ${email}`,
-      `Discord: ${discord}`,
-      telegram ? `Telegram: ${telegram}` : null,
-      `Payment: ${payment}`,
-      "",
-      "Items:",
-      ...itemLines,
-      "",
-      `Subtotal: $${subtotal.toFixed(2)}`,
-      "",
-      "Comment:",
-      comment || "-",
-      "",
-      "---",
-      "Sent from nanoboost website",
-    ];
+    const payload = {
+      type: "checkout",
+      email,
+      discord,
+      telegram,
+      payment,
+      items,
+      subtotal: subtotal.toFixed(2),
+      comment,
+    };
 
-    const mailto = `mailto:support@nanoboost.io?subject=${encodeURIComponent(
-      subject,
-    )}&body=${encodeURIComponent(bodyLines.filter(Boolean).join("\n"))}`;
-
-    if (hint) {
-      hint.textContent = "Opening your email app\u2026";
+    const submitBtn = form.querySelector(".checkout-form__btn");
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = "SENDING...";
     }
+    if (hint) hint.textContent = "";
 
-    window.location.href = mailto;
+    fetch(window.NB_API_URL, {
+      method: "POST",
+      body: JSON.stringify(payload),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        if (result.status === "ok") {
+          if (hint) {
+            hint.style.color = "#4ade80";
+            hint.textContent = "Order submitted successfully! We\u2019ll contact you soon.";
+          }
+          form.reset();
+          localStorage.removeItem(NB_CART_KEY);
+          renderOrderItems();
+          // Update cart badge
+          document.querySelectorAll(".cart-badge").forEach((b) => (b.textContent = "0"));
+        } else {
+          throw new Error(result.message || "Server error");
+        }
+      })
+      .catch(() => {
+        if (hint) {
+          hint.style.color = "#ff6b6b";
+          hint.textContent = "Something went wrong. Please try again or contact us via Discord.";
+        }
+      })
+      .finally(() => {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = "SUBMIT ORDER";
+        }
+      });
   });
 })();

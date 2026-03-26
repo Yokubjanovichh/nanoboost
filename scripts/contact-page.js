@@ -174,26 +174,50 @@
     const comment = safeValue(form.querySelector("#contact-comment")?.value);
 
     const meta = contactMeta[selected];
-    const subject = "Nanoboost Contact Request";
-    const bodyLines = [
-      "New message from Contact page:",
-      "",
-      `Preferred contact: ${meta.label}`,
-      `${meta.label}: ${contactHandle || "-"}`,
-      `Email: ${email || "-"}`,
-      "",
-      "Comment:",
-      comment || "-",
-      "",
-      "---",
-      "Sent from nanoboost website",
-    ];
 
-    const mailto = `mailto:support@nanoboost.io?subject=${encodeURIComponent(
-      subject,
-    )}&body=${encodeURIComponent(bodyLines.join("\n"))}`;
+    const payload = {
+      type: "contact",
+      preferredContact: meta.label,
+      handle: contactHandle,
+      email,
+      comment,
+    };
 
-    if (hint) hint.textContent = "Opening your email app\u2026";
-    window.location.href = mailto;
+    const submitBtn = form.querySelector(".contact-form__btn");
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = "SENDING...";
+    }
+    if (hint) hint.textContent = "";
+
+    fetch(window.NB_API_URL, {
+      method: "POST",
+      body: JSON.stringify(payload),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        if (result.status === "ok") {
+          if (hint) {
+            hint.style.color = "#4ade80";
+            hint.textContent = "Message sent! We\u2019ll get back to you soon.";
+          }
+          form.reset();
+          selectOption("discord");
+        } else {
+          throw new Error(result.message || "Server error");
+        }
+      })
+      .catch(() => {
+        if (hint) {
+          hint.style.color = "#ff6b6b";
+          hint.textContent = "Something went wrong. Please try again or contact us via Discord.";
+        }
+      })
+      .finally(() => {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = "SEND";
+        }
+      });
   });
 })();

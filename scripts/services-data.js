@@ -1,6 +1,9 @@
 // Shared service data used across pages.
 // This file defines global objects (no bundler/module system).
 
+// Google Apps Script web app URL (deploy qilib URL ni shu erga qo'ying)
+window.NB_API_URL = "https://script.google.com/macros/s/AKfycby183PefSS1xEQgyM5O86VxXqKpIYJcnqFxjaIyeSMUxgSlSbJsqRdXH6ND_i0Dn7vKWg/exec";
+
 window.NB_SERVICE_CONFIG = {
   // ========== PS4/PS5 ==========
   "gta-cash-cars-ps": {
