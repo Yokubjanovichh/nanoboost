@@ -309,7 +309,7 @@
       "Sent from nanoboost website",
     ];
 
-    const mailto = `mailto:support@nanoboost.com?subject=${encodeURIComponent(
+    const mailto = `mailto:support@nanoboost.io?subject=${encodeURIComponent(
       subject,
     )}&body=${encodeURIComponent(bodyLines.join("\n"))}`;
 
