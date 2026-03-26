@@ -448,6 +448,10 @@ a {
   font-weight: 500;
 }
 
+.dropdown__breadcrumb {
+  display: none;
+}
+
 .dropdown__subitem--unavailable {
   opacity: 0.3;
   pointer-events: none;
@@ -850,9 +854,9 @@ a {
 
   .dropdown__item,
   .dropdown__subitem a {
-    padding: 1.05rem 1.6rem;
+    padding: 1.2rem 1.6rem;
     margin: 0 0.55rem;
-    font-size: clamp(1.55rem, 4.6vw, 1.8rem);
+    font-size: clamp(1.8rem, 5vw, 2.1rem);
     border-radius: 0.75rem;
   }
 
