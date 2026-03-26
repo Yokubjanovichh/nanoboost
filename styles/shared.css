@@ -1290,6 +1290,8 @@ a {
 .testimonials,
 .why-us {
   contain: layout;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 600px;
 }
 
 /* Birinchi/oxirgi section marginlari main padding bilan conflict qilmasin */
@@ -1311,6 +1313,8 @@ a {
   isolation: isolate;
   overflow: hidden;
   background: rgba(8, 7, 26, 0.62);
+  content-visibility: auto;
+  contain-intrinsic-size: auto 400px;
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border-top: 1px solid rgba(101, 58, 222, 0.22);
