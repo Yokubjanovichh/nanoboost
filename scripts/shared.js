@@ -834,6 +834,30 @@ if (testimonialsSection && testimonialsSlider && testimonialsTrack) {
 }
 
 // =============================================
+// Email copy fallback for mailto: links
+// =============================================
+document.querySelectorAll('a[href^="mailto:"]').forEach((link) => {
+  link.addEventListener("click", (e) => {
+    const email = link.href.replace("mailto:", "").split("?")[0];
+    navigator.clipboard?.writeText(email).then(() => {
+      const toast = document.createElement("div");
+      toast.textContent = "Email copied!";
+      toast.style.cssText =
+        "position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);" +
+        "background:linear-gradient(135deg,#2de1fe,#6849fe);color:#fff;" +
+        "padding:1rem 2.4rem;border-radius:5rem;font-family:Poppins,sans-serif;" +
+        "font-size:1.4rem;font-weight:500;z-index:99999;opacity:0;transition:opacity .3s";
+      document.body.appendChild(toast);
+      requestAnimationFrame(() => (toast.style.opacity = "1"));
+      setTimeout(() => {
+        toast.style.opacity = "0";
+        setTimeout(() => toast.remove(), 300);
+      }, 2000);
+    });
+  });
+});
+
+// =============================================
 // Universal Search
 // =============================================
 {
