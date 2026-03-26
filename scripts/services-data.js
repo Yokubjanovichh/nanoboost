@@ -2,185 +2,705 @@
 // This file defines global objects (no bundler/module system).
 
 window.NB_SERVICE_CONFIG = {
-  "gta-cash-cars": {
-    titleHtml: "GTA Online Cash+<br />Cars Boost PS4/PS5",
+  // ========== PS4/PS5 ==========
+  "gta-cash-cars-ps": {
+    titleHtml: "GTA Online Cash +<br>Cars Boost PS4/PS5",
     imageSrc: "../assets/images/services1.webp",
     imageAlt: "GTA Online cash and cars boost",
+    platform: "PS4/PS5",
     options: [
-      "15 million - 19.99$",
-      "25 million - 23.99$",
-      "30 million - 27.99$",
-      "50 million - 33.99$",
-      "75 million - 39.99$",
-      "100 million - 49.99$",
-      "150 million - 60.99$",
-      "200 million - 70.99$",
-      "300 million - 85.99$",
-      "500 million - 120.99$",
-      "750 million - 150.99$",
-      "1 Billion - 199.99$",
+      "20 million - $15.99",
+      "25 million - $19.99",
+      "50 million - $29.99",
+      "75 million - $35.99",
+      "100 million - $44.99",
+      "150 million - $54.99",
+      "200 million - $64.99",
+      "500 million - $109.99",
+      "750 million - $139.99",
+      "1 Billion - $179.99",
     ],
-    defaultOption: "15 million - 19.99$",
+    defaultOption: "20 million - $15.99",
+    description: [
+      "Upgrade your GTA Online account on PlayStation 4 or PlayStation 5 with our professional Cash + Cars Boost service.",
+      "This package is built for players who want immediate financial freedom and access to high-performance vehicles without spending weeks grinding missions and low-paying activities.",
+      "With Nanoboost, you receive a structured in-game upgrade that allows you to enjoy premium GTA Online content right away.",
+    ],
+    whatYouGet: [
+      {
+        title: "GTA Online Money Boost",
+        lead: "A significant in-game cash upgrade that allows you to:",
+        items: [
+          "Purchase businesses and properties",
+          "Unlock advanced equipment",
+          "Invest in vehicles and upgrades",
+          "Access high-tier gameplay content",
+        ],
+      },
+      {
+        title: "Premium Cars Setup",
+        lead: "Depending on the selected package, your account will receive:",
+        items: [
+          "High-performance vehicles",
+          "Fully upgraded engine and performance parts",
+          "Armor and handling upgrades",
+          "Custom configuration options",
+        ],
+      },
+    ],
+    sections: [
+      {
+        title: "Designed for PlayStation Players",
+        texts: [
+          "This service is optimized specifically for PS4 and PS5 accounts. We ensure compatibility, smooth execution, and proper in-game handling for PlayStation users.",
+        ],
+      },
+      {
+        title: "Who This Service Is For",
+        texts: [
+          "This boost is ideal if you: want to skip repetitive grinding, need fast capital to start businesses, plan to build a competitive vehicle collection, or want to enjoy GTA Online without progression restrictions.",
+        ],
+      },
+      {
+        title: "Service Format",
+        texts: [
+          "After checkout, the upgrade process begins according to your selected package. Execution time depends on the amount of cash and vehicle configuration chosen. You will receive your account fully prepared and ready for gameplay.",
+        ],
+      },
+      {
+        title: "Play Without Limits",
+        texts: [
+          "GTA Online becomes significantly more enjoyable when financial barriers are removed.",
+          "With the right balance and a strong garage setup, you unlock the full experience of Los Santos — businesses, heists, customization, and competitive gameplay.",
+        ],
+      },
+    ],
   },
-  "gta-cash": {
-    titleHtml: "GTA Online Cash Boost<br />PS4/PS5",
+
+  "gta-cash-ps": {
+    titleHtml: "GTA Online Cash Boost<br>PS4/PS5",
     imageSrc: "../assets/images/services2.webp",
     imageAlt: "GTA Online cash boost",
+    platform: "PS4/PS5",
     options: [
-      "10 million - 19.99$",
-      "20 million - 24.99$",
-      "35 million - 32.99$",
-      "50 million - 39.99$",
-      "100 million - 59.99$",
+      "20 million - $19.99",
+      "25 million - $24.99",
+      "30 million - $29.99",
     ],
-    defaultOption: "10 million - 19.99$",
+    defaultOption: "20 million - $19.99",
+    description: [
+      "Increase your in-game balance quickly with our GTA Online Cash Boost service for PlayStation 4 and PlayStation 5.",
+      "This service is designed for players who want to unlock more content, purchase properties, and expand their businesses without spending weeks grinding low-reward missions.",
+      "With Nanoboost, you receive a structured money upgrade that helps you progress faster and enjoy the best parts of GTA Online without unnecessary delays.",
+    ],
+    whatYouGet: [
+      {
+        title: "GTA Online Money Upgrade",
+        lead: "Your account will receive a significant cash increase that can be used to:",
+        items: [
+          "Buy properties and businesses",
+          "Purchase vehicles and upgrades",
+          "Invest in new gameplay opportunities",
+          "Unlock advanced equipment and features",
+        ],
+      },
+    ],
+    sections: [
+      {
+        title: "Optimized for PlayStation",
+        texts: [
+          "This service is specifically designed for PS4 and PS5 accounts, ensuring smooth execution and compatibility with PlayStation systems.",
+        ],
+      },
+      {
+        title: "Who This Service Is For",
+        texts: [
+          "This boost is ideal for players who: want to skip repetitive grinding, need quick capital for businesses, want to unlock vehicles and upgrades faster, or prefer focusing on gameplay instead of farming money.",
+        ],
+      },
+      {
+        title: "Service Process",
+        texts: [
+          "Once your order is placed, the upgrade process begins based on the selected package. The completion time depends on the amount of money included in your order. After completion, your account will be ready for immediate gameplay with a significantly improved balance.",
+        ],
+      },
+    ],
   },
-  "gta-level": {
-    titleHtml: "GTA Online Level Boost<br />PS4/PS5",
+
+  "gta-level-ps": {
+    titleHtml: "GTA Online Level Boost<br>PS4/PS5",
     imageSrc: "../assets/images/services3.webp",
     imageAlt: "GTA Online level boost",
+    platform: "PS4/PS5",
     options: [
-      "Rank 50 - 29.99$",
-      "Rank 100 - 39.99$",
-      "Rank 150 - 49.99$",
-      "Rank 200 - 59.99$",
-      "Rank 300 - 79.99$",
+      "50 level - $29.99",
+      "75 level - $39.99",
+      "100 level - $49.99",
+      "120 level - $59.99",
+      "150 level - $69.99",
+      "200 level - $79.99",
     ],
-    defaultOption: "Rank 50 - 29.99$",
+    defaultOption: "50 level - $29.99",
+    description: [
+      "Reach higher ranks faster with our GTA Online Level Boost service for PlayStation 4 and PlayStation 5.",
+      "Ranking up in GTA Online unlocks new equipment, missions, and gameplay opportunities, but the process can take a significant amount of time.",
+      "With Nanoboost, you can accelerate your progression and access high-level content without spending countless hours farming experience.",
+    ],
+    whatYouGet: [
+      {
+        title: "GTA Online Rank Progression",
+        lead: "Your account will receive rank progression that helps unlock:",
+        items: [
+          "Advanced weapons and equipment",
+          "New gameplay features",
+          "Exclusive missions and activities",
+          "Higher reputation in GTA Online",
+        ],
+      },
+    ],
+    sections: [
+      {
+        title: "Built for PlayStation",
+        texts: [
+          "Our Level Boost service is optimized for PS4 and PS5 players, ensuring a smooth and efficient ranking process.",
+        ],
+      },
+      {
+        title: "Who This Service Is For",
+        texts: [
+          "This service is perfect for players who: want to unlock high-level content faster, need access to advanced weapons and equipment, want to improve their GTA Online progression, or prefer focusing on gameplay instead of repetitive XP farming.",
+        ],
+      },
+      {
+        title: "Service Process",
+        texts: [
+          "After placing your order, the leveling process begins based on your selected rank package. Completion time depends on the starting level and the target level chosen. Once the boost is complete, your account will be ready to access new gameplay opportunities.",
+        ],
+      },
+    ],
   },
-  "gta-modded": {
-    titleHtml: "GTA Online Modded Account<br />PS4/PS5",
+
+  "gta-modded-ps": {
+    titleHtml: "GTA Online Modded Account<br>PS4/PS5",
     imageSrc: "../assets/images/services4.webp",
     imageAlt: "GTA Online modded account",
+    platform: "PS4/PS5",
     options: [
-      "Modded Basic - 29.99$",
-      "Modded Standard - 39.99$",
-      "Modded Pro - 49.99$",
-      "Modded Ultra - 69.99$",
-      "Modded Legend - 89.99$",
+      "level 100 + 15 million - $29.99",
+      "level 100 + 100 million - $74.99",
+      "level 120 + 300 million - $99.99",
+      "level 120 + 500 million - $139.99",
+      "level 100 + 1 Billion - $179.99",
+      "level 120 + 1 Billion - $199.99",
     ],
-    defaultOption: "Modded Basic - 29.99$",
+    defaultOption: "level 100 + 15 million - $29.99",
+    description: [
+      "Start your GTA Online journey with a powerful setup using our Modded Account service for PlayStation 4 and PlayStation 5.",
+      "Instead of building your progress from scratch, you receive an account prepared with valuable in-game resources that allow you to access premium content immediately.",
+      "This option is ideal for players who want to jump directly into the advanced parts of GTA Online.",
+    ],
+    whatYouGet: [
+      {
+        title: "What You Get",
+        lead: "Depending on the selected package, modded accounts may include:",
+        items: [
+          "High in-game money balance",
+          "High-level progression",
+          "Powerful vehicles",
+          "Additional upgrades and features",
+        ],
+      },
+    ],
+    sections: [
+      {
+        title: "PlayStation Ready",
+        texts: [
+          "All modded accounts are compatible with PS4 and PS5 platforms, ensuring smooth gameplay and proper functionality.",
+        ],
+      },
+      {
+        title: "Who This Service Is For",
+        texts: [
+          "This option is ideal for players who: want a fully prepared GTA Online account, prefer starting with strong resources, want instant access to advanced content, or do not want to spend time building progress from the beginning.",
+        ],
+      },
+      {
+        title: "Start Strong",
+        texts: [
+          "With a prepared GTA Online account, you can immediately enjoy the best parts of the game — businesses, vehicles, missions, and customization.",
+        ],
+      },
+    ],
+  },
+
+  // ========== Xbox One/Series ==========
+  "gta-cash-cars-xbox": {
+    titleHtml: "GTA Online Cash +<br>Cars Boost Xbox One/Series",
+    imageSrc: "../assets/images/services1.webp",
+    imageAlt: "GTA Online cash and cars boost",
+    platform: "Xbox One/Series",
+    options: [
+      "20 million - $15.99",
+      "25 million - $19.99",
+      "50 million - $29.99",
+      "75 million - $35.99",
+      "100 million - $44.99",
+      "150 million - $54.99",
+      "200 million - $64.99",
+      "500 million - $109.99",
+      "750 million - $139.99",
+      "1 Billion - $179.99",
+    ],
+    defaultOption: "20 million - $15.99",
+    description: [
+      "Upgrade your GTA Online account on Xbox One or Xbox Series with our professional Cash + Cars Boost service.",
+      "This package is designed for players who want immediate financial freedom and access to powerful vehicles without spending weeks grinding missions and repetitive activities.",
+      "With Nanoboost, you receive a structured in-game upgrade that helps you unlock premium GTA Online content faster and enjoy the full Los Santos experience.",
+    ],
+    whatYouGet: [
+      {
+        title: "GTA Online Money Upgrade",
+        lead: "Your account receives a significant in-game balance increase that can be used to:",
+        items: [
+          "Purchase businesses and properties",
+          "Invest in vehicles and upgrades",
+          "Unlock new gameplay opportunities",
+          "Access high-tier GTA Online content",
+        ],
+      },
+      {
+        title: "Premium Vehicle Setup",
+        lead: "Depending on the selected package, your account may include:",
+        items: [
+          "High-performance vehicles",
+          "Fully upgraded engine and performance parts",
+          "Armor and handling improvements",
+          "Custom configuration options",
+        ],
+      },
+    ],
+    sections: [
+      {
+        title: "Optimized for Xbox Players",
+        texts: [
+          "This service is specifically optimized for Xbox One and Xbox Series accounts, ensuring smooth execution and proper compatibility with Xbox systems.",
+        ],
+      },
+      {
+        title: "Service Process",
+        texts: [
+          "After completing your order, our team begins the upgrade according to the selected package. The completion time depends on the amount of cash and vehicle setup included in your order. Once finished, your account will be fully prepared and ready for gameplay.",
+        ],
+      },
+    ],
+  },
+
+  "gta-cash-xbox": {
+    titleHtml: "GTA Online Cash Boost<br>Xbox One/Series",
+    imageSrc: "../assets/images/services2.webp",
+    imageAlt: "GTA Online cash boost",
+    platform: "Xbox One/Series",
+    options: [
+      "20 million - $19.99",
+      "25 million - $24.99",
+      "30 million - $29.99",
+    ],
+    defaultOption: "20 million - $19.99",
+    description: [
+      "Increase your in-game balance quickly with our GTA Online Cash Boost service for Xbox One and Xbox Series.",
+      "Grinding money in GTA Online can take a lot of time. With Nanoboost, you can speed up your financial progression and unlock new opportunities in Los Santos without endless farming.",
+    ],
+    whatYouGet: [
+      {
+        title: "GTA Online Money Upgrade",
+        lead: "Your account will receive a significant GTA Online money upgrade, allowing you to:",
+        items: [
+          "Buy businesses and properties",
+          "Purchase vehicles and upgrades",
+          "Expand your in-game operations",
+          "Access advanced gameplay content",
+        ],
+      },
+    ],
+    sections: [
+      {
+        title: "Built for Xbox Players",
+        texts: [
+          "This service is optimized for Xbox One and Xbox Series platforms, ensuring smooth delivery and compatibility.",
+        ],
+      },
+      {
+        title: "Service Process",
+        texts: [
+          "After placing your order, the boost begins according to the selected cash package. Completion time depends on the amount of GTA Online money included. Once completed, your account will be ready with a significantly increased balance.",
+        ],
+      },
+    ],
+  },
+
+  "gta-level-xbox": {
+    titleHtml: "GTA Online Level Boost<br>Xbox One/Series",
+    imageSrc: "../assets/images/services3.webp",
+    imageAlt: "GTA Online level boost",
+    platform: "Xbox One/Series",
+    options: [
+      "50 level - $29.99",
+      "75 level - $39.99",
+      "100 level - $49.99",
+      "120 level - $59.99",
+      "150 level - $69.99",
+      "200 level - $79.99",
+    ],
+    defaultOption: "50 level - $29.99",
+    description: [
+      "Reach higher ranks faster with our GTA Online Level Boost service for Xbox One and Xbox Series.",
+      "Leveling up in GTA Online unlocks new equipment, missions, and gameplay features, but progressing through ranks can take a long time.",
+      "With Nanoboost, you can accelerate your progression and access advanced content much sooner.",
+    ],
+    whatYouGet: [
+      {
+        title: "GTA Online Rank Progression",
+        lead: "Your account will receive rank progression that unlocks:",
+        items: [
+          "Advanced weapons and equipment",
+          "Additional missions and activities",
+          "New gameplay features",
+          "Higher reputation in GTA Online",
+        ],
+      },
+    ],
+    sections: [
+      {
+        title: "Optimized for Xbox",
+        texts: [
+          "This boost is designed for Xbox One and Xbox Series accounts, ensuring smooth and efficient rank progression.",
+        ],
+      },
+      {
+        title: "Service Process",
+        texts: [
+          "Once the order is placed, the leveling process begins based on the selected target rank. Completion time depends on your starting level and the desired rank. After completion, your account will be ready to enjoy new gameplay opportunities.",
+        ],
+      },
+    ],
+  },
+
+  "gta-modded-xbox": {
+    titleHtml: "GTA Online Modded Account<br>Xbox One/Series",
+    imageSrc: "../assets/images/services4.webp",
+    imageAlt: "GTA Online modded account",
+    platform: "Xbox One/Series",
+    options: [
+      "level 100 + 15 million - $29.99",
+      "level 100 + 100 million - $74.99",
+      "level 120 + 300 million - $99.99",
+      "level 120 + 500 million - $139.99",
+      "level 100 + 1 Billion - $179.99",
+      "level 120 + 1 Billion - $199.99",
+    ],
+    defaultOption: "level 100 + 15 million - $29.99",
+    description: [
+      "Start playing GTA Online with a powerful setup using our Modded Account service for Xbox One and Xbox Series.",
+      "Instead of building progress from the beginning, you receive an account prepared with valuable resources and upgrades that allow you to access premium content immediately.",
+    ],
+    whatYouGet: [
+      {
+        title: "What You Get",
+        lead: "Depending on the selected package, modded accounts may include:",
+        items: [
+          "High GTA Online money balance",
+          "High rank progression",
+          "Premium vehicles",
+          "Additional upgrades and features",
+        ],
+      },
+    ],
+    sections: [
+      {
+        title: "Xbox Compatibility",
+        texts: [
+          "All modded accounts are prepared for Xbox One and Xbox Series platforms, ensuring proper functionality and smooth gameplay.",
+        ],
+      },
+      {
+        title: "Start Strong",
+        texts: [
+          "With a prepared account, you can immediately enjoy the best parts of GTA Online — businesses, vehicles, missions, and customization.",
+        ],
+      },
+    ],
+  },
+
+  // ========== PC ==========
+  "gta-cash-pc": {
+    titleHtml: "GTA Online Cash Boost<br>PC",
+    imageSrc: "../assets/images/services2.webp",
+    imageAlt: "GTA Online cash boost",
+    platform: "PC",
+    options: [
+      "50 million - $29.99",
+      "100 million - $34.99",
+      "200 million - $39.99",
+      "500 million - $49.99",
+      "1 Billion - $69.99",
+      "1.5 Billion - $84.99",
+      "2 Billion - $99.99",
+    ],
+    defaultOption: "50 million - $29.99",
+    description: [
+      "Increase your in-game balance quickly with our GTA Online Cash Boost for PC players.",
+      "Earning large amounts of money in GTA Online can require many hours of grinding missions, businesses, and repetitive activities. With Nanoboost, you can accelerate your progress and gain the financial freedom needed to enjoy the most exciting parts of the game.",
+      "Our cash boost service provides a reliable way to upgrade your GTA Online experience without spending countless hours farming in-game currency.",
+    ],
+    whatYouGet: [
+      {
+        title: "GTA Online Money Upgrade",
+        lead: "Your account receives a significant GTA Online money increase that can be used to:",
+        items: [
+          "Buy businesses and properties",
+          "Purchase vehicles and upgrades",
+          "Invest in new gameplay opportunities",
+          "Unlock advanced equipment and features",
+        ],
+      },
+    ],
+    sections: [
+      {
+        title: "Designed for PC Players",
+        texts: [
+          "This service is specifically optimized for GTA Online PC accounts, ensuring proper compatibility and smooth in-game execution.",
+        ],
+      },
+      {
+        title: "Who This Service Is For",
+        texts: [
+          "This service is ideal for players who: want to avoid repetitive grinding, need fast capital for businesses, want to unlock vehicles and equipment faster, or prefer enjoying gameplay instead of farming money.",
+        ],
+      },
+      {
+        title: "Service Process",
+        texts: [
+          "After placing your order, the boost process begins based on the selected cash package. The completion time depends on the amount of GTA Online money included in your order. Once completed, your account will have a significantly improved balance and be ready for immediate gameplay.",
+        ],
+      },
+    ],
+  },
+
+  "gta-level-pc": {
+    titleHtml: "GTA Online Level Boost<br>PC",
+    imageSrc: "../assets/images/services3.webp",
+    imageAlt: "GTA Online level boost",
+    platform: "PC",
+    options: [
+      "120 level - $19.99",
+      "250 level - $24.99",
+      "500 level - $29.99",
+      "8000 level - $49.99",
+    ],
+    defaultOption: "120 level - $19.99",
+    description: [
+      "Progress through GTA Online ranks faster with our Level Boost service for PC players.",
+      "Increasing your rank unlocks new weapons, missions, equipment, and gameplay features. However, gaining experience through standard gameplay can take a long time.",
+      "With Nanoboost, you can speed up your progression and reach higher ranks much faster.",
+    ],
+    whatYouGet: [
+      {
+        title: "GTA Online Rank Progression",
+        lead: "Your account receives rank progression that unlocks:",
+        items: [
+          "Advanced weapons and equipment",
+          "New missions and activities",
+          "Additional gameplay features",
+          "Higher reputation in GTA Online",
+        ],
+      },
+    ],
+    sections: [
+      {
+        title: "Built for GTA Online PC",
+        texts: [
+          "Our Level Boost service is designed specifically for PC accounts, ensuring compatibility and efficient rank progression.",
+        ],
+      },
+      {
+        title: "Who This Service Is For",
+        texts: [
+          "This service is perfect for players who: want to unlock high-level content faster, need access to advanced weapons and equipment, want to improve their GTA Online progression, or prefer playing instead of grinding XP.",
+        ],
+      },
+      {
+        title: "Service Process",
+        texts: [
+          "Once the order is placed, the leveling process begins according to the selected rank package. Completion time depends on your current level and the target rank. After the boost is completed, your account will be ready to access new gameplay opportunities.",
+        ],
+      },
+    ],
+  },
+
+  "gta-unlock-pc": {
+    titleHtml: "GTA Online Unlock All<br>PC",
+    imageSrc: "../assets/images/services4.webp",
+    imageAlt: "GTA Online unlock all",
+    platform: "PC",
+    options: ["Unlock All - $29.99"],
+    defaultOption: "Unlock All - $29.99",
+    description: [
+      "Unlock the full potential of your GTA Online account on PC with our Unlock All service.",
+      "This package is designed for players who want complete access to in-game content without grinding, restrictions, or progression limits.",
+      "With Nanoboost, your account is fully upgraded and ready for high-level gameplay from the moment you log in.",
+    ],
+    whatYouGet: [
+      {
+        title: "Full Account Upgrade",
+        lead: "Your account receives a complete upgrade including:",
+        items: [
+          "Maximum character stats (all skills maxed)",
+          "Gender change option",
+          "All hairstyles unlocked",
+          "All tattoos unlocked",
+          "Full clothing collection",
+          "All masks available",
+        ],
+      },
+      {
+        title: "Progression & Reputation",
+        lead: "All progression systems maxed:",
+        items: [
+          "Auto Shop reputation maxed",
+          "LS Car Meet reputation (1,950,000)",
+          "Arena War level 1000",
+          "Crew level 1000",
+        ],
+      },
+      {
+        title: "Business & Research",
+        lead: "All business content unlocked:",
+        items: ["Bunker research unlocked", "Fast Run setup (optimized progression)"],
+      },
+      {
+        title: "Equipment & Unlocks",
+        lead: "Full equipment access:",
+        items: ["All weapons unlocked", "Full weapon access for gameplay"],
+      },
+      {
+        title: "Account Completion",
+        lead: "Additional account features:",
+        items: [
+          "Achievements unlocked",
+          "All contacts available",
+          "Report history cleaned",
+          "Removed from BadSport status",
+        ],
+      },
+    ],
+    sections: [
+      {
+        title: "Who This Service Is For",
+        texts: [
+          "This service is perfect if you: want a fully completed GTA Online account, need access to all content instantly, don't want to spend time unlocking items manually, or prefer to play without restrictions.",
+        ],
+      },
+      {
+        title: "Service Format",
+        texts: [
+          "After placing your order, our team will begin the upgrade process. Execution time depends on the selected configuration and current account status. Your account will be delivered fully upgraded and ready for gameplay.",
+        ],
+      },
+      {
+        title: "Play Without Limits",
+        texts: [
+          "With everything unlocked, GTA Online becomes a completely different experience. You get full freedom — from customization and weapons to vehicles and progression systems.",
+          "Unlock everything and enjoy the game on your own terms.",
+        ],
+      },
+    ],
   },
 };
 
+// Platform-grouped services for gta5.html card grid
 window.NB_GTA5_SERVICES = {
   ps: [
     {
-      serviceParam: "gta-cash-cars",
+      serviceParam: "gta-cash-cars-ps",
       imageSrc: "../assets/images/services1.webp",
       imageAlt: "GTA Online Cash + Cars Boost",
       title: "GTA Online Cash + Cars Boost PS4/PS5",
-      priceNow: "$19.99",
+      priceNow: "$15.99",
     },
     {
-      serviceParam: "gta-cash",
+      serviceParam: "gta-cash-ps",
       imageSrc: "../assets/images/services2.webp",
       imageAlt: "GTA Online Cash Boost",
       title: "GTA Online Cash Boost PS4/PS5",
       priceNow: "$19.99",
     },
     {
-      serviceParam: "gta-level",
+      serviceParam: "gta-level-ps",
       imageSrc: "../assets/images/services3.webp",
       imageAlt: "GTA Online Level Boost",
       title: "GTA Online Level Boost PS4/PS5",
       priceNow: "$29.99",
     },
     {
-      serviceParam: "gta-modded",
+      serviceParam: "gta-modded-ps",
       imageSrc: "../assets/images/services4.webp",
       imageAlt: "GTA Online Modded Account",
       title: "GTA Online Modded Account PS4/PS5",
-      priceNow: "$29.99",
-    },
-    {
-      serviceParam: "gta-cash-cars",
-      imageSrc: "../assets/images/services1.webp",
-      imageAlt: "GTA Online Cash + Cars Boost",
-      title: "GTA Online Cash + Cars Boost PS4/PS5",
-      priceNow: "$19.99",
-    },
-    {
-      serviceParam: "gta-cash-cars",
-      imageSrc: "../assets/images/services2.webp",
-      imageAlt: "GTA Online Cash + Cars Boost",
-      title: "GTA Online Cash + Cars Boost PS4/PS5",
-      priceNow: "$19.99",
-    },
-    {
-      serviceParam: "gta-cash-cars",
-      imageSrc: "../assets/images/services3.webp",
-      imageAlt: "GTA Online Cash + Cars Boost",
-      title: "GTA Online Cash + Cars Boost PS4/PS5",
-      priceNow: "$19.99",
-    },
-    {
-      serviceParam: "gta-cash-cars",
-      imageSrc: "../assets/images/services4.webp",
-      imageAlt: "GTA Online Cash + Cars Boost",
-      title: "GTA Online Cash + Cars Boost PS4/PS5",
-      priceNow: "$19.99",
-    },
-  ],
-
-  pc: [
-    {
-      serviceParam: "gta-cash-cars",
-      imageSrc: "../assets/images/services1.webp",
-      imageAlt: "GTA Online Cash + Cars Boost",
-      title: "GTA Online Cash + Cars Boost PC",
-      priceNow: "$19.99",
-    },
-    {
-      serviceParam: "gta-cash",
-      imageSrc: "../assets/images/services2.webp",
-      imageAlt: "GTA Online Cash Boost",
-      title: "GTA Online Cash Boost PC",
-      priceNow: "$19.99",
-    },
-    {
-      serviceParam: "gta-level",
-      imageSrc: "../assets/images/services3.webp",
-      imageAlt: "GTA Online Level Boost",
-      title: "GTA Online Level Boost PC",
-      priceNow: "$29.99",
-    },
-    {
-      serviceParam: "gta-modded",
-      imageSrc: "../assets/images/services4.webp",
-      imageAlt: "GTA Online Modded Account",
-      title: "GTA Online Modded Account PC",
       priceNow: "$29.99",
     },
   ],
 
   xbox: [
     {
-      serviceParam: "gta-cash-cars",
+      serviceParam: "gta-cash-cars-xbox",
       imageSrc: "../assets/images/services1.webp",
       imageAlt: "GTA Online Cash + Cars Boost",
       title: "GTA Online Cash + Cars Boost Xbox One/Series",
-      priceNow: "$19.99",
+      priceNow: "$15.99",
     },
     {
-      serviceParam: "gta-cash",
+      serviceParam: "gta-cash-xbox",
       imageSrc: "../assets/images/services2.webp",
       imageAlt: "GTA Online Cash Boost",
       title: "GTA Online Cash Boost Xbox One/Series",
       priceNow: "$19.99",
     },
     {
-      serviceParam: "gta-level",
+      serviceParam: "gta-level-xbox",
       imageSrc: "../assets/images/services3.webp",
       imageAlt: "GTA Online Level Boost",
       title: "GTA Online Level Boost Xbox One/Series",
       priceNow: "$29.99",
     },
     {
-      serviceParam: "gta-modded",
+      serviceParam: "gta-modded-xbox",
       imageSrc: "../assets/images/services4.webp",
       imageAlt: "GTA Online Modded Account",
       title: "GTA Online Modded Account Xbox One/Series",
+      priceNow: "$29.99",
+    },
+  ],
+
+  pc: [
+    {
+      serviceParam: "gta-cash-pc",
+      imageSrc: "../assets/images/services2.webp",
+      imageAlt: "GTA Online Cash Boost",
+      title: "GTA Online Cash Boost PC",
+      priceNow: "$29.99",
+    },
+    {
+      serviceParam: "gta-level-pc",
+      imageSrc: "../assets/images/services3.webp",
+      imageAlt: "GTA Online Level Boost",
+      title: "GTA Online Level Boost PC",
+      priceNow: "$19.99",
+    },
+    {
+      serviceParam: "gta-unlock-pc",
+      imageSrc: "../assets/images/services4.webp",
+      imageAlt: "GTA Online Unlock All",
+      title: "GTA Online Unlock All PC",
       priceNow: "$29.99",
     },
   ],

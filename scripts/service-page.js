@@ -132,6 +132,67 @@ const dropdownApi = initServiceDropdown(
   document.querySelector(".service-dropdown"),
 );
 
+// =============================================
+// Render service-details and service-what sections
+// =============================================
+const renderServiceContent = (config, serviceId) => {
+  if (!config) return;
+
+  // Render service-details description
+  const detailsBody = document.querySelector(".service-details__body");
+  if (detailsBody && config.description) {
+    detailsBody.innerHTML = config.description
+      .map((p) => `<p class="service-details__text">${p}</p>`)
+      .join("");
+  }
+
+  // Update service-details title
+  const detailsTitleFg = document.querySelector(".service-details__title-fg");
+  const detailsTitleBgText = document.querySelector(
+    ".service-details__title-bg text",
+  );
+  if (detailsTitleFg && config.titleHtml) {
+    const plainTitle = config.titleHtml.replace(/<br\s*\/?>/g, " ");
+    detailsTitleFg.textContent = plainTitle;
+    if (detailsTitleBgText) {
+      detailsTitleBgText.textContent = "GTA Online";
+    }
+  }
+
+  // Render whatYouGet cards
+  const whatGrid = document.querySelector(".service-what__grid");
+  if (whatGrid && config.whatYouGet) {
+    whatGrid.innerHTML = config.whatYouGet
+      .map(
+        (card) => `
+      <article class="service-what__card" role="listitem">
+        <h3 class="service-what__card-title">${card.title}</h3>
+        <p class="service-what__card-lead">${card.lead}</p>
+        <ul class="service-what__list">
+          ${card.items.map((item) => `<li class="service-what__item">${item}</li>`).join("")}
+        </ul>
+      </article>
+    `,
+      )
+      .join("");
+  }
+
+  // Render sections (platform info, who this is for, service process, etc.)
+  const sectionsContainer = document.querySelector(".service-what__sections");
+  if (sectionsContainer && config.sections) {
+    sectionsContainer.innerHTML = config.sections
+      .map(
+        (section) => `
+      <article class="service-what__section">
+        <h3 class="service-what__section-title">${section.title}</h3>
+        ${section.texts.map((t) => `<p class="service-what__section-text">${t}</p>`).join("")}
+      </article>
+    `,
+      )
+      .join("");
+  }
+};
+
 const applyServiceToHero = (serviceId, { updateUrl = false } = {}) => {
   const config = SERVICE_CONFIG[serviceId];
   if (!config) return false;
@@ -152,6 +213,9 @@ const applyServiceToHero = (serviceId, { updateUrl = false } = {}) => {
     dropdownApi.setOptions(config.options, config.defaultOption);
   }
 
+  // Render description and whatYouGet content
+  renderServiceContent(config, serviceId);
+
   if (updateUrl) {
     const nextUrl = new URL(window.location.href);
     nextUrl.searchParams.set("service", serviceId);
@@ -166,11 +230,11 @@ const getServiceFromUrl = () => {
   return id && SERVICE_CONFIG[id] ? id : null;
 };
 
-const initialService = getServiceFromUrl() || "gta-cash-cars";
+const initialService = getServiceFromUrl() || "gta-cash-cars-ps";
 applyServiceToHero(initialService);
 
 window.addEventListener("popstate", () => {
-  const serviceId = getServiceFromUrl() || "gta-cash-cars";
+  const serviceId = getServiceFromUrl() || "gta-cash-cars-ps";
   applyServiceToHero(serviceId);
 });
 
@@ -202,15 +266,15 @@ if (purchaseForm) {
   purchaseForm.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    const serviceId = getServiceFromUrl() || "gta-cash-cars";
+    const serviceId = getServiceFromUrl() || "gta-cash-cars-ps";
     const config = SERVICE_CONFIG[serviceId];
     if (!config) return;
 
     const optionInput = purchaseForm.querySelector('input[name="option"]');
     const selectedOption = optionInput?.value || config.defaultOption || "";
 
-    // Parse price from option string like "15 million - 19.99$"
-    const priceMatch = selectedOption.match(/([\d.]+)\$$/);
+    // Parse price from option string like "20 million - $15.99"
+    const priceMatch = selectedOption.match(/\$([\d.]+)/);
     const price = priceMatch ? parseFloat(priceMatch[1]) : 0;
 
     // Build clean name from title (strip HTML tags)
