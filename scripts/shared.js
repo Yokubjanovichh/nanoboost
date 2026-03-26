@@ -58,6 +58,60 @@ const dropdownLink = dropdownItem?.querySelector(".nav__link");
 
 const dropdownRoot = dropdownItem?.querySelector(".dropdown");
 
+// Breadcrumb element (mobile only)
+const breadcrumb = dropdownRoot?.querySelector(".dropdown__breadcrumb");
+const breadcrumbText = breadcrumb?.querySelector(".dropdown__breadcrumb-text");
+const breadcrumbBack = breadcrumb?.querySelector(".dropdown__breadcrumb-back");
+
+let currentStep = "games"; // "games" | "platforms" | "services"
+let activeGameLabel = "";
+let activePlatformLabel = "";
+
+const updateBreadcrumb = () => {
+  if (!breadcrumb || !breadcrumbText) return;
+  if (currentStep === "games") {
+    breadcrumb.classList.remove("is-visible");
+    breadcrumbText.textContent = "";
+  } else if (currentStep === "platforms") {
+    breadcrumb.classList.add("is-visible");
+    breadcrumbText.textContent = activeGameLabel;
+  } else if (currentStep === "services") {
+    breadcrumb.classList.add("is-visible");
+    breadcrumbText.textContent = activeGameLabel + " \u203A " + activePlatformLabel;
+  }
+};
+
+const goBack = () => {
+  if (!dropdownRoot) return;
+  if (currentStep === "services") {
+    dropdownRoot.classList.remove("has-platform");
+    dropdownRoot
+      .querySelectorAll(".dropdown__item[data-platform]")
+      .forEach((el) => el.classList.remove("is-active"));
+    dropdownRoot
+      .querySelectorAll(".dropdown__sublist[data-for]")
+      .forEach((list) => list.classList.remove("is-active"));
+    currentStep = "platforms";
+  } else if (currentStep === "platforms") {
+    dropdownRoot.classList.remove("has-game", "has-platform");
+    dropdownRoot
+      .querySelectorAll(".dropdown__item[data-game]")
+      .forEach((el) => el.classList.remove("is-active"));
+    dropdownRoot
+      .querySelectorAll(".dropdown__platform-list[data-for-game]")
+      .forEach((list) => list.classList.remove("is-active"));
+    currentStep = "games";
+  }
+  updateBreadcrumb();
+};
+
+if (breadcrumbBack) {
+  breadcrumbBack.addEventListener("click", (e) => {
+    e.stopPropagation();
+    goBack();
+  });
+}
+
 const resetDropdownSteps = () => {
   if (!dropdownRoot) return;
   dropdownRoot.classList.remove("has-game", "has-platform");
@@ -77,6 +131,9 @@ const resetDropdownSteps = () => {
   dropdownRoot
     .querySelectorAll(".dropdown__sublist[data-for]")
     .forEach((list) => list.classList.remove("is-active"));
+
+  currentStep = "games";
+  updateBreadcrumb();
 };
 
 if (dropdownLink) {
@@ -145,6 +202,10 @@ const setActiveGame = (gameId) => {
     ?.querySelectorAll(".dropdown__item[data-platform]")
     .forEach((el) => el.classList.remove("is-active"));
   setActiveSublist(null);
+
+  activeGameLabel = activeGame?.textContent?.trim() || gameId;
+  currentStep = "platforms";
+  if (isMobileNav()) updateBreadcrumb();
 };
 
 // Map: service-type + platform → service ID
@@ -213,6 +274,10 @@ const setActivePlatform = (platformId) => {
 
   // Update service links with correct URLs for this platform
   updateSublistLinks(platformId);
+
+  activePlatformLabel = activeItem?.textContent?.trim() || platformId;
+  currentStep = "services";
+  if (isMobileNav()) updateBreadcrumb();
 };
 
 // Game interactions (hover + click + keyboard) — Step 1
