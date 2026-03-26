@@ -563,8 +563,10 @@ if (testimonialsSection && testimonialsSlider && testimonialsTrack) {
 
   const getVisibleCount = () => {
     const w = window.innerWidth;
-    if (w >= 1600) return 4;
-    if (w <= 430) return 1.5;
+    const h = window.innerHeight;
+    const isPhoneLandscape = h <= 500 && w > h;
+    if (w >= 1600 && !isPhoneLandscape) return 4;
+    if (w <= 480 || isPhoneLandscape) return 1.5;
     if (w <= 980) return 2;
     return 3;
   };
@@ -581,7 +583,7 @@ if (testimonialsSection && testimonialsSlider && testimonialsTrack) {
     }
 
     const visible = getVisibleCount();
-    maxIndex = Math.max(0, cards.length - Math.ceil(visible));
+    maxIndex = Math.max(0, cards.length - Math.floor(visible));
     currentIndex = clamp(currentIndex, 0, maxIndex);
   };
 
