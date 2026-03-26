@@ -398,7 +398,7 @@
   }
 }
 
-@media (max-width: 430px) {
+@media (max-width: 480px) {
   .page--checkout .checkout-form__label {
     padding-left: 1.7rem;
   }

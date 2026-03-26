@@ -1206,7 +1206,7 @@ a {
   }
 }
 
-@media (max-width: 430px) {
+@media (max-width: 480px) {
   .cart-widget__panel {
     width: 80%;
   }
@@ -1552,7 +1552,7 @@ a {
   }
 }
 
-@media (max-width: 430px) {
+@media (max-width: 480px) {
   .footer {
     margin-top: var(--gap-main-footer);
   }
@@ -1687,7 +1687,7 @@ a {
   }
 }
 
-@media only screen and (max-width: 430px) {
+@media only screen and (max-width: 480px) {
   .services__title-bg {
     transform: translate(-50%, -63%) !important;
   }
@@ -2044,7 +2044,7 @@ a {
   }
 }
 
-@media only screen and (max-width: 430px) {
+@media only screen and (max-width: 480px) {
   .how__title-bg {
     transform: translate(-50%, -63%) !important;
   }
@@ -2136,7 +2136,7 @@ a {
   }
 }
 
-@media only screen and (max-width: 430px) {
+@media only screen and (max-width: 480px) {
   .how-step:nth-child(2) .how-step__up,
   .how-step:nth-child(3) .how-step__up {
     left: calc(46.5% + (var(--how-num-width) / 2) + 0.4rem);
@@ -2170,7 +2170,7 @@ a {
   }
 }
 
-@media (max-width: 430px) {
+@media (max-width: 480px) {
   .how {
     margin-top: clamp(8rem, 6vw, 14rem);
   }
@@ -2306,7 +2306,7 @@ a {
   text-rendering: geometricPrecision;
 }
 
-@media only screen and (max-width: 430px) {
+@media only screen and (max-width: 480px) {
   .why__title-bg {
     transform: translate(-50%, -63%) !important;
   }
@@ -2495,7 +2495,7 @@ a {
   }
 }
 
-@media only screen and (max-width: 430px) {
+@media only screen and (max-width: 480px) {
   .testimonials__title-bg {
     transform: translate(-50%, -63%) !important;
   }
@@ -2801,7 +2801,7 @@ a {
   text-rendering: geometricPrecision;
 }
 
-@media only screen and (max-width: 430px) {
+@media only screen and (max-width: 480px) {
   .faq__title-bg {
     transform: translate(-50%, -63%) !important;
   }
@@ -3023,7 +3023,7 @@ a {
   }
 }
 
-@media (max-width: 430px) {
+@media (max-width: 480px) {
   .testimonials {
     margin-top: clamp(8rem, 6vw, 14rem);
   }
