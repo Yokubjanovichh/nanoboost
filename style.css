@@ -128,8 +128,6 @@ body:not([class]) .main {
 .games {
   width: 100%;
   margin-top: clamp(8rem, 6vw, 14rem);
-  content-visibility: auto;
-  contain-intrinsic-size: auto 600px;
 }
 
 .games__head {

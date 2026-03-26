@@ -1290,8 +1290,6 @@ a {
 .testimonials,
 .why-us {
   contain: layout;
-  content-visibility: auto;
-  contain-intrinsic-size: auto 600px;
 }
 
 /* Birinchi/oxirgi section marginlari main padding bilan conflict qilmasin */
