@@ -38,6 +38,12 @@
   color: rgba(111, 75, 255, 0.75);
 }
 
+.checkout-form__optional {
+  font-weight: 400;
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.35);
+}
+
 .page--checkout .checkout-form__input,
 .page--checkout .checkout-form__textarea,
 .page--checkout .checkout-form__select {

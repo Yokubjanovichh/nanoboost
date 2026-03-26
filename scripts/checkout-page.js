@@ -393,6 +393,7 @@
     const formData = new FormData(form);
     const email = safeValue(formData.get("email"));
     const discord = safeValue(formData.get("discord"));
+    const telegram = safeValue(formData.get("telegram"));
     const payment = safeValue(formData.get("payment"));
     const comment = safeValue(formData.get("comment"));
 
@@ -412,6 +413,7 @@
       "",
       `Email: ${email}`,
       `Discord: ${discord}`,
+      telegram ? `Telegram: ${telegram}` : null,
       `Payment: ${payment}`,
       "",
       "Items:",
@@ -428,7 +430,7 @@
 
     const mailto = `mailto:support@nanoboost.io?subject=${encodeURIComponent(
       subject,
-    )}&body=${encodeURIComponent(bodyLines.join("\n"))}`;
+    )}&body=${encodeURIComponent(bodyLines.filter(Boolean).join("\n"))}`;
 
     if (hint) {
       hint.textContent = "Opening your email app\u2026";
