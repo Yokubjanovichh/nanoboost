@@ -635,6 +635,8 @@ if (testimonialsSection && testimonialsSlider && testimonialsTrack) {
   let draggedX = 0;
   let lastClientX = 0;
   let moveRaf = 0;
+  let lastMoveTime = 0;
+  let velocity = 0;
 
   const getCurrentTranslateX = () => -currentIndex * stepPx;
 
@@ -650,20 +652,37 @@ if (testimonialsSection && testimonialsSlider && testimonialsTrack) {
     lastClientX = e.clientX;
     startTranslateX = getCurrentTranslateX();
     draggedX = 0;
+    velocity = 0;
+    lastMoveTime = Date.now();
 
     testimonialsSlider.setPointerCapture?.(e.pointerId);
   };
 
   const onPointerMove = (e) => {
     if (!isDown) return;
+    const now = Date.now();
+    const dt = now - lastMoveTime;
+    const prevX = lastClientX;
     lastClientX = e.clientX;
+    lastMoveTime = now;
+
+    if (dt > 0) {
+      const instantV = (lastClientX - prevX) / dt;
+      velocity = velocity * 0.4 + instantV * 0.6;
+    }
+
     if (moveRaf) return;
 
     moveRaf = requestAnimationFrame(() => {
       moveRaf = 0;
       const dx = lastClientX - startX;
       draggedX = dx;
-      testimonialsTrack.style.transform = `translate3d(${startTranslateX + dx}px, 0, 0)`;
+      let tx = startTranslateX + dx;
+      // Rubber-band at edges
+      const minTx = -maxIndex * stepPx;
+      if (tx > 0) tx = tx * 0.3;
+      else if (tx < minTx) tx = minTx + (tx - minTx) * 0.3;
+      testimonialsTrack.style.transform = `translate3d(${tx}px, 0, 0)`;
     });
   };
 
@@ -683,9 +702,16 @@ if (testimonialsSection && testimonialsSlider && testimonialsTrack) {
     }
 
     const currentTranslateX = startTranslateX + draggedX;
-    const rawIndex = stepPx
-      ? Math.round(-currentTranslateX / stepPx)
-      : currentIndex;
+    // velocity: px/ms, threshold ~0.3 px/ms ≈ flick
+    const flick = Math.abs(velocity) > 0.3;
+    let rawIndex;
+    if (flick) {
+      rawIndex = velocity < 0
+        ? Math.ceil(-currentTranslateX / stepPx)
+        : Math.floor(-currentTranslateX / stepPx);
+    } else {
+      rawIndex = Math.round(-currentTranslateX / stepPx);
+    }
     goTo(rawIndex, { animate: !prefersReducedMotion });
   };
 
