@@ -3339,13 +3339,8 @@ a {
   }
 }
 
-/* Phone landscape: 2-column grids override (must be last) */
+/* Phone landscape: override (must be last) */
 @media (orientation: landscape) and (max-height: 500px) {
-  .services__grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    gap: 1.4rem;
-  }
-
   .service-card__name {
     -webkit-line-clamp: unset;
     line-clamp: unset;
