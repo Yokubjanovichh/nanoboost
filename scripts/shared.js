@@ -337,8 +337,12 @@ subItems?.forEach((link) => {
   link.addEventListener("click", (e) => {
     // If link has a real URL, let browser navigate
     if (link.href && !link.href.endsWith("#")) {
-      // Close dropdown and navigate
       dropdownItem?.classList.remove("is-open");
+      if (isMobileNav()) {
+        burger?.classList.remove("is-open");
+        nav?.classList.remove("is-open");
+        resetDropdownSteps();
+      }
       return;
     }
     e.preventDefault();
