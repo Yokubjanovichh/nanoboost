@@ -539,7 +539,7 @@ window.NB_SERVICE_CONFIG = {
 
   "gta-unlock-pc": {
     titleHtml: "GTA Online Unlock All<br>PC",
-    imageSrc: "../assets/images/services4.webp",
+    imageSrc: "../assets/images/unlock-all.png",
     imageAlt: "GTA Online unlock all",
     platform: "PC",
     options: ["Unlock All - $29.99"],
@@ -698,7 +698,7 @@ window.NB_GTA5_SERVICES = {
     },
     {
       serviceParam: "gta-unlock-pc",
-      imageSrc: "../assets/images/services4.webp",
+      imageSrc: "../assets/images/unlock-all.png",
       imageAlt: "GTA Online Unlock All",
       title: "GTA Online Unlock All PC",
       priceNow: "$29.99",
