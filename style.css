@@ -8,6 +8,7 @@
   height: clamp(32rem, 38vw, 48rem);
   border-radius: 2.4rem;
   overflow: hidden;
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
   display: flex;
   align-items: center;
 }
@@ -215,6 +216,7 @@ body:not([class]) .main {
   padding: 2.6rem;
   border-radius: 2.4rem;
   overflow: hidden;
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
 }
 
 .game-card::before {
@@ -333,6 +335,7 @@ body:not([class]) .main {
     scale 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
   cursor: pointer;
   overflow: hidden;
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
   z-index: 3;
   isolation: isolate;
 }

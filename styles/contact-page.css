@@ -241,6 +241,10 @@
   max-height: 24rem;
 }
 
+.page--contact .contact-form__input::-webkit-input-placeholder,
+.page--contact .contact-form__textarea::-webkit-input-placeholder {
+  color: rgba(8, 7, 26, 0.52);
+}
 .page--contact .contact-form__input::placeholder,
 .page--contact .contact-form__textarea::placeholder {
   color: rgba(8, 7, 26, 0.52);
@@ -311,6 +315,7 @@
 
 .page--contact .contact-email__link {
   display: inline-flex;
+  width: -webkit-fit-content;
   width: fit-content;
   align-self: flex-start;
   color: rgba(111, 75, 255, 0.75);

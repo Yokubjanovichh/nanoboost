@@ -64,6 +64,10 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.7);
 }
 
+.page--checkout .checkout-form__input::-webkit-input-placeholder,
+.page--checkout .checkout-form__textarea::-webkit-input-placeholder {
+  color: rgba(8, 7, 26, 0.52);
+}
 .page--checkout .checkout-form__input::placeholder,
 .page--checkout .checkout-form__textarea::placeholder {
   color: rgba(8, 7, 26, 0.52);
