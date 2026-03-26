@@ -147,6 +147,43 @@ const setActiveGame = (gameId) => {
   setActiveSublist(null);
 };
 
+// Map: service-type + platform → service ID
+const serviceTypeMap = {
+  "cash-cars": { ps: "gta-cash-cars-ps", xbox: "gta-cash-cars-xbox" },
+  cash: { ps: "gta-cash-ps", xbox: "gta-cash-xbox", pc: "gta-cash-pc" },
+  level: { ps: "gta-level-ps", xbox: "gta-level-xbox", pc: "gta-level-pc" },
+  modded: { ps: "gta-modded-ps", xbox: "gta-modded-xbox" },
+  unlock: { pc: "gta-unlock-pc" },
+};
+
+// Determine the correct services page path based on current page location
+const getServicesPagePath = () => {
+  const path = window.location.pathname;
+  if (path.includes("/pages/")) return "./services.html";
+  return "./pages/services.html";
+};
+
+// Update sublist links with correct service URLs for the selected platform
+const updateSublistLinks = (platformId) => {
+  const subLinks = dropdownRoot?.querySelectorAll(
+    ".dropdown__sublist.is-active a[data-service-type]",
+  );
+  if (!subLinks) return;
+
+  const basePath = getServicesPagePath();
+  subLinks.forEach((link) => {
+    const type = link.dataset.serviceType;
+    const serviceId = serviceTypeMap[type]?.[platformId];
+    if (serviceId) {
+      link.href = `${basePath}?service=${serviceId}`;
+      link.closest(".dropdown__subitem")?.classList.remove("dropdown__subitem--unavailable");
+    } else {
+      link.href = "#";
+      link.closest(".dropdown__subitem")?.classList.add("dropdown__subitem--unavailable");
+    }
+  });
+};
+
 // Step 2: User picks a platform → show services for the selected game
 const setActivePlatform = (platformId) => {
   if (!dropdownRoot) return;
@@ -173,6 +210,9 @@ const setActivePlatform = (platformId) => {
     ".dropdown__item[data-game].is-active",
   );
   if (activeGame) setActiveSublist(activeGame.dataset.game);
+
+  // Update service links with correct URLs for this platform
+  updateSublistLinks(platformId);
 };
 
 // Game interactions (hover + click + keyboard) — Step 1
@@ -227,9 +267,15 @@ dropdownRoot
     });
   });
 
-// Sub-item click: active state + close dropdown
+// Sub-item click: navigate to service page or mark active
 subItems?.forEach((link) => {
   link.addEventListener("click", (e) => {
+    // If link has a real URL, let browser navigate
+    if (link.href && !link.href.endsWith("#")) {
+      // Close dropdown and navigate
+      dropdownItem?.classList.remove("is-open");
+      return;
+    }
     e.preventDefault();
     const parentList = link.closest(".dropdown__sublist");
     parentList

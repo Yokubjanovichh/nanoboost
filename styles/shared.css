@@ -448,6 +448,11 @@ a {
   font-weight: 500;
 }
 
+.dropdown__subitem--unavailable {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
 .dropdown__subitem--active a:hover {
   opacity: 0.8;
   background: linear-gradient(90deg, #2de1fe 0%, #6849fe 55%, #9d21fe 100%);
