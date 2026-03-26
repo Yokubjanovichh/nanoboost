@@ -16,24 +16,22 @@
 
   const safeValue = (value) => String(value || "").trim();
 
-  const applyPreferredContact = (channel) => {
-    preferredContact = channel === "whatsapp" ? "whatsapp" : "discord";
+  const contactMeta = {
+    discord:  { label: "Discord",  type: "text", autocomplete: "off", placeholder: "DiscordName#0000 or username" },
+    telegram: { label: "Telegram", type: "text", autocomplete: "off", placeholder: "@username" },
+    whatsapp: { label: "WhatsApp", type: "tel",  autocomplete: "tel", placeholder: "Enter your WhatsApp number" },
+  };
 
-    if (contactLabel) {
-      contactLabel.textContent =
-        preferredContact === "whatsapp" ? "WhatsApp" : "Discord";
-    }
+  const applyPreferredContact = (channel) => {
+    preferredContact = contactMeta[channel] ? channel : "discord";
+    const meta = contactMeta[preferredContact];
+
+    if (contactLabel) contactLabel.textContent = meta.label;
 
     if (contactInput) {
-      if (preferredContact === "whatsapp") {
-        contactInput.type = "tel";
-        contactInput.autocomplete = "tel";
-        contactInput.placeholder = "Enter your WhatsApp number";
-      } else {
-        contactInput.type = "text";
-        contactInput.autocomplete = "off";
-        contactInput.placeholder = "DiscordName#0000 or username";
-      }
+      contactInput.type = meta.type;
+      contactInput.autocomplete = meta.autocomplete;
+      contactInput.placeholder = meta.placeholder;
     }
 
     contactButtons.forEach((button) => {
@@ -67,10 +65,8 @@
     const bodyLines = [
       "New message from Contact page:",
       "",
-      `Preferred contact: ${preferredContact === "whatsapp" ? "WhatsApp" : "Discord"}`,
-      `${preferredContact === "whatsapp" ? "WhatsApp" : "Discord"}: ${
-        contactHandle || "-"
-      }`,
+      `Preferred contact: ${contactMeta[preferredContact].label}`,
+      `${contactMeta[preferredContact].label}: ${contactHandle || "-"}`,
       `Email: ${email || "-"}`,
       "",
       "Comment:",
