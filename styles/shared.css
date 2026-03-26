@@ -476,6 +476,12 @@ a {
   gap: 2rem;
   border-bottom: 1.5px solid #2531d8;
   padding: 0 0.6rem 0.4rem 0.6rem;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.search:focus-within {
+  border-color: #653ade;
+  box-shadow: 0 2px 8px rgba(101, 58, 222, 0.3);
 }
 
 .search__input {
@@ -507,6 +513,91 @@ a {
   align-items: center;
   padding: 0;
   transition: color 0.25s ease;
+}
+
+/* --- Search Results Dropdown --- */
+.search__results {
+  position: absolute;
+  top: calc(100% + 0.8rem);
+  left: 0;
+  right: 0;
+  background: rgba(14, 11, 36, 0.97);
+  border: 1px solid rgba(101, 58, 222, 0.25);
+  border-radius: 1.2rem;
+  padding: 0.6rem;
+  max-height: 36rem;
+  overflow-y: auto;
+  z-index: 1000;
+  display: none;
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 1.2rem 3.2rem rgba(0, 0, 0, 0.5);
+}
+
+.search__results.is-open {
+  display: block;
+}
+
+.search__results {
+  scrollbar-width: none;
+}
+
+.search__results::-webkit-scrollbar {
+  display: none;
+}
+
+.search__result-group {
+  padding: 0.4rem 1rem;
+}
+
+.search__result-label {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.6rem 0.6rem 0.4rem;
+}
+
+.search__result-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.2rem;
+  padding: 1rem 1rem;
+  border-radius: 0.8rem;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  text-decoration: none;
+  color: #fff;
+}
+
+.search__result-item:hover,
+.search__result-item.is-focused {
+  background: rgba(101, 58, 222, 0.15);
+}
+
+.search__result-name {
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #fff;
+}
+
+.search__result-meta {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.5);
+  flex-shrink: 0;
+}
+
+.search__no-results {
+  padding: 2rem 1.2rem;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 1.3rem;
+}
+
+.search {
+  position: relative;
 }
 
 /* --- Cart --- */

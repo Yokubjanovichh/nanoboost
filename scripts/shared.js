@@ -834,6 +834,193 @@ if (testimonialsSection && testimonialsSlider && testimonialsTrack) {
 }
 
 // =============================================
+// Universal Search
+// =============================================
+{
+  const searchContainer = document.querySelector(".search");
+  const searchInput = document.querySelector(".search__input");
+  const SERVICE_CFG = window.NB_SERVICE_CONFIG || {};
+
+  if (searchContainer && searchInput && Object.keys(SERVICE_CFG).length) {
+    // Determine services page path
+    const isSubpage = window.location.pathname.includes("/pages/");
+    const servicesPath = isSubpage
+      ? "./services.html"
+      : "./pages/services.html";
+
+    // Build searchable index from service config
+    const searchIndex = Object.entries(SERVICE_CFG).map(([id, cfg]) => {
+      const plainTitle = (cfg.titleHtml || "").replace(/<br\s*\/?>/g, " ");
+      const platform = cfg.platform || "";
+      // Build keywords: title words + platform + common aliases
+      const keywords = [
+        plainTitle,
+        platform,
+        id,
+        "gta",
+        "gta5",
+        "gta 5",
+        "gta online",
+      ]
+        .join(" ")
+        .toLowerCase();
+
+      // Extract "From" price
+      const firstOption = (cfg.options || [])[0] || "";
+      const priceMatch = firstOption.match(/\$([\d.]+)/);
+      const fromPrice = priceMatch ? `$${priceMatch[1]}` : "";
+
+      return {
+        id,
+        title: plainTitle,
+        platform,
+        image: cfg.imageSrc || "",
+        fromPrice,
+        keywords,
+        href: `${servicesPath}?service=${id}`,
+      };
+    });
+
+    // Create dropdown element
+    const resultsEl = document.createElement("div");
+    resultsEl.className = "search__results";
+    resultsEl.setAttribute("role", "listbox");
+    searchContainer.appendChild(resultsEl);
+
+    let focusedIndex = -1;
+    let currentItems = [];
+
+    const renderResults = (query) => {
+      const q = query.trim().toLowerCase();
+      focusedIndex = -1;
+
+      if (!q) {
+        resultsEl.classList.remove("is-open");
+        resultsEl.innerHTML = "";
+        currentItems = [];
+        return;
+      }
+
+      // Split query into words for multi-word matching
+      const words = q.split(/\s+/).filter(Boolean);
+
+      // Filter: ALL words must match somewhere in keywords
+      const matches = searchIndex.filter((item) =>
+        words.every((w) => item.keywords.includes(w)),
+      );
+
+      currentItems = matches;
+
+      if (!matches.length) {
+        resultsEl.innerHTML =
+          '<div class="search__no-results">No services found</div>';
+        resultsEl.classList.add("is-open");
+        return;
+      }
+
+      // Group by platform
+      const groups = {};
+      matches.forEach((m) => {
+        const key = m.platform || "Other";
+        if (!groups[key]) groups[key] = [];
+        groups[key].push(m);
+      });
+
+      let html = "";
+      let idx = 0;
+      for (const [platform, items] of Object.entries(groups)) {
+        html += `<div class="search__result-group">`;
+        html += `<div class="search__result-label">${platform}</div>`;
+        items.forEach((item) => {
+          html += `
+            <a class="search__result-item" href="${item.href}"
+               data-index="${idx}" role="option">
+              <span class="search__result-name">${highlightMatch(item.title, words)}</span>
+            </a>`;
+          idx++;
+        });
+        html += `</div>`;
+      }
+
+      resultsEl.innerHTML = html;
+      resultsEl.classList.add("is-open");
+    };
+
+    // Highlight matching text
+    const highlightMatch = (text, words) => {
+      let result = text;
+      words.forEach((w) => {
+        const regex = new RegExp(`(${w.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})`, "gi");
+        result = result.replace(regex, "<strong>$1</strong>");
+      });
+      return result;
+    };
+
+    // Keyboard navigation
+    const setFocus = (index) => {
+      const items = resultsEl.querySelectorAll(".search__result-item");
+      items.forEach((el) => el.classList.remove("is-focused"));
+      if (index >= 0 && index < items.length) {
+        focusedIndex = index;
+        items[index].classList.add("is-focused");
+        items[index].scrollIntoView({ block: "nearest" });
+      } else {
+        focusedIndex = -1;
+      }
+    };
+
+    // Debounce input
+    let debounceTimer;
+    searchInput.addEventListener("input", () => {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(() => {
+        renderResults(searchInput.value);
+      }, 150);
+    });
+
+    searchInput.addEventListener("keydown", (e) => {
+      const total = currentItems.length;
+      if (!total && e.key !== "Escape") return;
+
+      if (e.key === "ArrowDown") {
+        e.preventDefault();
+        setFocus(focusedIndex < total - 1 ? focusedIndex + 1 : 0);
+      } else if (e.key === "ArrowUp") {
+        e.preventDefault();
+        setFocus(focusedIndex > 0 ? focusedIndex - 1 : total - 1);
+      } else if (e.key === "Enter") {
+        e.preventDefault();
+        if (focusedIndex >= 0) {
+          const items = resultsEl.querySelectorAll(".search__result-item");
+          if (items[focusedIndex]) {
+            window.location.href = items[focusedIndex].href;
+          }
+        } else if (currentItems.length === 1) {
+          window.location.href = currentItems[0].href;
+        }
+      } else if (e.key === "Escape") {
+        resultsEl.classList.remove("is-open");
+        searchInput.blur();
+      }
+    });
+
+    // Close on outside click
+    document.addEventListener("click", (e) => {
+      if (!searchContainer.contains(e.target)) {
+        resultsEl.classList.remove("is-open");
+      }
+    });
+
+    // Focus opens results if there's a query
+    searchInput.addEventListener("focus", () => {
+      if (searchInput.value.trim()) {
+        renderResults(searchInput.value);
+      }
+    });
+  }
+}
+
+// =============================================
 // Skeleton: rasm yuklangach skeleton olib tashlash
 // =============================================
 document.querySelectorAll("img.skeleton").forEach((img) => {
