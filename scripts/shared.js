@@ -1127,7 +1127,10 @@ document.querySelectorAll('a[href^="mailto:"]').forEach((link) => {
     let typingTimer = null;
 
     const typeStep = () => {
-      if (document.activeElement === searchInput || searchInput.value) return;
+      if (document.activeElement === searchInput || searchInput.value) {
+        typingTimer = setTimeout(typeStep, 1000);
+        return;
+      }
 
       const phrase = typingPhrases[phraseIdx];
 

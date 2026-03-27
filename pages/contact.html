@@ -492,6 +492,35 @@
       </section>
     </main>
 
+    <!-- Success Modal -->
+    <div class="contact-modal" id="contact-modal" aria-hidden="true">
+      <div class="contact-modal__backdrop"></div>
+      <div class="contact-modal__card">
+        <div class="contact-modal__glow"></div>
+        <div class="contact-modal__icon">
+          <svg viewBox="0 0 52 52" width="52" height="52" fill="none">
+            <circle cx="26" cy="26" r="25" stroke="url(#contactCheckGrad)" stroke-width="2"/>
+            <path d="M15 27l7 7 15-15" stroke="url(#contactCheckGrad)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <defs>
+              <linearGradient id="contactCheckGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#2de1fe"/>
+                <stop offset="50%" stop-color="#6849fe"/>
+                <stop offset="100%" stop-color="#9d21fe"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <h2 class="contact-modal__title">Message Received</h2>
+        <p class="contact-modal__text">
+          Thank you for reaching out! Our team will review your message and
+          get back to you as soon as possible.
+        </p>
+        <button class="contact-modal__btn animated-border" id="contact-modal-btn" type="button">
+          BROWSE SERVICES
+        </button>
+      </div>
+    </div>
+
     <footer class="footer" id="contacts" aria-label="Footer">
       <div class="container footer__inner">
         <div class="footer__top">

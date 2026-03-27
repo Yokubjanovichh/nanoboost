@@ -184,9 +184,13 @@
     };
 
     const submitBtn = form.querySelector(".contact-form__btn");
+    const formFields = form.querySelectorAll("input, textarea, button");
+
+    // ── Loading state ──
+    formFields.forEach((f) => (f.disabled = true));
     if (submitBtn) {
-      submitBtn.disabled = true;
       submitBtn.textContent = "SENDING...";
+      submitBtn.classList.add("is-loading");
     }
     if (hint) hint.textContent = "";
 
@@ -197,26 +201,47 @@
       .then((res) => res.json())
       .then((result) => {
         if (result.status === "ok") {
-          if (hint) {
-            hint.style.color = "#4ade80";
-            hint.textContent = "Message sent! We\u2019ll get back to you soon.";
-          }
+          // ── Clean up ──
           form.reset();
           selectOption("discord");
-        } else {
-          throw new Error(result.message || "Server error");
+          formFields.forEach((f) => (f.disabled = false));
+          if (submitBtn) {
+            submitBtn.classList.remove("is-loading");
+            submitBtn.textContent = "SEND";
+          }
+
+          // ── Show success modal ──
+          const modal = document.querySelector("#contact-modal");
+          const modalBtn = document.querySelector("#contact-modal-btn");
+
+          if (modal) {
+            modal.classList.add("is-open");
+            modal.setAttribute("aria-hidden", "false");
+            document.body.style.overflow = "hidden";
+
+            const closeModal = () => {
+              modal.classList.remove("is-open");
+              modal.setAttribute("aria-hidden", "true");
+              document.body.style.overflow = "";
+              window.location.href = "./gta5.html";
+            };
+
+            if (modalBtn) modalBtn.addEventListener("click", closeModal, { once: true });
+          }
+          return;
         }
+        throw new Error(result.message || "Server error");
       })
       .catch(() => {
+        // ── Error state ──
+        formFields.forEach((f) => (f.disabled = false));
+        if (submitBtn) {
+          submitBtn.classList.remove("is-loading");
+          submitBtn.textContent = "SEND";
+        }
         if (hint) {
           hint.style.color = "#ff6b6b";
           hint.textContent = "Something went wrong. Please try again or contact us via Discord.";
-        }
-      })
-      .finally(() => {
-        if (submitBtn) {
-          submitBtn.disabled = false;
-          submitBtn.textContent = "SEND";
         }
       });
   });
