@@ -2858,6 +2858,48 @@ a {
   transform: scale(1.15);
 }
 
+@media (max-width: 980px) {
+  .testimonial {
+    flex: 0 0 calc((100% - var(--t-gap) - 2px) / 2);
+  }
+}
+
+@media (max-width: 767px) {
+  .testimonial {
+    flex: 0 0 calc(100% - 2px);
+  }
+}
+
+@media (max-width: 480px) {
+  .testimonial {
+    padding: 2rem 1.6rem;
+    min-height: unset;
+    border-radius: 1.6rem;
+  }
+
+  .testimonial__stars svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .testimonial__text {
+    font-size: 1.5rem;
+  }
+
+  .testimonial__avatar {
+    width: 40px;
+    height: 40px;
+  }
+
+  .testimonial__name {
+    font-size: 1.8rem;
+  }
+
+  .testimonial__service {
+    font-size: 1.5rem;
+  }
+}
+
 /* =============================================
    FAQ (shared)
 ============================================= */
