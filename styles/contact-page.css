@@ -643,14 +643,14 @@
 
   .page--contact .contact-form__input,
   .page--contact .contact-form__textarea {
-    padding: 1.6rem 1.8rem;
-    font-size: 1.7rem;
+    padding: 1.8rem 2rem;
+    font-size: 1.85rem;
     border-radius: 1.8rem;
   }
 
   .page--contact .contact-dropdown__trigger {
-    padding: 1.6rem 1.8rem;
-    font-size: 1.7rem;
+    padding: 1.8rem 2rem;
+    font-size: 1.85rem;
     border-radius: 1.8rem;
   }
 
@@ -660,8 +660,8 @@
   }
 
   .page--contact .contact-dropdown__option {
-    padding: 1.4rem 1.8rem;
-    font-size: 1.6rem;
+    padding: 1.6rem 2rem;
+    font-size: 1.75rem;
   }
 
   .page--contact .contact-form__btn {
@@ -714,14 +714,14 @@
   .page--contact .contact-form__input,
   .page--contact .contact-form__textarea {
     border-radius: 1.6rem;
-    padding: 1.5rem 1.6rem;
-    font-size: 1.6rem;
+    padding: 1.6rem 1.8rem;
+    font-size: 1.8rem;
   }
 
   .page--contact .contact-dropdown__trigger {
-    padding: 1.5rem 1.6rem;
+    padding: 1.6rem 1.8rem;
     border-radius: 1.6rem;
-    font-size: 1.6rem;
+    font-size: 1.8rem;
   }
 
   .page--contact .contact-dropdown.is-open .contact-dropdown__trigger {
@@ -735,8 +735,8 @@
   }
 
   .page--contact .contact-dropdown__option {
-    padding: 1.3rem 1.6rem;
-    font-size: 1.5rem;
+    padding: 1.4rem 1.8rem;
+    font-size: 1.7rem;
   }
 
   .page--contact .contact-form__error {

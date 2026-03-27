@@ -615,8 +615,8 @@
   .page--checkout .checkout-form__input,
   .page--checkout .checkout-form__textarea,
   .page--checkout .checkout-form__select {
-    padding: 1.6rem 1.8rem;
-    font-size: 1.7rem;
+    padding: 1.8rem 2rem;
+    font-size: 1.85rem;
     border-radius: 1.8rem;
   }
 
@@ -625,8 +625,8 @@
   }
 
   .page--checkout .checkout-form__select-option {
-    padding: 1.4rem 1.6rem;
-    font-size: 1.6rem;
+    padding: 1.6rem 2rem;
+    font-size: 1.75rem;
   }
 
   .page--checkout .checkout-form__textarea {
@@ -634,11 +634,11 @@
   }
 
   .page--checkout .checkout-form__agree {
-    padding-left: 1.8rem;
+    padding-left: 2rem;
   }
 
   .page--checkout .checkout-form__agree-text {
-    font-size: 1.35rem;
+    font-size: 1.5rem;
   }
 
   .page--checkout .checkout-form__btn {
@@ -684,8 +684,8 @@
   .page--checkout .checkout-form__input,
   .page--checkout .checkout-form__textarea,
   .page--checkout .checkout-form__select {
-    padding: 1.5rem 1.6rem;
-    font-size: 1.6rem;
+    padding: 1.6rem 1.8rem;
+    font-size: 1.8rem;
     border-radius: 1.6rem;
   }
 
@@ -696,8 +696,8 @@
 
   .page--checkout .checkout-form__select-option {
     border-radius: 1.2rem;
-    padding: 1.3rem 1.4rem;
-    font-size: 1.5rem;
+    padding: 1.4rem 1.8rem;
+    font-size: 1.7rem;
   }
 
   .page--checkout .checkout-form__agree {
