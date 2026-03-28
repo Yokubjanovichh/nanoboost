@@ -1,97 +1,97 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://nanoboost.gg/</loc>
+    <loc>https://nanoboost.io/</loc>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://nanoboost.gg/pages/gta5.html</loc>
+    <loc>https://nanoboost.io/pages/gta5.html</loc>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://nanoboost.gg/pages/services.html</loc>
+    <loc>https://nanoboost.io/pages/services.html</loc>
     <priority>0.9</priority>
   </url>
 
   <!-- PS4/PS5 Services -->
   <url>
-    <loc>https://nanoboost.gg/pages/services.html?service=gta-cash-cars-ps</loc>
+    <loc>https://nanoboost.io/pages/services.html?service=gta-cash-cars-ps</loc>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://nanoboost.gg/pages/services.html?service=gta-cash-ps</loc>
+    <loc>https://nanoboost.io/pages/services.html?service=gta-cash-ps</loc>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://nanoboost.gg/pages/services.html?service=gta-level-ps</loc>
+    <loc>https://nanoboost.io/pages/services.html?service=gta-level-ps</loc>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://nanoboost.gg/pages/services.html?service=gta-modded-ps</loc>
+    <loc>https://nanoboost.io/pages/services.html?service=gta-modded-ps</loc>
     <priority>0.85</priority>
   </url>
 
   <!-- Xbox One/Series Services -->
   <url>
-    <loc>https://nanoboost.gg/pages/services.html?service=gta-cash-cars-xbox</loc>
+    <loc>https://nanoboost.io/pages/services.html?service=gta-cash-cars-xbox</loc>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://nanoboost.gg/pages/services.html?service=gta-cash-xbox</loc>
+    <loc>https://nanoboost.io/pages/services.html?service=gta-cash-xbox</loc>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://nanoboost.gg/pages/services.html?service=gta-level-xbox</loc>
+    <loc>https://nanoboost.io/pages/services.html?service=gta-level-xbox</loc>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://nanoboost.gg/pages/services.html?service=gta-modded-xbox</loc>
+    <loc>https://nanoboost.io/pages/services.html?service=gta-modded-xbox</loc>
     <priority>0.85</priority>
   </url>
 
   <!-- PC Services -->
   <url>
-    <loc>https://nanoboost.gg/pages/services.html?service=gta-cash-pc</loc>
+    <loc>https://nanoboost.io/pages/services.html?service=gta-cash-pc</loc>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://nanoboost.gg/pages/services.html?service=gta-level-pc</loc>
+    <loc>https://nanoboost.io/pages/services.html?service=gta-level-pc</loc>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://nanoboost.gg/pages/services.html?service=gta-unlock-pc</loc>
+    <loc>https://nanoboost.io/pages/services.html?service=gta-unlock-pc</loc>
     <priority>0.85</priority>
   </url>
 
   <!-- Info Pages -->
   <url>
-    <loc>https://nanoboost.gg/pages/why-us.html</loc>
+    <loc>https://nanoboost.io/pages/why-us.html</loc>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://nanoboost.gg/pages/faq.html</loc>
+    <loc>https://nanoboost.io/pages/faq.html</loc>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://nanoboost.gg/pages/contact.html</loc>
+    <loc>https://nanoboost.io/pages/contact.html</loc>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://nanoboost.gg/pages/checkout.html</loc>
+    <loc>https://nanoboost.io/pages/checkout.html</loc>
     <priority>0.6</priority>
   </url>
 
   <!-- Legal Pages -->
   <url>
-    <loc>https://nanoboost.gg/pages/terms-of-service.html</loc>
+    <loc>https://nanoboost.io/pages/terms-of-service.html</loc>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://nanoboost.gg/pages/privacy-policy.html</loc>
+    <loc>https://nanoboost.io/pages/privacy-policy.html</loc>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://nanoboost.gg/pages/refund-policy.html</loc>
+    <loc>https://nanoboost.io/pages/refund-policy.html</loc>
     <priority>0.3</priority>
   </url>
 </urlset>
