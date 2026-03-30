@@ -29,7 +29,7 @@
 
 ## 4. Email (Notifications)
 
-- **Recipient**: `support@nanoboost.io` (defined as `NOTIFY_EMAIL`)
+- **Recipient**: `traffichunter2021@gmail.com` (defined as `NOTIFY_EMAIL`)
 - **Sender**: Google Apps Script `MailApp.sendEmail()`
 - **Templates**: HTML emails for orders and contact messages
 

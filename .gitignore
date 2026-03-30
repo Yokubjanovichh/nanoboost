@@ -1,1 +1,4 @@
 google-apps-script.js
+.planning/
+.claude/
+node_modules/
