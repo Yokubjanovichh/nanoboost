@@ -67,6 +67,7 @@ nanoboos/                          # Root (workspace)
 ```
 
 ## File Loading Order (per page)
+
 1. `styles/shared.css` — Shared styles (all pages)
 2. `styles/<page>-page.css` — Page-specific styles
 3. `style.css` — Index-only styles (only on `index.html`)
@@ -75,6 +76,7 @@ nanoboos/                          # Root (workspace)
 6. `scripts/<page>-page.js` — Page-specific JS
 
 ## Naming Conventions
+
 - HTML pages: `kebab-case.html`
 - CSS files: `<page>-page.css` (matching HTML page name)
 - JS files: `<page>-page.js` (matching HTML page name)
