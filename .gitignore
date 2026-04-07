@@ -2,3 +2,5 @@ google-apps-script.js
 .planning/
 .claude/
 node_modules/
+package.json
+package-lock.json
