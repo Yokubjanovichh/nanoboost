@@ -5,7 +5,54 @@
   font-style: normal;
   font-display: swap;
 }
-* {
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 0;
+  z-index: 10000;
+  padding: 0.75rem 1.5rem;
+  background: #6849fe;
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  border-radius: 0 0 8px 0;
+  transition: top 0.2s;
+}
+.skip-link:focus {
+  top: 0;
+}
+.breadcrumb {
+  padding: 0.75rem 0;
+  font-size: 0.85rem;
+}
+.breadcrumb__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  list-style: none;
+  gap: 0.25rem;
+}
+.breadcrumb__item {
+  color: rgba(255, 255, 255, 0.5);
+}
+.breadcrumb__item + .breadcrumb__item::before {
+  content: "›";
+  margin-right: 0.25rem;
+  color: rgba(255, 255, 255, 0.3);
+}
+.breadcrumb__link {
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.breadcrumb__link:hover {
+  color: #2de1fe;
+}
+.breadcrumb__item[aria-current="page"] {
+  color: rgba(255, 255, 255, 0.8);
+}
+*{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
