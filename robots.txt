@@ -1,4 +1,13 @@
 User-agent: *
 Allow: /
+Disallow: /pages/checkout.html
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
 
 Sitemap: https://nanoboost.io/sitemap.xml
+
+Host: https://nanoboost.io
