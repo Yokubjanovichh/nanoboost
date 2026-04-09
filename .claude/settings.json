@@ -1,7 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(grep -n \"class=\"\"[^\"\"]*__title-bg\" index.html pages/*.html)"
-    ]
-  }
-}
