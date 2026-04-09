@@ -1313,11 +1313,14 @@ a {
   transform: translateX(2px);
 }
 .footer__contact[aria-disabled="true"],
-.footer__link[aria-disabled="true"] {
+.footer__link[aria-disabled="true"],
+.footer__link--disabled {
   opacity: 0.45;
   cursor: not-allowed;
+  pointer-events: none;
 }
-.footer__link[aria-disabled="true"]:hover {
+.footer__link[aria-disabled="true"]:hover,
+.footer__link--disabled:hover {
   color: rgba(255, 255, 255, 0.74);
   transform: none;
 }

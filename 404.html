@@ -11,6 +11,8 @@
     <meta name="robots" content="noindex, follow" />
     <meta name="theme-color" content="#08071a" />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Nanoboost" />
+    <meta property="og:locale" content="en_US" />
     <meta property="og:title" content="Page Not Found — 404 | Nanoboost" />
     <meta
       property="og:description"
@@ -35,13 +37,13 @@
       content="https://nanoboost.io/assets/icons/logo-text.webp"
     />
     <link rel="alternate" hreflang="en" href="https://nanoboost.io/404.html" />
-    <link rel="alternate" hreflang="x-default" href="https://nanoboost.io/404.html" />
-    <link rel="canonical" href="https://nanoboost.io/404.html" />
     <link
-      rel="icon"
-      type="image/svg+xml"
-      href="./assets/icons/main-logo.svg"
+      rel="alternate"
+      hreflang="x-default"
+      href="https://nanoboost.io/404.html"
     />
+    <link rel="canonical" href="https://nanoboost.io/404.html" />
+    <link rel="icon" type="image/svg+xml" href="./assets/icons/main-logo.svg" />
     <link
       rel="icon"
       type="image/png"
@@ -56,9 +58,11 @@
     />
     <link
       rel="apple-touch-icon"
-      sizes="192x192"
+      sizes="180x180"
       href="./assets/icons/favicon-192.png"
     />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link rel="manifest" href="./manifest.json" />
     <link
       rel="preload"
       as="font"
@@ -72,7 +76,10 @@
       rel="preload"
       as="style"
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
-      onload="this.onload=null;this.rel='stylesheet'"
+      onload="
+        this.onload = null;
+        this.rel = 'stylesheet';
+      "
     />
     <noscript>
       <link

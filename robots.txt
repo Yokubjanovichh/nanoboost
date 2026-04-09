@@ -9,5 +9,3 @@ User-agent: Bingbot
 Allow: /
 
 Sitemap: https://nanoboost.io/sitemap.xml
-
-Host: https://nanoboost.io

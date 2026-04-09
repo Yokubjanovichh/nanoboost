@@ -10,6 +10,8 @@
     />
     <meta name="theme-color" content="#08071a" />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Nanoboost" />
+    <meta property="og:locale" content="en_US" />
     <meta property="og:title" content="Terms of Service | Nanoboost" />
     <meta
       property="og:description"
@@ -36,9 +38,17 @@
       name="twitter:image"
       content="https://nanoboost.io/assets/icons/logo-text.webp"
     />
-    <meta name="robots" content="index, follow" />
-    <link rel="alternate" hreflang="en" href="https://nanoboost.io/pages/terms-of-service.html" />
-    <link rel="alternate" hreflang="x-default" href="https://nanoboost.io/pages/terms-of-service.html" />
+    <meta name="robots" content="noindex, follow" />
+    <link
+      rel="alternate"
+      hreflang="en"
+      href="https://nanoboost.io/pages/terms-of-service.html"
+    />
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href="https://nanoboost.io/pages/terms-of-service.html"
+    />
     <link
       rel="canonical"
       href="https://nanoboost.io/pages/terms-of-service.html"
@@ -62,9 +72,11 @@
     />
     <link
       rel="apple-touch-icon"
-      sizes="192x192"
+      sizes="180x180"
       href="../assets/icons/favicon-192.png"
     />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link rel="manifest" href="../manifest.json" />
     <link
       rel="preload"
       as="image"
@@ -90,9 +102,16 @@
       rel="preload"
       as="style"
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
-      onload="this.onload=null;this.rel='stylesheet'"
+      onload="
+        this.onload = null;
+        this.rel = 'stylesheet';
+      "
     />
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" /></noscript>
+    <noscript
+      ><link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    /></noscript>
     <link rel="stylesheet" href="../styles/shared.css" />
     <link rel="stylesheet" href="../styles/privacy-policy.css" />
     <script>
@@ -699,30 +718,24 @@
                 <a class="footer__link" href="./gta5.html">GTA5 Online</a>
               </li>
               <li>
-                <a
-                  class="footer__link"
-                  href="#"
+                <span
+                  class="footer__link footer__link--disabled"
                   aria-disabled="true"
-                  tabindex="-1"
-                  >World of Warcraft</a
+                  >World of Warcraft</span
                 >
               </li>
               <li>
-                <a
-                  class="footer__link"
-                  href="#"
+                <span
+                  class="footer__link footer__link--disabled"
                   aria-disabled="true"
-                  tabindex="-1"
-                  >Destiny 2</a
+                  >Destiny 2</span
                 >
               </li>
               <li>
-                <a
-                  class="footer__link"
-                  href="#"
+                <span
+                  class="footer__link footer__link--disabled"
                   aria-disabled="true"
-                  tabindex="-1"
-                  >League of Legends</a
+                  >League of Legends</span
                 >
               </li>
             </ul>
@@ -892,7 +905,7 @@
         </div>
         <div class="cart-widget__body">
           <div class="cart-widget__title-row">
-            <h2 class="cart-widget__title">Shopping Cart</h2>
+            <span class="cart-widget__title">Shopping Cart</span>
             <span class="cart-widget__count" id="cart-widget-count"
               >0 items</span
             >
@@ -936,8 +949,18 @@
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",
         "itemListElement": [
-          {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://nanoboost.io/"},
-          {"@type": "ListItem", "position": 2, "name": "Terms of Service", "item": "https://nanoboost.io/pages/terms-of-service.html"}
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://nanoboost.io/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Terms of Service",
+            "item": "https://nanoboost.io/pages/terms-of-service.html"
+          }
         ]
       }
     </script>

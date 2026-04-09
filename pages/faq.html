@@ -10,6 +10,8 @@
     />
     <meta name="theme-color" content="#08071a" />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Nanoboost" />
+    <meta property="og:locale" content="en_US" />
     <meta
       property="og:title"
       content="FAQ — Common GTA Boosting Questions | Nanoboost"
@@ -40,8 +42,16 @@
       content="https://nanoboost.io/assets/icons/logo-text.webp"
     />
     <meta name="robots" content="index, follow" />
-    <link rel="alternate" hreflang="en" href="https://nanoboost.io/pages/faq.html" />
-    <link rel="alternate" hreflang="x-default" href="https://nanoboost.io/pages/faq.html" />
+    <link
+      rel="alternate"
+      hreflang="en"
+      href="https://nanoboost.io/pages/faq.html"
+    />
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href="https://nanoboost.io/pages/faq.html"
+    />
     <link rel="canonical" href="https://nanoboost.io/pages/faq.html" />
     <link
       rel="icon"
@@ -62,9 +72,11 @@
     />
     <link
       rel="apple-touch-icon"
-      sizes="192x192"
+      sizes="180x180"
       href="../assets/icons/favicon-192.png"
     />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link rel="manifest" href="../manifest.json" />
     <link
       rel="preload"
       as="image"
@@ -90,9 +102,16 @@
       rel="preload"
       as="style"
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
-      onload="this.onload=null;this.rel='stylesheet'"
+      onload="
+        this.onload = null;
+        this.rel = 'stylesheet';
+      "
     />
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" /></noscript>
+    <noscript
+      ><link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    /></noscript>
     <link rel="stylesheet" href="../styles/shared.css" />
     <link rel="stylesheet" href="../styles/faq-page.css" />
     <script>
@@ -1242,30 +1261,24 @@
                 <a class="footer__link" href="./gta5.html">GTA5 Online</a>
               </li>
               <li>
-                <a
-                  class="footer__link"
-                  href="#"
+                <span
+                  class="footer__link footer__link--disabled"
                   aria-disabled="true"
-                  tabindex="-1"
-                  >World of Warcraft</a
+                  >World of Warcraft</span
                 >
               </li>
               <li>
-                <a
-                  class="footer__link"
-                  href="#"
+                <span
+                  class="footer__link footer__link--disabled"
                   aria-disabled="true"
-                  tabindex="-1"
-                  >Destiny 2</a
+                  >Destiny 2</span
                 >
               </li>
               <li>
-                <a
-                  class="footer__link"
-                  href="#"
+                <span
+                  class="footer__link footer__link--disabled"
                   aria-disabled="true"
-                  tabindex="-1"
-                  >League of Legends</a
+                  >League of Legends</span
                 >
               </li>
             </ul>
@@ -1435,7 +1448,7 @@
         </div>
         <div class="cart-widget__body">
           <div class="cart-widget__title-row">
-            <h2 class="cart-widget__title">Shopping Cart</h2>
+            <span class="cart-widget__title">Shopping Cart</span>
             <span class="cart-widget__count" id="cart-widget-count"
               >0 items</span
             >
@@ -1465,8 +1478,18 @@
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",
         "itemListElement": [
-          {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://nanoboost.io/"},
-          {"@type": "ListItem", "position": 2, "name": "FAQ", "item": "https://nanoboost.io/pages/faq.html"}
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://nanoboost.io/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "FAQ",
+            "item": "https://nanoboost.io/pages/faq.html"
+          }
         ]
       }
     </script>
@@ -1480,7 +1503,7 @@
             "name": "What payment methods do you accept?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "We accept major payment methods including PayPal, crypto USDT, and other options available at checkout."
+              "text": "We accept major payment methods including PayPal, crypto USDT, and other options available at checkout. The exact payment methods are displayed during the checkout process."
             }
           },
           {
@@ -1488,7 +1511,31 @@
             "name": "When do I need to pay for the boost?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Payment is required upfront before the boosting service begins."
+              "text": "Payment is required before the boost starts. Once the payment is confirmed, your order is placed in the queue and processed by our team."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Are there any hidden fees?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. The price you see on the service page is the final price unless you choose extra options such as express delivery or specific boosters."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I cancel my order?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, you can request a cancellation if the boost has not started yet. If the service is already in progress, a partial refund may be issued depending on the completed work."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do you offer discounts or promo codes?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. We regularly offer promotions, seasonal discounts, and special offers. Follow our Discord or contact support to receive current deals."
             }
           },
           {
@@ -1496,23 +1543,111 @@
             "name": "Is boosting safe for my account?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Yes, we use only trusted and safe methods. Your account is fully protected during the process."
+              "text": "We use experienced boosters, secure connections, and safe methods to minimize risks. However, boosting always carries a small inherent risk, as with any third-party service."
             }
           },
           {
             "@type": "Question",
-            "name": "How long does delivery take?",
+            "name": "Do you use VPN protection?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Most orders start within minutes and are completed quickly depending on the service selected."
+              "text": "Yes. When account access is required, we use region-matched VPN connections to avoid suspicious logins."
             }
           },
           {
             "@type": "Question",
-            "name": "Can I get a refund?",
+            "name": "Will I get banned for using your service?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Yes, refunds are available under certain conditions. Please refer to our Refund Policy page for full details."
+              "text": "Bans are extremely rare when using professional boosters and safe methods. While no service can guarantee 100% safety, we take all possible precautions."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Who will have access to my account?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Only a verified professional booster assigned to your order. All boosters are experienced and work under strict security policies."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do you store my account data?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. We do not store account passwords. All sensitive information is used only for the duration of the order."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How does the boosting process work?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "1. You choose a service and complete the payment. 2. Our support team contacts you. 3. A professional booster is assigned. 4. The boost is completed within the estimated time."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How long does a boost take?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The time depends on the game and service type. Estimated completion times are shown on each service page."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I play while the boost is active?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This depends on the service. For account-sharing boosts, you should not log in during the process. For duo or carry boosts, you can play together with the booster."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I track my order progress?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. You can contact support anytime via Discord or email to receive updates on your order."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What if I need a custom boost?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "You can request a custom order through Discord or email. We'll create a personalized offer based on your needs."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How can I contact support?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "You can reach us through Discord or Email. Our support team responds as quickly as possible."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What are your support hours?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Our support is available daily. Response times may vary depending on the time zone and workload."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do you offer live chat?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Discord is our main live support channel for fast communication."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What if there is a problem with my order?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Contact support immediately. We will review the issue and offer a solution, such as a correction, compensation, or refund if applicable."
             }
           }
         ]

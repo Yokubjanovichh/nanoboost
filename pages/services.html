@@ -10,6 +10,8 @@
     />
     <meta name="theme-color" content="#08071a" />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Nanoboost" />
+    <meta property="og:locale" content="en_US" />
     <meta
       property="og:title"
       content="GTA Online Boost — Select Service & Package | Nanoboost"
@@ -43,8 +45,16 @@
       content="https://nanoboost.io/assets/icons/logo-text.webp"
     />
     <meta name="robots" content="index, follow" />
-    <link rel="alternate" hreflang="en" href="https://nanoboost.io/pages/services.html" />
-    <link rel="alternate" hreflang="x-default" href="https://nanoboost.io/pages/services.html" />
+    <link
+      rel="alternate"
+      hreflang="en"
+      href="https://nanoboost.io/pages/services.html"
+    />
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href="https://nanoboost.io/pages/services.html"
+    />
     <link rel="canonical" href="https://nanoboost.io/pages/services.html" />
     <link
       rel="icon"
@@ -65,9 +75,11 @@
     />
     <link
       rel="apple-touch-icon"
-      sizes="192x192"
+      sizes="180x180"
       href="../assets/icons/favicon-192.png"
     />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link rel="manifest" href="../manifest.json" />
     <link
       rel="preload"
       as="image"
@@ -99,9 +111,16 @@
       rel="preload"
       as="style"
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
-      onload="this.onload=null;this.rel='stylesheet'"
+      onload="
+        this.onload = null;
+        this.rel = 'stylesheet';
+      "
     />
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" /></noscript>
+    <noscript
+      ><link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    /></noscript>
     <link rel="stylesheet" href="../styles/shared.css" />
     <link rel="stylesheet" href="../styles/service-page.css" />
     <script>
@@ -1538,30 +1557,24 @@
                 <a class="footer__link" href="./gta5.html">GTA5 Online</a>
               </li>
               <li>
-                <a
-                  class="footer__link"
-                  href="#"
+                <span
+                  class="footer__link footer__link--disabled"
                   aria-disabled="true"
-                  tabindex="-1"
-                  >World of Warcraft</a
+                  >World of Warcraft</span
                 >
               </li>
               <li>
-                <a
-                  class="footer__link"
-                  href="#"
+                <span
+                  class="footer__link footer__link--disabled"
                   aria-disabled="true"
-                  tabindex="-1"
-                  >Destiny 2</a
+                  >Destiny 2</span
                 >
               </li>
               <li>
-                <a
-                  class="footer__link"
-                  href="#"
+                <span
+                  class="footer__link footer__link--disabled"
                   aria-disabled="true"
-                  tabindex="-1"
-                  >League of Legends</a
+                  >League of Legends</span
                 >
               </li>
             </ul>
@@ -1731,7 +1744,7 @@
         </div>
         <div class="cart-widget__body">
           <div class="cart-widget__title-row">
-            <h2 class="cart-widget__title">Shopping Cart</h2>
+            <span class="cart-widget__title">Shopping Cart</span>
             <span class="cart-widget__count" id="cart-widget-count"
               >0 items</span
             >
@@ -1762,7 +1775,7 @@
         "@type": "Product",
         "name": "GTA Online Boosting Service",
         "description": "Professional GTA Online boosting package with cash, cars, levels, and modded accounts for all platforms.",
-        "brand": {"@type": "Brand", "name": "Nanoboost"},
+        "brand": { "@type": "Brand", "name": "Nanoboost" },
         "offers": {
           "@type": "AggregateOffer",
           "priceCurrency": "USD",
@@ -1778,9 +1791,24 @@
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",
         "itemListElement": [
-          {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://nanoboost.io/"},
-          {"@type": "ListItem", "position": 2, "name": "GTA 5 Online", "item": "https://nanoboost.io/pages/gta5.html"},
-          {"@type": "ListItem", "position": 3, "name": "Service", "item": "https://nanoboost.io/pages/services.html"}
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://nanoboost.io/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "GTA 5 Online",
+            "item": "https://nanoboost.io/pages/gta5.html"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Service",
+            "item": "https://nanoboost.io/pages/services.html"
+          }
         ]
       }
     </script>
