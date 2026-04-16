@@ -6,3 +6,5 @@ package.json
 package-lock.json
 SEO-AUDIT-REPORT.md
 seo_fix.js
+build.js
+dist/
