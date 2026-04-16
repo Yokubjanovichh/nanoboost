@@ -1,1 +1,132 @@
-.why-us{margin-top:0}.page--why-us .why__title-bg{transform:translate(-50%,-63%);width:58rem;height:13.5rem;opacity:.55}.why-us__head{display:flex;justify-content:center;margin-bottom:1.6rem}.why-us__subtitle{text-align:center;color:rgba(255,255,255,.78);font-size:1.6rem;line-height:1.4;margin-bottom:3.8rem}.why-us__copy{width:100%}.why-us__copy p{color:rgba(255,255,255,.84);font-size:1.6rem;line-height:1.7}.why-us__copy p+p{margin-top:1.8rem}.why-us__cards{margin-top:4.2rem;display:grid;gap:2.6rem}.why-us__card{--why-us-icon-size:10.5rem;display:flex;flex-direction:row;align-items:flex-start;gap:2.6rem;padding:3.2rem}.why-us__card .benefit__icon{flex:0 0 auto;width:var(--why-us-icon-size);height:var(--why-us-icon-size);margin-bottom:0;justify-content:center}.why-us__card .benefit__icon img{width:var(--why-us-icon-size);height:var(--why-us-icon-size);object-position:center}.why-us__card-body{flex:1;min-width:0}.why-us__card .benefit__title{white-space:normal;overflow:visible;text-overflow:clip;font-size:3.5rem;margin-bottom:1.2rem}.why-us__card .benefit__text{max-width:none;font-size:2rem}.why-us__card .benefit__text+.benefit__text{margin-top:1.2rem}.why-us__closing{width:100%;margin-top:3.6rem;color:rgba(255,255,255,.78);font-size:1.5rem;line-height:1.6}@media (max-width:980px){.why-us__card{--why-us-icon-size:10.5rem;padding:2.6rem;min-height:32rem}}@media (max-width:768px){.why-us__card{flex-direction:column;align-items:stretch;min-height:unset}.why-us__card .benefit__icon{align-self:center;justify-content:center}.why-us__card-body{width:100%}.why-us__card .benefit__title{text-align:center}}@media (max-width:480px),(orientation:landscape) and (max-height:500px){.why-us__cards{gap:2.2rem}.page--why-us .why__title-bg{width:min(44rem,90vw);height:10.4rem}.why-us__card{--why-us-icon-size:8.25rem;flex-direction:column;align-items:stretch;gap:1.8rem;min-height:unset}.why-us__card .benefit__icon{align-self:center;justify-content:center}.why-us__card-body{width:100%}.why-us__card .benefit__title{text-align:center}}
+.why-us {
+  margin-top: 0;
+}
+.page--why-us .why__title-bg {
+  transform: translate(-50%, -63%);
+  width: 58rem;
+  height: 13.5rem;
+  opacity: 0.55;
+}
+.why-us__head {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.6rem;
+}
+.why-us__subtitle {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 1.6rem;
+  line-height: 1.4;
+  margin-bottom: 3.8rem;
+}
+.why-us__copy {
+  width: 100%;
+}
+.why-us__copy p {
+  color: rgba(255, 255, 255, 0.84);
+  font-size: 1.6rem;
+  line-height: 1.7;
+}
+.why-us__copy p + p {
+  margin-top: 1.8rem;
+}
+.why-us__cards {
+  margin-top: 4.2rem;
+  display: grid;
+  gap: 2.6rem;
+}
+.why-us__card {
+  --why-us-icon-size: 10.5rem;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 2.6rem;
+  padding: 3.2rem;
+}
+.why-us__card .benefit__icon {
+  flex: 0 0 auto;
+  width: var(--why-us-icon-size);
+  height: var(--why-us-icon-size);
+  margin-bottom: 0;
+  justify-content: center;
+}
+.why-us__card .benefit__icon img {
+  width: var(--why-us-icon-size);
+  height: var(--why-us-icon-size);
+  object-position: center;
+}
+.why-us__card-body {
+  flex: 1;
+  min-width: 0;
+}
+.why-us__card .benefit__title {
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+  font-size: 3.5rem;
+  margin-bottom: 1.2rem;
+}
+.why-us__card .benefit__text {
+  max-width: none;
+  font-size: 2rem;
+}
+.why-us__card .benefit__text + .benefit__text {
+  margin-top: 1.2rem;
+}
+.why-us__closing {
+  width: 100%;
+  margin-top: 3.6rem;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 1.5rem;
+  line-height: 1.6;
+}
+@media (max-width: 980px) {
+  .why-us__card {
+    --why-us-icon-size: 10.5rem;
+    padding: 2.6rem;
+    min-height: 32rem;
+  }
+}
+@media (max-width: 768px) {
+  .why-us__card {
+    flex-direction: column;
+    align-items: stretch;
+    min-height: unset;
+  }
+  .why-us__card .benefit__icon {
+    align-self: center;
+    justify-content: center;
+  }
+  .why-us__card-body {
+    width: 100%;
+  }
+  .why-us__card .benefit__title {
+    text-align: center;
+  }
+}
+@media (max-width: 480px), (orientation: landscape) and (max-height: 500px) {
+  .why-us__cards {
+    gap: 2.2rem;
+  }
+  .page--why-us .why__title-bg {
+    width: min(44rem, 90vw);
+    height: 10.4rem;
+  }
+  .why-us__card {
+    --why-us-icon-size: 8.25rem;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.8rem;
+    min-height: unset;
+  }
+  .why-us__card .benefit__icon {
+    align-self: center;
+    justify-content: center;
+  }
+  .why-us__card-body {
+    width: 100%;
+  }
+  .why-us__card .benefit__title {
+    text-align: center;
+  }
+}

@@ -1,1 +1,166 @@
-!function(){const e=document.querySelector("#contact-form"),t=document.querySelector("#contact-form-hint"),o=document.querySelector("#contact-dropdown"),a=document.querySelector("#contact-social-input"),n=document.querySelector("#contact-email");if(!e||!o)return;const r=o.querySelector(".contact-dropdown__trigger"),c=o.querySelector(".contact-dropdown__value"),s=o.querySelector(".contact-dropdown__menu"),l=o.querySelectorAll(".contact-dropdown__option"),i={discord:{label:"Discord",type:"text",autocomplete:"off",placeholder:"DiscordName#0000 or username"},telegram:{label:"Telegram",type:"text",autocomplete:"off",placeholder:"@username"},whatsapp:{label:"WhatsApp",type:"tel",autocomplete:"tel",placeholder:"Enter your WhatsApp number"}};let d="discord";const u=e=>String(e||"").trim(),m=/^[^\s@]+@[^\s@]+\.[^\s@]+$/,p=(e,t,o)=>{const a=document.querySelector("#"+t);e&&e.classList.add("is-invalid"),a&&(a.textContent=o,a.classList.add("is-visible"))},v=(e,t)=>{const o=document.querySelector("#"+t);e&&e.classList.remove("is-invalid"),o&&(o.textContent="",o.classList.remove("is-visible"))},y=()=>u(a?.value)?(v(a,"contact-social-error"),!0):(p(a,"contact-social-error",`Please enter your ${i[d].label}`),!1),f=()=>{const e=u(n?.value);return e?m.test(e)?(v(n,"contact-email-error"),!0):(p(n,"contact-email-error","Please enter a valid email address"),!1):(p(n,"contact-email-error","Please enter your email address"),!1)};a&&(a.addEventListener("blur",()=>{a.value&&y()}),a.addEventListener("input",()=>{a.classList.contains("is-invalid")&&y()})),n&&(n.addEventListener("blur",()=>{n.value&&f()}),n.addEventListener("input",()=>{n.classList.contains("is-invalid")&&f()}));const b=()=>{o.classList.remove("is-open"),r.setAttribute("aria-expanded","false")},h=e=>{d=i[e]?e:"discord";const t=i[d];c.textContent=t.label,l.forEach(e=>{e.setAttribute("aria-selected",e.dataset.value===d?"true":"false")}),a&&(a.type=t.type,a.autocomplete=t.autocomplete,a.placeholder=t.placeholder,a.classList.contains("is-invalid")&&y()),b()};r.addEventListener("click",()=>{o.classList.contains("is-open")?b():(o.classList.add("is-open"),r.setAttribute("aria-expanded","true"))}),s.addEventListener("click",e=>{const t=e.target.closest(".contact-dropdown__option");t&&(h(t.dataset.value),r.focus())}),o.addEventListener("keydown",e=>{"Escape"===e.key&&(b(),r.focus())}),document.addEventListener("click",e=>{o.contains(e.target)||b()}),e.addEventListener("submit",o=>{o.preventDefault();const r=y(),c=f();if(!r||!c){const t=e.querySelector(".is-invalid");return void(t&&t.focus())}const s=u(a?.value),l=u(n?.value),m=u(e.querySelector("#contact-comment")?.value),p={type:"contact",preferredContact:i[d].label,handle:s,email:l,comment:m},v=e.querySelector(".contact-form__btn"),b=e.querySelectorAll("input, textarea, button");b.forEach(e=>e.disabled=!0),v&&(v.textContent="SENDING...",v.classList.add("is-loading")),t&&(t.textContent=""),fetch(window.NB_API_URL,{method:"POST",body:JSON.stringify(p)}).then(e=>e.json()).then(t=>{if("ok"===t.status){e.reset(),h("discord"),b.forEach(e=>e.disabled=!1),v&&(v.classList.remove("is-loading"),v.textContent="SEND");const t=document.querySelector("#contact-modal"),o=document.querySelector("#contact-modal-btn");if(t){t.classList.add("is-open"),t.setAttribute("aria-hidden","false"),document.body.style.overflow="hidden";const e=()=>{t.classList.remove("is-open"),t.setAttribute("aria-hidden","true"),document.body.style.overflow="",window.location.href="./gta5.html"};o&&o.addEventListener("click",e,{once:!0})}return}throw new Error(t.message||"Server error")}).catch(()=>{b.forEach(e=>e.disabled=!1),v&&(v.classList.remove("is-loading"),v.textContent="SEND"),t&&(t.style.color="#ff6b6b",t.textContent="Something went wrong. Please try again or contact us via Discord.")})})}();
+!(function () {
+  const e = document.querySelector("#contact-form"),
+    t = document.querySelector("#contact-form-hint"),
+    o = document.querySelector("#contact-dropdown"),
+    a = document.querySelector("#contact-social-input"),
+    n = document.querySelector("#contact-email");
+  if (!e || !o) return;
+  const r = o.querySelector(".contact-dropdown__trigger"),
+    c = o.querySelector(".contact-dropdown__value"),
+    s = o.querySelector(".contact-dropdown__menu"),
+    l = o.querySelectorAll(".contact-dropdown__option"),
+    i = {
+      discord: {
+        label: "Discord",
+        type: "text",
+        autocomplete: "off",
+        placeholder: "DiscordName#0000 or username",
+      },
+      telegram: {
+        label: "Telegram",
+        type: "text",
+        autocomplete: "off",
+        placeholder: "@username",
+      },
+      whatsapp: {
+        label: "WhatsApp",
+        type: "tel",
+        autocomplete: "tel",
+        placeholder: "Enter your WhatsApp number",
+      },
+    };
+  let d = "discord";
+  const u = (e) => String(e || "").trim(),
+    m = /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+    p = (e, t, o) => {
+      const a = document.querySelector("#" + t);
+      (e && e.classList.add("is-invalid"),
+        a && ((a.textContent = o), a.classList.add("is-visible")));
+    },
+    v = (e, t) => {
+      const o = document.querySelector("#" + t);
+      (e && e.classList.remove("is-invalid"),
+        o && ((o.textContent = ""), o.classList.remove("is-visible")));
+    },
+    y = () =>
+      u(a?.value)
+        ? (v(a, "contact-social-error"), !0)
+        : (p(a, "contact-social-error", `Please enter your ${i[d].label}`), !1),
+    f = () => {
+      const e = u(n?.value);
+      return e
+        ? m.test(e)
+          ? (v(n, "contact-email-error"), !0)
+          : (p(n, "contact-email-error", "Please enter a valid email address"),
+            !1)
+        : (p(n, "contact-email-error", "Please enter your email address"), !1);
+    };
+  (a &&
+    (a.addEventListener("blur", () => {
+      a.value && y();
+    }),
+    a.addEventListener("input", () => {
+      a.classList.contains("is-invalid") && y();
+    })),
+    n &&
+      (n.addEventListener("blur", () => {
+        n.value && f();
+      }),
+      n.addEventListener("input", () => {
+        n.classList.contains("is-invalid") && f();
+      })));
+  const b = () => {
+      (o.classList.remove("is-open"), r.setAttribute("aria-expanded", "false"));
+    },
+    h = (e) => {
+      d = i[e] ? e : "discord";
+      const t = i[d];
+      ((c.textContent = t.label),
+        l.forEach((e) => {
+          e.setAttribute(
+            "aria-selected",
+            e.dataset.value === d ? "true" : "false",
+          );
+        }),
+        a &&
+          ((a.type = t.type),
+          (a.autocomplete = t.autocomplete),
+          (a.placeholder = t.placeholder),
+          a.classList.contains("is-invalid") && y()),
+        b());
+    };
+  (r.addEventListener("click", () => {
+    o.classList.contains("is-open")
+      ? b()
+      : (o.classList.add("is-open"), r.setAttribute("aria-expanded", "true"));
+  }),
+    s.addEventListener("click", (e) => {
+      const t = e.target.closest(".contact-dropdown__option");
+      t && (h(t.dataset.value), r.focus());
+    }),
+    o.addEventListener("keydown", (e) => {
+      "Escape" === e.key && (b(), r.focus());
+    }),
+    document.addEventListener("click", (e) => {
+      o.contains(e.target) || b();
+    }),
+    e.addEventListener("submit", (o) => {
+      o.preventDefault();
+      const r = y(),
+        c = f();
+      if (!r || !c) {
+        const t = e.querySelector(".is-invalid");
+        return void (t && t.focus());
+      }
+      const s = u(a?.value),
+        l = u(n?.value),
+        m = u(e.querySelector("#contact-comment")?.value),
+        p = {
+          type: "contact",
+          preferredContact: i[d].label,
+          handle: s,
+          email: l,
+          comment: m,
+        },
+        v = e.querySelector(".contact-form__btn"),
+        b = e.querySelectorAll("input, textarea, button");
+      (b.forEach((e) => (e.disabled = !0)),
+        v && ((v.textContent = "SENDING..."), v.classList.add("is-loading")),
+        t && (t.textContent = ""),
+        fetch(window.NB_API_URL, { method: "POST", body: JSON.stringify(p) })
+          .then((e) => e.json())
+          .then((t) => {
+            if ("ok" === t.status) {
+              (e.reset(),
+                h("discord"),
+                b.forEach((e) => (e.disabled = !1)),
+                v &&
+                  (v.classList.remove("is-loading"), (v.textContent = "SEND")));
+              const t = document.querySelector("#contact-modal"),
+                o = document.querySelector("#contact-modal-btn");
+              if (t) {
+                (t.classList.add("is-open"),
+                  t.setAttribute("aria-hidden", "false"),
+                  (document.body.style.overflow = "hidden"));
+                const e = () => {
+                  (t.classList.remove("is-open"),
+                    t.setAttribute("aria-hidden", "true"),
+                    (document.body.style.overflow = ""),
+                    (window.location.href = "./gta5.html"));
+                };
+                o && o.addEventListener("click", e, { once: !0 });
+              }
+              return;
+            }
+            throw new Error(t.message || "Server error");
+          })
+          .catch(() => {
+            (b.forEach((e) => (e.disabled = !1)),
+              v && (v.classList.remove("is-loading"), (v.textContent = "SEND")),
+              t &&
+                ((t.style.color = "#ff6b6b"),
+                (t.textContent =
+                  "Something went wrong. Please try again or contact us via Discord.")));
+          }));
+    }));
+})();
