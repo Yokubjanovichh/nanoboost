@@ -8,6 +8,10 @@
     c = document.querySelector("#checkout-payment-menu"),
     s = a ? a.closest(".checkout-form__select-wrap") : null,
     i = (e) => String(e || "").trim(),
+    DISCOUNT_RATE = 0.05,
+    USDT_VALUE = "USDT (TRC20)",
+    discountRow = document.querySelector("#order-discount"),
+    discountValueEl = document.querySelector("#order-discount-value");
     d = "nb_cart",
     l = (() => {
       try {
@@ -29,11 +33,13 @@
           void (o && (o.textContent = "$0.00"))
         );
       }
+      const isUsdt = i(n?.value) === USDT_VALUE;
       let e = 0;
       (l.forEach((t) => {
         const o = Number(t.price) || 0,
-          n = t.qty || 1;
-        e += o * n;
+          n = t.qty || 1,
+          itemTotal = o * n;
+        e += itemTotal;
         const a = document.createElement("li");
         ((a.className = "order-item"),
           a.setAttribute("data-name", t.name || ""),
@@ -57,15 +63,35 @@
           s.appendChild(i),
           t.option && s.appendChild(d),
           s.appendChild(l));
+        const priceWrap = document.createElement("div");
+        priceWrap.className = "order-item__price-wrap";
+        const oldPrice = document.createElement("p");
+        oldPrice.className = "order-item__price-old" + (isUsdt ? " is-visible" : "");
+        oldPrice.textContent = "$" + itemTotal.toFixed(2);
         const u = document.createElement("p");
         ((u.className = "order-item__price"),
-          (u.textContent = "$" + (o * n).toFixed(2)),
+          (u.textContent = "$" + (isUsdt ? (itemTotal * (1 - DISCOUNT_RATE)).toFixed(2) : itemTotal.toFixed(2))),
+          priceWrap.appendChild(oldPrice),
+          priceWrap.appendChild(u),
           a.appendChild(c),
           a.appendChild(s),
-          a.appendChild(u),
+          a.appendChild(priceWrap),
           r.appendChild(a));
       }),
-        o && (o.textContent = "$" + e.toFixed(2)));
+        (() => {
+          const discountAmt = e * DISCOUNT_RATE;
+          const finalTotal = e - discountAmt;
+          if (isUsdt) {
+            discountRow && discountRow.classList.add("is-visible");
+            discountValueEl && (discountValueEl.textContent = "-$" + discountAmt.toFixed(2));
+            if (o) {
+              o.innerHTML = '<span class="order__subtotal-value--original">$' + e.toFixed(2) + '</span>$' + finalTotal.toFixed(2);
+            }
+          } else {
+            discountRow && discountRow.classList.remove("is-visible");
+            o && (o.textContent = "$" + e.toFixed(2));
+          }
+        })());
     };
   if (
     (u(),
@@ -85,6 +111,7 @@
               (e.setAttribute("aria-selected", String(t)),
                 (e.tabIndex = t ? 0 : -1));
             }));
+          u();
         },
         o = (t = !0) => {
           (s.classList.add("is-open"), a.setAttribute("aria-expanded", "true"));
@@ -233,7 +260,8 @@
       S = i(p.get("payment")),
       x = i(p.get("comment"));
     let L = 0;
-    const q = {
+    const isUsdtPayment = S === USDT_VALUE,
+      q = {
         type: "checkout",
         email: h,
         discord: g,
@@ -253,6 +281,9 @@
           );
         }),
         subtotal: L.toFixed(2),
+        discount: isUsdtPayment ? (L * DISCOUNT_RATE).toFixed(2) : "0.00",
+        discountPercent: isUsdtPayment ? 5 : 0,
+        finalTotal: isUsdtPayment ? (L * (1 - DISCOUNT_RATE)).toFixed(2) : L.toFixed(2),
         comment: x,
       },
       _ = e.querySelector(".checkout-form__btn"),
@@ -267,7 +298,7 @@
             if (typeof gtag === "function") {
               gtag("event", "conversion", {
                 send_to: "AW-18061608347/SR8uCNm5wZUcEJuLuaRD",
-                value: parseFloat(q.subtotal) || 1.0,
+                value: parseFloat(q.finalTotal) || 1.0,
                 currency: "USD",
               });
             }

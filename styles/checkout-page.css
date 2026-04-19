@@ -518,6 +518,64 @@
   font-size: 1.8rem;
   font-weight: 600;
   color: rgba(111, 75, 255, 0.95);
+  transition: color 0.3s ease;
+}
+.page--checkout .order__discount {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2.2rem 0.6rem;
+  animation: discountFadeIn 0.35s ease both;
+}
+.page--checkout .order__discount.is-visible {
+  display: flex;
+}
+.page--checkout .order__discount-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 1.35rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+.page--checkout .order__discount-badge {
+  display: inline-block;
+  padding: 0.2rem 0.8rem;
+  border-radius: 999px;
+  background: rgba(0, 214, 143, 0.18);
+  color: #00d68f;
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+.page--checkout .order__discount-value {
+  font-size: 1.45rem;
+  font-weight: 500;
+  color: #00d68f;
+}
+.page--checkout .order__subtotal-value--original {
+  font-size: 1.35rem;
+  color: rgba(255, 255, 255, 0.4);
+  text-decoration: line-through;
+  margin-right: 0.8rem;
+}
+.page--checkout .order-item__price-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.15rem;
+}
+.page--checkout .order-item__price-old {
+  display: none;
+  font-size: 1.15rem;
+  color: rgba(255, 255, 255, 0.38);
+  text-decoration: line-through;
+}
+.page--checkout .order-item__price-old.is-visible {
+  display: block;
+}
+@keyframes discountFadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 @media (max-width: 980px) {
   .page--checkout .checkout__grid {
