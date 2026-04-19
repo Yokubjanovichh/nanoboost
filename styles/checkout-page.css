@@ -155,6 +155,29 @@
 .page--checkout .checkout-form__select-option[aria-selected="true"] {
   background: rgba(111, 75, 255, 0.22);
 }
+.page--checkout .checkout-form__select-option {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+.page--checkout .checkout-form__discount-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.7rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.4;
+  color: #fff;
+  background: linear-gradient(135deg, #00d68f, #00b87a);
+  border-radius: 0.8rem;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  animation: chipPulse 2s ease-in-out infinite;
+}
+@keyframes chipPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.75; }
+}
 .page--checkout .checkout-form__select-ico {
   position: absolute;
   right: 1.8rem;
