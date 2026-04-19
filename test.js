@@ -271,6 +271,8 @@ test("Currency switcher HTML present in all pages with header", () => {
     if (content.includes("header__right")) {
       assert.ok(content.includes("currency-switch"), `${path.basename(f)}: missing currency switcher`);
       assert.ok(content.includes("currency-switch-mobile"), `${path.basename(f)}: missing mobile currency switcher`);
+      assert.ok(content.includes("nav__currency-switch-label"), `${path.basename(f)}: missing mobile currency label`);
+      assert.ok(content.includes("currency-switch--nav"), `${path.basename(f)}: missing nav currency modifier class`);
     }
   }
 });

@@ -870,10 +870,15 @@ document.querySelectorAll("img.skeleton").forEach((e) => {
     if (!sw) return;
     const btn = sw.querySelector(".currency-switch__btn"),
       opts = sw.querySelectorAll(".currency-switch__option"),
-      symEl = sw.querySelector(".currency-switch__active-symbol");
+      symEl = sw.querySelector(".currency-switch__active-symbol"),
+      codeEl = sw.querySelector(".currency-switch__active-code");
+    const row = sw.closest(".nav__currency-switch");
+    const iconEl = row ? row.querySelector(".nav__currency-switch-icon") : null;
     const sync = () => {
       const cur = nbGetCurrency();
       symEl && (symEl.textContent = NB_CURRENCIES[cur].symbol);
+      codeEl && (codeEl.textContent = cur);
+      iconEl && (iconEl.textContent = NB_CURRENCIES[cur].symbol);
       opts.forEach((o) => {
         o.setAttribute("aria-selected", o.dataset.currency === cur ? "true" : "false");
       });
