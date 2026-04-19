@@ -589,6 +589,10 @@ a {
   min-width: 1.2rem;
   text-align: center;
 }
+/* Mobile currency switcher inside nav */
+.nav__currency-switch {
+  display: none;
+}
 .cart {
   position: relative;
   display: flex;
@@ -884,6 +888,31 @@ a {
   }
   .dropdown.has-platform .dropdown__platforms {
     display: none;
+  }
+  .nav__currency-switch {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 1.6rem 1.19rem 0.8rem;
+    margin-top: 0.8rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .nav__currency-switch .currency-switch__btn {
+    font-size: clamp(1.5rem, 4.2vw, 1.8rem);
+    padding: 0.8rem 1.4rem;
+    border-radius: 1rem;
+    background: rgba(101, 58, 222, 0.12);
+    border-color: rgba(101, 58, 222, 0.25);
+  }
+  .nav__currency-switch .currency-switch__menu {
+    left: 0;
+    right: auto;
+    bottom: calc(100% + 0.6rem);
+    top: auto;
+  }
+  .nav__currency-switch .currency-switch__option {
+    font-size: clamp(1.4rem, 4vw, 1.7rem);
+    padding: 1rem 1.4rem;
   }
 }
 @media (max-width: 480px), (orientation: landscape) and (max-height: 500px) {

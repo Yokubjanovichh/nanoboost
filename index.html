@@ -369,6 +369,18 @@
               <a href="./pages/faq.html" class="nav__link">FAQ</a>
             </li>
           </ul>
+          <div class="nav__currency-switch">
+            <div class="currency-switch" id="currency-switch-mobile">
+              <button type="button" class="currency-switch__btn" aria-haspopup="listbox" aria-expanded="false">
+                <span class="currency-switch__active-symbol">$</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </button>
+              <ul class="currency-switch__menu" role="listbox" aria-label="Select currency">
+                <li><button type="button" class="currency-switch__option" role="option" aria-selected="true" data-currency="USD"><span class="currency-switch__symbol">$</span> USD</button></li>
+                <li><button type="button" class="currency-switch__option" role="option" aria-selected="false" data-currency="EUR"><span class="currency-switch__symbol">€</span> EUR</button></li>
+              </ul>
+            </div>
+          </div>
         </nav>
         <button class="burger" id="burger" aria-label="Menu">
           <span class="burger__line"></span> <span class="burger__line"></span>

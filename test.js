@@ -270,6 +270,7 @@ test("Currency switcher HTML present in all pages with header", () => {
     const content = fs.readFileSync(f, "utf8");
     if (content.includes("header__right")) {
       assert.ok(content.includes("currency-switch"), `${path.basename(f)}: missing currency switcher`);
+      assert.ok(content.includes("currency-switch-mobile"), `${path.basename(f)}: missing mobile currency switcher`);
     }
   }
 });

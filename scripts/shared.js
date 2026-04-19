@@ -865,43 +865,46 @@ document.querySelectorAll("img.skeleton").forEach((e) => {
   }
 }
 (() => {
-  const sw = document.getElementById("currency-switch");
-  if (!sw) return;
-  const btn = sw.querySelector(".currency-switch__btn"),
-    menu = sw.querySelector(".currency-switch__menu"),
-    opts = sw.querySelectorAll(".currency-switch__option"),
-    symEl = sw.querySelector(".currency-switch__active-symbol");
-  const sync = () => {
-    const cur = nbGetCurrency();
-    symEl && (symEl.textContent = NB_CURRENCIES[cur].symbol);
-    opts.forEach((o) => {
-      o.setAttribute("aria-selected", o.dataset.currency === cur ? "true" : "false");
-    });
-    btn && btn.setAttribute("aria-expanded", "false");
-    sw.classList.remove("is-open");
-  };
-  btn?.addEventListener("click", (e) => {
-    e.stopPropagation();
-    const open = sw.classList.toggle("is-open");
-    btn.setAttribute("aria-expanded", String(open));
-  });
-  opts.forEach((o) => {
-    o.addEventListener("click", () => {
-      nbSetCurrency(o.dataset.currency);
-    });
-  });
-  document.addEventListener("click", (e) => {
-    sw.contains(e.target) || (sw.classList.remove("is-open"), btn?.setAttribute("aria-expanded", "false"));
-  });
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && sw.classList.contains("is-open")) {
+  function initSwitcher(id) {
+    const sw = document.getElementById(id);
+    if (!sw) return;
+    const btn = sw.querySelector(".currency-switch__btn"),
+      opts = sw.querySelectorAll(".currency-switch__option"),
+      symEl = sw.querySelector(".currency-switch__active-symbol");
+    const sync = () => {
+      const cur = nbGetCurrency();
+      symEl && (symEl.textContent = NB_CURRENCIES[cur].symbol);
+      opts.forEach((o) => {
+        o.setAttribute("aria-selected", o.dataset.currency === cur ? "true" : "false");
+      });
+      btn && btn.setAttribute("aria-expanded", "false");
       sw.classList.remove("is-open");
-      btn?.setAttribute("aria-expanded", "false");
-      btn?.focus();
-    }
-  });
-  document.addEventListener("nb:currency-change", sync);
-  sync();
+    };
+    btn?.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const open = sw.classList.toggle("is-open");
+      btn.setAttribute("aria-expanded", String(open));
+    });
+    opts.forEach((o) => {
+      o.addEventListener("click", () => {
+        nbSetCurrency(o.dataset.currency);
+      });
+    });
+    document.addEventListener("click", (e) => {
+      sw.contains(e.target) || (sw.classList.remove("is-open"), btn?.setAttribute("aria-expanded", "false"));
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && sw.classList.contains("is-open")) {
+        sw.classList.remove("is-open");
+        btn?.setAttribute("aria-expanded", "false");
+        btn?.focus();
+      }
+    });
+    document.addEventListener("nb:currency-change", sync);
+    sync();
+  }
+  initSwitcher("currency-switch");
+  initSwitcher("currency-switch-mobile");
 })();
 (() => {
   const els = document.querySelectorAll(".service-card__amount[data-usd]");
