@@ -2,9 +2,6 @@ google-apps-script.js
 .planning/
 .claude/
 node_modules/
-package.json
-package-lock.json
 SEO-AUDIT-REPORT.md
 seo_fix.js
-build.js
 dist/

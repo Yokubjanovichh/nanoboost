@@ -1,0 +1,27 @@
+{
+  "name": "nanoboos",
+  "version": "1.0.0",
+  "description": "",
+  "main": "build.js",
+  "scripts": {
+    "build": "node build.js",
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yokubjanovichh/nanoboost.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Yokubjanovichh/nanoboost/issues"
+  },
+  "homepage": "https://github.com/Yokubjanovichh/nanoboost#readme",
+  "devDependencies": {
+    "clean-css": "^5.3.3",
+    "html-minifier-terser": "^7.2.0",
+    "terser": "^5.46.1"
+  }
+}
