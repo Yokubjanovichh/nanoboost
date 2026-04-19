@@ -131,6 +131,13 @@
           .then((e) => e.json())
           .then((t) => {
             if ("ok" === t.status) {
+              if (typeof gtag === "function") {
+                gtag("event", "conversion", {
+                  send_to: "AW-18061608347/SR8uCNm5wZUcEJuLuaRD",
+                  value: 1.0,
+                  currency: "USD",
+                });
+              }
               (e.reset(),
                 h("discord"),
                 b.forEach((e) => (e.disabled = !1)),
