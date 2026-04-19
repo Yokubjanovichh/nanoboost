@@ -650,6 +650,7 @@ a {
   }
   .header .nav {
     display: flex;
+    flex-direction: column;
     position: fixed;
     top: 5.95rem;
     left: 0;
