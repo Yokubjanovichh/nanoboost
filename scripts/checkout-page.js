@@ -11,7 +11,7 @@
     DISCOUNT_RATE = 0.05,
     USDT_VALUE = "USDT (TRC20)",
     discountRow = document.querySelector("#order-discount"),
-    discountValueEl = document.querySelector("#order-discount-value");
+    discountValueEl = document.querySelector("#order-discount-value"),
     d = "nb_cart",
     l = (() => {
       try {
@@ -22,7 +22,6 @@
     })(),
     u = () => {
       const fmt = window.nbFormatPrice || ((v) => "$" + Number(v).toFixed(2));
-      const sym = window.nbCurrencySymbol ? window.nbCurrencySymbol() : "$";
       if (!r) return;
       if (((r.innerHTML = ""), !l.length)) {
         const e = document.createElement("li");

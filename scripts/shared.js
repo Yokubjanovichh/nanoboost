@@ -893,6 +893,13 @@ document.querySelectorAll("img.skeleton").forEach((e) => {
   document.addEventListener("click", (e) => {
     sw.contains(e.target) || (sw.classList.remove("is-open"), btn?.setAttribute("aria-expanded", "false"));
   });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && sw.classList.contains("is-open")) {
+      sw.classList.remove("is-open");
+      btn?.setAttribute("aria-expanded", "false");
+      btn?.focus();
+    }
+  });
   document.addEventListener("nb:currency-change", sync);
   sync();
 })();
