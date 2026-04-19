@@ -406,6 +406,16 @@
               </svg>
             </button>
           </div>
+          <div class="currency-switch" id="currency-switch">
+            <button type="button" class="currency-switch__btn" aria-haspopup="listbox" aria-expanded="false">
+              <span class="currency-switch__active-symbol">$</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <ul class="currency-switch__menu" role="listbox" aria-label="Select currency">
+              <li><button type="button" class="currency-switch__option" role="option" aria-selected="true" data-currency="USD"><span class="currency-switch__symbol">$</span> USA</button></li>
+              <li><button type="button" class="currency-switch__option" role="option" aria-selected="false" data-currency="EUR"><span class="currency-switch__symbol">€</span> EU</button></li>
+            </ul>
+          </div>
           <button type="button" class="cart" aria-label="Cart" data-open-cart>
             <svg
               xmlns="http://www.w3.org/2000/svg"

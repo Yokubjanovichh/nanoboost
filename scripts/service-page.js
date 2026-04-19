@@ -1,6 +1,11 @@
 const SERVICE_CONFIG = window.NB_SERVICE_CONFIG || {},
   initServiceDropdown = (e) => {
     if (!e) return null;
+    const nbConvertPriceStr = (str) => {
+      if (!window.nbFormatPrice) return str;
+      const m = str.match(/\$([\d.]+)/);
+      return m ? window.nbFormatPrice(parseFloat(m[1])) : str;
+    };
     const t = e.querySelector('input[name="option"]'),
       r = e.querySelector(".service-dropdown__trigger"),
       n = e.querySelector(".service-dropdown__value"),
@@ -26,7 +31,7 @@ const SERVICE_CONFIG = window.NB_SERVICE_CONFIG || {},
           if (-1 !== t) {
             const r = e.slice(0, t),
               s = e.slice(t + 3);
-            n.innerHTML = `<span class="service-dropdown__label">${nbEscapeHtml(r)}</span><span class="service-dropdown__price">${nbEscapeHtml(s)}</span>`;
+            n.innerHTML = `<span class="service-dropdown__label">${nbEscapeHtml(r)}</span><span class="service-dropdown__price">${nbEscapeHtml(nbConvertPriceStr(s))}</span>`;
           } else n.textContent = e;
         }
       };
@@ -78,7 +83,7 @@ const SERVICE_CONFIG = window.NB_SERVICE_CONFIG || {},
               if (-1 !== r) {
                 const n = e.slice(0, r),
                   s = e.slice(r + 3);
-                t.innerHTML = `<span class="service-dropdown__label">${nbEscapeHtml(n)}</span><span class="service-dropdown__price">${nbEscapeHtml(s)}</span>`;
+                t.innerHTML = `<span class="service-dropdown__label">${nbEscapeHtml(n)}</span><span class="service-dropdown__price">${nbEscapeHtml(nbConvertPriceStr(s))}</span>`;
               } else t.textContent = e;
               (t.setAttribute("aria-selected", e === n ? "true" : "false"),
                 s.appendChild(t));
@@ -155,7 +160,7 @@ const SERVICE_CONFIG = window.NB_SERVICE_CONFIG || {},
             e,
           ) => {
             const t = ((e.options || [])[0] || "").match(/\$([\d.]+)/);
-            return t ? `$${t[1]}` : "";
+            return t ? (window.nbFormatPrice ? window.nbFormatPrice(parseFloat(t[1])) : `$${t[1]}`) : "";
           })(
             t,
           )}</span>\n        </p>\n        <a href="?service=${e}" class="service-card__btn" data-service="${e}">\n          BUY NOW\n        </a>\n      </div>\n    </article>`,
@@ -243,3 +248,13 @@ purchaseForm &&
         option: s,
       });
   });
+document.addEventListener("nb:currency-change", () => {
+  const svc = getServiceFromUrl();
+  if (!svc) return;
+  const cfg = SERVICE_CONFIG[svc];
+  if (cfg && dropdownApi) {
+    const sel = purchaseForm?.querySelector('input[name="option"]')?.value;
+    dropdownApi.setOptions(cfg.options, sel);
+  }
+  renderRelatedServices(svc);
+});

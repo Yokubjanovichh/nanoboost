@@ -398,6 +398,16 @@
               </svg>
             </button>
           </div>
+          <div class="currency-switch" id="currency-switch">
+            <button type="button" class="currency-switch__btn" aria-haspopup="listbox" aria-expanded="false">
+              <span class="currency-switch__active-symbol">$</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <ul class="currency-switch__menu" role="listbox" aria-label="Select currency">
+              <li><button type="button" class="currency-switch__option" role="option" aria-selected="true" data-currency="USD"><span class="currency-switch__symbol">$</span> USA</button></li>
+              <li><button type="button" class="currency-switch__option" role="option" aria-selected="false" data-currency="EUR"><span class="currency-switch__symbol">€</span> EU</button></li>
+            </ul>
+          </div>
           <button type="button" class="cart" aria-label="Cart" data-open-cart>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -757,7 +767,7 @@
               </h3>
               <p class="service-card__price">
                 <span class="service-card__from">From</span>
-                <span class="service-card__amount">$15.99</span>
+                <span class="service-card__amount" data-usd="15.99">$15.99</span>
               </p>
               <a
                 href="./pages/services.html?service=gta-cash-cars-ps"
@@ -780,7 +790,7 @@
               <h3 class="service-card__name">GTA Online Cash Boost PS4/PS5</h3>
               <p class="service-card__price">
                 <span class="service-card__from">From</span>
-                <span class="service-card__amount">$19.99</span>
+                <span class="service-card__amount" data-usd="19.99">$19.99</span>
               </p>
               <a
                 href="./pages/services.html?service=gta-cash-ps"
@@ -803,7 +813,7 @@
               <h3 class="service-card__name">GTA Online Level Boost PS4/PS5</h3>
               <p class="service-card__price">
                 <span class="service-card__from">From</span>
-                <span class="service-card__amount">$29.99</span>
+                <span class="service-card__amount" data-usd="29.99">$29.99</span>
               </p>
               <a
                 href="./pages/services.html?service=gta-level-ps"
@@ -828,7 +838,7 @@
               </h3>
               <p class="service-card__price">
                 <span class="service-card__from">From</span>
-                <span class="service-card__amount">$29.99</span>
+                <span class="service-card__amount" data-usd="29.99">$29.99</span>
               </p>
               <a
                 href="./pages/services.html?service=gta-modded-ps"

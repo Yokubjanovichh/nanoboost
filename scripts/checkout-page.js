@@ -21,6 +21,8 @@
       }
     })(),
     u = () => {
+      const fmt = window.nbFormatPrice || ((v) => "$" + Number(v).toFixed(2));
+      const sym = window.nbCurrencySymbol ? window.nbCurrencySymbol() : "$";
       if (!r) return;
       if (((r.innerHTML = ""), !l.length)) {
         const e = document.createElement("li");
@@ -30,7 +32,7 @@
             "text-align:center;color:rgba(255,255,255,0.5);padding:2rem 0;display:block;"),
           (e.textContent = "Your cart is empty"),
           r.appendChild(e),
-          void (o && (o.textContent = "$0.00"))
+          void (o && (o.textContent = fmt(0)))
         );
       }
       const isUsdt = i(n?.value) === USDT_VALUE;
@@ -67,10 +69,10 @@
         priceWrap.className = "order-item__price-wrap";
         const oldPrice = document.createElement("p");
         oldPrice.className = "order-item__price-old" + (isUsdt ? " is-visible" : "");
-        oldPrice.textContent = "$" + itemTotal.toFixed(2);
+        oldPrice.textContent = fmt(itemTotal);
         const u = document.createElement("p");
         ((u.className = "order-item__price"),
-          (u.textContent = "$" + (isUsdt ? (itemTotal * (1 - DISCOUNT_RATE)).toFixed(2) : itemTotal.toFixed(2))),
+          (u.textContent = fmt(isUsdt ? itemTotal * (1 - DISCOUNT_RATE) : itemTotal)),
           priceWrap.appendChild(oldPrice),
           priceWrap.appendChild(u),
           a.appendChild(c),
@@ -83,13 +85,13 @@
           const finalTotal = e - discountAmt;
           if (isUsdt) {
             discountRow && discountRow.classList.add("is-visible");
-            discountValueEl && (discountValueEl.textContent = "-$" + discountAmt.toFixed(2));
+            discountValueEl && (discountValueEl.textContent = "-" + fmt(discountAmt));
             if (o) {
-              o.innerHTML = '<span class="order__subtotal-value--original">$' + e.toFixed(2) + '</span>$' + finalTotal.toFixed(2);
+              o.innerHTML = '<span class="order__subtotal-value--original">' + fmt(e) + '</span>' + fmt(finalTotal);
             }
           } else {
             discountRow && discountRow.classList.remove("is-visible");
-            o && (o.textContent = "$" + e.toFixed(2));
+            o && (o.textContent = fmt(e));
           }
         })());
     };
@@ -284,6 +286,7 @@
         discount: isUsdtPayment ? (L * DISCOUNT_RATE).toFixed(2) : "0.00",
         discountPercent: isUsdtPayment ? 5 : 0,
         finalTotal: isUsdtPayment ? (L * (1 - DISCOUNT_RATE)).toFixed(2) : L.toFixed(2),
+        displayCurrency: window.nbGetCurrency ? window.nbGetCurrency() : "USD",
         comment: x,
       },
       _ = e.querySelector(".checkout-form__btn"),
@@ -345,4 +348,5 @@
                 "Something went wrong. Please try again or contact us via Discord.")));
         }));
   });
+  document.addEventListener("nb:currency-change", () => u());
 })();

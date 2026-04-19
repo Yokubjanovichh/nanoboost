@@ -28,8 +28,9 @@ const GTA5_SERVICES = window.NB_GTA5_SERVICES || { ps: [], pc: [], xbox: [] },
         const s = document.createElement("p");
         s.className = "service-card__price";
         const o = document.createElement("span");
+        const rawUsd = parseFloat((e.priceNow || "").replace(/[^0-9.]/g, "")) || 0;
         ((o.className = "service-card__amount"),
-          (o.textContent = e.priceNow),
+          (o.textContent = window.nbFormatPrice ? window.nbFormatPrice(rawUsd) : e.priceNow),
           s.appendChild(o));
         const i = document.createElement("a");
         ((i.className = "service-card__btn"),
@@ -71,3 +72,7 @@ const GTA5_SERVICES = window.NB_GTA5_SERVICES || { ps: [], pc: [], xbox: [] },
       }));
   };
 initGta5Tabs();
+document.addEventListener("nb:currency-change", () => {
+  const p = new URL(window.location.href).searchParams.get("platform");
+  renderCards(p === "pc" || p === "xbox" ? p : "ps");
+});

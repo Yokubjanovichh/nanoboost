@@ -274,6 +274,37 @@ if (faqItems.length) {
       }));
   });
 }
+const NB_CURRENCIES = {
+    USD: { symbol: "$", rate: 1, label: "USA" },
+    EUR: { symbol: "€", rate: 0.92, label: "EU" },
+  },
+  NB_CURRENCY_KEY = "nb_currency",
+  nbGetCurrency = () => {
+    const c = localStorage.getItem(NB_CURRENCY_KEY);
+    return NB_CURRENCIES[c] ? c : "USD";
+  },
+  nbSetCurrency = (code) => {
+    if (!NB_CURRENCIES[code]) return;
+    localStorage.setItem(NB_CURRENCY_KEY, code);
+    document.dispatchEvent(new CustomEvent("nb:currency-change", { detail: { currency: code } }));
+  },
+  nbConvertPrice = (usdAmt) => {
+    const c = nbGetCurrency();
+    return (Number(usdAmt) || 0) * NB_CURRENCIES[c].rate;
+  },
+  nbFormatPrice = (usdAmt) => {
+    const c = nbGetCurrency(),
+      cfg = NB_CURRENCIES[c],
+      val = ((Number(usdAmt) || 0) * cfg.rate).toFixed(2);
+    return cfg.symbol + val;
+  },
+  nbCurrencySymbol = () => NB_CURRENCIES[nbGetCurrency()].symbol;
+window.nbFormatPrice = nbFormatPrice;
+window.nbConvertPrice = nbConvertPrice;
+window.nbGetCurrency = nbGetCurrency;
+window.nbSetCurrency = nbSetCurrency;
+window.nbCurrencySymbol = nbCurrencySymbol;
+window.NB_CURRENCIES = NB_CURRENCIES;
 const NB_CART_KEY = "nb_cart",
   nbGetCart = () => {
     try {
@@ -349,7 +380,7 @@ const nbIsInPages = () =>
     if (!r.length)
       return (
         (e.innerHTML = '<p class="cart-widget__empty">Your cart is empty</p>'),
-        t && (t.textContent = "$0.00"),
+        t && (t.textContent = nbFormatPrice(0)),
         o && (o.textContent = "0 items"),
         void a.forEach((e) => {
           (e.removeAttribute("href"),
@@ -389,7 +420,7 @@ const nbIsInPages = () =>
       } else d.appendChild(l);
       const m = document.createElement("span");
       ((m.className = "cart-widget__item-price"),
-        (m.textContent = "$" + (o * r).toFixed(2)),
+        (m.textContent = nbFormatPrice(o * r)),
         d.appendChild(m));
       const p = document.createElement("button");
       ((p.className = "cart-widget__item-remove"),
@@ -409,7 +440,7 @@ const nbIsInPages = () =>
     }),
       (e.innerHTML = ""),
       e.appendChild(c),
-      t && (t.textContent = "$" + n.toFixed(2)),
+      t && (t.textContent = nbFormatPrice(n)),
       o && (o.textContent = i + " item" + (1 !== i ? "s" : "")));
   },
   nbGetScrollbarWidth = () =>
@@ -833,3 +864,45 @@ document.querySelectorAll("img.skeleton").forEach((e) => {
       c());
   }
 }
+(() => {
+  const sw = document.getElementById("currency-switch");
+  if (!sw) return;
+  const btn = sw.querySelector(".currency-switch__btn"),
+    menu = sw.querySelector(".currency-switch__menu"),
+    opts = sw.querySelectorAll(".currency-switch__option"),
+    symEl = sw.querySelector(".currency-switch__active-symbol");
+  const sync = () => {
+    const cur = nbGetCurrency();
+    symEl && (symEl.textContent = NB_CURRENCIES[cur].symbol);
+    opts.forEach((o) => {
+      o.setAttribute("aria-selected", o.dataset.currency === cur ? "true" : "false");
+    });
+    btn && btn.setAttribute("aria-expanded", "false");
+    sw.classList.remove("is-open");
+  };
+  btn?.addEventListener("click", (e) => {
+    e.stopPropagation();
+    const open = sw.classList.toggle("is-open");
+    btn.setAttribute("aria-expanded", String(open));
+  });
+  opts.forEach((o) => {
+    o.addEventListener("click", () => {
+      nbSetCurrency(o.dataset.currency);
+    });
+  });
+  document.addEventListener("click", (e) => {
+    sw.contains(e.target) || (sw.classList.remove("is-open"), btn?.setAttribute("aria-expanded", "false"));
+  });
+  document.addEventListener("nb:currency-change", sync);
+  sync();
+})();
+(() => {
+  const els = document.querySelectorAll(".service-card__amount[data-usd]");
+  if (!els.length) return;
+  const update = () => els.forEach((el) => { el.textContent = nbFormatPrice(el.dataset.usd); });
+  update();
+  document.addEventListener("nb:currency-change", update);
+})();
+document.addEventListener("nb:currency-change", () => {
+  nbRenderCartWidget();
+});
