@@ -295,7 +295,8 @@ const NB_CURRENCIES = {
   nbFormatPrice = (usdAmt) => {
     const c = nbGetCurrency(),
       cfg = NB_CURRENCIES[c],
-      val = ((Number(usdAmt) || 0) * cfg.rate).toFixed(2);
+      raw = (Number(usdAmt) || 0) * cfg.rate,
+      val = c === "USD" ? raw.toFixed(2) : (Math.floor(raw) + 0.99).toFixed(2);
     return cfg.symbol + val;
   },
   nbCurrencySymbol = () => NB_CURRENCIES[nbGetCurrency()].symbol;
