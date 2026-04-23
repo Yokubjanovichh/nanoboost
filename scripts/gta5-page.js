@@ -27,10 +27,11 @@ const GTA5_SERVICES = window.NB_GTA5_SERVICES || { ps: [], pc: [], xbox: [] },
         ((n.className = "service-card__name"), (n.textContent = e.title));
         const s = document.createElement("p");
         s.className = "service-card__price";
+        const isEur = window.nbGetCurrency && window.nbGetCurrency() === "EUR";
         const o = document.createElement("span");
         const rawUsd = parseFloat((e.priceNow || "").replace(/[^0-9.]/g, "")) || 0;
         ((o.className = "service-card__amount"),
-          (o.textContent = window.nbFormatPrice ? window.nbFormatPrice(rawUsd) : e.priceNow),
+          (o.textContent = (isEur && e.eurPriceNow) ? e.eurPriceNow : (window.nbFormatPrice ? window.nbFormatPrice(rawUsd) : e.priceNow)),
           s.appendChild(o));
         const i = document.createElement("a");
         ((i.className = "service-card__btn"),

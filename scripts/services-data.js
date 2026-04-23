@@ -24,6 +24,18 @@
         "1 Billion - $179.99",
       ],
       defaultOption: "20 million - $15.99",
+      eurOptions: [
+        "20 million - €13.99",
+        "25 million - €16.99",
+        "50 million - €25.99",
+        "75 million - €30.99",
+        "100 million - €38.99",
+        "150 million - €46.99",
+        "200 million - €55.99",
+        "500 million - €93.99",
+        "750 million - €119.99",
+        "1 Billion - €153.99",
+      ],
       description: [
         "Upgrade your GTA Online account on PlayStation 4 or PlayStation 5 with our professional Cash + Cars Boost service.",
         "This package is built for players who want immediate financial freedom and access to high-performance vehicles without spending weeks grinding missions and low-paying activities.",
@@ -95,6 +107,11 @@
         "30 million - $29.99",
       ],
       defaultOption: "20 million - $19.99",
+      eurOptions: [
+        "20 million - €16.99",
+        "25 million - €21.99",
+        "30 million - €25.99",
+      ],
       description: [
         "Increase your in-game balance quickly with our GTA Online Cash Boost service for PlayStation 4 and PlayStation 5.",
         "This service is designed for players who want to unlock more content, purchase properties, and expand their businesses without spending weeks grinding low-reward missions.",
@@ -151,6 +168,14 @@
         "200 level - $79.99",
       ],
       defaultOption: "50 level - $29.99",
+      eurOptions: [
+        "50 level - €25.99",
+        "75 level - €34.99",
+        "100 level - €42.99",
+        "120 level - €51.99",
+        "150 level - €59.99",
+        "200 level - €68.99",
+      ],
       description: [
         "Reach higher ranks faster with our GTA Online Level Boost service for PlayStation 4 and PlayStation 5.",
         "Ranking up in GTA Online unlocks new equipment, missions, and gameplay opportunities, but the process can take a significant amount of time.",
@@ -208,6 +233,14 @@
         "level 120 + 1 Billion - $199.99",
       ],
       defaultOption: "level 100 + 15 million - $29.99",
+      eurOptions: [
+        "level 100 + 15 million - €25.99",
+        "level 100 + 100 million - €63.99",
+        "level 120 + 300 million - €85.99",
+        "level 120 + 500 million - €119.99",
+        "level 100 + 1 Billion - €153.99",
+        "level 120 + 1 Billion - €170.99",
+      ],
       description: [
         "Start your GTA Online journey with a powerful setup using our Modded Account service for PlayStation 4 and PlayStation 5.",
         "Instead of building your progress from scratch, you receive an account prepared with valuable in-game resources that allow you to access premium content immediately.",
@@ -269,6 +302,18 @@
         "1 Billion - $179.99",
       ],
       defaultOption: "20 million - $15.99",
+      eurOptions: [
+        "20 million - €13.99",
+        "25 million - €16.99",
+        "50 million - €25.99",
+        "75 million - €30.99",
+        "100 million - €38.99",
+        "150 million - €46.99",
+        "200 million - €55.99",
+        "500 million - €93.99",
+        "750 million - €119.99",
+        "1 Billion - €153.99",
+      ],
       description: [
         "Upgrade your GTA Online account on Xbox One or Xbox Series with our professional Cash + Cars Boost service.",
         "This package is designed for players who want immediate financial freedom and access to powerful vehicles without spending weeks grinding missions and repetitive activities.",
@@ -327,6 +372,11 @@
         "30 million - $29.99",
       ],
       defaultOption: "20 million - $19.99",
+      eurOptions: [
+        "20 million - €16.99",
+        "25 million - €21.99",
+        "30 million - €25.99",
+      ],
       description: [
         "Increase your in-game balance quickly with our GTA Online Cash Boost service for Xbox One and Xbox Series.",
         "Grinding money in GTA Online can take a lot of time. With Nanoboost, you can speed up your financial progression and unlock new opportunities in Los Santos without endless farming.",
@@ -377,6 +427,14 @@
         "200 level - $79.99",
       ],
       defaultOption: "50 level - $29.99",
+      eurOptions: [
+        "50 level - €25.99",
+        "75 level - €34.99",
+        "100 level - €42.99",
+        "120 level - €51.99",
+        "150 level - €59.99",
+        "200 level - €68.99",
+      ],
       description: [
         "Reach higher ranks faster with our GTA Online Level Boost service for Xbox One and Xbox Series.",
         "Leveling up in GTA Online unlocks new equipment, missions, and gameplay features, but progressing through ranks can take a long time.",
@@ -428,6 +486,14 @@
         "level 120 + 1 Billion - $199.99",
       ],
       defaultOption: "level 100 + 15 million - $29.99",
+      eurOptions: [
+        "level 100 + 15 million - €25.99",
+        "level 100 + 100 million - €63.99",
+        "level 120 + 300 million - €85.99",
+        "level 120 + 500 million - €119.99",
+        "level 100 + 1 Billion - €153.99",
+        "level 120 + 1 Billion - €170.99",
+      ],
       description: [
         "Start playing GTA Online with a powerful setup using our Modded Account service for Xbox One and Xbox Series.",
         "Instead of building progress from the beginning, you receive an account prepared with valuable resources and upgrades that allow you to access premium content immediately.",
@@ -477,6 +543,15 @@
         "2 Billion - $99.99",
       ],
       defaultOption: "50 million - $29.99",
+      eurOptions: [
+        "50 million - €25.99",
+        "100 million - €29.99",
+        "200 million - €34.99",
+        "500 million - €42.99",
+        "1 Billion - €59.99",
+        "1.5 Billion - €72.99",
+        "2 Billion - €85.99",
+      ],
       description: [
         "Increase your in-game balance quickly with our GTA Online Cash Boost for PC players.",
         "Earning large amounts of money in GTA Online can require many hours of grinding missions, businesses, and repetitive activities. With Nanoboost, you can accelerate your progress and gain the financial freedom needed to enjoy the most exciting parts of the game.",
@@ -530,6 +605,12 @@
         "8000 level - $49.99",
       ],
       defaultOption: "120 level - $19.99",
+      eurOptions: [
+        "120 level - €16.99",
+        "250 level - €21.99",
+        "500 level - €25.99",
+        "8000 level - €42.99",
+      ],
       description: [
         "Progress through GTA Online ranks faster with our Level Boost service for PC players.",
         "Increasing your rank unlocks new weapons, missions, equipment, and gameplay features. However, gaining experience through standard gameplay can take a long time.",
@@ -579,6 +660,9 @@
       platform: "PC",
       options: ["Unlock All - $29.99"],
       defaultOption: "Unlock All - $29.99",
+      eurOptions: [
+        "Unlock All - €25.99",
+      ],
       description: [
         "Unlock the full potential of your GTA Online account on PC with our Unlock All service.",
         "This package is designed for players who want complete access to in-game content without grinding, restrictions, or progression limits.",
@@ -665,6 +749,9 @@
       platform: "PS4/PS5",
       options: ["Premium Cars Pack - $19.99"],
       defaultOption: "Premium Cars Pack - $19.99",
+      eurOptions: [
+        "Premium Cars Pack - €16.99",
+      ],
       description: [
         "Upgrade your GTA Online account on PlayStation 4 or PlayStation 5 with our professional Premium Cars Pack service.",
         "This bundle is designed for players who want instant access to top-tier vehicles without spending time unlocking or purchasing them individually.",
@@ -729,6 +816,9 @@
       platform: "Xbox One/Series",
       options: ["Premium Cars Pack - $19.99"],
       defaultOption: "Premium Cars Pack - $19.99",
+      eurOptions: [
+        "Premium Cars Pack - €16.99",
+      ],
       description: [
         "Upgrade your GTA Online account on Xbox One or Xbox Series with our professional Premium Cars Pack service.",
         "This package is built for players who want instant access to top-tier vehicles without grinding.",
@@ -793,6 +883,9 @@
       platform: "PS4/PS5",
       options: ["Luxury Assets Pack - $19.99"],
       defaultOption: "Luxury Assets Pack - $19.99",
+      eurOptions: [
+        "Luxury Assets Pack - €16.99",
+      ],
       description: [
         "Upgrade your GTA Online account on PlayStation 4 or PlayStation 5 with our professional Luxury Assets Pack service.",
         "This package is built for players who want access to premium properties and exclusive content without spending time unlocking everything manually.",
@@ -851,6 +944,9 @@
       platform: "Xbox One/Series",
       options: ["Luxury Assets Pack - $19.99"],
       defaultOption: "Luxury Assets Pack - $19.99",
+      eurOptions: [
+        "Luxury Assets Pack - €16.99",
+      ],
       description: [
         "Upgrade your GTA Online account on Xbox with our professional Luxury Assets Pack service.",
         "This package is built for players who want access to premium properties and exclusive content without spending time unlocking everything manually.",
@@ -903,6 +999,9 @@
       platform: "PS4/PS5",
       options: ["Cayo Perico Heist Pack - $24.99"],
       defaultOption: "Cayo Perico Heist Pack - $24.99",
+      eurOptions: [
+        "Cayo Perico Heist Pack - €21.99",
+      ],
       description: [
         "Upgrade your GTA Online account on PlayStation 4 or PlayStation 5 with our professional Cayo Perico Heist Pack service.",
         "This package is built for players who want instant access to one of the most profitable activities in GTA Online without spending time on setup and preparation.",
@@ -969,6 +1068,9 @@
       platform: "Xbox One/Series",
       options: ["Cayo Perico Heist Pack - $24.99"],
       defaultOption: "Cayo Perico Heist Pack - $24.99",
+      eurOptions: [
+        "Cayo Perico Heist Pack - €21.99",
+      ],
       description: [
         "Upgrade your GTA Online account on Xbox One or Xbox Series with our professional Cayo Perico Heist Pack service.",
         "This package is built for players who want immediate access to high-level content without spending time on setup.",
@@ -1035,6 +1137,9 @@
       platform: "PS4/PS5",
       options: ["Elite Penthouses Pack - $34.99"],
       defaultOption: "Elite Penthouses Pack - $34.99",
+      eurOptions: [
+        "Elite Penthouses Pack - €29.99",
+      ],
       description: [
         "Upgrade your GTA Online account on PlayStation 4 or PlayStation 5 with our professional Elite Penthouse Pack service.",
         "This package is built for players who want instant access to premium properties and high-end lifestyle features without spending time unlocking them manually.",
@@ -1102,6 +1207,9 @@
       platform: "Xbox One/Series",
       options: ["Elite Penthouses Pack - $34.99"],
       defaultOption: "Elite Penthouses Pack - $34.99",
+      eurOptions: [
+        "Elite Penthouses Pack - €29.99",
+      ],
       description: [
         "Upgrade your GTA Online account on Xbox One or Xbox Series with our professional Elite Penthouse Pack service.",
         "This package is built for players who want immediate access to high-end properties and improved gameplay convenience.",
@@ -1167,6 +1275,7 @@
           "Buy GTA Online cash and cars boost PS4 PS5 — fast safe delivery",
         title: "GTA Online Cash + Cars Boost PS4/PS5",
         priceNow: "$15.99",
+        eurPriceNow: "€13.99",
       },
       {
         serviceParam: "gta-cash-ps",
@@ -1175,6 +1284,7 @@
           "Buy GTA Online cash boost PS4 PS5 — millions delivered instantly",
         title: "GTA Online Cash Boost PS4/PS5",
         priceNow: "$19.99",
+        eurPriceNow: "€16.99",
       },
       {
         serviceParam: "gta-level-ps",
@@ -1183,6 +1293,7 @@
           "GTA Online level boost PS4 PS5 — rank up fast with pro boosters",
         title: "GTA Online Level Boost PS4/PS5",
         priceNow: "$29.99",
+        eurPriceNow: "€25.99",
       },
       {
         serviceParam: "gta-modded-ps",
@@ -1191,6 +1302,7 @@
           "Buy GTA Online modded account PS4 PS5 — fully loaded ready to play",
         title: "GTA Online Modded Account PS4/PS5",
         priceNow: "$29.99",
+        eurPriceNow: "€25.99",
       },
       {
         serviceParam: "gta-cars-ps",
@@ -1199,6 +1311,7 @@
           "Buy GTA Online premium cars pack PS4 PS5 — top vehicles delivered instantly",
         title: "GTA Online Premium Cars Pack PS4/PS5",
         priceNow: "$19.99",
+        eurPriceNow: "€16.99",
       },
       {
         serviceParam: "gta-luxury-ps",
@@ -1207,6 +1320,7 @@
           "Buy GTA Online luxury assets pack PS4 PS5 — premium properties delivered instantly",
         title: "GTA Online Luxury Assets Pack PS4/PS5",
         priceNow: "$19.99",
+        eurPriceNow: "€16.99",
       },
       {
         serviceParam: "gta-cayo-ps",
@@ -1215,6 +1329,7 @@
           "Buy GTA Online Cayo Perico heist pack PS4 PS5 — heist ready setup delivered instantly",
         title: "GTA Online Cayo Perico Heist Pack PS4/PS5",
         priceNow: "$24.99",
+        eurPriceNow: "€21.99",
       },
       {
         serviceParam: "gta-penthouses-ps",
@@ -1223,6 +1338,7 @@
           "Buy GTA Online elite penthouses pack PS4 PS5 — premium properties delivered instantly",
         title: "GTA Online Elite Penthouses Pack PS4/PS5",
         priceNow: "$34.99",
+        eurPriceNow: "€29.99",
       },
     ],
     xbox: [
@@ -1233,6 +1349,7 @@
           "Buy GTA Online cash and cars boost Xbox — fast safe delivery",
         title: "GTA Online Cash + Cars Boost Xbox One/Series",
         priceNow: "$15.99",
+        eurPriceNow: "€13.99",
       },
       {
         serviceParam: "gta-cash-xbox",
@@ -1241,6 +1358,7 @@
           "Buy GTA Online cash boost Xbox — millions delivered instantly",
         title: "GTA Online Cash Boost Xbox One/Series",
         priceNow: "$19.99",
+        eurPriceNow: "€16.99",
       },
       {
         serviceParam: "gta-level-xbox",
@@ -1249,6 +1367,7 @@
           "GTA Online level boost Xbox — rank up fast with pro boosters",
         title: "GTA Online Level Boost Xbox One/Series",
         priceNow: "$29.99",
+        eurPriceNow: "€25.99",
       },
       {
         serviceParam: "gta-modded-xbox",
@@ -1257,6 +1376,7 @@
           "Buy GTA Online modded account Xbox — fully loaded ready to play",
         title: "GTA Online Modded Account Xbox One/Series",
         priceNow: "$29.99",
+        eurPriceNow: "€25.99",
       },
       {
         serviceParam: "gta-cars-xbox",
@@ -1265,6 +1385,7 @@
           "Buy GTA Online premium cars pack Xbox One Series — top vehicles delivered instantly",
         title: "GTA Online Premium Cars Pack Xbox One/Series",
         priceNow: "$19.99",
+        eurPriceNow: "€16.99",
       },
       {
         serviceParam: "gta-luxury-xbox",
@@ -1273,6 +1394,7 @@
           "Buy GTA Online luxury assets pack Xbox One Series — premium properties delivered instantly",
         title: "GTA Online Luxury Assets Pack Xbox One/Series",
         priceNow: "$19.99",
+        eurPriceNow: "€16.99",
       },
       {
         serviceParam: "gta-cayo-xbox",
@@ -1281,6 +1403,7 @@
           "Buy GTA Online Cayo Perico heist pack Xbox One Series — heist ready setup delivered instantly",
         title: "GTA Online Cayo Perico Heist Pack Xbox One/Series",
         priceNow: "$24.99",
+        eurPriceNow: "€21.99",
       },
       {
         serviceParam: "gta-penthouses-xbox",
@@ -1289,6 +1412,7 @@
           "Buy GTA Online elite penthouses pack Xbox One Series — premium properties delivered instantly",
         title: "GTA Online Elite Penthouses Pack Xbox One/Series",
         priceNow: "$34.99",
+        eurPriceNow: "€29.99",
       },
     ],
     pc: [
@@ -1298,6 +1422,7 @@
         imageAlt: "Buy GTA Online cash boost PC — instant delivery safe method",
         title: "GTA Online Cash Boost PC",
         priceNow: "$29.99",
+        eurPriceNow: "€25.99",
       },
       {
         serviceParam: "gta-level-pc",
@@ -1305,6 +1430,7 @@
         imageAlt: "GTA Online level boost PC — rank up fast with pro boosters",
         title: "GTA Online Level Boost PC",
         priceNow: "$19.99",
+        eurPriceNow: "€16.99",
       },
       {
         serviceParam: "gta-unlock-pc",
@@ -1313,6 +1439,7 @@
           "GTA Online unlock all PC — every weapon vehicle achievement unlocked",
         title: "GTA Online Unlock All PC",
         priceNow: "$29.99",
+        eurPriceNow: "€25.99",
       },
     ],
   }));

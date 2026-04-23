@@ -182,7 +182,12 @@ const SERVICE_CONFIG = window.NB_SERVICE_CONFIG || {},
         ((s.src = r.imageSrc), r.imageAlt && (s.alt = r.imageAlt)),
       dropdownApi &&
         r.options?.length &&
-        dropdownApi.setOptions(r.options, r.defaultOption),
+        (() => {
+          const isEur = window.nbGetCurrency && window.nbGetCurrency() === "EUR";
+          const activeOptions = (isEur && r.eurOptions?.length) ? r.eurOptions : r.options;
+          const defaultOpt = (isEur && r.eurOptions?.length) ? r.eurOptions[0] : r.defaultOption;
+          dropdownApi.setOptions(activeOptions, defaultOpt);
+        })(),
       r.seoTitle)
     ) {
       document.title = r.seoTitle;
@@ -253,8 +258,10 @@ document.addEventListener("nb:currency-change", () => {
   if (!svc) return;
   const cfg = SERVICE_CONFIG[svc];
   if (cfg && dropdownApi) {
+    const isEur = window.nbGetCurrency && window.nbGetCurrency() === "EUR";
     const sel = purchaseForm?.querySelector('input[name="option"]')?.value;
-    dropdownApi.setOptions(cfg.options, sel);
+    const activeOptions = (isEur && cfg.eurOptions?.length) ? cfg.eurOptions : cfg.options;
+    dropdownApi.setOptions(activeOptions, sel && activeOptions.includes(sel) ? sel : activeOptions[0]);
   }
   renderRelatedServices(svc);
 });

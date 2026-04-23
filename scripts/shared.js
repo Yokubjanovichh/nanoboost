@@ -915,7 +915,10 @@ document.querySelectorAll("img.skeleton").forEach((e) => {
 (() => {
   const els = document.querySelectorAll(".service-card__amount[data-usd]");
   if (!els.length) return;
-  const update = () => els.forEach((el) => { el.textContent = nbFormatPrice(el.dataset.usd); });
+  const update = () => els.forEach((el) => {
+    const isEur = nbGetCurrency() === "EUR";
+    el.textContent = (isEur && el.dataset.eur) ? ("€" + parseFloat(el.dataset.eur).toFixed(2)) : nbFormatPrice(el.dataset.usd);
+  });
   update();
   document.addEventListener("nb:currency-change", update);
 })();
