@@ -234,6 +234,7 @@ body:not([class]) .main {
   border-radius: 2.4rem;
   overflow: hidden;
   -webkit-mask-image: -webkit-radial-gradient(white, black);
+  cursor: pointer;
 }
 .game-card::before {
   content: "";
@@ -393,6 +394,9 @@ body:not([class]) .main {
 .game-card__cta:hover::after {
   opacity: 1;
   animation: ctaBorderGlow 2s linear infinite;
+}
+.game-card:has(.game-card__cta:disabled, .game-card__cta[disabled]) {
+  cursor: default;
 }
 .game-card__cta:disabled,
 .game-card__cta[disabled] {

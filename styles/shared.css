@@ -635,7 +635,7 @@ a {
   }
   .header__inner {
     height: 5.95rem;
-    gap: 0;
+    gap: 0.6rem;
     justify-content: space-between;
   }
   .header .logo__icon {
@@ -644,6 +644,7 @@ a {
   }
   .header .logo__text {
     width: 12.6rem;
+    display: none;
   }
   body {
     padding-top: 5.95rem;
@@ -697,8 +698,29 @@ a {
     padding: 0.85rem 0.55rem;
     width: 100%;
   }
+  .logo {
+    margin-right: auto;
+  }
   .header__right {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    order: 2;
+  }
+  .header__right .search {
     display: none;
+  }
+  .header__right .cart {
+    display: none;
+  }
+  .burger {
+    order: 3;
+  }
+  .header__right .currency-switch__btn {
+    font-size: clamp(1.3rem, 3.8vw, 1.5rem);
+    padding: 0.5rem 0.8rem;
+    gap: 0.35rem;
+    border-radius: 0.7rem;
   }
   .burger {
     --nb-burger-size: clamp(3.8rem, 11.5vw, 4.62rem);
@@ -891,55 +913,7 @@ a {
     display: none;
   }
   .nav__currency-switch {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    padding: 1.6rem 0.55rem 1.2rem;
-    margin-top: 1.2rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
-  }
-  .nav__currency-switch-icon {
-    font-size: clamp(1.8rem, 5vw, 2.1rem);
-    font-weight: 700;
-    color: rgba(255, 255, 255, 0.55);
-    min-width: 2.4rem;
-    text-align: center;
-  }
-  .nav__currency-switch-label {
-    font-family: Poppins, sans-serif;
-    font-size: clamp(1.8rem, 5.2vw, 2.2rem);
-    font-weight: 500;
-    color: rgba(255, 255, 255, 0.85);
-    flex: 1;
-    line-height: 1.2;
-    padding: 0.85rem 0.55rem;
-  }
-  .nav__currency-switch .currency-switch--nav {
-    position: relative;
-    margin-left: auto;
-  }
-  .nav__currency-switch .currency-switch--nav .currency-switch__btn {
-    font-size: clamp(1.4rem, 4vw, 1.6rem);
-    padding: 0.7rem 1.2rem;
-    border-radius: 0.8rem;
-    background: rgba(255, 255, 255, 0.06);
-    border-color: rgba(255, 255, 255, 0.12);
-    gap: 0.5rem;
-  }
-  .nav__currency-switch .currency-switch--nav .currency-switch__btn:hover {
-    background: rgba(101, 58, 222, 0.18);
-    border-color: rgba(101, 58, 222, 0.35);
-  }
-  .nav__currency-switch .currency-switch--nav .currency-switch__menu {
-    right: 0;
-    left: auto;
-    bottom: calc(100% + 0.6rem);
-    top: auto;
-    min-width: 11rem;
-  }
-  .nav__currency-switch .currency-switch--nav .currency-switch__option {
-    font-size: clamp(1.4rem, 4vw, 1.6rem);
-    padding: 0.9rem 1.2rem;
+    display: none;
   }
 }
 @media (max-width: 480px), (orientation: landscape) and (max-height: 500px) {
@@ -951,7 +925,7 @@ a {
     height: 3.01rem;
   }
   .header .logo__text {
-    width: 11.83rem;
+    display: none;
   }
   .header .nav {
     top: 5.215rem;
@@ -1723,6 +1697,7 @@ a {
   overflow: hidden;
   isolation: isolate;
   border-radius: 2.4rem;
+  cursor: pointer;
   -webkit-mask-image: -webkit-radial-gradient(white, black);
   min-height: clamp(380px, 22vw, 460px);
   padding: clamp(10px, 0.8vw, 14px) clamp(10px, 0.8vw, 14px)

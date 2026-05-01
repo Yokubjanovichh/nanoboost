@@ -925,3 +925,13 @@ document.querySelectorAll("img.skeleton").forEach((e) => {
 document.addEventListener("nb:currency-change", () => {
   nbRenderCartWidget();
 });
+document.addEventListener("click", (e) => {
+  if (e.target.closest("a, button")) return;
+  const card = e.target.closest(".game-card, .service-card");
+  if (!card) return;
+  const link = card.querySelector("a[href]");
+  if (!link || link.hasAttribute("disabled") || !link.href) return;
+  const btn = card.querySelector("button[disabled]");
+  if (btn) return;
+  window.location.href = link.href;
+});
