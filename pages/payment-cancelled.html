@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Оплата отменена — Nanoboost</title>
+    <meta name="description" content="Оплата заказа отменена" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#08071a" />
+    <link rel="icon" type="image/svg+xml" href="../assets/icons/main-logo.svg" />
+    <link rel="icon" type="image/png" sizes="48x48" href="../assets/icons/favicon-48.png" />
+    <link rel="manifest" href="../manifest.json" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      onload="((this.onload = null), (this.rel = 'stylesheet'))"
+    />
+    <noscript
+      ><link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    /></noscript>
+    <link rel="stylesheet" href="../styles/shared.css" />
+    <link rel="stylesheet" href="../styles/payment-status.css" />
+  </head>
+  <body class="page page--payment-status">
+    <main class="payment-status" id="main-content">
+      <div class="payment-status__card">
+        <div class="payment-status__icon payment-status__icon--cancelled" aria-hidden="true">
+          <svg viewBox="0 0 52 52" width="52" height="52" fill="none">
+            <circle cx="26" cy="26" r="25" stroke="#ff6b6b" stroke-width="2" />
+            <path
+              d="M18 18 L34 34 M34 18 L18 34"
+              stroke="#ff6b6b"
+              stroke-width="2.5"
+              stroke-linecap="round"
+            />
+          </svg>
+        </div>
+        <h1 class="payment-status__title">Оплата отменена</h1>
+        <p class="payment-status__text">
+          Платёж не был завершён. Ваша корзина сохранена — вы можете
+          повторить заказ или выбрать другой способ оплаты.
+        </p>
+        <div class="payment-status__actions">
+          <a href="./checkout.html" class="payment-status__btn">Попробовать снова</a>
+          <a href="./contact.html" class="payment-status__btn payment-status__btn--ghost">Поддержка</a>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

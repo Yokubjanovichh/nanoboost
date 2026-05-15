@@ -5,6 +5,21 @@
   font-style: normal;
   font-display: swap;
 }
+.nb-error-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  padding: 12px 20px;
+  background-color: #ff4d4f;
+  color: #fff;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+}
 .skip-link {
   position: absolute;
   top: -100%;

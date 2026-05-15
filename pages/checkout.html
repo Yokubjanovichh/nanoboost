@@ -574,7 +574,8 @@
                     class="checkout-form__select-option"
                     role="option"
                     aria-selected="false"
-                    data-value="PayPal"
+                    data-value="paypal"
+                    data-label="PayPal"
                     tabindex="0"
                   >
                     PayPal
@@ -583,7 +584,18 @@
                     class="checkout-form__select-option"
                     role="option"
                     aria-selected="false"
-                    data-value="USDT (TRC20)"
+                    data-value="card_ecomtrade24"
+                    data-label="Visa / Mastercard"
+                    tabindex="-1"
+                  >
+                    Visa / Mastercard
+                  </li>
+                  <li
+                    class="checkout-form__select-option"
+                    role="option"
+                    aria-selected="false"
+                    data-value="usdt_trc20"
+                    data-label="Tether USDT (TRC20)"
                     tabindex="-1"
                   >
                     Tether USDT (TRC20)
@@ -1115,7 +1127,8 @@
         ]
       }
     </script>
-    <script src="../scripts/services-data.js" defer></script>
+    <script src="../scripts/api-client.js" defer></script>
+    <script src="../scripts/services-bootstrap.js" defer></script>
     <script src="../scripts/shared.js" defer></script>
     <script src="../scripts/checkout-page.js" defer></script>
   </body>

@@ -1,351 +1,511 @@
-!(function () {
-  const e = document.querySelector("#checkout-form"),
-    t = document.querySelector("#checkout-form-hint"),
-    o = document.querySelector("#order-subtotal"),
-    r = document.querySelector("#order-list"),
-    n = document.querySelector("#checkout-payment"),
-    a = document.querySelector("#checkout-payment-btn"),
-    c = document.querySelector("#checkout-payment-menu"),
-    s = a ? a.closest(".checkout-form__select-wrap") : null,
-    i = (e) => String(e || "").trim(),
-    DISCOUNT_RATE = 0.05,
-    USDT_VALUE = "USDT (TRC20)",
-    discountRow = document.querySelector("#order-discount"),
-    discountValueEl = document.querySelector("#order-discount-value"),
-    d = "nb_cart",
-    l = (() => {
-      try {
-        return JSON.parse(localStorage.getItem(d) || "[]");
-      } catch {
-        return [];
+// Checkout page logic — POSTs orders to /public/orders, handles three
+// payment flows: PayPal & USDT show a success modal, card (EcomTrade24)
+// redirects to a hosted checkout page. Backend computes discounts and
+// the final total — the frontend only shows a USDT preview.
+
+(function () {
+  "use strict";
+
+  const CART_KEY = "nb_cart";
+  const USDT_VALUE = "usdt_trc20";
+  const CARD_VALUE = "card_ecomtrade24";
+  const PAYPAL_VALUE = "paypal";
+  const DISCOUNT_RATE = 0.05;
+
+  const trim = (v) => String(v == null ? "" : v).trim();
+  const fmtMoney = (v) => {
+    if (typeof window.nbFormatPrice === "function") {
+      return window.nbFormatPrice(Number(v) || 0);
+    }
+    return "$" + (Number(v) || 0).toFixed(2);
+  };
+
+  const form = document.querySelector("#checkout-form");
+  const formHint = document.querySelector("#checkout-form-hint");
+  const subtotalEl = document.querySelector("#order-subtotal");
+  const listEl = document.querySelector("#order-list");
+  const paymentInput = document.querySelector("#checkout-payment");
+  const paymentBtn = document.querySelector("#checkout-payment-btn");
+  const paymentMenu = document.querySelector("#checkout-payment-menu");
+  const paymentWrap = paymentBtn
+    ? paymentBtn.closest(".checkout-form__select-wrap")
+    : null;
+  const discountRow = document.querySelector("#order-discount");
+  const discountValueEl = document.querySelector("#order-discount-value");
+
+  let cart = (() => {
+    try {
+      return JSON.parse(localStorage.getItem(CART_KEY) || "[]");
+    } catch {
+      return [];
+    }
+  })();
+
+  // --- Render order list / subtotal -----------------------------------
+
+  function renderOrder() {
+    if (!listEl) return;
+    listEl.innerHTML = "";
+    if (!cart.length) {
+      const li = document.createElement("li");
+      li.className = "order-item";
+      li.style.cssText =
+        "text-align:center;color:rgba(255,255,255,0.5);padding:2rem 0;display:block;";
+      li.textContent = "Your cart is empty";
+      listEl.appendChild(li);
+      if (subtotalEl) subtotalEl.textContent = fmtMoney(0);
+      return;
+    }
+
+    const isUsdt = trim(paymentInput?.value) === USDT_VALUE;
+    let subtotal = 0;
+
+    cart.forEach((item) => {
+      const price = Number(item.price) || 0;
+      const qty = item.qty || 1;
+      const itemTotal = price * qty;
+      subtotal += itemTotal;
+
+      const li = document.createElement("li");
+      li.className = "order-item";
+      li.setAttribute("data-name", item.name || "");
+      li.setAttribute("data-price", price.toFixed(2));
+      li.setAttribute("data-qty", qty);
+      if (item.option) li.setAttribute("data-option", item.option);
+
+      const img = document.createElement("img");
+      img.className = "order-item__img";
+      img.src = item.image || "";
+      img.alt = item.name || "";
+      img.loading = "lazy";
+
+      const info = document.createElement("div");
+      info.className = "order-item__info";
+      const name = document.createElement("p");
+      name.className = "order-item__name";
+      name.textContent = item.name || "";
+      const opt = document.createElement("p");
+      opt.className = "order-item__meta";
+      opt.textContent = item.option || "";
+      const qtyEl = document.createElement("p");
+      qtyEl.className = "order-item__qty";
+      qtyEl.textContent = "x" + qty;
+      info.appendChild(name);
+      if (item.option) info.appendChild(opt);
+      info.appendChild(qtyEl);
+
+      const priceWrap = document.createElement("div");
+      priceWrap.className = "order-item__price-wrap";
+      const oldPrice = document.createElement("p");
+      oldPrice.className =
+        "order-item__price-old" + (isUsdt ? " is-visible" : "");
+      oldPrice.textContent = fmtMoney(itemTotal);
+      const cur = document.createElement("p");
+      cur.className = "order-item__price";
+      cur.textContent = fmtMoney(
+        isUsdt ? itemTotal * (1 - DISCOUNT_RATE) : itemTotal,
+      );
+      priceWrap.appendChild(oldPrice);
+      priceWrap.appendChild(cur);
+
+      li.appendChild(img);
+      li.appendChild(info);
+      li.appendChild(priceWrap);
+      listEl.appendChild(li);
+    });
+
+    const discountAmt = subtotal * DISCOUNT_RATE;
+    const finalTotal = subtotal - discountAmt;
+    if (isUsdt) {
+      discountRow && discountRow.classList.add("is-visible");
+      if (discountValueEl) {
+        discountValueEl.textContent = "-" + fmtMoney(discountAmt);
       }
-    })(),
-    u = () => {
-      const fmt = window.nbFormatPrice || ((v) => "$" + Number(v).toFixed(2));
-      if (!r) return;
-      if (((r.innerHTML = ""), !l.length)) {
-        const e = document.createElement("li");
-        return (
-          (e.className = "order-item"),
-          (e.style.cssText =
-            "text-align:center;color:rgba(255,255,255,0.5);padding:2rem 0;display:block;"),
-          (e.textContent = "Your cart is empty"),
-          r.appendChild(e),
-          void (o && (o.textContent = fmt(0)))
-        );
+      if (subtotalEl) {
+        subtotalEl.innerHTML =
+          '<span class="order__subtotal-value--original">' +
+          fmtMoney(subtotal) +
+          "</span>" +
+          fmtMoney(finalTotal);
       }
-      const isUsdt = i(n?.value) === USDT_VALUE;
-      let e = 0;
-      (l.forEach((t) => {
-        const o = Number(t.price) || 0,
-          n = t.qty || 1,
-          itemTotal = o * n;
-        e += itemTotal;
-        const a = document.createElement("li");
-        ((a.className = "order-item"),
-          a.setAttribute("data-name", t.name || ""),
-          a.setAttribute("data-price", o.toFixed(2)),
-          a.setAttribute("data-qty", n),
-          t.option && a.setAttribute("data-option", t.option));
-        const c = document.createElement("img");
-        ((c.className = "order-item__img"),
-          (c.src = t.image || ""),
-          (c.alt = t.name || ""),
-          (c.loading = "lazy"));
-        const s = document.createElement("div");
-        s.className = "order-item__info";
-        const i = document.createElement("p");
-        ((i.className = "order-item__name"), (i.textContent = t.name || ""));
-        const d = document.createElement("p");
-        ((d.className = "order-item__meta"), (d.textContent = t.option || ""));
-        const l = document.createElement("p");
-        ((l.className = "order-item__qty"),
-          (l.textContent = "x" + n),
-          s.appendChild(i),
-          t.option && s.appendChild(d),
-          s.appendChild(l));
-        const priceWrap = document.createElement("div");
-        priceWrap.className = "order-item__price-wrap";
-        const oldPrice = document.createElement("p");
-        oldPrice.className = "order-item__price-old" + (isUsdt ? " is-visible" : "");
-        oldPrice.textContent = fmt(itemTotal);
-        const u = document.createElement("p");
-        ((u.className = "order-item__price"),
-          (u.textContent = fmt(isUsdt ? itemTotal * (1 - DISCOUNT_RATE) : itemTotal)),
-          priceWrap.appendChild(oldPrice),
-          priceWrap.appendChild(u),
-          a.appendChild(c),
-          a.appendChild(s),
-          a.appendChild(priceWrap),
-          r.appendChild(a));
-      }),
-        (() => {
-          const discountAmt = e * DISCOUNT_RATE;
-          const finalTotal = e - discountAmt;
-          if (isUsdt) {
-            discountRow && discountRow.classList.add("is-visible");
-            discountValueEl && (discountValueEl.textContent = "-" + fmt(discountAmt));
-            if (o) {
-              o.innerHTML = '<span class="order__subtotal-value--original">' + fmt(e) + '</span>' + fmt(finalTotal);
-            }
-          } else {
-            discountRow && discountRow.classList.remove("is-visible");
-            o && (o.textContent = fmt(e));
-          }
-        })());
+    } else {
+      discountRow && discountRow.classList.remove("is-visible");
+      if (subtotalEl) subtotalEl.textContent = fmtMoney(subtotal);
+    }
+  }
+
+  renderOrder();
+
+  // --- Custom payment dropdown ----------------------------------------
+
+  (function initPaymentDropdown() {
+    if (!paymentInput || !paymentBtn || !paymentMenu || !paymentWrap) return;
+
+    const options = Array.from(
+      paymentMenu.querySelectorAll(".checkout-form__select-option[data-value]"),
+    );
+
+    function setValue(value) {
+      const v = trim(value);
+      paymentInput.value = v;
+      const textEl = paymentBtn.querySelector(".checkout-form__select-text");
+      const matched = options.find(
+        (o) => trim(o.getAttribute("data-value")) === v,
+      );
+      const label = matched
+        ? matched.getAttribute("data-label") || trim(matched.textContent)
+        : "";
+      if (textEl) textEl.textContent = label || "Choose your payment method";
+      paymentBtn.classList.toggle("has-value", Boolean(v));
+      options.forEach((o) => {
+        const sel = trim(o.getAttribute("data-value")) === v;
+        o.setAttribute("aria-selected", String(sel));
+        o.tabIndex = sel ? 0 : -1;
+      });
+      renderOrder();
+    }
+
+    function open(focusActive = true) {
+      paymentWrap.classList.add("is-open");
+      paymentBtn.setAttribute("aria-expanded", "true");
+      const idx = focusActive
+        ? Math.max(
+            0,
+            options.findIndex(
+              (o) => o.getAttribute("aria-selected") === "true",
+            ),
+          )
+        : 0;
+      options[idx] && options[idx].focus();
+    }
+
+    function close(returnFocus = true) {
+      paymentWrap.classList.remove("is-open");
+      paymentBtn.setAttribute("aria-expanded", "false");
+      if (returnFocus) paymentBtn.focus();
+    }
+
+    const isOpen = () => paymentWrap.classList.contains("is-open");
+    const focusAt = (i) => {
+      const idx = Math.max(0, Math.min(options.length - 1, i));
+      options[idx] && options[idx].focus();
     };
-  if (
-    (u(),
-    (() => {
-      if (!(n && a && c && s)) return;
-      const e = Array.from(
-          c.querySelectorAll(".checkout-form__select-option[data-value]"),
-        ),
-        t = (t) => {
-          const o = i(t);
-          n.value = o;
-          const r = a.querySelector(".checkout-form__select-text");
-          (r && (r.textContent = o || "Choose your payment method"),
-            a.classList.toggle("has-value", Boolean(o)),
-            e.forEach((e) => {
-              const t = i(e.getAttribute("data-value")) === o;
-              (e.setAttribute("aria-selected", String(t)),
-                (e.tabIndex = t ? 0 : -1));
-            }));
-          u();
-        },
-        o = (t = !0) => {
-          (s.classList.add("is-open"), a.setAttribute("aria-expanded", "true"));
-          const o = t
-              ? Math.max(
-                  0,
-                  e.findIndex(
-                    (e) => "true" === e.getAttribute("aria-selected"),
-                  ),
-                )
-              : 0,
-            r = e[o];
-          r && r.focus();
-        },
-        r = (e = !0) => {
-          (s.classList.remove("is-open"),
-            a.setAttribute("aria-expanded", "false"),
-            e && a.focus());
-        },
-        d = () => s.classList.contains("is-open"),
-        l = (t) => {
-          const o = Math.max(0, Math.min(e.length - 1, t)),
-            r = e[o];
-          r && r.focus();
-        };
-      (a.addEventListener("click", () => {
-        d() ? r(!1) : o(!0);
-      }),
-        a.addEventListener("keydown", (e) => {
-          (("ArrowDown" !== e.key && "Enter" !== e.key && " " !== e.key) ||
-            (e.preventDefault(), o(!0)),
-            "Escape" === e.key && (e.preventDefault(), r(!1)));
-        }),
-        e.forEach((o, n) => {
-          (o.addEventListener("click", () => {
-            (t(o.getAttribute("data-value")), r(!0));
-          }),
-            o.addEventListener("keydown", (a) => {
-              ("ArrowDown" === a.key && (a.preventDefault(), l(n + 1)),
-                "ArrowUp" === a.key && (a.preventDefault(), l(n - 1)),
-                "Home" === a.key && (a.preventDefault(), l(0)),
-                "End" === a.key && (a.preventDefault(), l(e.length - 1)),
-                ("Enter" !== a.key && " " !== a.key) ||
-                  (a.preventDefault(), t(o.getAttribute("data-value")), r(!0)),
-                "Escape" === a.key && (a.preventDefault(), r(!0)));
-            }));
-        }),
-        document.addEventListener("click", (e) => {
-          if (!d()) return;
-          const t = e.target;
-          t instanceof Node && (s.contains(t) || r(!1));
-        }),
-        document.addEventListener("keydown", (e) => {
-          d() && "Escape" === e.key && (e.preventDefault(), r(!0));
-        }),
-        t(n.value));
-    })(),
-    !e)
-  )
-    return;
-  const m = document.querySelector("#checkout-email"),
-    p = document.querySelector("#checkout-discord"),
-    y = e.querySelector(".checkout-form__agree"),
-    h = /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-    v = (e, t, o) => {
-      e && e.classList.add("is-invalid");
-      const r = document.querySelector("#" + t);
-      r && ((r.textContent = o), r.classList.add("is-visible"));
-    },
-    f = (e, t) => {
-      e && e.classList.remove("is-invalid");
-      const o = document.querySelector("#" + t);
-      o && ((o.textContent = ""), o.classList.remove("is-visible"));
-    },
-    k = () => {
-      const e = i(m?.value);
-      return e
-        ? h.test(e)
-          ? (f(m, "checkout-email-error"), !0)
-          : (v(m, "checkout-email-error", "Please enter a valid email address"),
-            !1)
-        : (v(m, "checkout-email-error", "Please enter your email address"), !1);
-    },
-    b = () =>
-      i(p?.value)
-        ? (f(p, "checkout-discord-error"), !0)
-        : (v(p, "checkout-discord-error", "Please enter your Discord username"),
-          !1);
-  if (
-    (m &&
-      (m.addEventListener("blur", () => {
-        m.value && k();
-      }),
-      m.addEventListener("input", () => {
-        m.classList.contains("is-invalid") && k();
-      })),
-    p &&
-      (p.addEventListener("blur", () => {
-        p.value && b();
-      }),
-      p.addEventListener("input", () => {
-        p.classList.contains("is-invalid") && b();
-      })),
-    s &&
-      (new MutationObserver(() => {
-        n?.value &&
-          s.classList.contains("is-invalid") &&
-          f(s, "checkout-payment-error");
-      }).observe(n, { attributes: !0, attributeFilter: ["value"] }),
-      c?.addEventListener("click", () => {
-        setTimeout(() => {
-          n?.value && f(s, "checkout-payment-error");
-        }, 50);
-      })),
-    y)
-  ) {
-    const t = e.querySelector(".checkout-form__checkbox");
-    t &&
-      t.addEventListener("change", () => {
-        t.checked && y.classList.remove("is-invalid");
+
+    paymentBtn.addEventListener("click", () =>
+      isOpen() ? close(false) : open(true),
+    );
+    paymentBtn.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowDown" || e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        open(true);
+      } else if (e.key === "Escape") {
+        e.preventDefault();
+        close(false);
+      }
+    });
+
+    options.forEach((opt, i) => {
+      opt.addEventListener("click", () => {
+        setValue(opt.getAttribute("data-value"));
+        close(true);
+      });
+      opt.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowDown") {
+          e.preventDefault();
+          focusAt(i + 1);
+        } else if (e.key === "ArrowUp") {
+          e.preventDefault();
+          focusAt(i - 1);
+        } else if (e.key === "Home") {
+          e.preventDefault();
+          focusAt(0);
+        } else if (e.key === "End") {
+          e.preventDefault();
+          focusAt(options.length - 1);
+        } else if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          setValue(opt.getAttribute("data-value"));
+          close(true);
+        } else if (e.key === "Escape") {
+          e.preventDefault();
+          close(true);
+        }
+      });
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!isOpen()) return;
+      if (e.target instanceof Node && !paymentWrap.contains(e.target)) {
+        close(false);
+      }
+    });
+    document.addEventListener("keydown", (e) => {
+      if (isOpen() && e.key === "Escape") {
+        e.preventDefault();
+        close(true);
+      }
+    });
+
+    setValue(paymentInput.value);
+  })();
+
+  if (!form) return;
+
+  // --- Validation -----------------------------------------------------
+
+  const emailEl = document.querySelector("#checkout-email");
+  const discordEl = document.querySelector("#checkout-discord");
+  const agreeEl = form.querySelector(".checkout-form__agree");
+  const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  const setError = (el, errId, msg) => {
+    if (el) el.classList.add("is-invalid");
+    const node = document.querySelector("#" + errId);
+    if (node) {
+      node.textContent = msg;
+      node.classList.add("is-visible");
+    }
+  };
+  const clearError = (el, errId) => {
+    if (el) el.classList.remove("is-invalid");
+    const node = document.querySelector("#" + errId);
+    if (node) {
+      node.textContent = "";
+      node.classList.remove("is-visible");
+    }
+  };
+
+  const validateEmail = () => {
+    const v = trim(emailEl?.value);
+    if (!v) {
+      setError(emailEl, "checkout-email-error", "Please enter your email address");
+      return false;
+    }
+    if (!emailRe.test(v)) {
+      setError(emailEl, "checkout-email-error", "Please enter a valid email address");
+      return false;
+    }
+    clearError(emailEl, "checkout-email-error");
+    return true;
+  };
+  const validateDiscord = () => {
+    if (!trim(discordEl?.value)) {
+      setError(discordEl, "checkout-discord-error", "Please enter your Discord username");
+      return false;
+    }
+    clearError(discordEl, "checkout-discord-error");
+    return true;
+  };
+
+  if (emailEl) {
+    emailEl.addEventListener("blur", () => {
+      if (emailEl.value) validateEmail();
+    });
+    emailEl.addEventListener("input", () => {
+      if (emailEl.classList.contains("is-invalid")) validateEmail();
+    });
+  }
+  if (discordEl) {
+    discordEl.addEventListener("blur", () => {
+      if (discordEl.value) validateDiscord();
+    });
+    discordEl.addEventListener("input", () => {
+      if (discordEl.classList.contains("is-invalid")) validateDiscord();
+    });
+  }
+  if (paymentWrap) {
+    new MutationObserver(() => {
+      if (paymentInput?.value && paymentWrap.classList.contains("is-invalid")) {
+        clearError(paymentWrap, "checkout-payment-error");
+      }
+    }).observe(paymentInput, {
+      attributes: true,
+      attributeFilter: ["value"],
+    });
+    paymentMenu?.addEventListener("click", () => {
+      setTimeout(() => {
+        if (paymentInput?.value) clearError(paymentWrap, "checkout-payment-error");
+      }, 50);
+    });
+  }
+  if (agreeEl) {
+    const cb = form.querySelector(".checkout-form__checkbox");
+    cb &&
+      cb.addEventListener("change", () => {
+        if (cb.checked) agreeEl.classList.remove("is-invalid");
       });
   }
-  e.addEventListener("submit", (o) => {
-    o.preventDefault();
-    const r = k(),
-      a = b(),
-      c = i(n?.value)
-        ? (f(s, "checkout-payment-error"), !0)
-        : (v(s, "checkout-payment-error", "Please select a payment method"),
-          !1),
-      m = (() => {
-        const t = e.querySelector(".checkout-form__checkbox")?.checked;
-        return t
-          ? (y && y.classList.remove("is-invalid"), !0)
-          : (y && y.classList.add("is-invalid"), !1);
-      })();
-    if (!(r && a && c && m)) {
-      const t = e.querySelector(".is-invalid");
-      return void (t && (t.querySelector("input, button") || t).focus());
+
+  // --- Build payload --------------------------------------------------
+
+  function resolveOptionId(serviceSlug, optionLabelOrString) {
+    const cfg = window.NB_SERVICE_CONFIG && window.NB_SERVICE_CONFIG[serviceSlug];
+    if (!cfg || !Array.isArray(cfg.optionsRaw)) return null;
+    // Cart stores option as "Label - $price" — strip price tail.
+    const raw = String(optionLabelOrString || "").trim();
+    const labelPart = raw.split(" - ")[0].trim();
+    if (!labelPart) return cfg.optionsRaw[0]?.id || null;
+    const match = cfg.optionsRaw.find((o) => (o.label || "").trim() === labelPart);
+    return match ? match.id : null;
+  }
+
+  function buildPayload({ email, discord, telegram, payment, comment }) {
+    const items = cart.map((item) => ({
+      service_slug: item.serviceSlug || item.id || "",
+      option_id: item.optionId || resolveOptionId(item.id, item.option),
+      qty: item.qty || 1,
+    }));
+    return {
+      email: email,
+      discord: discord || null,
+      telegram: telegram || null,
+      whatsapp: null,
+      payment_method: payment,
+      display_currency: window.nbGetCurrency ? window.nbGetCurrency() : "USD",
+      comment: comment || null,
+      items: items,
+    };
+  }
+
+  function showOrderModal(orderNumber) {
+    const modal = document.querySelector("#order-modal");
+    const idEl = document.querySelector("#order-modal-id");
+    const btn = document.querySelector("#order-modal-btn");
+    if (!modal) return;
+    if (idEl) idEl.textContent = orderNumber || "";
+    modal.classList.add("is-open");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+
+    const close = () => {
+      modal.classList.remove("is-open");
+      modal.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+      const inPages = window.location.pathname.includes("/pages/");
+      window.location.href = inPages ? "./gta5.html" : "./pages/gta5.html";
+    };
+    btn && btn.addEventListener("click", close, { once: true });
+  }
+
+  function setHint(msg, isError) {
+    if (!formHint) return;
+    formHint.textContent = msg || "";
+    formHint.style.color = isError ? "#ff6b6b" : "";
+  }
+
+  // --- Submit ---------------------------------------------------------
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const okEmail = validateEmail();
+    const okDiscord = validateDiscord();
+    const okPayment = trim(paymentInput?.value)
+      ? (clearError(paymentWrap, "checkout-payment-error"), true)
+      : (setError(paymentWrap, "checkout-payment-error", "Please select a payment method"),
+        false);
+    const okAgree = (() => {
+      const checked = form.querySelector(".checkout-form__checkbox")?.checked;
+      if (!checked) {
+        agreeEl && agreeEl.classList.add("is-invalid");
+        return false;
+      }
+      agreeEl && agreeEl.classList.remove("is-invalid");
+      return true;
+    })();
+
+    if (!(okEmail && okDiscord && okPayment && okAgree)) {
+      const firstBad = form.querySelector(".is-invalid");
+      if (firstBad) {
+        (firstBad.querySelector("input, button") || firstBad).focus();
+      }
+      return;
     }
-    if (!l.length) return void (t && (t.textContent = "Your cart is empty."));
-    const p = new FormData(e),
-      h = i(p.get("email")),
-      g = i(p.get("discord")),
-      E = i(p.get("telegram")),
-      S = i(p.get("payment")),
-      x = i(p.get("comment"));
-    let L = 0;
-    const isUsdtPayment = S === USDT_VALUE,
-      q = {
-        type: "checkout",
-        email: h,
-        discord: g,
-        telegram: E,
-        payment: S,
-        items: l.map((e) => {
-          const t = Number(e.price) || 0,
-            o = e.qty || 1;
-          return (
-            (L += t * o),
-            {
-              name: e.name || "Service",
-              option: e.option || "",
-              qty: o,
-              price: (t * o).toFixed(2),
-            }
-          );
-        }),
-        subtotal: L.toFixed(2),
-        discount: isUsdtPayment ? (L * DISCOUNT_RATE).toFixed(2) : "0.00",
-        discountPercent: isUsdtPayment ? 5 : 0,
-        finalTotal: isUsdtPayment ? (L * (1 - DISCOUNT_RATE)).toFixed(2) : L.toFixed(2),
-        displayCurrency: window.nbGetCurrency ? window.nbGetCurrency() : "USD",
-        comment: x,
-      },
-      _ = e.querySelector(".checkout-form__btn"),
-      C = e.querySelectorAll("input, textarea, button, select");
-    (C.forEach((e) => (e.disabled = !0)),
-      _ && ((_.textContent = "SENDING..."), _.classList.add("is-loading")),
-      t && (t.textContent = ""),
-      fetch(window.NB_API_URL, { method: "POST", body: JSON.stringify(q) })
-        .then((e) => e.json())
-        .then((t) => {
-          if ("ok" === t.status) {
-            if (typeof gtag === "function") {
-              gtag("event", "conversion", {
-                send_to: "AW-18061608347/SR8uCNm5wZUcEJuLuaRD",
-                value: parseFloat(q.finalTotal) || 1.0,
-                currency: "USD",
-              });
-            }
-            (e.reset(),
-              localStorage.removeItem(d),
-              u(),
-              document
-                .querySelectorAll(".cart-badge")
-                .forEach((e) => (e.textContent = "0")),
-              _ &&
-                (_.classList.remove("is-loading"),
-                (_.textContent = "SUBMIT ORDER"),
-                (_.disabled = !1)),
-              C.forEach((e) => (e.disabled = !1)));
-            const o = document.querySelector("#order-modal"),
-              r = document.querySelector("#order-modal-id"),
-              n = document.querySelector("#order-modal-btn");
-            if (o) {
-              (r && (r.textContent = t.orderNumber || ""),
-                o.classList.add("is-open"),
-                o.setAttribute("aria-hidden", "false"),
-                (document.body.style.overflow = "hidden"));
-              const e = () => {
-                (o.classList.remove("is-open"),
-                  o.setAttribute("aria-hidden", "true"),
-                  (document.body.style.overflow = ""));
-                const e = window.location.pathname.includes("/pages/");
-                window.location.href = e ? "./gta5.html" : "./pages/gta5.html";
-              };
-              n && n.addEventListener("click", e, { once: !0 });
-            }
-            return;
-          }
-          throw new Error(t.message || "Server error");
-        })
-        .catch(() => {
-          (C.forEach((e) => (e.disabled = !1)),
-            _ &&
-              (_.classList.remove("is-loading"),
-              (_.textContent = "SUBMIT ORDER")),
-            t &&
-              ((t.style.color = "#ff6b6b"),
-              (t.textContent =
-                "Something went wrong. Please try again or contact us via Discord.")));
-        }));
+    if (!cart.length) {
+      setHint("Your cart is empty.", true);
+      return;
+    }
+
+    const fd = new FormData(form);
+    const payload = buildPayload({
+      email: trim(fd.get("email")),
+      discord: trim(fd.get("discord")),
+      telegram: trim(fd.get("telegram")),
+      payment: trim(fd.get("payment")),
+      comment: trim(fd.get("comment")),
+    });
+
+    // Sanity check: every item must have an option_id.
+    const badItem = payload.items.find((it) => !it.option_id || !it.service_slug);
+    if (badItem) {
+      setHint(
+        "Не удалось обработать товар в корзине. Очистите корзину и добавьте услугу заново.",
+        true,
+      );
+      return;
+    }
+
+    const submitBtn = form.querySelector(".checkout-form__btn");
+    const formControls = form.querySelectorAll("input, textarea, button, select");
+    formControls.forEach((el) => (el.disabled = true));
+    if (submitBtn) {
+      submitBtn.textContent = "SENDING...";
+      submitBtn.classList.add("is-loading");
+    }
+    setHint("");
+
+    const restoreForm = () => {
+      formControls.forEach((el) => (el.disabled = false));
+      if (submitBtn) {
+        submitBtn.classList.remove("is-loading");
+        submitBtn.textContent = "SUBMIT ORDER";
+      }
+    };
+
+    if (!window.NB_API || typeof window.NB_API.createOrder !== "function") {
+      restoreForm();
+      setHint("Ошибка: API client не загружен. Обновите страницу.", true);
+      return;
+    }
+
+    window.NB_API.createOrder(payload)
+      .then((res) => {
+        if (typeof gtag === "function") {
+          gtag("event", "conversion", {
+            send_to: "AW-18061608347/SR8uCNm5wZUcEJuLuaRD",
+            value: Number(res.final_total_usd) || 1.0,
+            currency: "USD",
+          });
+        }
+        // Card → redirect to provider checkout. Cart is cleared on
+        // payment-success page so the user can return on cancel.
+        if (res.checkout_url) {
+          window.location.assign(res.checkout_url);
+          return;
+        }
+        // PayPal / USDT → success modal + clear cart.
+        localStorage.removeItem(CART_KEY);
+        cart = [];
+        renderOrder();
+        document
+          .querySelectorAll(".cart__badge, .cart-float__badge")
+          .forEach((el) => (el.textContent = "0"));
+        restoreForm();
+        form.reset();
+        showOrderModal(res.order_number);
+      })
+      .catch((err) => {
+        restoreForm();
+        let msg = err && err.message ? err.message : "Что-то пошло не так. Попробуйте ещё раз.";
+        if (err && err.status === 503) {
+          msg = "Этот способ оплаты временно недоступен. Выберите другой метод.";
+        }
+        setHint(msg, true);
+      });
   });
-  document.addEventListener("nb:currency-change", () => u());
+
+  document.addEventListener("nb:currency-change", renderOrder);
+
+  // If services-data loaded after the page (slow API), the order list
+  // may already be rendered without option_id resolution support. Re-
+  // render isn't needed since resolution happens at submit time.
 })();

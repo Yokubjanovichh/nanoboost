@@ -52,7 +52,10 @@ function copyDirSync(src, dest) {
   // --- Minify JS ---
   console.log("\n📦 Minifying JavaScript...");
   fs.mkdirSync(path.join(DIST, "scripts"), { recursive: true });
-  const jsFiles = fs.readdirSync(path.join(ROOT, "scripts")).filter((f) => f.endsWith(".js"));
+  const SCRIPTS_EXCLUDE = new Set(["export-services-data.js"]);
+  const jsFiles = fs
+    .readdirSync(path.join(ROOT, "scripts"))
+    .filter((f) => f.endsWith(".js") && !SCRIPTS_EXCLUDE.has(f));
   for (const f of jsFiles) {
     const src = fs.readFileSync(path.join(ROOT, "scripts", f), "utf8");
     const result = await terserMinify(src, { compress: true, mangle: true });
@@ -106,6 +109,14 @@ function copyDirSync(src, dest) {
     minifyJS: true,
   };
 
+  // Inject runtime API URL via global before bootstrap script reads it.
+  const PUBLIC_API_URL =
+    process.env.NB_API_URL ||
+    "https://nanoboost-api-production.up.railway.app/api/v1";
+  const apiUrlSnippet = `<script>window.NB_PUBLIC_API_URL=${JSON.stringify(
+    PUBLIC_API_URL,
+  )};</script>`;
+
   function rewriteRefs(html) {
     // Replace each original filename with its hashed version
     // Handles all prefix patterns: ./, ../, or no prefix
@@ -116,6 +127,8 @@ function copyDirSync(src, dest) {
       const re = new RegExp(`((?:href|src)=["'])([./]*)(${escaped})(["'])`, "g");
       html = html.replace(re, `$1$2${hashed}$4`);
     }
+    // Inject the API URL global once per page, right after <head>.
+    html = html.replace(/<head[^>]*>/i, (match) => match + apiUrlSnippet);
     return html;
   }
 

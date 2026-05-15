@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Обработка платежа — Nanoboost</title>
+    <meta name="description" content="Подтверждение оплаты заказа Nanoboost" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#08071a" />
+    <link rel="icon" type="image/svg+xml" href="../assets/icons/main-logo.svg" />
+    <link rel="icon" type="image/png" sizes="48x48" href="../assets/icons/favicon-48.png" />
+    <link rel="manifest" href="../manifest.json" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      onload="((this.onload = null), (this.rel = 'stylesheet'))"
+    />
+    <noscript
+      ><link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    /></noscript>
+    <link rel="stylesheet" href="../styles/shared.css" />
+    <link rel="stylesheet" href="../styles/payment-status.css" />
+  </head>
+  <body class="page page--payment-status">
+    <main class="payment-status" id="main-content">
+      <div class="payment-status__card" id="payment-status" data-order-number="">
+        <div class="payment-status__icon payment-status__icon--pending" aria-hidden="true">
+          <div class="payment-status__spinner"></div>
+        </div>
+        <h1 class="payment-status__title" id="payment-status-title">
+          Обработка платежа...
+        </h1>
+        <p class="payment-status__text" id="payment-status-text">
+          Подождите, мы подтверждаем оплату.
+        </p>
+        <p class="payment-status__order" id="payment-status-order"></p>
+        <div class="payment-status__actions" id="payment-status-actions" hidden>
+          <a href="./gta5.html" class="payment-status__btn">К услугам</a>
+          <a href="./contact.html" class="payment-status__btn payment-status__btn--ghost">Поддержка</a>
+        </div>
+      </div>
+    </main>
+    <script src="../scripts/api-client.js" defer></script>
+    <script src="../scripts/payment-success.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,133 @@
+.page--payment-status {
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #08071a 0%, #14092e 100%);
+  min-height: 100vh;
+  color: #fff;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.payment-status {
+  width: 100%;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.payment-status__card {
+  width: 100%;
+  max-width: 480px;
+  padding: 48px 32px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  text-align: center;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+
+.payment-status__icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.payment-status__icon--pending {
+  background: rgba(104, 73, 254, 0.12);
+}
+.payment-status__icon--success {
+  background: rgba(45, 225, 254, 0.12);
+}
+.payment-status__icon--failure,
+.payment-status__icon--cancelled {
+  background: rgba(255, 107, 107, 0.12);
+}
+
+.payment-status__spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid rgba(255, 255, 255, 0.15);
+  border-top-color: #6849fe;
+  border-radius: 50%;
+  animation: pay-spin 0.9s linear infinite;
+}
+
+@keyframes pay-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.payment-status__title {
+  font-size: 28px;
+  font-weight: 700;
+  margin: 0 0 12px;
+  line-height: 1.2;
+}
+
+.payment-status__text {
+  font-size: 16px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.75);
+  margin: 0 0 16px;
+}
+
+.payment-status__order {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.55);
+  letter-spacing: 0.04em;
+  margin: 0 0 24px;
+  font-family: "Courier New", monospace;
+}
+
+.payment-status__actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+
+.payment-status__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #2de1fe, #6849fe, #9d21fe);
+  color: #fff;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.payment-status__btn:hover {
+  transform: translateY(-1px);
+  opacity: 0.9;
+}
+
+.payment-status__btn--ghost {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+@media (max-width: 480px) {
+  .payment-status__card {
+    padding: 32px 20px;
+  }
+  .payment-status__title {
+    font-size: 22px;
+  }
+  .payment-status__text {
+    font-size: 14px;
+  }
+}

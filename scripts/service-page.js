@@ -1,3 +1,16 @@
+function buildPicture(desktop, mobile, alt, opts) {
+  const o = opts || {};
+  const cls = o.className ? ` class="${o.className}"` : "";
+  const w = o.width ? ` width="${o.width}"` : "";
+  const h = o.height ? ` height="${o.height}"` : "";
+  const fp = o.fetchpriority ? ` fetchpriority="${o.fetchpriority}"` : "";
+  const ld = o.loading ? ` loading="${o.loading}"` : "";
+  const dec = o.decoding ? ` decoding="${o.decoding}"` : "";
+  const desk = nbEscapeHtml(desktop || "");
+  const mob = nbEscapeHtml(mobile || desktop || "");
+  const altSafe = nbEscapeHtml(alt || "");
+  return `<picture><source media="(max-width: 768px)" srcset="${mob}"><img src="${desk}" alt="${altSafe}"${cls}${w}${h}${fp}${ld}${dec}></picture>`;
+}
 const SERVICE_CONFIG = window.NB_SERVICE_CONFIG || {},
   initServiceDropdown = (e) => {
     if (!e) return null;
@@ -155,15 +168,23 @@ const SERVICE_CONFIG = window.NB_SERVICE_CONFIG || {},
         .slice(0, 4);
     let o = i
       .map(
-        ({ id: e, cfg: t }) =>
-          `\n    <article class="service-card">\n      <img\n        class="service-card__img"\n        src="${t.imageSrc || ""}"\n        alt="${t.imageAlt || ""}"\n        loading="lazy"\n      />\n      <div class="service-card__content">\n        <h3 class="service-card__name">${nbEscapeHtml((t.titleHtml || "").replace(/<br\s*\/?>/g, " "))}</h3>\n        <p class="service-card__price">\n          <span class="service-card__from">From</span>\n          <span class="service-card__amount">${((
-            e,
-          ) => {
-            const t = ((e.options || [])[0] || "").match(/\$([\d.]+)/);
-            return t ? (window.nbFormatPrice ? window.nbFormatPrice(parseFloat(t[1])) : `$${t[1]}`) : "";
-          })(
-            t,
-          )}</span>\n        </p>\n        <a href="?service=${e}" class="service-card__btn" data-service="${e}">\n          BUY NOW\n        </a>\n      </div>\n    </article>`,
+        ({ id: e, cfg: t }) => {
+          const pic = buildPicture(
+            t.imageSrcDesktop || t.imageSrc || "",
+            t.imageSrcMobile || "",
+            t.imageAlt || "",
+            { className: "service-card__img", loading: "lazy" },
+          );
+          const amount = ((cfg) => {
+            const m = ((cfg.options || [])[0] || "").match(/\$([\d.]+)/);
+            return m
+              ? window.nbFormatPrice
+                ? window.nbFormatPrice(parseFloat(m[1]))
+                : `$${m[1]}`
+              : "";
+          })(t);
+          return `\n    <article class="service-card">\n      ${pic}\n      <div class="service-card__content">\n        <h3 class="service-card__name">${nbEscapeHtml((t.titleHtml || "").replace(/<br\s*\/?>/g, " "))}</h3>\n        <p class="service-card__price">\n          <span class="service-card__from">From</span>\n          <span class="service-card__amount">${amount}</span>\n        </p>\n        <a href="?service=${e}" class="service-card__btn" data-service="${e}">\n          BUY NOW\n        </a>\n      </div>\n    </article>`;
+        },
       )
       .join("");
     ((o +=
@@ -174,13 +195,22 @@ const SERVICE_CONFIG = window.NB_SERVICE_CONFIG || {},
     const r = SERVICE_CONFIG[e];
     if (!r) return !1;
     const n = document.querySelector("#service-hero-title"),
-      s = document.querySelector(".service-hero__image");
+      frame = document.querySelector(".service-hero__image-frame");
+    if (n && r.titleHtml) n.innerHTML = nbSanitizeBr(r.titleHtml);
+    const heroDesktop = r.imageSrcDesktop || r.imageSrc || "";
+    const heroMobile = r.imageSrcMobile || "";
+    if (frame && heroDesktop) {
+      frame.innerHTML = buildPicture(heroDesktop, heroMobile, r.imageAlt || "", {
+        className: "service-hero__image",
+        width: 1536,
+        height: 1024,
+        fetchpriority: "high",
+        loading: "eager",
+        decoding: "async",
+      });
+    }
     if (
-      (n && r.titleHtml && (n.innerHTML = nbSanitizeBr(r.titleHtml)),
-      s &&
-        r.imageSrc &&
-        ((s.src = r.imageSrc), r.imageAlt && (s.alt = r.imageAlt)),
-      dropdownApi &&
+      (dropdownApi &&
         r.options?.length &&
         (() => {
           const isEur = window.nbGetCurrency && window.nbGetCurrency() === "EUR";
@@ -249,7 +279,7 @@ purchaseForm &&
         id: t,
         name: a,
         price: i,
-        image: r.imageSrc || "",
+        image: r.imageSrcDesktop || r.imageSrc || "",
         option: s,
       });
   });
@@ -264,4 +294,14 @@ document.addEventListener("nb:currency-change", () => {
     dropdownApi.setOptions(activeOptions, sel && activeOptions.includes(sel) ? sel : activeOptions[0]);
   }
   renderRelatedServices(svc);
+});
+
+// services-bootstrap.js fires this after /public/services resolves.
+window.addEventListener("nb:services-loaded", () => {
+  Object.keys(SERVICE_CONFIG).forEach((k) => delete SERVICE_CONFIG[k]);
+  Object.assign(SERVICE_CONFIG, window.NB_SERVICE_CONFIG || {});
+  const svc = getServiceFromUrl() || initialService;
+  if (svc && SERVICE_CONFIG[svc]) {
+    applyServiceToHero(svc);
+  }
 });
