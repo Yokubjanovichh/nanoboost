@@ -1,3 +1,15 @@
+function nbBuildPicture(desktop, mobile, alt, className) {
+  const esc = (s) =>
+    String(s == null ? "" : s)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+  const desk = esc(desktop || "");
+  const mob = esc(mobile || desktop || "");
+  return `<picture><source media="(max-width: 768px)" srcset="${mob}"><img src="${desk}" alt="${esc(alt || "")}" class="${className}" loading="lazy"></picture>`;
+}
 const GTA5_SERVICES = window.NB_GTA5_SERVICES || { ps: [], pc: [], xbox: [] },
   getInitialPlatform = () => {
     const e = new URL(window.location.href).searchParams.get("platform");
@@ -16,11 +28,14 @@ const GTA5_SERVICES = window.NB_GTA5_SERVICES || { ps: [], pc: [], xbox: [] },
       a.forEach((e) => {
         const a = document.createElement("article");
         a.className = "service-card";
-        const r = document.createElement("img");
-        ((r.className = "service-card__img"),
-          (r.src = e.imageSrc),
-          (r.alt = e.imageAlt),
-          (r.loading = "lazy"));
+        const pictureWrap = document.createElement("template");
+        pictureWrap.innerHTML = nbBuildPicture(
+          e.imageSrcDesktop || e.imageSrc || "",
+          e.imageSrcMobile || "",
+          e.imageAlt || "",
+          "service-card__img",
+        );
+        const r = pictureWrap.content.firstChild;
         const c = document.createElement("div");
         c.className = "service-card__content";
         const n = document.createElement("h3");
@@ -74,6 +89,12 @@ const GTA5_SERVICES = window.NB_GTA5_SERVICES || { ps: [], pc: [], xbox: [] },
   };
 initGta5Tabs();
 document.addEventListener("nb:currency-change", () => {
+  const p = new URL(window.location.href).searchParams.get("platform");
+  renderCards(p === "pc" || p === "xbox" ? p : "ps");
+});
+// services-bootstrap.js fires this after /public/services resolves.
+window.addEventListener("nb:services-loaded", () => {
+  Object.assign(GTA5_SERVICES, window.NB_GTA5_SERVICES || {});
   const p = new URL(window.location.href).searchParams.get("platform");
   renderCards(p === "pc" || p === "xbox" ? p : "ps");
 });
