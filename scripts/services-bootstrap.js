@@ -21,6 +21,25 @@
   const ERROR_BANNER_TEXT =
     "Ошибка загрузки данных. Обновите страницу или свяжитесь с поддержкой.";
 
+  // API origin (e.g. "https://nanoboost-api-production.up.railway.app").
+  // Used to resolve backend-served paths like "/uploads/services/foo.webp"
+  // into absolute URLs the browser can fetch from the public site origin.
+  const API_ORIGIN = (function () {
+    try {
+      const base = window.NB_PUBLIC_API_URL || "";
+      return base ? new URL(base).origin : "";
+    } catch (_) {
+      return "";
+    }
+  })();
+
+  function absolutizeBackendUrl(path) {
+    if (!path) return "";
+    if (/^https?:\/\//i.test(path)) return path;
+    if (path.indexOf("/uploads/") === 0 && API_ORIGIN) return API_ORIGIN + path;
+    return path;
+  }
+
   function stripHtml(html) {
     if (typeof html !== "string") return "";
     const div = document.createElement("div");
@@ -61,9 +80,10 @@
       seoTitle: service.seo_title || "",
       seoDescription: service.seo_description || "",
       titleHtml: service.title || "",
-      imageSrcDesktop:
+      imageSrcDesktop: absolutizeBackendUrl(
         service.image_desktop_url || service.image_url || "",
-      imageSrcMobile: service.image_mobile_url || "",
+      ),
+      imageSrcMobile: absolutizeBackendUrl(service.image_mobile_url || ""),
       imageAlt: service.image_alt || "",
       platform: PLATFORM_LABEL[platformKey] || service.platform || "",
       options: options.map(function (o) {
@@ -87,11 +107,13 @@
     const defaultOpt = pickDefaultOption(service.options);
     return {
       serviceParam: service.slug,
-      imageSrc:
+      imageSrc: absolutizeBackendUrl(
         service.image_desktop_url || service.image_url || "",
-      imageSrcDesktop:
+      ),
+      imageSrcDesktop: absolutizeBackendUrl(
         service.image_desktop_url || service.image_url || "",
-      imageSrcMobile: service.image_mobile_url || "",
+      ),
+      imageSrcMobile: absolutizeBackendUrl(service.image_mobile_url || ""),
       imageAlt: service.image_alt || "",
       title: stripHtml(service.title || ""),
       priceNow: formatPriceNow(defaultOpt, "USD"),
