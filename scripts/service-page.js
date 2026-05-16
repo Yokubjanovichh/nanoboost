@@ -259,6 +259,14 @@ const SERVICE_CONFIG = window.NB_SERVICE_CONFIG || {},
     return e && SERVICE_CONFIG[e] ? e : null;
   },
   initialService = getServiceFromUrl() || "gta-cash-cars-ps";
+// Hide the hardcoded fallback hero image until the API data arrives and
+// applyServiceToHero swaps in the real <picture>. Without this the user
+// briefly sees the wrong service's image on the first paint of any
+// services.html?service=… URL.
+(() => {
+  const hardcoded = document.querySelector(".service-hero__image-frame img");
+  if (hardcoded) hardcoded.style.visibility = "hidden";
+})();
 (applyServiceToHero(initialService),
   window.addEventListener("popstate", () => {
     const e = getServiceFromUrl() || "gta-cash-cars-ps";
@@ -273,9 +281,7 @@ const SERVICE_CONFIG = window.NB_SERVICE_CONFIG || {},
     n &&
       (e.preventDefault(),
       applyServiceToHero(n, { updateUrl: !0 }) &&
-        document
-          .querySelector(".service-hero")
-          ?.scrollIntoView({ block: "start", behavior: "smooth" }));
+        window.scrollTo({ top: 0, left: 0, behavior: "smooth" }));
   }));
 const purchaseForm = document.querySelector(".service-hero__purchase");
 purchaseForm &&
