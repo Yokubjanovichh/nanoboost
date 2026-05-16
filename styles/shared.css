@@ -68,6 +68,36 @@
     animation: none;
   }
 }
+/* Game cards loading state (shown by games-bootstrap.js before API resolves). */
+.game-card--skeleton {
+  pointer-events: none;
+}
+.game-card__img--skeleton {
+  width: 100%;
+  aspect-ratio: 810 / 1464;
+  border-radius: 16px;
+}
+.game-card__title--skeleton {
+  height: 1.4em;
+  width: 70%;
+  margin: 1rem 0 0.75rem;
+  border-radius: 6px;
+}
+.game-card__cta--skeleton {
+  height: 2.6em;
+  width: 100%;
+  border-radius: 10px;
+}
+/* Navigation dropdown loading state. */
+.dropdown__item--skeleton {
+  pointer-events: none;
+}
+.dropdown__skeleton-text {
+  display: inline-block;
+  height: 1em;
+  width: 80px;
+  border-radius: 4px;
+}
 html {
   font-size: clamp(8.5px, 1.5vw, 9.5px);
   scroll-behavior: smooth;

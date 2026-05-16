@@ -88,10 +88,41 @@
     );
   }
 
+  // 4 skeleton cards keep layout stable until the API resolves.
+  const SKELETON_CARD =
+    '<article class="game-card game-card--skeleton" aria-hidden="true">' +
+    '<div class="game-card__img game-card__img--skeleton skeleton"></div>' +
+    '<div class="game-card__content">' +
+    '<div class="game-card__title game-card__title--skeleton skeleton"></div>' +
+    '<div class="game-card__cta game-card__cta--skeleton skeleton"></div>' +
+    "</div>" +
+    "</article>";
+  const SKELETON_DROPDOWN_ITEM =
+    '<li class="dropdown__item dropdown__item--skeleton" aria-hidden="true">' +
+    '<span class="dropdown__skeleton-text skeleton"></span>' +
+    "</li>";
+
+  // Replace the hardcoded fallback markup with skeletons immediately so
+  // the user never sees stale "Coming Soon" cards or the duplicate GTA5
+  // dropdown row from the SSR HTML before the API resolves.
+  function paintSkeletons() {
+    const grid = document.querySelector(GRID_SELECTOR);
+    if (grid) {
+      const customCard = grid.querySelector(".game-card--custom");
+      grid.innerHTML =
+        SKELETON_CARD.repeat(4) + (customCard ? customCard.outerHTML : "");
+    }
+    const dropdownList = document.querySelector(DROPDOWN_LIST_SELECTOR);
+    if (dropdownList) {
+      dropdownList.innerHTML = SKELETON_DROPDOWN_ITEM.repeat(3);
+    }
+  }
+
   async function bootstrap() {
     if (!window.NB_API || typeof window.NB_API.fetchGames !== "function") {
       return;
     }
+    paintSkeletons();
 
     try {
       const games = await window.NB_API.fetchGames();
