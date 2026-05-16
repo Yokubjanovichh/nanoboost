@@ -12,6 +12,24 @@
   const GRID_SELECTOR = ".games__grid";
   const DROPDOWN_LIST_SELECTOR = ".dropdown__games .dropdown__list";
 
+  // API origin so /uploads/... paths resolve against the backend host
+  // rather than nanoboost.io (which doesn't serve those files).
+  const API_ORIGIN = (function () {
+    try {
+      const base = window.NB_PUBLIC_API_URL || "";
+      return base ? new URL(base).origin : "";
+    } catch (_) {
+      return "";
+    }
+  })();
+
+  function absolutizeBackendUrl(path) {
+    if (!path) return "";
+    if (/^https?:\/\//i.test(path)) return path;
+    if (path.indexOf("/uploads/") === 0 && API_ORIGIN) return API_ORIGIN + path;
+    return path;
+  }
+
   // Mirror of the chevron SVG used by the existing dropdown items.
   const CHEVRON_SVG =
     '<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" ' +
@@ -39,8 +57,10 @@
 
   function buildGameCard(game) {
     const status = effectiveStatus(game);
-    const desk = escape(game.image_desktop_url || "");
-    const mob = escape(game.image_mobile_url || game.image_desktop_url || "");
+    const desk = escape(absolutizeBackendUrl(game.image_desktop_url || ""));
+    const mob = escape(
+      absolutizeBackendUrl(game.image_mobile_url || game.image_desktop_url || ""),
+    );
     const name = escape(game.name || "");
     const alt = escape(
       (game.description || game.name || "").toString().slice(0, 200),
