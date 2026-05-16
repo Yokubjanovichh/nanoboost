@@ -2519,6 +2519,23 @@ a {
   cursor: grab;
   -webkit-user-select: none;
   user-select: none;
+  /* Fade out at left/right edges so cards visibly emerge from / fade
+     into the rim while scrolling — much clearer motion perception
+     than a hard cut. Browsers without mask support degrade silently. */
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 6%,
+    black 94%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 6%,
+    black 94%,
+    transparent 100%
+  );
 }
 .testimonials__viewport::-webkit-scrollbar {
   display: none;
@@ -2555,7 +2572,10 @@ a {
      "perfectly aligned" state, which makes the scrollability obvious. */
   flex: 0 0 clamp(280px, 28%, 360px);
   scroll-snap-align: start;
-  scroll-snap-stop: always;
+  /* `normal` (not `always`) lets fast drags / momentum carry past
+     multiple cards before snapping — feels smoother than the hard
+     per-card stop. */
+  scroll-snap-stop: normal;
   min-width: 0;
   position: relative;
   isolation: isolate;
@@ -2587,6 +2607,24 @@ a {
 @media (max-width: 640px) {
   .testimonial {
     flex-basis: 85%;
+  }
+  /* Smaller fade band on small screens — at this width the 6% band
+     was eating too much visible card. */
+  .testimonials__viewport {
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 3%,
+      black 97%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 3%,
+      black 97%,
+      transparent 100%
+    );
   }
 }
 @media (prefers-reduced-motion: reduce) {
