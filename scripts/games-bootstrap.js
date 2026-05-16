@@ -1,0 +1,144 @@
+// Populates the homepage "Choose Your Game" grid and the navigation
+// dropdown from /public/games. Falls back silently to the hardcoded
+// markup when the API is unreachable, returns empty, or the response
+// shape isn't what we expect.
+//
+// Backend Phase 5 will add a `status` field; until then we treat every
+// game as "active" so the page keeps working through the deploy lag.
+
+(function () {
+  "use strict";
+
+  const GRID_SELECTOR = ".games__grid";
+  const DROPDOWN_LIST_SELECTOR = ".dropdown__games .dropdown__list";
+
+  // Mirror of the chevron SVG used by the existing dropdown items.
+  const CHEVRON_SVG =
+    '<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" ' +
+    'viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" ' +
+    'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+    '<polyline points="9 18 15 12 9 6"/></svg>';
+
+  function escape(str) {
+    return String(str == null ? "" : str)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+  }
+
+  // Defensive: tolerate the missing `status` field while BE Phase 5
+  // hasn't rolled out yet. Anything we don't recognise is treated as
+  // "active" so the user can still click through.
+  function effectiveStatus(game) {
+    const raw = (game && game.status ? String(game.status) : "").toLowerCase();
+    if (raw === "coming_soon" || raw === "hidden") return raw;
+    return "active";
+  }
+
+  function buildGameCard(game) {
+    const status = effectiveStatus(game);
+    const desk = escape(game.image_desktop_url || "");
+    const mob = escape(game.image_mobile_url || game.image_desktop_url || "");
+    const name = escape(game.name || "");
+    const alt = escape(
+      (game.description || game.name || "").toString().slice(0, 200),
+    );
+
+    const cta =
+      status === "active"
+        ? '<a class="game-card__cta" href="./pages/gta5.html">CHOOSE A SERVICE</a>'
+        : '<button type="button" class="game-card__cta" disabled>Coming Soon</button>';
+
+    return (
+      '<article class="game-card' +
+      (status === "coming_soon" ? " game-card--coming-soon" : "") +
+      '">' +
+      "<picture>" +
+      '<source media="(max-width: 480px), (orientation: landscape) and (max-height: 500px)" srcset="' +
+      mob +
+      '">' +
+      '<img class="game-card__img" src="' +
+      desk +
+      '" alt="' +
+      alt +
+      '" loading="lazy">' +
+      "</picture>" +
+      '<div class="game-card__content">' +
+      '<h3 class="game-card__title">' +
+      name +
+      "</h3>" +
+      cta +
+      "</div>" +
+      "</article>"
+    );
+  }
+
+  function buildNavDropdownItem(game) {
+    return (
+      '<li class="dropdown__item" data-game="' +
+      escape(game.slug || "") +
+      '">' +
+      "<span>" +
+      escape(game.name || "") +
+      "</span>" +
+      CHEVRON_SVG +
+      "</li>"
+    );
+  }
+
+  async function bootstrap() {
+    if (!window.NB_API || typeof window.NB_API.fetchGames !== "function") {
+      return;
+    }
+
+    try {
+      const games = await window.NB_API.fetchGames();
+      if (!Array.isArray(games) || games.length === 0) return;
+
+      // Hide what the backend marks hidden; admins may still want to
+      // surface "coming_soon" on the homepage with a disabled CTA.
+      const visible = games.filter(function (g) {
+        return effectiveStatus(g) !== "hidden";
+      });
+      if (visible.length === 0) return;
+
+      // 1) Homepage grid — preserve the trailing "custom" CTA card.
+      const grid = document.querySelector(GRID_SELECTOR);
+      if (grid) {
+        const customCard = grid.querySelector(".game-card--custom");
+        const cardsHtml = visible.map(buildGameCard).join("");
+        grid.innerHTML = cardsHtml + (customCard ? customCard.outerHTML : "");
+      }
+
+      // 2) Navigation dropdown — only active games are clickable.
+      const dropdownList = document.querySelector(DROPDOWN_LIST_SELECTOR);
+      if (dropdownList) {
+        const activeGames = visible.filter(function (g) {
+          return effectiveStatus(g) === "active";
+        });
+        if (activeGames.length > 0) {
+          dropdownList.innerHTML = activeGames.map(buildNavDropdownItem).join("");
+        }
+      }
+
+      window.dispatchEvent(
+        new CustomEvent("nb:games-loaded", {
+          detail: { count: visible.length, source: "api" },
+        }),
+      );
+    } catch (e) {
+      if (console && typeof console.warn === "function") {
+        console.warn("[NB] games bootstrap failed:", e);
+      }
+      // Hardcoded markup stays in place — graceful fallback.
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", bootstrap, { once: true });
+  } else {
+    bootstrap();
+  }
+})();
