@@ -2482,6 +2482,30 @@ a {
   gap: clamp(3px, 0.35vw, 6px);
   margin-bottom: clamp(14px, 1.2vw, 18px);
 }
+/* API-driven testimonials use Unicode glyphs instead of SVG paths.
+   When the stars container holds text only (no <svg> child), render
+   the glyphs at the same size with a gradient text fill. */
+.testimonial__stars:not(:has(svg)) {
+  font-size: clamp(22px, 1.6vw, 28px);
+  line-height: 1;
+  letter-spacing: 0.05em;
+  background: linear-gradient(90deg, #2de1fe, #6849fe, #9d21fe);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+.testimonial__author {
+  font-size: clamp(2rem, 1.4vw, 2.5rem);
+  line-height: 1.15;
+  font-weight: 600;
+  color: transparent;
+  background: linear-gradient(90deg, #5e6bff 0, #7e4dff 55%, #9b3df2 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0;
+}
 .testimonial__stars svg {
   width: clamp(22px, 1.6vw, 28px);
   height: clamp(22px, 1.6vw, 28px);
