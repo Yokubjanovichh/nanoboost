@@ -2512,9 +2512,18 @@ a {
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
   padding-bottom: 1rem;
+  cursor: grab;
+  -webkit-user-select: none;
+  user-select: none;
 }
 .testimonials__viewport::-webkit-scrollbar {
   display: none;
+}
+.testimonials__viewport.is-grabbing {
+  cursor: grabbing;
+  /* Disable smooth scroll while dragging so the cursor doesn't drift
+     ahead of the scroll position. Snap re-engages on mouseup. */
+  scroll-behavior: auto;
 }
 .testimonials__track {
   display: flex;

@@ -482,12 +482,61 @@ const nbIsInPages = () =>
       '.footer__link[aria-disabled="true"], .footer__contact[aria-disabled="true"]',
     ) && e.preventDefault();
   }));
-// Testimonials swipe is now pure CSS scroll-snap on .testimonials__viewport
-// — see styles/shared.css. The custom drag carousel and per-card SVG
-// gradient cloning that lived here have been removed; modern browsers
-// resolve url(#testimonialStarGradient) against the same-document <defs>
-// fine, and reviews-bootstrap.js preserves that <defs> block when it
-// rewrites the track.
+// Testimonials carousel uses native CSS scroll-snap for touch / trackpad
+// (see styles/shared.css). Desktop users with only a mouse get a
+// click-and-drag affordance on top of that — touch event handlers are
+// deliberately untouched so mobile swipe keeps working unchanged.
+{
+  const DRAG_THRESHOLD_PX = 5;
+  document.querySelectorAll(".testimonials__viewport").forEach((viewport) => {
+    let isDown = false;
+    let startX = 0;
+    let scrollLeft = 0;
+    let walked = 0;
+
+    viewport.addEventListener("mousedown", (e) => {
+      if (e.button !== 0) return;
+      isDown = true;
+      walked = 0;
+      viewport.classList.add("is-grabbing");
+      startX = e.pageX - viewport.offsetLeft;
+      scrollLeft = viewport.scrollLeft;
+    });
+
+    viewport.addEventListener("mousemove", (e) => {
+      if (!isDown) return;
+      const walk = e.pageX - viewport.offsetLeft - startX;
+      walked = Math.abs(walk);
+      if (walked > DRAG_THRESHOLD_PX) {
+        e.preventDefault();
+        viewport.scrollLeft = scrollLeft - walk;
+      }
+    });
+
+    const stop = () => {
+      if (!isDown) return;
+      isDown = false;
+      viewport.classList.remove("is-grabbing");
+    };
+    viewport.addEventListener("mouseup", stop);
+    viewport.addEventListener("mouseleave", stop);
+
+    // Swallow the click that fires at the end of a real drag so a drag
+    // landing on an anchor/avatar doesn't navigate. Capture phase wins
+    // against link handlers.
+    viewport.addEventListener(
+      "click",
+      (e) => {
+        if (walked > DRAG_THRESHOLD_PX) {
+          e.preventDefault();
+          e.stopPropagation();
+          walked = 0;
+        }
+      },
+      true,
+    );
+  });
+}
 {
   const e = document.querySelectorAll(".animated-border");
   if (e.length) {
