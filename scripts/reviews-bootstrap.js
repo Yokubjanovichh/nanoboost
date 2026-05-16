@@ -7,7 +7,7 @@
 (function () {
   "use strict";
 
-  const TESTIMONIALS_SELECTOR = ".testimonials__grid";
+  const TESTIMONIALS_SELECTOR = ".testimonials__track";
   const MAX_REVIEWS = 12;
   const SKELETON_COUNT = 3;
 
