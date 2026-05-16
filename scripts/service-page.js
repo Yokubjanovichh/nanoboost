@@ -144,11 +144,29 @@ const SERVICE_CONFIG = window.NB_SERVICE_CONFIG || {},
         )
         .join(""));
   },
+  renderRelatedSkeleton = (target, count = 4) => {
+    const cell =
+      '<article class="service-card service-card--skeleton" aria-hidden="true">' +
+      '<div class="service-card__img service-card__img--skeleton skeleton"></div>' +
+      '<div class="service-card__content">' +
+      '<div class="service-card__name service-card__name--skeleton skeleton"></div>' +
+      '<div class="service-card__price service-card__price--skeleton skeleton"></div>' +
+      '<div class="service-card__btn service-card__btn--skeleton skeleton"></div>' +
+      "</div>" +
+      "</article>";
+    target.innerHTML = cell.repeat(count);
+  },
   renderRelatedServices = (e) => {
     const t = document.querySelector("#related-services-grid");
     if (!t) return;
     const r = SERVICE_CONFIG[e];
-    if (!r) return;
+    // No config yet — show skeleton placeholders. nb:services-loaded
+    // will trigger another applyServiceToHero → renderRelatedServices
+    // pass with the real data, which overwrites these cells.
+    if (!r) {
+      renderRelatedSkeleton(t, 4);
+      return;
+    }
     const n = r.platform || "",
       s = (e) => e.replace(/^gta-/, "").replace(/-(ps|xbox|pc)$/, ""),
       c = s(e),
@@ -259,13 +277,17 @@ const SERVICE_CONFIG = window.NB_SERVICE_CONFIG || {},
     return e && SERVICE_CONFIG[e] ? e : null;
   },
   initialService = getServiceFromUrl() || "gta-cash-cars-ps";
-// Hide the hardcoded fallback hero image until the API data arrives and
-// applyServiceToHero swaps in the real <picture>. Without this the user
-// briefly sees the wrong service's image on the first paint of any
-// services.html?service=… URL.
+// Hero + related-services skeletons: drop in placeholders so the page
+// isn't blank (or showing the wrong hardcoded service) while the API
+// resolves. applyServiceToHero swaps both in once the data arrives.
 (() => {
-  const hardcoded = document.querySelector(".service-hero__image-frame img");
-  if (hardcoded) hardcoded.style.visibility = "hidden";
+  const frame = document.querySelector(".service-hero__image-frame");
+  if (frame) {
+    frame.innerHTML =
+      '<div class="service-hero__image service-hero__image--skeleton skeleton" aria-hidden="true"></div>';
+  }
+  const relatedGrid = document.querySelector("#related-services-grid");
+  if (relatedGrid) renderRelatedSkeleton(relatedGrid, 4);
 })();
 (applyServiceToHero(initialService),
   window.addEventListener("popstate", () => {

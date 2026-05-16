@@ -98,6 +98,64 @@
   width: 80px;
   border-radius: 4px;
 }
+/* Service cards loading state — used both on the GTA5 grid and the
+   "related services" rail on a service detail page. */
+.service-card--skeleton {
+  pointer-events: none;
+}
+.service-card__img--skeleton {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: 14px;
+}
+.service-card__name--skeleton {
+  display: block;
+  height: 1.2em;
+  width: 75%;
+  margin: 0.9rem 0 0.6rem;
+  border-radius: 6px;
+}
+.service-card__price--skeleton {
+  display: block;
+  height: 1em;
+  width: 45%;
+  margin-bottom: 0.9rem;
+  border-radius: 6px;
+}
+.service-card__btn--skeleton {
+  display: block;
+  height: 2.4em;
+  width: 100%;
+  border-radius: 10px;
+}
+/* Hero image placeholder shown on services.html?service=… while the
+   API resolves. Aspect ratio mirrors the real <picture>. */
+.service-hero__image--skeleton {
+  width: 100%;
+  aspect-ratio: 1536 / 1024;
+  border-radius: 16px;
+}
+/* Testimonials placeholder shown on the home page before reviews load. */
+.testimonial--skeleton {
+  pointer-events: none;
+}
+.testimonial__stars--skeleton {
+  height: 1.2em;
+  width: 100px;
+  margin-bottom: 0.75rem;
+  border-radius: 4px;
+}
+.testimonial__text--skeleton {
+  height: 4.2em;
+  width: 100%;
+  margin-bottom: 0.75rem;
+  border-radius: 6px;
+}
+.testimonial__author--skeleton {
+  height: 1em;
+  width: 40%;
+  border-radius: 4px;
+}
 html {
   font-size: clamp(8.5px, 1.5vw, 9.5px);
   scroll-behavior: smooth;

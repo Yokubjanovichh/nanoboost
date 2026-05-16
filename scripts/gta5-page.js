@@ -20,10 +20,28 @@ const GTA5_SERVICES = window.NB_GTA5_SERVICES || { ps: [], pc: [], xbox: [] },
     (t.searchParams.set("platform", e),
       window.history.replaceState({ platform: e }, "", t));
   },
+  renderSkeletonCards = (target, count = 4) => {
+    const cell =
+      '<article class="service-card service-card--skeleton" aria-hidden="true">' +
+      '<div class="service-card__img service-card__img--skeleton skeleton"></div>' +
+      '<div class="service-card__content">' +
+      '<div class="service-card__name service-card__name--skeleton skeleton"></div>' +
+      '<div class="service-card__price service-card__price--skeleton skeleton"></div>' +
+      '<div class="service-card__btn service-card__btn--skeleton skeleton"></div>' +
+      "</div>" +
+      "</article>";
+    target.innerHTML = cell.repeat(count);
+  },
   renderCards = (e) => {
     const t = document.querySelector("#gta5-services-grid");
     if (!t) return;
     const a = GTA5_SERVICES[e] || [];
+    // No data yet (services-bootstrap hasn't fired nb:services-loaded) —
+    // show skeleton placeholders so the grid doesn't render empty.
+    if (a.length === 0) {
+      renderSkeletonCards(t, 4);
+      return;
+    }
     ((t.innerHTML = ""),
       a.forEach((e) => {
         const a = document.createElement("article");
