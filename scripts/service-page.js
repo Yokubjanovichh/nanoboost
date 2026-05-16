@@ -200,14 +200,31 @@ const SERVICE_CONFIG = window.NB_SERVICE_CONFIG || {},
     const heroDesktop = r.imageSrcDesktop || r.imageSrc || "";
     const heroMobile = r.imageSrcMobile || "";
     if (frame && heroDesktop) {
-      frame.innerHTML = buildPicture(heroDesktop, heroMobile, r.imageAlt || "", {
-        className: "service-hero__image",
-        width: 1536,
-        height: 1024,
-        fetchpriority: "high",
-        loading: "eager",
-        decoding: "async",
-      });
+      // Preload the new hero image before swapping it in so the user
+      // doesn't see the previous service's image flash through the smooth
+      // scroll. If the network is slow we still cap the wait at 1.5s so the
+      // page never feels stuck.
+      const swap = () => {
+        frame.innerHTML = buildPicture(heroDesktop, heroMobile, r.imageAlt || "", {
+          className: "service-hero__image",
+          width: 1536,
+          height: 1024,
+          fetchpriority: "high",
+          loading: "eager",
+          decoding: "async",
+        });
+      };
+      const preload = new Image();
+      let done = false;
+      const finish = () => {
+        if (done) return;
+        done = true;
+        swap();
+      };
+      preload.onload = finish;
+      preload.onerror = finish;
+      preload.src = heroDesktop;
+      setTimeout(finish, 1500);
     }
     if (
       (dropdownApi &&
