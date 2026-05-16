@@ -442,6 +442,15 @@ body:not([class]) .main {
   left: 1.2rem;
   transform: translateY(-50%);
 }
+/* API-driven flag for games whose backend status === "coming_soon".
+   Disabled CTA already styles itself; this dims the whole card so the
+   "not yet" status reads at a glance. */
+.game-card--coming-soon {
+  opacity: 0.65;
+}
+.game-card--coming-soon:hover {
+  opacity: 0.78;
+}
 .game-card__cta:disabled:active::after,
 .game-card__cta:disabled:hover::after,
 .game-card__cta[disabled]:active::after,
