@@ -8,6 +8,11 @@
       "source": "/index.html",
       "destination": "/",
       "permanent": true
+    },
+    {
+      "source": "/pages/gta5.html",
+      "destination": "/pages/game.html?game=gta5",
+      "permanent": true
     }
   ],
   "headers": [

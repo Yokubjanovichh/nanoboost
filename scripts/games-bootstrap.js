@@ -62,18 +62,36 @@
       absolutizeBackendUrl(game.image_mobile_url || game.image_desktop_url || ""),
     );
     const name = escape(game.name || "");
+    const slug = escape(game.slug || "");
     const alt = escape(
       (game.description || game.name || "").toString().slice(0, 200),
     );
 
-    const cta =
-      status === "active"
-        ? '<a class="game-card__cta" href="./pages/gta5.html">CHOOSE A SERVICE</a>'
-        : '<button type="button" class="game-card__cta" disabled>Coming Soon</button>';
+    // A game is clickable only when it's marked active AND has at least
+    // one published service; otherwise we degrade the CTA so we never
+    // ship an admin to an empty grid.
+    const serviceCount = Number(game.service_count || 0);
+    const hasServices = serviceCount > 0;
+    const isClickable = status === "active" && hasServices;
+    const dimmed = !isClickable;
+
+    let cta;
+    if (isClickable) {
+      cta =
+        '<a class="game-card__cta" href="./pages/game.html?game=' +
+        slug +
+        '">CHOOSE A SERVICE</a>';
+    } else if (status === "coming_soon") {
+      cta =
+        '<button type="button" class="game-card__cta" disabled>Coming Soon</button>';
+    } else {
+      cta =
+        '<button type="button" class="game-card__cta" disabled>Services Coming Soon</button>';
+    }
 
     return (
       '<article class="game-card' +
-      (status === "coming_soon" ? " game-card--coming-soon" : "") +
+      (dimmed ? " game-card--coming-soon" : "") +
       '">' +
       "<picture>" +
       '<source media="(max-width: 480px), (orientation: landscape) and (max-height: 500px)" srcset="' +
