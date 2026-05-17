@@ -1,7 +1,7 @@
-body.page--gta5 {
+body.page--game {
   overflow-x: hidden;
 }
-.page--gta5 .main > section.container + section.container {
+.page--game .main > section.container + section.container {
   margin-top: clamp(8rem, 6vw, 14rem);
 }
 .gta5-intro__head {
@@ -88,7 +88,7 @@ body.page--gta5 {
 .gta5-intro__tab:hover {
   color: #fff;
 }
-.page--gta5 .services__grid {
+.page--game .services__grid {
   margin-top: 0;
 }
 .gta5-offer {
@@ -286,12 +286,12 @@ body.page--gta5 {
   }
 }
 @media (max-width: 1599.98px) {
-  .page--gta5 .services__grid > .service-card:nth-child(5) {
+  .page--game .services__grid > .service-card:nth-child(5) {
     display: flex;
   }
 }
 @media (max-width: 480px), (orientation: landscape) and (max-height: 500px) {
-  .page--gta5 .services__grid > .service-card:nth-child(5) {
+  .page--game .services__grid > .service-card:nth-child(5) {
     display: grid;
   }
 }
