@@ -27,6 +27,9 @@
   function buildPicture(desktop, mobile, alt, className) {
     const desk = nbEscape(desktop || "");
     const mob = nbEscape(mobile || desktop || "");
+    // width/height attrs let the browser reserve the right slot
+    // before the image bytes arrive — without them, the card grows
+    // when the network resolves and the page jumps under the user.
     return (
       "<picture>" +
       '<source media="(max-width: 768px)" srcset="' +
@@ -38,7 +41,7 @@
       nbEscape(alt || "") +
       '" class="' +
       className +
-      '" loading="lazy">' +
+      '" width="1600" height="1300" loading="lazy">' +
       "</picture>"
     );
   }

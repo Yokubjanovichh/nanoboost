@@ -101,7 +101,7 @@
       desk +
       '" alt="' +
       alt +
-      '" loading="lazy">' +
+      '" width="810" height="1464" loading="lazy">' +
       "</picture>" +
       '<div class="game-card__content">' +
       '<h3 class="game-card__title">' +
