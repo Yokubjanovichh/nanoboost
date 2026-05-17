@@ -258,22 +258,31 @@
     animation: none;
   }
 }
-/* Game cards loading state (shown by games-bootstrap.js before API resolves). */
+/* Game cards loading state (shown by games-bootstrap.js before API resolves).
+   Mirrors the real .game-card layout: image is positioned absolutely so
+   the card's min-height owns the slot and the swap from skeleton to real
+   doesn't shift the rest of the page. */
 .game-card--skeleton {
   pointer-events: none;
 }
 .game-card__img--skeleton {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  aspect-ratio: 810 / 1464;
-  border-radius: 16px;
+  height: 100%;
+  border-radius: inherit;
 }
 .game-card__title--skeleton {
+  position: relative;
+  z-index: 1;
   height: 1.4em;
   width: 70%;
   margin: 1rem 0 0.75rem;
   border-radius: 6px;
 }
 .game-card__cta--skeleton {
+  position: relative;
+  z-index: 1;
   height: 2.6em;
   width: 100%;
   border-radius: 10px;
@@ -294,29 +303,37 @@
   pointer-events: none;
 }
 .service-card__img--skeleton {
-  width: 100%;
-  aspect-ratio: 16 / 10;
-  border-radius: 14px;
+  width: calc(100% - 0.2rem);
+  /* Matches the real .service-card__img aspect-ratio so the swap from
+     skeleton to <img> doesn't shift the card height. */
+  aspect-ratio: 16 / 13;
+  margin: 0 auto 1.8rem;
+  border-radius: 1.8rem;
 }
 .service-card__name--skeleton {
   display: block;
-  height: 1.2em;
+  /* Real title is two-line clamped to 2.56em — match it so the swap
+     doesn't change the card height. */
+  height: 2.56em;
   width: 75%;
-  margin: 0.9rem 0 0.6rem;
+  margin-bottom: 1.8rem;
   border-radius: 6px;
 }
 .service-card__price--skeleton {
   display: block;
-  height: 1em;
+  height: 1.6em;
   width: 45%;
-  margin-bottom: 0.9rem;
+  margin-bottom: 1.8rem;
   border-radius: 6px;
 }
 .service-card__btn--skeleton {
   display: block;
-  height: 2.4em;
+  /* Matches .service-card__btn min-height (5.4rem) plus the auto
+     top-margin behaviour by sitting at the bottom of the column. */
+  height: 5.4rem;
   width: 100%;
-  border-radius: 10px;
+  margin-top: auto;
+  border-radius: 999px;
 }
 /* Hero image placeholder shown on services.html?service=… while the
    API resolves. Aspect ratio mirrors the real <picture>. */

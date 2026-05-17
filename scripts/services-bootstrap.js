@@ -185,7 +185,7 @@
       desk +
       '" alt="' +
       alt +
-      '" loading="lazy">' +
+      '" width="1600" height="1300" loading="lazy">' +
       "</picture>" +
       '<div class="service-card__content">' +
       '<h3 class="service-card__name">' +

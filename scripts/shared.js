@@ -1,14 +1,11 @@
 const burger = document.getElementById("burger"),
   nav = document.querySelector(".nav"),
   isMobileNav = () => window.matchMedia("(max-width: 980px)").matches;
-("scrollRestoration" in history && (history.scrollRestoration = "manual"),
-  window.addEventListener("pageshow", () => {
-    window.location.hash ||
-      requestAnimationFrame(() => {
-        window.scrollTo(0, 0);
-      });
-  }),
-  burger &&
+// Trust the browser's native scroll restoration. The previous code
+// forced scrollTo(0, 0) inside a pageshow → requestAnimationFrame,
+// which raced any scroll the user did during the bootstrap skeleton
+// phase and yanked them back to the top once async content arrived.
+(burger &&
     nav &&
     (burger.addEventListener("click", () => {
       (burger.classList.toggle("is-open"),
