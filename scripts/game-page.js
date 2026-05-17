@@ -9,6 +9,11 @@
 
   const SUPPORTED_PLATFORMS = ["ps", "xbox", "pc"];
   const DEFAULT_GAME = "gta5";
+  const NB_PLATFORM_NAME = {
+    ps: "PS4/PS5",
+    xbox: "Xbox One/Series",
+    pc: "PC",
+  };
 
   function nbEscape(s) {
     return String(s == null ? "" : s)
@@ -83,6 +88,50 @@
       "</div>";
   }
 
+  function listIdFor(platform) {
+    return "game_" + currentGame + "_" + platform;
+  }
+  function listNameFor(platform) {
+    return (currentGameName || currentGame) + " — " + (NB_PLATFORM_NAME[platform] || platform);
+  }
+  function priceFromSvc(svc) {
+    const raw = (svc && svc.priceNow) || "";
+    return parseFloat(String(raw).replace(/[^0-9.]/g, "")) || 0;
+  }
+
+  function trackPlatformListView(platform, list) {
+    if (typeof window.nbTrack !== "function") return;
+    window.nbTrack("view_item_list", {
+      item_list_id: listIdFor(platform),
+      item_list_name: listNameFor(platform),
+      items: list.map(function (svc, i) {
+        return {
+          item_id: svc.serviceParam || "",
+          item_name: svc.title || "",
+          item_category: platform,
+          index: i,
+          price: priceFromSvc(svc),
+        };
+      }),
+    });
+  }
+
+  function trackSelectItem(platform, svc) {
+    if (typeof window.nbTrack !== "function") return;
+    window.nbTrack("select_item", {
+      item_list_id: listIdFor(platform),
+      item_list_name: listNameFor(platform),
+      items: [
+        {
+          item_id: svc.serviceParam || "",
+          item_name: svc.title || "",
+          item_category: platform,
+          price: priceFromSvc(svc),
+        },
+      ],
+    });
+  }
+
   function renderCards(platform) {
     if (!grid) return;
     const buckets =
@@ -100,6 +149,11 @@
     }
 
     grid.innerHTML = "";
+    trackPlatformListView(platform, list);
+    // Cache the rendered list so the delegated click handler can match
+    // the clicked card's slug back to the service object for the event.
+    grid.__nbLastList = list;
+    grid.__nbLastPlatform = platform;
     list.forEach(function (svc) {
       const article = document.createElement("article");
       article.className = "service-card";
@@ -324,4 +378,20 @@
     const p = u.searchParams.get("platform");
     renderCards(SUPPORTED_PLATFORMS.indexOf(p) >= 0 ? p : "ps");
   });
+
+  // Delegated click handler — fires GA4 select_item before the browser
+  // follows the BUY NOW link to services.html.
+  if (grid) {
+    grid.addEventListener("click", function (e) {
+      const link = e.target.closest("a.service-card__btn[data-service]");
+      if (!link) return;
+      const slug = link.dataset.service;
+      const list = grid.__nbLastList || [];
+      const platform = grid.__nbLastPlatform || "ps";
+      const svc = list.find(function (s) {
+        return s.serviceParam === slug;
+      });
+      if (svc) trackSelectItem(platform, svc);
+    });
+  }
 })();

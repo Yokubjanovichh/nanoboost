@@ -48,9 +48,36 @@
       .forEach((el) => (el.textContent = "0"));
   }
 
-  function showSuccess() {
+  function trackPurchase(status) {
+    if (typeof window.nbTrack !== "function" || !status) return;
+    const total = Number(status.final_total_usd || status.value || 0);
+    const items = Array.isArray(status.items)
+      ? status.items.map(function (it) {
+          const unit =
+            Number(it.unit_price_usd || it.price_usd || it.price || 0) || 0;
+          const qty = Number(it.quantity || it.qty || 1) || 1;
+          const snap = it.service_snapshot || {};
+          return {
+            item_id: it.service_slug || snap.slug || "",
+            item_name: it.service_title || snap.title || "",
+            item_variant: it.option_label || it.option || "",
+            price: unit,
+            quantity: qty,
+          };
+        })
+      : [];
+    window.nbTrack("purchase", {
+      transaction_id: status.order_number || orderNumber || "",
+      value: total,
+      currency: "USD",
+      items: items,
+    });
+  }
+
+  function showSuccess(status) {
     stopped = true;
     clearCart();
+    trackPurchase(status);
     setIcon(
       "success",
       '<svg viewBox="0 0 52 52" width="52" height="52" fill="none">' +

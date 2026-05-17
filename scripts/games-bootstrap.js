@@ -197,6 +197,20 @@
           detail: { count: visible.length, source: "api" },
         }),
       );
+
+      if (typeof window.nbTrack === "function") {
+        window.nbTrack("view_item_list", {
+          item_list_id: "choose_your_game",
+          item_list_name: "Choose Your Game",
+          items: visible.map(function (g, i) {
+            return {
+              item_id: g.slug || "",
+              item_name: g.name || "",
+              index: i,
+            };
+          }),
+        });
+      }
     } catch (e) {
       if (console && typeof console.warn === "function") {
         console.warn("[NB] games bootstrap failed:", e);

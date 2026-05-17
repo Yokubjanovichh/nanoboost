@@ -237,6 +237,26 @@
       hot.map(buildHotServiceCard).join("") +
       (customCard ? customCard.outerHTML : "");
     syncHotPrices();
+    trackHotListView(hot);
+  }
+
+  function trackHotListView(hot) {
+    if (typeof window.nbTrack !== "function") return;
+    window.nbTrack("view_item_list", {
+      item_list_id: "hot_right_now",
+      item_list_name: "Hot Right Now",
+      items: hot.map(function (s, i) {
+        const opt =
+          (Array.isArray(s.options) && s.options[0]) || {};
+        return {
+          item_id: s.slug || "",
+          item_name: String(s.title || "").replace(/<br\s*\/?>/g, " "),
+          item_category: (s.platform || "").toLowerCase(),
+          index: i,
+          price: Number(opt.price_usd || 0),
+        };
+      }),
+    });
   }
 
   document.addEventListener("nb:currency-change", syncHotPrices);
