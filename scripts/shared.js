@@ -104,152 +104,258 @@ dropdownLink &&
     dropdownItem.contains(e.target) ||
       (dropdownItem.classList.remove("is-open"), resetDropdownSteps());
   }));
-const gameItems = dropdownRoot?.querySelectorAll(".dropdown__item[data-game]"),
-  platformLists = dropdownRoot?.querySelectorAll(
-    ".dropdown__platform-list[data-for-game]",
-  ),
-  subLists = dropdownRoot?.querySelectorAll(".dropdown__sublist[data-for]"),
-  subItems = dropdownRoot?.querySelectorAll(".dropdown__subitem a"),
-  setActiveSublist = (e) => {
-    if (!subLists?.length) return;
-    if ((subLists.forEach((e) => e.classList.remove("is-active")), !e)) return;
-    const t = dropdownRoot?.querySelector(
-      `.dropdown__sublist[data-for="${e}"]`,
-    );
-    t && t.classList.add("is-active");
-  },
-  setActiveGame = (e) => {
-    if (!dropdownRoot || !platformLists?.length) return;
-    (dropdownRoot.classList.add("has-game"),
-      dropdownRoot.classList.remove("has-platform"),
-      gameItems?.forEach((e) => e.classList.remove("is-active")));
-    const t = dropdownRoot.querySelector(`.dropdown__item[data-game="${e}"]`);
-    (t && t.classList.add("is-active"),
-      platformLists.forEach((e) => e.classList.remove("is-active")));
-    const o = dropdownRoot.querySelector(
-      `.dropdown__platform-list[data-for-game="${e}"]`,
-    );
-    (o && o.classList.add("is-active"),
-      o
-        ?.querySelectorAll(".dropdown__item[data-platform]")
-        .forEach((e) => e.classList.remove("is-active")),
-      setActiveSublist(null),
-      (activeGameLabel = t?.textContent?.trim() || e),
-      (currentStep = "platforms"),
-      isMobileNav() && updateBreadcrumb());
-  },
-  serviceTypeMap = {
-    "cash-cars": { ps: "gta-cash-cars-ps", xbox: "gta-cash-cars-xbox" },
-    cash: { ps: "gta-cash-ps", xbox: "gta-cash-xbox", pc: "gta-cash-pc" },
-    level: { ps: "gta-level-ps", xbox: "gta-level-xbox", pc: "gta-level-pc" },
-    modded: { ps: "gta-modded-ps", xbox: "gta-modded-xbox" },
-    unlock: { pc: "gta-unlock-pc" },
-    cars: { ps: "gta-cars-ps", xbox: "gta-cars-xbox" },
-    luxury: { ps: "gta-luxury-ps", xbox: "gta-luxury-xbox" },
-    cayo: { ps: "gta-cayo-ps", xbox: "gta-cayo-xbox" },
-    penthouses: { ps: "gta-penthouses-ps", xbox: "gta-penthouses-xbox" },
-  },
-  getServicesPagePath = () =>
-    window.location.pathname.includes("/pages/")
-      ? "./services.html"
-      : "./pages/services.html",
-  updateSublistLinks = (e) => {
-    const t = dropdownRoot?.querySelectorAll(
-      ".dropdown__sublist.is-active a[data-service-type]",
-    );
-    if (!t) return;
-    const o = getServicesPagePath();
-    t.forEach((t) => {
-      const r = t.dataset.serviceType,
-        s = serviceTypeMap[r]?.[e];
-      s
-        ? ((t.href = `${o}?service=${s}`),
-          t
-            .closest(".dropdown__subitem")
-            ?.classList.remove("dropdown__subitem--unavailable"))
-        : ((t.href = "#"),
-          t
-            .closest(".dropdown__subitem")
-            ?.classList.add("dropdown__subitem--unavailable"));
-    });
-  },
-  setActivePlatform = (e) => {
-    if (!dropdownRoot) return;
-    const t = dropdownRoot.querySelector(".dropdown__platform-list.is-active");
-    if (!t) return;
-    t.querySelectorAll(".dropdown__item[data-platform]").forEach((e) =>
-      e.classList.remove("is-active"),
-    );
-    const o = t.querySelector(`.dropdown__item[data-platform="${e}"]`);
-    (o && o.classList.add("is-active"),
-      dropdownRoot.classList.add("has-platform"));
-    const r = dropdownRoot.querySelector(
-      ".dropdown__item[data-game].is-active",
-    );
-    (r && setActiveSublist(r.dataset.game),
-      updateSublistLinks(e),
-      (activePlatformLabel = o?.textContent?.trim() || e),
-      (currentStep = "services"),
-      isMobileNav() && updateBreadcrumb());
-  };
-(gameItems?.forEach((e) => {
-  const t = e.dataset.game;
-  t &&
-    (e.addEventListener("mouseenter", () => {
-      isMobileNav() || setActiveGame(t);
-    }),
-    e.addEventListener("click", () => {
-      setActiveGame(t);
-    }),
-    e.addEventListener("keydown", (e) => {
-      ("Enter" !== e.key && " " !== e.key) ||
-        (e.preventDefault(), setActiveGame(t));
-    }));
-}),
-  dropdownRoot
-    ?.querySelectorAll(".dropdown__item[data-platform]")
-    .forEach((e) => {
-      const t = e.dataset.platform;
-      if (!t) return;
-      const o = () => {
-        const t = e.closest(".dropdown__platform-list");
-        return t?.classList.contains("is-active");
-      };
-      (e.addEventListener("mouseenter", () => {
-        o() && (isMobileNav() || setActivePlatform(t));
-      }),
-        e.addEventListener("click", () => {
-          o() && setActivePlatform(t);
-        }),
-        e.addEventListener("keydown", (e) => {
-          ("Enter" !== e.key && " " !== e.key) ||
-            (o() && (e.preventDefault(), setActivePlatform(t)));
-        }));
-    }),
-  subItems?.forEach((e) => {
-    e.addEventListener("click", (t) => {
-      if (e.href && !e.href.endsWith("#"))
+// ---- Dynamic nav dropdown ------------------------------------------
+// Game / platform / service columns are populated from
+// NB_SERVICES_BY_GAME (services-bootstrap.js) so any game the admin
+// publishes shows up automatically. Event delegation on dropdownRoot
+// means we don't have to rebind after the bootstrap rewrites the DOM.
+
+const NB_PLATFORM_LABEL = {
+  ps: "PlayStation 4 / 5",
+  xbox: "Xbox One / Series",
+  pc: "PC",
+};
+const NB_PLATFORM_ORDER = ["ps", "xbox", "pc"];
+const NB_DROPDOWN_CHEVRON =
+  '<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" ' +
+  'viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" ' +
+  'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+  '<polyline points="9 18 15 12 9 6"/></svg>';
+
+function nbEscDropdown(s) {
+  return String(s == null ? "" : s)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+function nbGetServicesPagePath() {
+  return window.location.pathname.includes("/pages/")
+    ? "./services.html"
+    : "./pages/services.html";
+}
+
+function nbBuildDropdownData() {
+  if (!dropdownRoot) return;
+  const byGame = window.NB_SERVICES_BY_GAME || {};
+  const svcPath = nbGetServicesPagePath();
+
+  // 1) Platforms — one <ul> per game, only the platforms with at
+  //    least one service make the cut.
+  const platformsContainer = dropdownRoot.querySelector(".dropdown__platforms");
+  if (platformsContainer) {
+    platformsContainer.innerHTML = Object.keys(byGame)
+      .map(function (slug) {
+        const buckets = byGame[slug] || {};
+        const platforms = NB_PLATFORM_ORDER.filter(function (p) {
+          return Array.isArray(buckets[p]) && buckets[p].length > 0;
+        });
+        if (platforms.length === 0) return "";
+        const items = platforms
+          .map(function (p) {
+            return (
+              '<li class="dropdown__item" data-platform="' +
+              nbEscDropdown(p) +
+              '" tabindex="0"><span>' +
+              nbEscDropdown(NB_PLATFORM_LABEL[p] || p) +
+              "</span>" +
+              NB_DROPDOWN_CHEVRON +
+              "</li>"
+            );
+          })
+          .join("");
         return (
-          dropdownItem?.classList.remove("is-open"),
-          void (
-            isMobileNav() &&
-            (burger?.classList.remove("is-open"),
-            nav?.classList.remove("is-open"),
-            resetDropdownSteps())
-          )
+          '<ul class="dropdown__list dropdown__platform-list" data-for-game="' +
+          nbEscDropdown(slug) +
+          '">' +
+          items +
+          "</ul>"
         );
-      t.preventDefault();
-      const o = e.closest(".dropdown__sublist");
-      (o
-        ?.querySelectorAll(".dropdown__subitem")
-        .forEach((e) => e.classList.remove("dropdown__subitem--active")),
-        e
-          .closest(".dropdown__subitem")
-          ?.classList.add("dropdown__subitem--active"),
-        isMobileNav() || dropdownItem?.classList.remove("is-open"));
+      })
+      .join("");
+  }
+
+  // 2) Services — one <ul> per (game, platform). When user hovers a
+  //    platform the matching list is toggled with .is-active.
+  const subContainer = dropdownRoot.querySelector(".dropdown__sub");
+  if (subContainer) {
+    let html = "";
+    Object.keys(byGame).forEach(function (slug) {
+      const buckets = byGame[slug] || {};
+      NB_PLATFORM_ORDER.forEach(function (platform) {
+        const list = buckets[platform] || [];
+        if (list.length === 0) return;
+        const items = list
+          .map(function (svc) {
+            return (
+              '<li class="dropdown__subitem"><a href="' +
+              svcPath +
+              "?service=" +
+              encodeURIComponent(svc.serviceParam || "") +
+              '">' +
+              nbEscDropdown(svc.title || "") +
+              "</a></li>"
+            );
+          })
+          .join("");
+        html +=
+          '<ul class="dropdown__sublist" data-for="' +
+          nbEscDropdown(slug) +
+          '" data-platform="' +
+          nbEscDropdown(platform) +
+          '">' +
+          items +
+          "</ul>";
+      });
     });
-  }),
-  dropdownRoot && gameItems?.length && resetDropdownSteps());
+    subContainer.innerHTML = html;
+  }
+}
+
+function nbSetActiveGame(slug) {
+  if (!dropdownRoot) return;
+  dropdownRoot.classList.add("has-game");
+  dropdownRoot.classList.remove("has-platform");
+
+  dropdownRoot
+    .querySelectorAll(".dropdown__item[data-game]")
+    .forEach(function (el) {
+      el.classList.toggle("is-active", el.dataset.game === slug);
+    });
+  dropdownRoot
+    .querySelectorAll(".dropdown__platform-list[data-for-game]")
+    .forEach(function (el) {
+      el.classList.toggle("is-active", el.dataset.forGame === slug);
+    });
+  dropdownRoot
+    .querySelectorAll(".dropdown__sublist")
+    .forEach(function (el) {
+      el.classList.remove("is-active");
+    });
+
+  const tile = dropdownRoot.querySelector(
+    ".dropdown__item[data-game].is-active",
+  );
+  activeGameLabel = (tile && tile.textContent.trim()) || slug;
+  currentStep = "platforms";
+  if (isMobileNav()) updateBreadcrumb();
+}
+
+function nbSetActivePlatform(platform) {
+  if (!dropdownRoot) return;
+  const activeGameEl = dropdownRoot.querySelector(
+    ".dropdown__item[data-game].is-active",
+  );
+  if (!activeGameEl) return;
+  const slug = activeGameEl.dataset.game;
+
+  dropdownRoot.classList.add("has-platform");
+
+  const activeList = dropdownRoot.querySelector(
+    '.dropdown__platform-list[data-for-game="' + slug + '"]',
+  );
+  if (activeList) {
+    activeList
+      .querySelectorAll(".dropdown__item[data-platform]")
+      .forEach(function (el) {
+        el.classList.toggle("is-active", el.dataset.platform === platform);
+      });
+  }
+
+  dropdownRoot
+    .querySelectorAll(".dropdown__sublist")
+    .forEach(function (el) {
+      const matches =
+        el.dataset.for === slug && el.dataset.platform === platform;
+      el.classList.toggle("is-active", matches);
+    });
+
+  activePlatformLabel = NB_PLATFORM_LABEL[platform] || platform;
+  currentStep = "services";
+  if (isMobileNav()) updateBreadcrumb();
+}
+
+if (dropdownRoot) {
+  // Capture mouseenter via mouseover delegation (mouseenter doesn't bubble).
+  dropdownRoot.addEventListener("mouseover", function (e) {
+    if (isMobileNav()) return;
+    const gameItem = e.target.closest(".dropdown__item[data-game]");
+    if (gameItem && dropdownRoot.contains(gameItem)) {
+      nbSetActiveGame(gameItem.dataset.game);
+      return;
+    }
+    const platformItem = e.target.closest(".dropdown__item[data-platform]");
+    if (
+      platformItem &&
+      platformItem
+        .closest(".dropdown__platform-list")
+        ?.classList.contains("is-active")
+    ) {
+      nbSetActivePlatform(platformItem.dataset.platform);
+    }
+  });
+
+  dropdownRoot.addEventListener("click", function (e) {
+    const gameItem = e.target.closest(".dropdown__item[data-game]");
+    if (gameItem) {
+      nbSetActiveGame(gameItem.dataset.game);
+      return;
+    }
+    const platformItem = e.target.closest(".dropdown__item[data-platform]");
+    if (
+      platformItem &&
+      platformItem
+        .closest(".dropdown__platform-list")
+        ?.classList.contains("is-active")
+    ) {
+      nbSetActivePlatform(platformItem.dataset.platform);
+      return;
+    }
+    const subLink = e.target.closest(".dropdown__subitem a[href]");
+    if (subLink && subLink.href && !subLink.href.endsWith("#")) {
+      dropdownItem?.classList.remove("is-open");
+      if (isMobileNav()) {
+        burger?.classList.remove("is-open");
+        nav?.classList.remove("is-open");
+        resetDropdownSteps();
+      }
+    }
+  });
+
+  dropdownRoot.addEventListener("keydown", function (e) {
+    if (e.key !== "Enter" && e.key !== " ") return;
+    const gameItem = e.target.closest(".dropdown__item[data-game]");
+    if (gameItem) {
+      e.preventDefault();
+      nbSetActiveGame(gameItem.dataset.game);
+      return;
+    }
+    const platformItem = e.target.closest(".dropdown__item[data-platform]");
+    if (
+      platformItem &&
+      platformItem
+        .closest(".dropdown__platform-list")
+        ?.classList.contains("is-active")
+    ) {
+      e.preventDefault();
+      nbSetActivePlatform(platformItem.dataset.platform);
+    }
+  });
+
+  // Rebuild whenever services finish loading. The dropdown__games
+  // column is populated separately by games-bootstrap.js.
+  window.addEventListener("nb:services-loaded", function () {
+    nbBuildDropdownData();
+    resetDropdownSteps();
+  });
+
+  // First paint: if NB_SERVICES_BY_GAME is already there (cache hit)
+  // build immediately; otherwise wait for the event above.
+  if (window.NB_SERVICES_BY_GAME) nbBuildDropdownData();
+  resetDropdownSteps();
+}
 const faqItems = document.querySelectorAll(".faq-item");
 if (faqItems.length) {
   const e = Array.from(faqItems).find((e) => e.classList.contains("is-open"));

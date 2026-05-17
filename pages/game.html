@@ -799,7 +799,7 @@
             <img
               class="gta5-offer__img skeleton"
               src="../assets/images/custom-service.webp"
-              alt="Custom GTA 5 Online boosting order — tell us what you need"
+              alt="Custom boosting order — tell us what you need"
               width="3420"
               height="1326"
               loading="lazy"
@@ -827,44 +827,19 @@
           </div>
         </div>
       </section>
+      <!-- Game description block — game-page.js shows this only when
+           the matching /public/games entry exposes a non-empty
+           description, otherwise the section stays hidden so blank
+           games don't render an empty rail. -->
       <section
         class="gta5-article container"
-        aria-label="Game boosting information"
+        aria-label="About this game"
+        data-game-description
+        hidden
       >
         <div class="gta5-article__shell">
-          <div class="gta5-article__content">
-            <p class="gta5-article__text">
-              GTA 5 boosting services are designed to help players progress
-              faster in GTA Online and enjoy all game content without long
-              grinding. Whether you need money, RP levels, heist completion,
-              unlock services, or account-related services, our professional
-              boosters will complete your order quickly and efficiently.
-            </p>
-            <p class="gta5-article__text">
-              We provide a full range of GTA Online boosting options, including
-              money boost, RP and level boost, heist carry, unlock all services,
-              and account services for PC, PlayStation, and Xbox platforms. All
-              orders are performed manually by experienced players to ensure
-              quality, speed, and account safety.
-            </p>
-            <p class="gta5-article__text">
-              Our service is suitable for both new and experienced players who
-              want to save time and focus on gameplay. You can customize your
-              order, choose the amount of money or levels, select specific
-              heists, or combine multiple services in one package. We offer
-              flexible pricing, fast delivery, and real-time support via
-              Discord.
-            </p>
-            <p class="gta5-article__text">
-              Privacy and security are our top priorities. We do not use bots,
-              cheats, or automated software. All boosting is done manually with
-              individual instructions for each client. Our support team is
-              available 24/7 to answer questions and help with your order.
-            </p>
-            <p class="gta5-article__text">
-              Choose a reliable GTA 5 boosting service and start enjoying GTA
-              Online with maximum progress today.
-            </p>
+          <div class="gta5-article__content" data-game-description-body>
+            <!-- paragraphs injected by game-page.js -->
           </div>
         </div>
       </section>
