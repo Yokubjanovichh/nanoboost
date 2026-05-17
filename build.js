@@ -113,9 +113,12 @@ function copyDirSync(src, dest) {
   const PUBLIC_API_URL =
     process.env.NB_API_URL ||
     "https://nanoboost-api-production.up.railway.app/api/v1";
-  const apiUrlSnippet = `<script>window.NB_PUBLIC_API_URL=${JSON.stringify(
+  // GA4 measurement ID is empty by default so dev/staging stay tracking-free.
+  // Production builds: NB_GA4_ID=G-XXXXXXXXXX node build.js
+  const GA4_ID = process.env.NB_GA4_ID || "";
+  const headSnippet = `<script>window.NB_PUBLIC_API_URL=${JSON.stringify(
     PUBLIC_API_URL,
-  )};</script>`;
+  )};window.NB_GA4_MEASUREMENT_ID=${JSON.stringify(GA4_ID)};</script>`;
 
   function rewriteRefs(html) {
     // Replace each original filename with its hashed version
@@ -127,8 +130,8 @@ function copyDirSync(src, dest) {
       const re = new RegExp(`((?:href|src)=["'])([./]*)(${escaped})(["'])`, "g");
       html = html.replace(re, `$1$2${hashed}$4`);
     }
-    // Inject the API URL global once per page, right after <head>.
-    html = html.replace(/<head[^>]*>/i, (match) => match + apiUrlSnippet);
+    // Inject the runtime globals once per page, right after <head>.
+    html = html.replace(/<head[^>]*>/i, (match) => match + headSnippet);
     return html;
   }
 

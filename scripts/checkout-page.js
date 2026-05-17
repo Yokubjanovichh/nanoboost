@@ -467,6 +467,27 @@
       return;
     }
 
+    if (typeof window.nbTrack === "function") {
+      const cartSubtotal = cart.reduce(function (sum, item) {
+        return sum + (Number(item.price) || 0) * (item.qty || 1);
+      }, 0);
+      window.nbTrack("begin_checkout", {
+        currency: "USD",
+        value: cartSubtotal,
+        items: cart.map(function (item) {
+          const optionLabel = String(item.option || "").split(" - ")[0].trim();
+          return {
+            item_id: item.serviceSlug || item.id || "",
+            item_name: item.name || "",
+            item_variant: optionLabel,
+            price: Number(item.price) || 0,
+            quantity: item.qty || 1,
+          };
+        }),
+        coupon: payload.payment_method,
+      });
+    }
+
     window.NB_API.createOrder(payload)
       .then((res) => {
         if (typeof gtag === "function") {

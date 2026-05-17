@@ -270,6 +270,28 @@ const SERVICE_CONFIG = window.NB_SERVICE_CONFIG || {},
       (t.searchParams.set("service", e),
         window.history.pushState({ service: e }, "", t));
     }
+    if (typeof window.nbTrack === "function") {
+      const defaultStr = r.defaultOption || (r.options || [])[0] || "";
+      const m = defaultStr.match(/\$([\d.]+)/);
+      const priceUsd = m ? parseFloat(m[1]) : 0;
+      const titleTxt = (r.titleHtml || "")
+        .replace(/<br\s*\/?>/g, " ")
+        .replace(/<[^>]+>/g, "")
+        .trim();
+      window.nbTrack("view_item", {
+        currency: "USD",
+        value: priceUsd,
+        items: [
+          {
+            item_id: e,
+            item_name: titleTxt,
+            item_category: r.platform || "",
+            price: priceUsd,
+            quantity: 1,
+          },
+        ],
+      });
+    }
     return !0;
   },
   getServiceFromUrl = () => {
@@ -327,6 +349,23 @@ purchaseForm &&
         image: r.imageSrcDesktop || r.imageSrc || "",
         option: s,
       });
+    if (typeof window.nbTrack === "function") {
+      const variantLabel = s.split(" - ")[0].trim();
+      window.nbTrack("add_to_cart", {
+        currency: "USD",
+        value: i,
+        items: [
+          {
+            item_id: t,
+            item_name: a,
+            item_category: r.platform || "",
+            item_variant: variantLabel,
+            price: i,
+            quantity: 1,
+          },
+        ],
+      });
+    }
   });
 document.addEventListener("nb:currency-change", () => {
   const svc = getServiceFromUrl();
