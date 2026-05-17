@@ -273,22 +273,36 @@
       }
 
       const config = {};
-      const buckets = PLATFORM_BUCKETS.reduce(function (acc, key) {
-        acc[key] = [];
-        return acc;
-      }, {});
+      const byGame = {};
+      const emptyBuckets = function () {
+        return PLATFORM_BUCKETS.reduce(function (acc, key) {
+          acc[key] = [];
+          return acc;
+        }, {});
+      };
 
       services.forEach(function (service) {
         if (!service || !service.slug) return;
         config[service.slug] = adaptToLegacyConfig(service);
         const platformKey = (service.platform || "").toLowerCase();
-        if (buckets[platformKey]) {
-          buckets[platformKey].push(adaptToLegacySummary(service));
+        // Service is linked to a game either by `game_slug` (preferred,
+        // backend Phase 5+) or by a nested `game` object. Fall back to
+        // "gta5" so older payloads keep populating the gta5 bucket.
+        const gameSlug = (
+          service.game_slug ||
+          (service.game && service.game.slug) ||
+          "gta5"
+        ).toLowerCase();
+        if (!byGame[gameSlug]) byGame[gameSlug] = emptyBuckets();
+        if (byGame[gameSlug][platformKey]) {
+          byGame[gameSlug][platformKey].push(adaptToLegacySummary(service));
         }
       });
 
       window.NB_SERVICE_CONFIG = config;
-      window.NB_GTA5_SERVICES = buckets;
+      window.NB_SERVICES_BY_GAME = byGame;
+      // Backward-compat alias for gta5-page.js consumers still in flight.
+      window.NB_GTA5_SERVICES = byGame.gta5 || emptyBuckets();
 
       renderHotServices(services);
 
