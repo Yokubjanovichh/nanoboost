@@ -625,16 +625,12 @@
           </div>
           <div class="service-hero__media">
             <div class="service-hero__image-frame">
-              <img
-                src="../assets/images/services1.webp"
-                alt="Buy GTA Online cash and cars boost — from $15.99 fast delivery"
-                class="service-hero__image skeleton"
-                width="1536"
-                height="1024"
-                fetchpriority="high"
-                loading="eager"
-                decoding="async"
-              />
+              <!-- service-page.js swaps this skeleton for a <picture>
+                   once /public/services/:slug resolves. -->
+              <div
+                class="service-hero__image service-hero__image--skeleton skeleton"
+                aria-hidden="true"
+              ></div>
             </div>
           </div>
         </div>

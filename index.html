@@ -632,80 +632,9 @@
           </h2>
         </div>
         <div class="games__grid">
-          <article class="game-card">
-            <picture
-              ><source
-                media="(max-width: 480px), (orientation: landscape) and (max-height: 500px)"
-                srcset="./assets/images/mobgames1.webp" />
-              <img
-                class="game-card__img skeleton"
-                src="./assets/images/games1.webp"
-                alt="GTA 5 Online game boosting — buy cash cars levels modded accounts"
-                width="810"
-                height="1464"
-                loading="lazy"
-            /></picture>
-            <div class="game-card__content">
-              <h3 class="game-card__title">GTA5 Online</h3>
-              <a class="game-card__cta" href="./pages/gta5.html"
-                >CHOOSE A SERVICE</a
-              >
-            </div>
-          </article>
-          <article class="game-card">
-            <picture
-              ><source
-                media="(max-width: 480px), (orientation: landscape) and (max-height: 500px)"
-                srcset="./assets/images/mobgames2.webp" />
-              <img
-                class="game-card__img skeleton"
-                src="./assets/images/games2.webp"
-                alt="World of Warcraft boosting services — coming soon to Nanoboost"
-                width="810"
-                height="1464"
-                loading="lazy"
-            /></picture>
-            <div class="game-card__content">
-              <h3 class="game-card__title">WORLD<br />OF WARCRAFT</h3>
-              <button disabled class="game-card__cta">Coming Soon</button>
-            </div>
-          </article>
-          <article class="game-card">
-            <picture
-              ><source
-                media="(max-width: 480px), (orientation: landscape) and (max-height: 500px)"
-                srcset="./assets/images/mobgames3.webp" />
-              <img
-                class="game-card__img skeleton"
-                src="./assets/images/games3.webp"
-                alt="Destiny 2 boosting services — coming soon to Nanoboost"
-                width="810"
-                height="1464"
-                loading="lazy"
-            /></picture>
-            <div class="game-card__content">
-              <h3 class="game-card__title">DESTINY 2</h3>
-              <button disabled class="game-card__cta">Coming Soon</button>
-            </div>
-          </article>
-          <article class="game-card">
-            <picture
-              ><source
-                media="(max-width: 480px), (orientation: landscape) and (max-height: 500px)"
-                srcset="./assets/images/mobgames4.webp" />
-              <img
-                class="game-card__img skeleton"
-                src="./assets/images/games4.webp"
-                alt="League of Legends boosting services — coming soon to Nanoboost"
-                width="810"
-                height="1464"
-                loading="lazy"
-            /></picture>
-            <div class="game-card__content">
-              <h3 class="game-card__title">LEAGUE<br />OF LEGENDS</h3>
-              <button disabled class="game-card__cta">Coming soon</button>
-            </div>
-          </article>
+          <!-- games-bootstrap.js paints skeletons immediately and then
+               populates from /public/games. The custom CTA card below
+               is preserved across rewrites. -->
           <article class="game-card game-card--custom">
             <div class="game-card__content game-card__content--custom">
               <h3 class="game-card__title game-card__title--custom">
@@ -765,103 +694,11 @@
             <span class="services__title-fg">Hot right now</span>
           </h2>
         </div>
-        <div class="services__grid">
-          <article class="service-card">
-            <img
-              class="service-card__img skeleton"
-              src="./assets/images/services3.webp"
-              alt="Buy GTA Online cash and cars boost — from $15.99 fast delivery"
-              width="1536"
-              height="1024"
-              loading="lazy"
-            />
-            <div class="service-card__content">
-              <h3 class="service-card__name">
-                GTA Online Cash + Cars Boost PS4/PS5
-              </h3>
-              <p class="service-card__price">
-                <span class="service-card__from">From</span>
-                <span class="service-card__amount" data-usd="15.99" data-eur="13.99">$15.99</span>
-              </p>
-              <a
-                href="./pages/services.html?service=gta-cash-cars-ps"
-                class="service-card__btn"
-                data-service="gta-cash-cars-ps"
-                >BUY NOW</a
-              >
-            </div>
-          </article>
-          <article class="service-card">
-            <img
-              class="service-card__img skeleton"
-              src="./assets/images/services1.webp"
-              alt="Buy GTA Online cash boost — millions of GTA dollars delivered safely"
-              width="1536"
-              height="1024"
-              loading="lazy"
-            />
-            <div class="service-card__content">
-              <h3 class="service-card__name">GTA Online Cash Boost PS4/PS5</h3>
-              <p class="service-card__price">
-                <span class="service-card__from">From</span>
-                <span class="service-card__amount" data-usd="19.99" data-eur="16.99">$19.99</span>
-              </p>
-              <a
-                href="./pages/services.html?service=gta-cash-ps"
-                class="service-card__btn"
-                data-service="gta-cash-ps"
-                >BUY NOW</a
-              >
-            </div>
-          </article>
-          <article class="service-card">
-            <img
-              class="service-card__img skeleton"
-              src="./assets/images/services2.webp"
-              alt="GTA Online level boost — rank up to any level with pro players"
-              width="1536"
-              height="1024"
-              loading="lazy"
-            />
-            <div class="service-card__content">
-              <h3 class="service-card__name">GTA Online Level Boost PS4/PS5</h3>
-              <p class="service-card__price">
-                <span class="service-card__from">From</span>
-                <span class="service-card__amount" data-usd="29.99" data-eur="25.99">$29.99</span>
-              </p>
-              <a
-                href="./pages/services.html?service=gta-level-ps"
-                class="service-card__btn"
-                data-service="gta-level-ps"
-                >BUY NOW</a
-              >
-            </div>
-          </article>
-          <article class="service-card">
-            <img
-              class="service-card__img skeleton"
-              src="./assets/images/services4.webp"
-              alt="Buy GTA Online modded account — fully loaded with cash cars and rank"
-              width="1536"
-              height="1024"
-              loading="lazy"
-            />
-            <div class="service-card__content">
-              <h3 class="service-card__name">
-                GTA Online Modded Account PS4/PS5
-              </h3>
-              <p class="service-card__price">
-                <span class="service-card__from">From</span>
-                <span class="service-card__amount" data-usd="29.99" data-eur="25.99">$29.99</span>
-              </p>
-              <a
-                href="./pages/services.html?service=gta-modded-ps"
-                class="service-card__btn"
-                data-service="gta-modded-ps"
-                >BUY NOW</a
-              >
-            </div>
-          </article>
+        <div class="services__grid" id="hot-services-grid" aria-live="polite">
+          <!-- services-bootstrap.js paints skeletons immediately and then
+               populates the "Hot right now" cards from /public/services
+               (first 4 by sort_order). The custom CTA card below is
+               preserved across rewrites. -->
           <article class="service-card service-card--custom">
             <div class="service-card__content service-card__content--custom">
               <h3 class="service-card__name service-card__name--custom">
