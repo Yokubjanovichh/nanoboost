@@ -173,9 +173,36 @@
 
   // ---- Game meta (title, hero text, breadcrumb, og tags) ------------
 
+  function applyGameDescription(game) {
+    const section = document.querySelector("[data-game-description]");
+    const body = document.querySelector("[data-game-description-body]");
+    if (!section || !body) return;
+    const text = String((game && game.description) || "").trim();
+    if (!text) {
+      section.hidden = true;
+      body.innerHTML = "";
+      return;
+    }
+    // Split into paragraphs (blank line OR newline) so admins can paste
+    // multi-paragraph copy from the panel.
+    const paragraphs = text
+      .split(/\n\s*\n|\r\n\s*\r\n/)
+      .map(function (p) {
+        return p.replace(/\s+/g, " ").trim();
+      })
+      .filter(Boolean);
+    body.innerHTML = paragraphs
+      .map(function (p) {
+        return '<p class="gta5-article__text">' + nbEscape(p) + "</p>";
+      })
+      .join("");
+    section.hidden = false;
+  }
+
   function applyGameMeta(game) {
     if (!game) return;
     currentGameName = game.name || currentGameName;
+    applyGameDescription(game);
 
     const titleEl = document.querySelector("[data-game-title]");
     if (titleEl) titleEl.textContent = (game.name || "").toUpperCase();
