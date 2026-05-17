@@ -121,6 +121,128 @@
     };
   }
 
+  // ---- "Hot right now" homepage grid -------------------------------
+
+  const HOT_GRID_SELECTOR = "#hot-services-grid";
+  const HOT_LIMIT = 4;
+
+  function escapeHtml(str) {
+    return String(str == null ? "" : str)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+  }
+
+  const HOT_SKELETON_CARD =
+    '<article class="service-card service-card--skeleton" aria-hidden="true">' +
+    '<div class="service-card__img service-card__img--skeleton skeleton"></div>' +
+    '<div class="service-card__content">' +
+    '<div class="service-card__name service-card__name--skeleton skeleton"></div>' +
+    '<div class="service-card__price service-card__price--skeleton skeleton"></div>' +
+    '<div class="service-card__btn service-card__btn--skeleton skeleton"></div>' +
+    "</div>" +
+    "</article>";
+
+  function paintHotSkeletons() {
+    const grid = document.querySelector(HOT_GRID_SELECTOR);
+    if (!grid) return;
+    const customCard = grid.querySelector(".service-card--custom");
+    grid.innerHTML =
+      HOT_SKELETON_CARD.repeat(HOT_LIMIT) +
+      (customCard ? customCard.outerHTML : "");
+  }
+
+  function buildHotServiceCard(service) {
+    const opt =
+      (Array.isArray(service.options) && service.options[0]) || {};
+    const usd = Number(opt.price_usd || 0);
+    const eur = Number(opt.price_eur || 0);
+    const slug = escapeHtml(service.slug || "");
+    const title = escapeHtml(
+      String(service.title || "").replace(/<br\s*\/?>/g, " "),
+    );
+    const desk = escapeHtml(
+      absolutizeBackendUrl(service.image_desktop_url || service.image_url || ""),
+    );
+    const mob = escapeHtml(
+      absolutizeBackendUrl(
+        service.image_mobile_url ||
+          service.image_desktop_url ||
+          service.image_url ||
+          "",
+      ),
+    );
+    const alt = escapeHtml(service.image_alt || title);
+    return (
+      '<article class="service-card">' +
+      "<picture>" +
+      '<source media="(max-width: 640px)" srcset="' +
+      mob +
+      '">' +
+      '<img class="service-card__img" src="' +
+      desk +
+      '" alt="' +
+      alt +
+      '" loading="lazy">' +
+      "</picture>" +
+      '<div class="service-card__content">' +
+      '<h3 class="service-card__name">' +
+      title +
+      "</h3>" +
+      '<p class="service-card__price">' +
+      '<span class="service-card__from">From</span>' +
+      '<span class="service-card__amount" data-usd="' +
+      usd.toFixed(2) +
+      '" data-eur="' +
+      eur.toFixed(2) +
+      '">$' +
+      usd.toFixed(2) +
+      "</span>" +
+      "</p>" +
+      '<a href="./pages/services.html?service=' +
+      slug +
+      '" class="service-card__btn" data-service="' +
+      slug +
+      '">BUY NOW</a>' +
+      "</div>" +
+      "</article>"
+    );
+  }
+
+  function syncHotPrices() {
+    const isEur = window.nbGetCurrency && window.nbGetCurrency() === "EUR";
+    document
+      .querySelectorAll(HOT_GRID_SELECTOR + " .service-card__amount[data-usd]")
+      .forEach(function (el) {
+        const usd = parseFloat(el.dataset.usd);
+        const eur = parseFloat(el.dataset.eur);
+        if (isEur && !Number.isNaN(eur)) {
+          el.textContent = "€" + eur.toFixed(2);
+        } else if (window.nbFormatPrice) {
+          el.textContent = window.nbFormatPrice(usd);
+        } else {
+          el.textContent = "$" + (Number.isNaN(usd) ? "0.00" : usd.toFixed(2));
+        }
+      });
+  }
+
+  function renderHotServices(services) {
+    const grid = document.querySelector(HOT_GRID_SELECTOR);
+    if (!grid) return;
+    const customCard = grid.querySelector(".service-card--custom");
+    const hot = services.slice(0, HOT_LIMIT);
+    grid.innerHTML =
+      hot.map(buildHotServiceCard).join("") +
+      (customCard ? customCard.outerHTML : "");
+    syncHotPrices();
+  }
+
+  document.addEventListener("nb:currency-change", syncHotPrices);
+
+  // -------------------------------------------------------------------
+
   function showLoadError(msg) {
     if (document.getElementById(ERROR_BANNER_ID)) return;
     const banner = document.createElement("div");
@@ -141,6 +263,7 @@
       showLoadError("api-client.js not loaded");
       return;
     }
+    paintHotSkeletons();
 
     try {
       const services = await window.NB_API.fetchServices();
@@ -166,6 +289,8 @@
 
       window.NB_SERVICE_CONFIG = config;
       window.NB_GTA5_SERVICES = buckets;
+
+      renderHotServices(services);
 
       window.dispatchEvent(
         new CustomEvent("nb:services-loaded", {
