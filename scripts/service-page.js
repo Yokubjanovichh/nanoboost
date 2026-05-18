@@ -120,10 +120,24 @@ const SERVICE_CONFIG = window.NB_SERVICE_CONFIG || {},
         .map((e) => `<p class="service-details__text">${nbEscapeHtml(e)}</p>`)
         .join(""));
     const n = document.querySelector(".service-details__title-fg"),
-      s = document.querySelector(".service-details__title-bg text");
+      s = document.querySelector(".service-details__title-bg text"),
+      titleBgSvg = document.querySelector(".service-details__title-bg");
     if (n && e.titleHtml) {
       const t = e.titleHtml.replace(/<br\s*\/?>/g, " ");
-      ((n.textContent = t), s && (s.textContent = "GTA Online"));
+      n.textContent = t;
+      if (s && titleBgSvg) {
+        // Was hardcoded "GTA Online"; pick whichever game the service
+        // belongs to. Falls back to hiding the SVG layer entirely so a
+        // mystery game doesn't paint the previous one's name.
+        const bgLabel = String(e.gameName || "").trim();
+        if (bgLabel) {
+          s.textContent = bgLabel.toUpperCase();
+          titleBgSvg.style.removeProperty("display");
+        } else {
+          s.textContent = "";
+          titleBgSvg.style.display = "none";
+        }
+      }
     }
     const c = document.querySelector(".service-what__grid");
     c &&
