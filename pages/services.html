@@ -645,12 +645,17 @@
             id="service-details-title"
             aria-label="GTA Online Cash + Cars Boost PS4 / PS5"
           >
+            <!-- Title background SVG — kept invisible until
+                 service-page.js knows which game's name to draw. The
+                 previous hardcoded "GTA Online" leaked through for
+                 Forza / other-game pages before the data arrived. -->
             <svg
               class="service-details__title-bg"
               aria-hidden="true"
               focusable="false"
               viewBox="0 0 600 140"
               preserveAspectRatio="xMidYMid meet"
+              style="visibility: hidden"
             >
               <defs>
                 <linearGradient
@@ -676,9 +681,7 @@
                 stroke="url(#serviceDetailsStrokeGrad)"
                 stroke-width="1.5"
                 stroke-linejoin="round"
-              >
-                GTA Online
-              </text>
+              ></text>
             </svg>
             <span class="service-details__title-fg"
               >GTA Online Cash + Cars Boost PS4 / PS5</span

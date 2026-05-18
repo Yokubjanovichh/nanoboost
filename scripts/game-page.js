@@ -169,6 +169,10 @@
 
   function renderTabs(platforms, activePlatform) {
     if (!tabsContainer) return;
+    // Clear the skeleton chips the HTML ships with so the swap to the
+    // real list (or to the empty state) happens in one paint, with no
+    // stale pre-data row flashing through.
+    tabsContainer.removeAttribute("data-tabs-pending");
     if (!platforms || platforms.length === 0) {
       tabsContainer.hidden = true;
       tabsContainer.innerHTML = "";

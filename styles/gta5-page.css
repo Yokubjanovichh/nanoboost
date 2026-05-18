@@ -88,6 +88,17 @@ body.page--game {
 .gta5-intro__tab:hover {
   color: #fff;
 }
+/* Placeholder pill shown by the static HTML before game-page.js has
+   the data to know which platforms actually exist. Sized like a real
+   tab so the row doesn't reflow when the swap happens. */
+.gta5-intro__tab--skeleton {
+  width: clamp(14rem, 15vw, 22rem);
+  height: 5rem;
+  border: 0;
+  border-radius: 999px;
+  cursor: default;
+  pointer-events: none;
+}
 .page--game .services__grid {
   margin-top: 0;
 }

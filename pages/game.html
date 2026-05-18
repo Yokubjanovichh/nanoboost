@@ -503,42 +503,19 @@
             </svg>
             <span class="gta5-intro__title-fg" data-game-title>&nbsp;</span>
           </h1>
-          <!-- Platform tabs — game-page.js rewrites this list from
+          <!-- Platform tabs — game-page.js renders the list from
                NB_SERVICES_BY_GAME so only platforms with at least one
-               service are shown. The static markup below is a fallback
-               that mirrors the GTA5 layout for the first paint. -->
+               service appear. Hidden + filled with two skeleton chips
+               so the user never sees a stale PS/PC/Xbox row flash for
+               a Forza/etc. page before the data arrives. -->
           <div
             class="gta5-intro__tabs"
             role="tablist"
             aria-label="Choose platform"
+            data-tabs-pending
           >
-            <button
-              type="button"
-              class="gta5-intro__tab is-active"
-              role="tab"
-              aria-selected="true"
-              data-platform="ps"
-            >
-              Playstation 4/5
-            </button>
-            <button
-              type="button"
-              class="gta5-intro__tab"
-              role="tab"
-              aria-selected="false"
-              data-platform="pc"
-            >
-              PC
-            </button>
-            <button
-              type="button"
-              class="gta5-intro__tab"
-              role="tab"
-              aria-selected="false"
-              data-platform="xbox"
-            >
-              XBOX One/Series
-            </button>
+            <span class="gta5-intro__tab gta5-intro__tab--skeleton skeleton" aria-hidden="true"></span>
+            <span class="gta5-intro__tab gta5-intro__tab--skeleton skeleton" aria-hidden="true"></span>
           </div>
         </div>
         <div
