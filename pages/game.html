@@ -503,69 +503,42 @@
             </svg>
             <span class="gta5-intro__title-fg" data-game-title>&nbsp;</span>
           </h1>
+          <!-- Platform tabs — game-page.js rewrites this list from
+               NB_SERVICES_BY_GAME so only platforms with at least one
+               service are shown. The static markup below is a fallback
+               that mirrors the GTA5 layout for the first paint. -->
           <div
-            class="services-filter"
-            role="search"
-            aria-label="Filter services"
+            class="gta5-intro__tabs"
+            role="tablist"
+            aria-label="Choose platform"
           >
-            <label class="services-filter__search">
-              <span class="services-filter__search-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg>
-              </span>
-              <input
-                type="search"
-                id="services-search"
-                class="services-filter__search-input"
-                placeholder="Search services..."
-                aria-label="Search services"
-                autocomplete="off"
-              />
-              <span class="services-filter__spinner" aria-hidden="true" hidden>
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9" stroke-opacity="0.25"/><path d="M12 3 a9 9 0 0 1 9 9"/></svg>
-              </span>
-            </label>
-            <div
-              class="services-filter__platforms"
-              role="tablist"
-              aria-label="Choose platform"
+            <button
+              type="button"
+              class="gta5-intro__tab is-active"
+              role="tab"
+              aria-selected="true"
+              data-platform="ps"
             >
-              <button
-                type="button"
-                class="services-filter__pill services-filter__pill--active"
-                role="tab"
-                aria-selected="true"
-                data-platform="all"
-              >
-                All
-              </button>
-              <button
-                type="button"
-                class="services-filter__pill"
-                role="tab"
-                aria-selected="false"
-                data-platform="ps"
-              >
-                PS
-              </button>
-              <button
-                type="button"
-                class="services-filter__pill"
-                role="tab"
-                aria-selected="false"
-                data-platform="xbox"
-              >
-                Xbox
-              </button>
-              <button
-                type="button"
-                class="services-filter__pill"
-                role="tab"
-                aria-selected="false"
-                data-platform="pc"
-              >
-                PC
-              </button>
-            </div>
+              Playstation 4/5
+            </button>
+            <button
+              type="button"
+              class="gta5-intro__tab"
+              role="tab"
+              aria-selected="false"
+              data-platform="pc"
+            >
+              PC
+            </button>
+            <button
+              type="button"
+              class="gta5-intro__tab"
+              role="tab"
+              aria-selected="false"
+              data-platform="xbox"
+            >
+              XBOX One/Series
+            </button>
           </div>
         </div>
         <div

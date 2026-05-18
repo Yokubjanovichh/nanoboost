@@ -99,6 +99,18 @@
       // Raw fields kept so checkout can build POST payloads without re-fetching.
       slug: service.slug || "",
       optionsRaw: options,
+      // Game metadata so the service detail page can label the title
+      // background with the right game name (was hardcoded "GTA Online").
+      gameSlug: String(
+        service.game_slug ||
+          (service.game && service.game.slug) ||
+          "",
+      ).toLowerCase(),
+      gameName: String(
+        (service.game && service.game.name) ||
+          service.game_name ||
+          "",
+      ),
     };
   }
 

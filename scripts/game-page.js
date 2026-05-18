@@ -8,16 +8,17 @@
   "use strict";
 
   const SUPPORTED_PLATFORMS = ["ps", "xbox", "pc"];
-  const FILTER_PLATFORMS = ["all", "ps", "xbox", "pc"];
-  const DEFAULT_GAME = "gta5";
-  const NB_PLATFORM_NAME = {
-    all: "All platforms",
+  const PLATFORM_LABEL = {
+    ps: "Playstation 4/5",
+    pc: "PC",
+    xbox: "XBOX One/Series",
+  };
+  const PLATFORM_SHORT = {
     ps: "PS4/PS5",
     xbox: "Xbox One/Series",
     pc: "PC",
   };
-  const SEARCH_MIN_LEN = 2;
-  const SEARCH_DEBOUNCE_MS = 300;
+  const DEFAULT_GAME = "gta5";
 
   function nbEscape(s) {
     return String(s == null ? "" : s)
@@ -54,32 +55,22 @@
     const slug = new URL(window.location.href).searchParams.get("game");
     return slug ? String(slug).toLowerCase() : DEFAULT_GAME;
   }
-  function getInitialPlatform() {
+  function getRequestedPlatform() {
     const p = new URL(window.location.href).searchParams.get("platform");
-    return FILTER_PLATFORMS.indexOf(p) >= 0 ? p : "all";
+    return SUPPORTED_PLATFORMS.indexOf(p) >= 0 ? p : null;
   }
-  function getInitialSearch() {
-    return String(
-      new URL(window.location.href).searchParams.get("search") || "",
-    );
-  }
-  function readFiltersFromUrl() {
-    return { platform: getInitialPlatform(), search: getInitialSearch() };
-  }
-  function setUrlState(game, filters, opts) {
+  function setUrlState(game, platform, opts) {
     const u = new URL(window.location.href);
     u.searchParams.set("game", game);
-    if (filters.platform && filters.platform !== "all") {
-      u.searchParams.set("platform", filters.platform);
+    if (platform) {
+      u.searchParams.set("platform", platform);
     } else {
       u.searchParams.delete("platform");
     }
-    if (filters.search && filters.search.length >= SEARCH_MIN_LEN) {
-      u.searchParams.set("search", filters.search);
-    } else {
-      u.searchParams.delete("search");
-    }
-    const state = { game: game, platform: filters.platform, search: filters.search };
+    // Search param is no longer supported here — strip it if a legacy
+    // URL leaks through so it doesn't reappear after a navigation.
+    u.searchParams.delete("search");
+    const state = { game: game, platform: platform };
     if (opts && opts.replace) {
       window.history.replaceState(state, "", u);
     } else {
@@ -90,6 +81,7 @@
   // ---- Render helpers -----------------------------------------------
 
   const grid = document.querySelector("#game-services-grid");
+  const tabsContainer = document.querySelector(".gta5-intro__tabs");
 
   const SKELETON_CARD =
     '<article class="service-card service-card--skeleton" aria-hidden="true">' +
@@ -119,22 +111,11 @@
       "</div>";
   }
 
-  function renderNoResults() {
-    if (!grid) return;
-    grid.innerHTML =
-      '<div class="services__empty" role="status">' +
-      '<span class="services__empty-icon" aria-hidden="true">🔍</span>' +
-      '<p class="services__empty-title">No services found</p>' +
-      '<p class="services__empty-text">Try a different search or platform filter.</p>' +
-      '<button type="button" class="services__empty-action" data-clear-filters>Clear filters</button>' +
-      "</div>";
-  }
-
   function listIdFor(platform) {
     return "game_" + currentGame + "_" + platform;
   }
   function listNameFor(platform) {
-    return (currentGameName || currentGame) + " — " + (NB_PLATFORM_NAME[platform] || platform);
+    return (currentGameName || currentGame) + " — " + (PLATFORM_SHORT[platform] || platform);
   }
   function priceFromSvc(svc) {
     const raw = (svc && svc.priceNow) || "";
@@ -158,24 +139,6 @@
     });
   }
 
-  let lastSearchTracked = "";
-  function trackSearchEvent(filters, resultsCount) {
-    if (typeof window.nbTrack !== "function") return;
-    const q = String(filters.search || "").trim();
-    if (q.length < SEARCH_MIN_LEN) return;
-    // De-duplicate identical queries (e.g. same input replayed on
-    // currency/popstate refresh) so we don't spam GA.
-    const key = filters.platform + "|" + q;
-    if (key === lastSearchTracked) return;
-    lastSearchTracked = key;
-    window.nbTrack("search", {
-      search_term: q,
-      game: currentGame,
-      platform: filters.platform || "all",
-      results_count: resultsCount,
-    });
-  }
-
   function trackSelectItem(platform, svc) {
     if (typeof window.nbTrack !== "function") return;
     window.nbTrack("select_item", {
@@ -192,35 +155,47 @@
     });
   }
 
-  function collectByPlatform(buckets, platform) {
-    if (!buckets) return [];
-    if (platform === "all") {
-      // Merge ps + xbox + pc into one list, preserving the platform on
-      // each item so click tracking + responsive labels still work.
-      const out = [];
-      SUPPORTED_PLATFORMS.forEach(function (p) {
-        (buckets[p] || []).forEach(function (svc) {
-          out.push(Object.assign({}, svc, { _platform: p }));
-        });
-      });
-      return out;
+  // ---- Available platforms for the current game ---------------------
+
+  function getAvailablePlatforms() {
+    const buckets =
+      (window.NB_SERVICES_BY_GAME && window.NB_SERVICES_BY_GAME[currentGame]) ||
+      null;
+    if (!buckets) return null; // not loaded yet
+    return SUPPORTED_PLATFORMS.filter(function (p) {
+      return Array.isArray(buckets[p]) && buckets[p].length > 0;
+    });
+  }
+
+  function renderTabs(platforms, activePlatform) {
+    if (!tabsContainer) return;
+    if (!platforms || platforms.length === 0) {
+      tabsContainer.hidden = true;
+      tabsContainer.innerHTML = "";
+      return;
     }
-    return (buckets[platform] || []).map(function (svc) {
-      return Object.assign({}, svc, { _platform: platform });
-    });
+    tabsContainer.hidden = false;
+    tabsContainer.innerHTML = platforms
+      .map(function (p) {
+        const active = p === activePlatform;
+        return (
+          '<button type="button" class="gta5-intro__tab' +
+          (active ? " is-active" : "") +
+          '" role="tab" aria-selected="' +
+          (active ? "true" : "false") +
+          '" data-platform="' +
+          nbEscape(p) +
+          '">' +
+          nbEscape(PLATFORM_LABEL[p] || p) +
+          "</button>"
+        );
+      })
+      .join("");
   }
 
-  function applySearch(list, query) {
-    const q = String(query || "").trim().toLowerCase();
-    if (q.length < SEARCH_MIN_LEN) return list;
-    return list.filter(function (svc) {
-      const title = String(svc.title || "").toLowerCase();
-      const slug = String(svc.serviceParam || "").toLowerCase();
-      return title.indexOf(q) >= 0 || slug.indexOf(q) >= 0;
-    });
-  }
+  // ---- Cards render -------------------------------------------------
 
-  function renderCards(filters) {
+  function renderCards(platform) {
     if (!grid) return;
     const buckets =
       (window.NB_SERVICES_BY_GAME && window.NB_SERVICES_BY_GAME[currentGame]) ||
@@ -231,28 +206,16 @@
       return;
     }
 
-    const collected = collectByPlatform(buckets, filters.platform);
-    if (collected.length === 0) {
+    const list = (buckets[platform] || []).slice();
+    if (list.length === 0) {
       renderEmpty(currentGameName);
       return;
     }
 
-    const list = applySearch(collected, filters.search);
-    trackSearchEvent(filters, list.length);
-
-    if (list.length === 0) {
-      renderNoResults();
-      grid.__nbLastList = [];
-      grid.__nbLastPlatform = filters.platform;
-      return;
-    }
-
     grid.innerHTML = "";
-    trackPlatformListView(filters.platform, list);
-    // Cache the rendered list so the delegated click handler can match
-    // the clicked card's slug back to the service object for the event.
+    trackPlatformListView(platform, list);
     grid.__nbLastList = list;
-    grid.__nbLastPlatform = filters.platform;
+    grid.__nbLastPlatform = platform;
     list.forEach(function (svc) {
       const article = document.createElement("article");
       article.className = "service-card";
@@ -305,42 +268,45 @@
     });
   }
 
-  // ---- Filter UI management -----------------------------------------
+  // ---- Tab + platform management ------------------------------------
 
-  let currentFilters = { platform: "all", search: "" };
-  let searchDebounceId = 0;
-  let loaderTimeoutId = 0;
+  let currentPlatform = "ps";
 
-  function setActivePill(platform) {
-    Array.from(document.querySelectorAll(".services-filter__pill")).forEach(
-      function (pill) {
-        const active = pill.dataset.platform === platform;
-        pill.classList.toggle("services-filter__pill--active", active);
-        pill.setAttribute("aria-selected", active ? "true" : "false");
-      },
-    );
+  function pickPlatform(available, requested) {
+    if (!available || available.length === 0) return null;
+    if (requested && available.indexOf(requested) >= 0) return requested;
+    return available[0];
   }
 
-  function showLoader(show) {
-    const spinner = document.querySelector(".services-filter__spinner");
-    if (spinner) spinner.hidden = !show;
-    if (grid) grid.classList.toggle("is-loading", Boolean(show));
-  }
-
-  function applyFilters(filters, opts) {
-    currentFilters = {
-      platform: FILTER_PLATFORMS.indexOf(filters.platform) >= 0 ? filters.platform : "all",
-      search: String(filters.search || ""),
-    };
-    setActivePill(currentFilters.platform);
-    const input = document.getElementById("services-search");
-    if (input && opts && opts.syncInput) input.value = currentFilters.search;
-
-    renderCards(currentFilters);
-    showLoader(false);
-
+  function switchPlatform(platform, opts) {
+    if (!platform) return;
+    currentPlatform = platform;
+    const available = getAvailablePlatforms();
+    if (available) renderTabs(available, platform);
+    renderCards(platform);
     if (!(opts && opts.skipUrlUpdate)) {
-      setUrlState(currentGame, currentFilters, opts || {});
+      setUrlState(currentGame, platform, opts || {});
+    }
+  }
+
+  function syncFromData(opts) {
+    const available = getAvailablePlatforms();
+    if (!available) {
+      // Data not loaded yet — keep showing skeletons + static fallback tabs.
+      return;
+    }
+    if (available.length === 0) {
+      renderTabs([], null);
+      renderEmpty(currentGameName);
+      return;
+    }
+    const target = pickPlatform(available, getRequestedPlatform());
+    currentPlatform = target;
+    renderTabs(available, target);
+    renderCards(target);
+    if (!(opts && opts.skipUrlUpdate)) {
+      // URL may need to be cleaned (e.g. requested PS but only Xbox exists).
+      setUrlState(currentGame, target, { replace: true });
     }
   }
 
@@ -356,8 +322,6 @@
       body.innerHTML = "";
       return;
     }
-    // Split into paragraphs (blank line OR newline) so admins can paste
-    // multi-paragraph copy from the panel.
     const paragraphs = text
       .split(/\n\s*\n|\r\n\s*\r\n/)
       .map(function (p) {
@@ -410,7 +374,6 @@
     const twDesc = document.querySelector('meta[name="twitter:description"]');
     if (twDesc) twDesc.setAttribute("content", description);
 
-    // Breadcrumb JSON-LD
     const ld = document.getElementById("game-breadcrumb-jsonld");
     if (ld && game.name) {
       try {
@@ -462,86 +425,50 @@
 
   const currentGame = getInitialGame();
   let currentGameName = currentGame;
-  const initialFilters = readFiltersFromUrl();
 
   renderSkeletons(4);
-  // Sync input + pill on first paint without polluting history.
-  applyFilters(initialFilters, { syncInput: true, replace: true });
   resolveGameMeta();
 
-  // Pill clicks — immediate filter, no debounce.
-  Array.from(document.querySelectorAll(".services-filter__pill")).forEach(
-    function (pill) {
-      pill.addEventListener("click", function () {
-        const p = pill.dataset.platform;
-        if (!p) return;
-        applyFilters({ platform: p, search: currentFilters.search });
-      });
-    },
-  );
-
-  // Search input — debounced 300ms; <2 chars clears the filter silently.
-  const searchInput = document.getElementById("services-search");
-  if (searchInput) {
-    searchInput.addEventListener("input", function () {
-      const raw = String(searchInput.value || "");
-      const trimmed = raw.trim();
-      if (searchDebounceId) clearTimeout(searchDebounceId);
-      if (loaderTimeoutId) clearTimeout(loaderTimeoutId);
-
-      // Empty input clears the filter immediately (matches "instant
-      // back-to-all" expectation) without a 300ms wait.
-      if (trimmed.length === 0) {
-        showLoader(false);
-        applyFilters({ platform: currentFilters.platform, search: "" });
-        return;
-      }
-      // 1-char input: leave the prior result in place silently.
-      if (trimmed.length < SEARCH_MIN_LEN) {
-        showLoader(false);
-        return;
-      }
-
-      // Show the loader only if the debounce window actually elapses
-      // (skips the flicker for fast typists who keep pressing keys).
-      loaderTimeoutId = setTimeout(function () {
-        showLoader(true);
-      }, 80);
-
-      searchDebounceId = setTimeout(function () {
-        if (loaderTimeoutId) clearTimeout(loaderTimeoutId);
-        applyFilters({ platform: currentFilters.platform, search: trimmed });
-      }, SEARCH_DEBOUNCE_MS);
+  // Tab clicks (delegated so dynamically-rendered tabs work without rebind).
+  if (tabsContainer) {
+    tabsContainer.addEventListener("click", function (e) {
+      const tab = e.target.closest(".gta5-intro__tab[data-platform]");
+      if (!tab) return;
+      switchPlatform(tab.dataset.platform);
     });
   }
 
-  // Back/forward navigation — replay URL filters without pushing more.
+  // Back/forward navigation — pick the URL's platform if still available.
   window.addEventListener("popstate", function () {
-    applyFilters(readFiltersFromUrl(), { syncInput: true, skipUrlUpdate: true });
+    const requested = getRequestedPlatform();
+    const available = getAvailablePlatforms();
+    if (!available || available.length === 0) {
+      renderTabs([], null);
+      renderEmpty(currentGameName);
+      return;
+    }
+    switchPlatform(pickPlatform(available, requested), { skipUrlUpdate: true });
   });
 
-  // Currency switch — re-render to update prices, keep current filters.
+  // Currency switch — re-render to update prices, keep current platform.
   document.addEventListener("nb:currency-change", function () {
-    renderCards(currentFilters);
+    if (currentPlatform) renderCards(currentPlatform);
   });
 
-  // services-bootstrap.js fires this after /public/services resolves.
+  // services-bootstrap.js fires this after /public/services resolves —
+  // first chance to know which platforms actually have content.
   window.addEventListener("nb:services-loaded", function () {
-    renderCards(currentFilters);
+    syncFromData();
   });
+
+  // If services-bootstrap finished before we wired the listener (cache
+  // hit), sync immediately.
+  if (window.NB_SERVICES_BY_GAME) syncFromData();
 
   // Delegated click handler — fires GA4 select_item before the browser
-  // follows the BUY NOW link to services.html, and handles the
-  // "Clear filters" button in the no-results state.
+  // follows the BUY NOW link to services.html.
   if (grid) {
     grid.addEventListener("click", function (e) {
-      const clearBtn = e.target.closest("[data-clear-filters]");
-      if (clearBtn) {
-        const input = document.getElementById("services-search");
-        if (input) input.value = "";
-        applyFilters({ platform: "all", search: "" });
-        return;
-      }
       const link = e.target.closest("a.service-card__btn[data-service]");
       if (!link) return;
       const slug = link.dataset.service;
@@ -549,7 +476,7 @@
       const svc = list.find(function (s) {
         return s.serviceParam === slug;
       });
-      if (svc) trackSelectItem(svc._platform || currentFilters.platform, svc);
+      if (svc) trackSelectItem(currentPlatform, svc);
     });
   }
 })();
