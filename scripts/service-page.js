@@ -126,16 +126,16 @@ const SERVICE_CONFIG = window.NB_SERVICE_CONFIG || {},
       const t = e.titleHtml.replace(/<br\s*\/?>/g, " ");
       n.textContent = t;
       if (s && titleBgSvg) {
-        // Was hardcoded "GTA Online"; pick whichever game the service
-        // belongs to. Falls back to hiding the SVG layer entirely so a
-        // mystery game doesn't paint the previous one's name.
+        // SVG ships with visibility: hidden in the HTML so the page
+        // never flashes a stale game label. Reveal it only once we
+        // know which game's name to paint.
         const bgLabel = String(e.gameName || "").trim();
         if (bgLabel) {
           s.textContent = bgLabel.toUpperCase();
-          titleBgSvg.style.removeProperty("display");
+          titleBgSvg.style.visibility = "visible";
         } else {
           s.textContent = "";
-          titleBgSvg.style.display = "none";
+          titleBgSvg.style.visibility = "hidden";
         }
       }
     }
