@@ -9,21 +9,12 @@
 (function () {
   "use strict";
 
-  const PLATFORM_LABEL = {
-    ps: "PS4/PS5",
-    xbox: "Xbox One/Series",
-    pc: "PC",
-  };
-
   const PLATFORM_BUCKETS = ["ps", "xbox", "pc"];
 
   const ERROR_BANNER_ID = "nb-error-banner";
   const ERROR_BANNER_TEXT =
     "Failed to load data. Please refresh the page or contact support.";
 
-  // API origin (e.g. "https://nanoboost-api-production.up.railway.app").
-  // Used to resolve backend-served paths like "/uploads/services/foo.webp"
-  // into absolute URLs the browser can fetch from the public site origin.
   const API_ORIGIN = (function () {
     try {
       const base = window.NB_PUBLIC_API_URL || "";
@@ -54,16 +45,6 @@
     }) || options[0];
   }
 
-  function formatOptionString(option, currency) {
-    if (!option) return "";
-    const label = option.label || "";
-    const price =
-      currency === "EUR"
-        ? "€" + Number(option.price_eur || 0).toFixed(2)
-        : "$" + Number(option.price_usd || 0).toFixed(2);
-    return label + " - " + price;
-  }
-
   function formatPriceNow(option, currency) {
     if (!option) return "";
     return currency === "EUR"
@@ -71,47 +52,11 @@
       : "$" + Number(option.price_usd || 0).toFixed(2);
   }
 
-  // Convert backend Service into the legacy NB_SERVICE_CONFIG[slug] shape.
+  // Delegates to the shared NB_API.adaptService so service-page.js can
+  // hydrate a single service via /public/services/{slug} using the same
+  // shape (DRY across consumers).
   function adaptToLegacyConfig(service) {
-    const options = Array.isArray(service.options) ? service.options : [];
-    const defaultOpt = pickDefaultOption(options);
-    const platformKey = (service.platform || "").toLowerCase();
-    return {
-      seoTitle: service.seo_title || "",
-      seoDescription: service.seo_description || "",
-      titleHtml: service.title || "",
-      imageSrcDesktop: absolutizeBackendUrl(
-        service.image_desktop_url || service.image_url || "",
-      ),
-      imageSrcMobile: absolutizeBackendUrl(service.image_mobile_url || ""),
-      imageAlt: service.image_alt || "",
-      platform: PLATFORM_LABEL[platformKey] || service.platform || "",
-      options: options.map(function (o) {
-        return formatOptionString(o, "USD");
-      }),
-      eurOptions: options.map(function (o) {
-        return formatOptionString(o, "EUR");
-      }),
-      defaultOption: defaultOpt ? formatOptionString(defaultOpt, "USD") : "",
-      description: Array.isArray(service.description) ? service.description : [],
-      whatYouGet: Array.isArray(service.what_you_get) ? service.what_you_get : [],
-      sections: Array.isArray(service.sections) ? service.sections : [],
-      // Raw fields kept so checkout can build POST payloads without re-fetching.
-      slug: service.slug || "",
-      optionsRaw: options,
-      // Game metadata so the service detail page can label the title
-      // background with the right game name (was hardcoded "GTA Online").
-      gameSlug: String(
-        service.game_slug ||
-          (service.game && service.game.slug) ||
-          "",
-      ).toLowerCase(),
-      gameName: String(
-        (service.game && service.game.name) ||
-          service.game_name ||
-          "",
-      ),
-    };
+    return window.NB_API.adaptService(service);
   }
 
   // Convert backend Service into the legacy NB_GTA5_SERVICES[platform][] entry.
