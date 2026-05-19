@@ -1322,31 +1322,19 @@
           </div>
           <div class="footer__col">
             <h3 class="footer__title">Games</h3>
-            <ul class="footer__list">
-              <li>
-                <a class="footer__link" href="./gta5.html">GTA5 Online</a>
-              </li>
-              <li>
-                <span
-                  class="footer__link footer__link--disabled"
-                  aria-disabled="true"
-                  >World of Warcraft</span
-                >
-              </li>
-              <li>
-                <span
-                  class="footer__link footer__link--disabled"
-                  aria-disabled="true"
-                  >Destiny 2</span
-                >
-              </li>
-              <li>
-                <span
-                  class="footer__link footer__link--disabled"
-                  aria-disabled="true"
-                  >League of Legends</span
-                >
-              </li>
+            <ul class="footer__list" data-dynamic-games>
+              <li class="footer__skeleton skeleton" aria-hidden="true"></li>
+              <li class="footer__skeleton skeleton" aria-hidden="true"></li>
+              <li class="footer__skeleton skeleton" aria-hidden="true"></li>
+              <noscript>
+                <li>
+                  <span
+                    class="footer__link footer__link--disabled"
+                    aria-disabled="true"
+                    >JavaScript required</span
+                  >
+                </li>
+              </noscript>
             </ul>
           </div>
           <div class="footer__col">

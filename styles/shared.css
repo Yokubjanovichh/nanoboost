@@ -1639,6 +1639,26 @@ a {
 .footer__contact[aria-disabled="true"]:hover {
   color: rgba(255, 255, 255, 0.8);
 }
+/* Skeletons for the Games column while /public/games resolves. The list
+   keeps its flex gap so the column doesn't collapse during loading. */
+.footer__skeleton {
+  display: block;
+  width: clamp(8rem, 70%, 14rem);
+  height: 1.2rem;
+  border-radius: 4px;
+}
+.footer__skeleton:nth-child(2) {
+  width: 60%;
+}
+.footer__skeleton:nth-child(3) {
+  width: 80%;
+}
+.footer__link em {
+  font-style: normal;
+  font-size: 0.85em;
+  opacity: 0.75;
+  margin-left: 0.4rem;
+}
 .footer__contacts {
   margin-top: 2.4rem;
   display: flex;
