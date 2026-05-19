@@ -52,10 +52,9 @@ function copyDirSync(src, dest) {
   // --- Minify JS ---
   console.log("\n📦 Minifying JavaScript...");
   fs.mkdirSync(path.join(DIST, "scripts"), { recursive: true });
-  const SCRIPTS_EXCLUDE = new Set(["export-services-data.js"]);
   const jsFiles = fs
     .readdirSync(path.join(ROOT, "scripts"))
-    .filter((f) => f.endsWith(".js") && !SCRIPTS_EXCLUDE.has(f));
+    .filter((f) => f.endsWith(".js"));
   for (const f of jsFiles) {
     const src = fs.readFileSync(path.join(ROOT, "scripts", f), "utf8");
     const result = await terserMinify(src, { compress: true, mangle: true });

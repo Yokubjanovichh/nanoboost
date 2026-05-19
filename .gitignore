@@ -5,6 +5,8 @@ node_modules/
 SEO-AUDIT-REPORT.md
 seo_fix.js
 dist/
+
+.playwright-mcp/
 image.png
 
 .vercel
