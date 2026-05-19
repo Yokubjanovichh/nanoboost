@@ -330,7 +330,7 @@ function renderServiceErrorState(variant, slug) {
     ? "We couldn't find the service you're looking for. It may have been removed or the link is incorrect."
     : "Something went wrong while loading this service. Please check your connection and try again.";
   const actions = isNotFound
-    ? '<a class="service-error__btn" href="./gta5.html">Browse services</a>'
+    ? '<a class="service-error__btn" href="/#games">Choose a game</a>'
     : '<button class="service-error__btn" type="button" data-action="retry-service">Try again</button>' +
       '<a class="service-error__btn service-error__btn--ghost" href="./contact.html">Contact support</a>';
   main.innerHTML =
