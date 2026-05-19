@@ -102,13 +102,31 @@
     "</div>" +
     "</article>";
 
+  // "Need a custom service?" conversion card appended after the four
+  // featured tiles on every Hot Right Now grid. Owned by the script
+  // (single source of truth) so a new page only needs <div id="hot-
+  // services-grid"> to get the same CTA — no HTML duplication. Uses
+  // an absolute /pages/contact.html so it resolves from any directory.
+  const HOT_CUSTOM_CARD =
+    '<article class="service-card service-card--custom">' +
+    '<div class="service-card__content service-card__content--custom">' +
+    '<h3 class="service-card__name service-card__name--custom">' +
+    "NEED A CUSTOM SERVICE?" +
+    "</h3>" +
+    '<p class="service-card__text">' +
+    "Tell our support team exactly what you want - we'll build a " +
+    "personalized order around your goals." +
+    "</p>" +
+    '<a href="/pages/contact.html" class="service-card__btn service-card__btn--custom">' +
+    "CONTACT SUPPORT" +
+    "</a>" +
+    "</div>" +
+    "</article>";
+
   function paintHotSkeletons() {
     const grid = document.querySelector(HOT_GRID_SELECTOR);
     if (!grid) return;
-    const customCard = grid.querySelector(".service-card--custom");
-    grid.innerHTML =
-      HOT_SKELETON_CARD.repeat(HOT_LIMIT) +
-      (customCard ? customCard.outerHTML : "");
+    grid.innerHTML = HOT_SKELETON_CARD.repeat(HOT_LIMIT) + HOT_CUSTOM_CARD;
   }
 
   function buildHotServiceCard(service) {
@@ -188,11 +206,8 @@
   function renderHotServices(services) {
     const grid = document.querySelector(HOT_GRID_SELECTOR);
     if (!grid) return;
-    const customCard = grid.querySelector(".service-card--custom");
     const hot = services.slice(0, HOT_LIMIT);
-    grid.innerHTML =
-      hot.map(buildHotServiceCard).join("") +
-      (customCard ? customCard.outerHTML : "");
+    grid.innerHTML = hot.map(buildHotServiceCard).join("") + HOT_CUSTOM_CARD;
     syncHotPrices();
     trackHotListView(hot);
   }

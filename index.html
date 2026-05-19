@@ -705,27 +705,16 @@
             <span class="services__title-fg">Hot right now</span>
           </h2>
         </div>
-        <div class="services__grid" id="hot-services-grid" aria-live="polite">
-          <!-- services-bootstrap.js paints skeletons immediately and then
-               populates the "Hot right now" cards from /public/services
-               (first 4 by sort_order). The custom CTA card below is
-               preserved across rewrites. -->
-          <article class="service-card service-card--custom">
-            <div class="service-card__content service-card__content--custom">
-              <h3 class="service-card__name service-card__name--custom">
-                NEED A CUSTOM SERVICE?
-              </h3>
-              <p class="service-card__text">
-                Tell our support team exactly what you want - we'll build a
-                personalized order around your goals.
-              </p>
-              <a
-                href="./pages/contact.html"
-                class="service-card__btn service-card__btn--custom"
-                >CONTACT SUPPORT</a
-              >
-            </div>
-          </article>
+        <div
+          class="services__grid"
+          id="hot-services-grid"
+          aria-live="polite"
+        >
+          <!-- services-bootstrap.js paints skeletons immediately, fetches
+               /public/services?featured=true, and appends the "Need a
+               custom service?" CTA tile. The CTA markup lives in the
+               script (HOT_CUSTOM_CARD) so every Hot Right Now surface
+               renders the same conversion card without duplicated HTML. -->
         </div>
       </section>
       <section class="how container" aria-label="How it works">
