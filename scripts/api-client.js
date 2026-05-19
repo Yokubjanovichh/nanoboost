@@ -90,6 +90,9 @@
     createOrder: function (payload) {
       return postRequest("/public/orders", payload);
     },
+    submitContact: function (payload) {
+      return postRequest("/public/contact", payload);
+    },
     getOrderStatus: function (orderNumber) {
       return request(
         "/public/orders/" + encodeURIComponent(orderNumber) + "/status",

@@ -124,50 +124,71 @@
         },
         v = e.querySelector(".contact-form__btn"),
         b = e.querySelectorAll("input, textarea, button");
-      (b.forEach((e) => (e.disabled = !0)),
-        v && ((v.textContent = "SENDING..."), v.classList.add("is-loading")),
-        t && (t.textContent = ""),
-        fetch(window.NB_API_URL, { method: "POST", body: JSON.stringify(p) })
-          .then((e) => e.json())
-          .then((t) => {
-            if ("ok" === t.status) {
-              if (typeof gtag === "function") {
-                gtag("event", "conversion", {
-                  send_to: "AW-18061608347/SR8uCNm5wZUcEJuLuaRD",
-                  value: 1.0,
-                  currency: "USD",
-                });
-              }
-              (e.reset(),
-                h("discord"),
-                b.forEach((e) => (e.disabled = !1)),
-                v &&
-                  (v.classList.remove("is-loading"), (v.textContent = "SEND")));
-              const t = document.querySelector("#contact-modal"),
-                o = document.querySelector("#contact-modal-btn");
-              if (t) {
-                (t.classList.add("is-open"),
-                  t.setAttribute("aria-hidden", "false"),
-                  (document.body.style.overflow = "hidden"));
-                const e = () => {
-                  (t.classList.remove("is-open"),
-                    t.setAttribute("aria-hidden", "true"),
-                    (document.body.style.overflow = ""),
-                    (window.location.href = "./gta5.html"));
-                };
-                o && o.addEventListener("click", e, { once: !0 });
-              }
-              return;
-            }
-            throw new Error(t.message || "Server error");
-          })
-          .catch(() => {
-            (b.forEach((e) => (e.disabled = !1)),
-              v && (v.classList.remove("is-loading"), (v.textContent = "SEND")),
-              t &&
-                ((t.style.color = "#ff6b6b"),
-                (t.textContent =
-                  "Something went wrong. Please try again or contact us via Discord.")));
-          }));
+      const restoreForm = () => {
+        b.forEach((e) => (e.disabled = !1));
+        if (v) {
+          v.classList.remove("is-loading");
+          v.textContent = "SEND";
+        }
+      };
+      const showSuccess = () => {
+        if (typeof gtag === "function") {
+          gtag("event", "conversion", {
+            send_to: "AW-18061608347/SR8uCNm5wZUcEJuLuaRD",
+            value: 1.0,
+            currency: "USD",
+          });
+        }
+        e.reset();
+        h("discord");
+        restoreForm();
+        const modal = document.querySelector("#contact-modal");
+        const modalBtn = document.querySelector("#contact-modal-btn");
+        if (modal) {
+          modal.classList.add("is-open");
+          modal.setAttribute("aria-hidden", "false");
+          document.body.style.overflow = "hidden";
+          const close = () => {
+            modal.classList.remove("is-open");
+            modal.setAttribute("aria-hidden", "true");
+            document.body.style.overflow = "";
+            window.location.href = "./gta5.html";
+          };
+          modalBtn && modalBtn.addEventListener("click", close, { once: !0 });
+        }
+      };
+      const showFailure = (err) => {
+        restoreForm();
+        if (!t) return;
+        t.style.color = "#ff6b6b";
+        // Always give the user a working escape hatch — even if the
+        // backend endpoint is down they can still reach support.
+        t.innerHTML =
+          'Something went wrong. Please try again or email us at ' +
+          '<a href="mailto:support@nanoboost.io" style="color:#ff6b6b;text-decoration:underline">support@nanoboost.io</a>.';
+        if (err && console && typeof console.warn === "function") {
+          console.warn("[NB] contact submit failed:", err);
+        }
+      };
+
+      b.forEach((e) => (e.disabled = !0));
+      v && ((v.textContent = "SENDING..."), v.classList.add("is-loading"));
+      t && (t.textContent = "");
+
+      if (!window.NB_API || typeof window.NB_API.submitContact !== "function") {
+        showFailure(new Error("NB_API.submitContact not loaded"));
+        return;
+      }
+
+      const apiPayload = {
+        preferred_contact: p.preferredContact,
+        handle: p.handle,
+        email: p.email,
+        message: p.comment,
+      };
+
+      window.NB_API.submitContact(apiPayload)
+        .then(showSuccess)
+        .catch(showFailure);
     }));
 })();

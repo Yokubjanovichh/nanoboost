@@ -19,7 +19,7 @@
 
   const ERROR_BANNER_ID = "nb-error-banner";
   const ERROR_BANNER_TEXT =
-    "Ошибка загрузки данных. Обновите страницу или свяжитесь с поддержкой.";
+    "Failed to load data. Please refresh the page or contact support.";
 
   // API origin (e.g. "https://nanoboost-api-production.up.railway.app").
   // Used to resolve backend-served paths like "/uploads/services/foo.webp"
