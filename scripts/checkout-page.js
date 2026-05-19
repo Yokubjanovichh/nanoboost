@@ -438,7 +438,7 @@
     const badItem = payload.items.find((it) => !it.option_id || !it.service_slug);
     if (badItem) {
       setHint(
-        "Не удалось обработать товар в корзине. Очистите корзину и добавьте услугу заново.",
+        "Failed to process an item in your cart. Please clear the cart and add the service again.",
         true,
       );
       return;
@@ -463,7 +463,7 @@
 
     if (!window.NB_API || typeof window.NB_API.createOrder !== "function") {
       restoreForm();
-      setHint("Ошибка: API client не загружен. Обновите страницу.", true);
+      setHint("Error: API client not loaded. Please refresh the page.", true);
       return;
     }
 
@@ -516,9 +516,9 @@
       })
       .catch((err) => {
         restoreForm();
-        let msg = err && err.message ? err.message : "Что-то пошло не так. Попробуйте ещё раз.";
+        let msg = err && err.message ? err.message : "Something went wrong. Please try again.";
         if (err && err.status === 503) {
-          msg = "Этот способ оплаты временно недоступен. Выберите другой метод.";
+          msg = "This payment method is currently unavailable. Please choose another one.";
         }
         setHint(msg, true);
       });

@@ -9,7 +9,6 @@
 
 const path = require("node:path");
 
-// services-data.js also reads window.NB_API_URL via destructuring etc.
 global.window = {};
 
 require(path.resolve(__dirname, "..", "archive", "services-data.js"));

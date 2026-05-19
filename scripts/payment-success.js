@@ -20,7 +20,7 @@
 
   if (cardEl && orderNumber) {
     cardEl.setAttribute("data-order-number", orderNumber);
-    if (orderLineEl) orderLineEl.textContent = "Заказ: " + orderNumber;
+    if (orderLineEl) orderLineEl.textContent = "Order: " + orderNumber;
   }
 
   let attempts = 0;
@@ -85,10 +85,10 @@
         '<path d="M15 27l7 7 15-15" stroke="#2de1fe" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />' +
         "</svg>",
     );
-    if (titleEl) titleEl.textContent = "Оплата подтверждена";
+    if (titleEl) titleEl.textContent = "Payment confirmed";
     if (textEl) {
       textEl.textContent =
-        "Спасибо! Заказ принят в работу. Мы свяжемся с вами в течение нескольких минут.";
+        "Thank you! Your order is now in progress. We'll be in touch within a few minutes.";
     }
     if (actionsEl) actionsEl.hidden = false;
   }
@@ -104,21 +104,21 @@
     );
     if (titleEl) {
       titleEl.textContent =
-        status === "cancelled" ? "Оплата отменена" : "Платёж не прошёл";
+        status === "cancelled" ? "Payment cancelled" : "Payment failed";
     }
     if (textEl) {
       textEl.textContent =
-        "Платёж не был завершён. Если деньги списались — свяжитесь с поддержкой, мы поможем.";
+        "Your payment wasn't completed. If you were charged, please contact support and we'll sort it out.";
     }
     if (actionsEl) actionsEl.hidden = false;
   }
 
   function showPending() {
     stopped = true;
-    if (titleEl) titleEl.textContent = "Платёж в обработке";
+    if (titleEl) titleEl.textContent = "Payment still processing";
     if (textEl) {
       textEl.textContent =
-        "Подтверждение занимает дольше обычного. Мы свяжемся с вами по email, как только оплата подтвердится.";
+        "Confirmation is taking longer than usual. We'll email you the moment the payment clears.";
     }
     if (actionsEl) actionsEl.hidden = false;
   }
@@ -132,10 +132,10 @@
         '<path d="M26 14 v18 M26 38 v.5" stroke="#ff6b6b" stroke-width="2.5" stroke-linecap="round" />' +
         "</svg>",
     );
-    if (titleEl) titleEl.textContent = "Ошибка проверки";
+    if (titleEl) titleEl.textContent = "Verification error";
     if (textEl) {
       textEl.textContent =
-        "Не удалось проверить статус оплаты. Обновите страницу или свяжитесь с поддержкой.";
+        "Failed to verify payment status. Please refresh the page or contact support.";
     }
     if (actionsEl) actionsEl.hidden = false;
     if (err && console && typeof console.warn === "function") {
