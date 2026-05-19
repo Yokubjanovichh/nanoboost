@@ -158,71 +158,11 @@ const SERVICE_CONFIG = window.NB_SERVICE_CONFIG || {},
         )
         .join(""));
   },
-  renderRelatedSkeleton = (target, count = 4) => {
-    const cell =
-      '<article class="service-card service-card--skeleton" aria-hidden="true">' +
-      '<div class="service-card__img service-card__img--skeleton skeleton"></div>' +
-      '<div class="service-card__content">' +
-      '<div class="service-card__name service-card__name--skeleton skeleton"></div>' +
-      '<div class="service-card__price service-card__price--skeleton skeleton"></div>' +
-      '<div class="service-card__btn service-card__btn--skeleton skeleton"></div>' +
-      "</div>" +
-      "</article>";
-    target.innerHTML = cell.repeat(count);
-  },
-  renderRelatedServices = (e) => {
-    const t = document.querySelector("#related-services-grid");
-    if (!t) return;
-    const r = SERVICE_CONFIG[e];
-    // No config yet — show skeleton placeholders. nb:services-loaded
-    // will trigger another applyServiceToHero → renderRelatedServices
-    // pass with the real data, which overwrites these cells.
-    if (!r) {
-      renderRelatedSkeleton(t, 4);
-      return;
-    }
-    const n = r.platform || "",
-      s = (e) => e.replace(/^gta-/, "").replace(/-(ps|xbox|pc)$/, ""),
-      c = s(e),
-      i = Object.entries(SERVICE_CONFIG)
-        .filter(([t]) => t !== e)
-        .map(([e, t]) => {
-          let r = 0;
-          const i = s(e);
-          return (
-            t.platform === n && (r += 10),
-            i === c && (r += 5),
-            (r += 1),
-            { id: e, cfg: t, score: r }
-          );
-        })
-        .sort((e, t) => t.score - e.score)
-        .slice(0, 4);
-    let o = i
-      .map(
-        ({ id: e, cfg: t }) => {
-          const pic = buildPicture(
-            t.imageSrcDesktop || t.imageSrc || "",
-            t.imageSrcMobile || "",
-            t.imageAlt || "",
-            { className: "service-card__img", loading: "lazy" },
-          );
-          const amount = ((cfg) => {
-            const m = ((cfg.options || [])[0] || "").match(/\$([\d.]+)/);
-            return m
-              ? window.nbFormatPrice
-                ? window.nbFormatPrice(parseFloat(m[1]))
-                : `$${m[1]}`
-              : "";
-          })(t);
-          return `\n    <article class="service-card">\n      ${pic}\n      <div class="service-card__content">\n        <h3 class="service-card__name">${nbEscapeHtml((t.titleHtml || "").replace(/<br\s*\/?>/g, " "))}</h3>\n        <p class="service-card__price">\n          <span class="service-card__from">From</span>\n          <span class="service-card__amount">${amount}</span>\n        </p>\n        <a href="?service=${e}" class="service-card__btn" data-service="${e}">\n          BUY NOW\n        </a>\n      </div>\n    </article>`;
-        },
-      )
-      .join("");
-    ((o +=
-      '\n    <article class="service-card service-card--custom">\n      <div class="service-card__content service-card__content--custom">\n        <h3 class="service-card__name service-card__name--custom">\n          NEED A CUSTOM SERVICE?\n        </h3>\n        <p class="service-card__text">\n          Tell our support team exactly what you want - we\'ll build a\n          personalized order around your goals.\n        </p>\n        <a href="./contact.html" class="service-card__btn service-card__btn--custom">\n          CONTACT SUPPORT\n        </a>\n      </div>\n    </article>'),
-      (t.innerHTML = o));
-  },
+  // "Hot right now" on the service page is rendered by services-bootstrap
+  // from /public/services?featured=true so the homepage and this page
+  // always show the same admin-curated set. The legacy per-service
+  // "related" picker (score by platform + family + base) lived here and
+  // produced a different list every navigation — it's gone now.
   applyServiceToHero = (e, { updateUrl: t = !1 } = {}) => {
     const r = SERVICE_CONFIG[e];
     if (!r) return !1;
@@ -279,7 +219,7 @@ const SERVICE_CONFIG = window.NB_SERVICE_CONFIG || {},
       const t = document.querySelector('meta[property="og:description"]');
       t && t.setAttribute("content", r.seoDescription);
     }
-    if ((renderServiceContent(r), renderRelatedServices(e), t)) {
+    if ((renderServiceContent(r), t)) {
       const t = new URL(window.location.href);
       (t.searchParams.set("service", e),
         window.history.pushState({ service: e }, "", t));
@@ -408,8 +348,9 @@ async function loadService(slug) {
     frame.innerHTML =
       '<div class="service-hero__image service-hero__image--skeleton skeleton" aria-hidden="true"></div>';
   }
-  const relatedGrid = document.querySelector("#related-services-grid");
-  if (relatedGrid) renderRelatedSkeleton(relatedGrid, 4);
+  // The "Hot right now" grid at the bottom of the page is painted with
+  // skeletons + filled by services-bootstrap.js (same code path as the
+  // homepage), so we no longer need to seed anything here.
 })();
 // Kick off a single-service fetch right away (don't wait for the bulk
 // /public/services bootstrap to finish). 20× smaller payload, sub-second
@@ -489,7 +430,6 @@ document.addEventListener("nb:currency-change", () => {
     const activeOptions = (isEur && cfg.eurOptions?.length) ? cfg.eurOptions : cfg.options;
     dropdownApi.setOptions(activeOptions, sel && activeOptions.includes(sel) ? sel : activeOptions[0]);
   }
-  renderRelatedServices(svc);
 });
 
 // services-bootstrap.js fires this after /public/services resolves.
