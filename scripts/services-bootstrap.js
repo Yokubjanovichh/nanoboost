@@ -197,6 +197,40 @@
     trackHotListView(hot);
   }
 
+  // "Hot right now" used to be `bulkServices.slice(0, 4)` which gave the
+  // first four services on the page no curator control. Now we fetch
+  // /public/services?featured=true so the admin's "Избранная" toggle is
+  // the source of truth. Three fallbacks keep the grid populated:
+  //   1) featured returns empty   → first 4 of the bulk list
+  //   2) featured request errors  → first 4 of the bulk list
+  //   3) featured not supported   → same fallback (request still returns)
+  async function bootstrapHotServices(bulkServices) {
+    const grid = document.querySelector(HOT_GRID_SELECTOR);
+    if (!grid) return;
+    try {
+      const featured = await window.NB_API.fetchServices({ featured: "true" });
+      if (Array.isArray(featured) && featured.length > 0) {
+        renderHotServices(featured);
+        return;
+      }
+      if (console && typeof console.info === "function") {
+        console.info(
+          "[NB] no featured services configured, falling back to first " +
+            HOT_LIMIT,
+        );
+      }
+    } catch (err) {
+      if (console && typeof console.warn === "function") {
+        console.warn(
+          "[NB] featured services request failed, falling back to first " +
+            HOT_LIMIT,
+          err,
+        );
+      }
+    }
+    renderHotServices(bulkServices);
+  }
+
   function trackHotListView(hot) {
     if (typeof window.nbTrack !== "function") return;
     window.nbTrack("view_item_list", {
@@ -281,7 +315,10 @@
       // Backward-compat alias for gta5-page.js consumers still in flight.
       window.NB_GTA5_SERVICES = byGame.gta5 || emptyBuckets();
 
-      renderHotServices(services);
+      // Kick off the featured fetch but don't block the rest of the
+      // bootstrap (NB_SERVICE_CONFIG and nb:services-loaded shouldn't
+      // wait on the smaller request).
+      bootstrapHotServices(services);
 
       window.dispatchEvent(
         new CustomEvent("nb:services-loaded", {
