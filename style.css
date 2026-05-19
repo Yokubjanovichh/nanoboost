@@ -130,6 +130,7 @@
   z-index: 3;
 }
 .hero__dot {
+  position: relative;
   width: 1rem;
   height: 1rem;
   border-radius: 50rem;
@@ -141,6 +142,11 @@
     width 0.4s cubic-bezier(0.4, 0, 0.2, 1),
     background 0.4s ease,
     box-shadow 0.4s ease;
+}
+.hero__dot::before {
+  content: "";
+  position: absolute;
+  inset: -1.4rem -0.8rem;
 }
 .hero__dot.is-active {
   width: 3.2rem;
