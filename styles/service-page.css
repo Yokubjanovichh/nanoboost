@@ -709,3 +709,82 @@ body.page--service {
     height: 100%;
   }
 }
+
+/* Empty state shown when /public/services/{slug} returns 404 or fails.
+   Replaces the entire <main> so the hero/related grid skeletons don't
+   keep spinning behind the message. */
+.service-error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  min-height: 60dvh;
+  padding: clamp(4rem, 8vw, 8rem) 1.5rem;
+}
+.service-error__inner {
+  max-width: 56rem;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.92);
+}
+.service-error__icon {
+  font-size: clamp(4.8rem, 8vw, 7.2rem);
+  line-height: 1;
+  margin-bottom: 2rem;
+}
+.service-error__title {
+  font-family: "LEMON MILK", "Poppins", sans-serif;
+  font-size: clamp(2.8rem, 4vw, 4.2rem);
+  margin: 0 0 1.4rem;
+  background: linear-gradient(90deg, #2de1fe, #6849fe, #9d21fe);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.service-error__text {
+  font-size: clamp(1.6rem, 2vw, 1.8rem);
+  line-height: 1.55;
+  margin: 0 0 1rem;
+  color: rgba(255, 255, 255, 0.82);
+}
+.service-error__hint {
+  font-size: 1.4rem;
+  margin: 0 0 2.4rem;
+  color: rgba(255, 255, 255, 0.55);
+}
+.service-error__hint code {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 0.2rem 0.6rem;
+  border-radius: 0.4rem;
+  font-family: "Courier New", monospace;
+}
+.service-error__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  justify-content: center;
+}
+.service-error__btn {
+  display: inline-block;
+  padding: 1.2rem 2.4rem;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #2de1fe, #6849fe, #9d21fe);
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.5rem;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.service-error__btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(104, 73, 254, 0.4);
+}
+.service-error__btn--ghost {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+.service-error__btn--ghost:hover {
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: none;
+}

@@ -312,7 +312,93 @@ const SERVICE_CONFIG = window.NB_SERVICE_CONFIG || {},
     const e = new URLSearchParams(window.location.search).get("service");
     return e && SERVICE_CONFIG[e] ? e : null;
   },
+  getRequestedSlug = () =>
+    new URLSearchParams(window.location.search).get("service") ||
+    "gta-cash-cars-ps",
   initialService = getServiceFromUrl() || "gta-cash-cars-ps";
+
+// Render a friendly empty state inside the hero when the requested
+// service can't be loaded (404, network down, malformed payload, …).
+// Two variants: "not-found" (slug doesn't exist) and "error" (transient
+// network/server issue with a retry CTA).
+function renderServiceErrorState(variant, slug) {
+  const main = document.querySelector("#main-content");
+  if (!main) return;
+  const isNotFound = variant === "not-found";
+  const heading = isNotFound ? "Service not found" : "Failed to load service";
+  const message = isNotFound
+    ? "We couldn't find the service you're looking for. It may have been removed or the link is incorrect."
+    : "Something went wrong while loading this service. Please check your connection and try again.";
+  const actions = isNotFound
+    ? '<a class="service-error__btn" href="./gta5.html">Browse services</a>'
+    : '<button class="service-error__btn" type="button" data-action="retry-service">Try again</button>' +
+      '<a class="service-error__btn service-error__btn--ghost" href="./contact.html">Contact support</a>';
+  main.innerHTML =
+    '<section class="service-error container" role="alert" aria-live="polite">' +
+    '<div class="service-error__inner">' +
+    '<div class="service-error__icon" aria-hidden="true">' +
+    (isNotFound ? "🔍" : "⚠️") +
+    "</div>" +
+    '<h1 class="service-error__title">' +
+    nbEscapeHtml(heading) +
+    "</h1>" +
+    '<p class="service-error__text">' +
+    nbEscapeHtml(message) +
+    "</p>" +
+    (slug
+      ? '<p class="service-error__hint">Requested: <code>' +
+        nbEscapeHtml(slug) +
+        "</code></p>"
+      : "") +
+    '<div class="service-error__actions">' +
+    actions +
+    "</div>" +
+    "</div>" +
+    "</section>";
+  const retryBtn = main.querySelector('[data-action="retry-service"]');
+  if (retryBtn) {
+    retryBtn.addEventListener("click", () => {
+      window.location.reload();
+    });
+  }
+}
+
+// Cache-first then network. Returns the adapted config or null on failure.
+// On 404 / network error we render an inline empty state so the user has
+// a path forward instead of a blank/stuck hero.
+async function loadService(slug) {
+  if (!slug) return null;
+  if (window.NB_SERVICE_CONFIG && window.NB_SERVICE_CONFIG[slug]) {
+    return window.NB_SERVICE_CONFIG[slug];
+  }
+  if (!window.NB_API || typeof window.NB_API.fetchService !== "function") {
+    renderServiceErrorState("error", slug);
+    return null;
+  }
+  try {
+    const raw = await window.NB_API.fetchService(slug);
+    const adapted = window.NB_API.adaptService(raw);
+    if (!adapted) {
+      renderServiceErrorState("not-found", slug);
+      return null;
+    }
+    window.NB_SERVICE_CONFIG = window.NB_SERVICE_CONFIG || {};
+    window.NB_SERVICE_CONFIG[slug] = adapted;
+    SERVICE_CONFIG[slug] = adapted;
+    return adapted;
+  } catch (err) {
+    if (err && err.status === 404) {
+      renderServiceErrorState("not-found", slug);
+    } else {
+      renderServiceErrorState("error", slug);
+      if (console && typeof console.error === "function") {
+        console.error("[NB] loadService failed:", err);
+      }
+    }
+    return null;
+  }
+}
+
 // Hero + related-services skeletons: drop in placeholders so the page
 // isn't blank (or showing the wrong hardcoded service) while the API
 // resolves. applyServiceToHero swaps both in once the data arrives.
@@ -325,22 +411,34 @@ const SERVICE_CONFIG = window.NB_SERVICE_CONFIG || {},
   const relatedGrid = document.querySelector("#related-services-grid");
   if (relatedGrid) renderRelatedSkeleton(relatedGrid, 4);
 })();
-(applyServiceToHero(initialService),
-  window.addEventListener("popstate", () => {
-    const e = getServiceFromUrl() || "gta-cash-cars-ps";
-    applyServiceToHero(e);
-  }),
-  document.addEventListener("click", (e) => {
-    const t = e.target.closest("a.service-card__btn");
-    if (!t) return;
-    if (t.classList.contains("service-card__btn--custom")) return;
-    const r = t.dataset.service,
-      n = r && SERVICE_CONFIG[r] ? r : null;
-    n &&
-      (e.preventDefault(),
-      applyServiceToHero(n, { updateUrl: !0 }) &&
-        window.scrollTo({ top: 0, left: 0, behavior: "smooth" }));
-  }));
+// Kick off a single-service fetch right away (don't wait for the bulk
+// /public/services bootstrap to finish). 20× smaller payload, sub-second
+// TTFB on cached Redis HIT. Bootstrap still runs in parallel for cart /
+// header / related-services hydration.
+(async () => {
+  const slug = getRequestedSlug();
+  const cfg = await loadService(slug);
+  if (cfg) {
+    applyServiceToHero(slug);
+  }
+})();
+window.addEventListener("popstate", async () => {
+  const slug = getRequestedSlug();
+  const cfg = await loadService(slug);
+  if (cfg) applyServiceToHero(slug);
+});
+document.addEventListener("click", async (e) => {
+  const t = e.target.closest("a.service-card__btn");
+  if (!t) return;
+  if (t.classList.contains("service-card__btn--custom")) return;
+  const slug = t.dataset.service;
+  if (!slug) return;
+  e.preventDefault();
+  const cfg = await loadService(slug);
+  if (cfg && applyServiceToHero(slug, { updateUrl: true })) {
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  }
+});
 const purchaseForm = document.querySelector(".service-hero__purchase");
 purchaseForm &&
   purchaseForm.addEventListener("submit", (e) => {

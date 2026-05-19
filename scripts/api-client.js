@@ -74,6 +74,96 @@
     return payload;
   }
 
+  // ---- Service shape adapter -----------------------------------------
+  // Converts a backend Service payload into the legacy NB_SERVICE_CONFIG
+  // shape that services-bootstrap.js and service-page.js both consume.
+  // Kept here (not inside services-bootstrap) so service-page can hydrate
+  // a single service from /public/services/{slug} without depending on
+  // the bulk-list bootstrap finishing first.
+
+  const PLATFORM_LABEL = {
+    ps: "PS4/PS5",
+    xbox: "Xbox One/Series",
+    pc: "PC",
+  };
+
+  const API_ORIGIN = (function () {
+    try {
+      return API_BASE ? new URL(API_BASE).origin : "";
+    } catch (_) {
+      return "";
+    }
+  })();
+
+  function absolutizeBackendUrl(path) {
+    if (!path) return "";
+    if (/^https?:\/\//i.test(path)) return path;
+    if (path.indexOf("/uploads/") === 0 && API_ORIGIN) return API_ORIGIN + path;
+    return path;
+  }
+
+  function stripHtml(html) {
+    if (typeof html !== "string") return "";
+    const div = document.createElement("div");
+    div.innerHTML = html;
+    return (div.textContent || "").trim();
+  }
+
+  function pickDefaultOption(options) {
+    if (!Array.isArray(options) || options.length === 0) return null;
+    return (
+      options.find(function (o) {
+        return o && o.is_default;
+      }) || options[0]
+    );
+  }
+
+  function formatOptionString(option, currency) {
+    if (!option) return "";
+    const label = option.label || "";
+    const price =
+      currency === "EUR"
+        ? "€" + Number(option.price_eur || 0).toFixed(2)
+        : "$" + Number(option.price_usd || 0).toFixed(2);
+    return label + " - " + price;
+  }
+
+  function adaptService(service) {
+    if (!service || typeof service !== "object") return null;
+    const options = Array.isArray(service.options) ? service.options : [];
+    const defaultOpt = pickDefaultOption(options);
+    const platformKey = (service.platform || "").toLowerCase();
+    return {
+      seoTitle: service.seo_title || "",
+      seoDescription: service.seo_description || "",
+      titleHtml: service.title || "",
+      imageSrcDesktop: absolutizeBackendUrl(
+        service.image_desktop_url || service.image_url || "",
+      ),
+      imageSrcMobile: absolutizeBackendUrl(service.image_mobile_url || ""),
+      imageAlt: service.image_alt || "",
+      platform: PLATFORM_LABEL[platformKey] || service.platform || "",
+      options: options.map(function (o) {
+        return formatOptionString(o, "USD");
+      }),
+      eurOptions: options.map(function (o) {
+        return formatOptionString(o, "EUR");
+      }),
+      defaultOption: defaultOpt ? formatOptionString(defaultOpt, "USD") : "",
+      description: Array.isArray(service.description) ? service.description : [],
+      whatYouGet: Array.isArray(service.what_you_get) ? service.what_you_get : [],
+      sections: Array.isArray(service.sections) ? service.sections : [],
+      slug: service.slug || "",
+      optionsRaw: options,
+      gameSlug: String(
+        service.game_slug || (service.game && service.game.slug) || "",
+      ).toLowerCase(),
+      gameName: String(
+        (service.game && service.game.name) || service.game_name || "",
+      ),
+    };
+  }
+
   window.NB_API = {
     fetchGames: async function () {
       return unwrap(await request("/public/games"));
