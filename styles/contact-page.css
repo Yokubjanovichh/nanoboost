@@ -392,75 +392,30 @@
     background-position: -200% 0;
   }
 }
-.contact-modal {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-  opacity: 0;
-  visibility: hidden;
-  transition:
-    opacity 0.35s ease,
-    visibility 0.35s ease;
-}
-.contact-modal.is-open {
-  opacity: 1;
-  visibility: visible;
-}
-.contact-modal__backdrop {
-  position: absolute;
-  inset: 0;
-  background: rgba(4, 2, 16, 0.85);
-  -webkit-backdrop-filter: blur(12px);
-  backdrop-filter: blur(12px);
-}
-.contact-modal__card {
-  position: relative;
-  z-index: 1;
+/* Inline success state shown in place of the form once submitContact
+   resolves. Replaces the old contact-modal redirect flow so the user
+   stays on /pages/contact.html with a clear confirmation and two CTAs. */
+.contact-success {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  max-width: 46rem;
-  width: 100%;
-  padding: clamp(3rem, 4vw, 4.6rem) clamp(2.4rem, 3vw, 4rem);
-  border-radius: 2.4rem;
-  background: linear-gradient(
-    180deg,
-    rgba(65, 18, 132, 0.95) 0,
-    rgba(29, 4, 63, 0.98) 100%
-  );
-  border: 1px solid rgba(134, 89, 233, 0.3);
-  box-shadow:
-    0 32px 80px rgba(0, 0, 0, 0.5),
-    0 0 0 1px rgba(255, 255, 255, 0.03) inset;
-  transform: translateY(2rem) scale(0.96);
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: clamp(2rem, 3vw, 3.6rem) 0;
+  animation: contactSuccessIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
-.contact-modal.is-open .contact-modal__card {
-  transform: translateY(0) scale(1);
+@keyframes contactSuccessIn {
+  from {
+    opacity: 0;
+    transform: translateY(0.8rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
-.contact-modal__glow {
-  position: absolute;
-  left: 50%;
-  bottom: -40%;
-  width: 140%;
-  height: 140%;
-  transform: translateX(-50%);
-  border-radius: 50%;
-  background: radial-gradient(
-    50% 50% at 50% 50%,
-    rgba(104, 73, 254, 0.2) 0,
-    rgba(104, 73, 254, 0) 70%
-  );
-  pointer-events: none;
-}
-.contact-modal__icon {
+.contact-success__icon {
   margin-bottom: 2rem;
-  animation: contactCheckPop 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+  animation: contactCheckPop 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
 }
 @keyframes contactCheckPop {
   0% {
@@ -472,44 +427,64 @@
     opacity: 1;
   }
 }
-.contact-modal__title {
-  font-size: clamp(2.6rem, 3vw, 3.6rem);
+.contact-success__title {
+  font-family: "LEMON MILK", "Poppins", sans-serif;
+  font-size: clamp(2.4rem, 3vw, 3.4rem);
   font-weight: 600;
-  color: #fff;
-  margin-bottom: 1.4rem;
+  margin: 0 0 1.2rem;
+  background: linear-gradient(90deg, #2de1fe, #6849fe, #9d21fe);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
-.contact-modal__text {
-  font-size: clamp(1.5rem, 1.2vw, 1.75rem);
-  line-height: 1.7;
-  color: rgba(255, 255, 255, 0.72);
-  margin-bottom: 3rem;
+.contact-success__text {
+  font-size: clamp(1.5rem, 1.2vw, 1.7rem);
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.78);
+  margin: 0 0 2.6rem;
   max-width: 38rem;
 }
-.contact-modal__btn {
-  --speed: 3.2s;
+.contact-success__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  justify-content: center;
   width: 100%;
-  max-width: 32rem;
-  min-height: 6.4rem;
-  border-radius: 999px;
-  border: none;
-  background: rgba(12, 6, 44, 0.7);
-  color: rgba(255, 255, 255, 0.92);
-  font-family: Poppins, sans-serif;
-  font-size: 1.7rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  cursor: pointer;
-  box-shadow:
-    0 22px 48px rgba(0, 0, 0, 0.38),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.03);
-  transition:
-    transform 0.15s ease,
-    background 0.2s ease;
 }
-.contact-modal__btn:hover {
+.contact-success__btn {
+  flex: 1 1 14rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 5.4rem;
+  padding: 0 2.2rem;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #2de1fe, #6849fe, #9d21fe);
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.45rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    background 0.18s ease;
+}
+.contact-success__btn:hover {
   transform: translateY(-1px);
+  box-shadow: 0 12px 28px rgba(104, 73, 254, 0.4);
+}
+.contact-success__btn--ghost {
+  background: rgba(12, 6, 44, 0.55);
+  border: 1px solid rgba(134, 89, 233, 0.35);
+  color: rgba(255, 255, 255, 0.88);
+}
+.contact-success__btn--ghost:hover {
   background: rgba(12, 6, 44, 0.85);
+  box-shadow: none;
 }
 .page--contact .contact-form__hint {
   margin-top: 1.2rem;
@@ -599,19 +574,15 @@
   .page--contact .contact-form__error {
     font-size: 1.2rem;
   }
-  .contact-modal__card {
-    padding: 2.8rem 2rem;
-    border-radius: 2rem;
+  .contact-success__title {
+    font-size: 2.2rem;
   }
-  .contact-modal__title {
-    font-size: 2.4rem;
-  }
-  .contact-modal__text {
+  .contact-success__text {
     font-size: 1.45rem;
   }
-  .contact-modal__btn {
-    min-height: 5.6rem;
-    font-size: 1.5rem;
+  .contact-success__btn {
+    min-height: 5rem;
+    font-size: 1.35rem;
   }
 }
 @media (max-width: 480px), (orientation: landscape) and (max-height: 500px) {
