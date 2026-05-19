@@ -400,7 +400,7 @@
         </button>
         <div class="header__right">
           <div class="search">
-            <input class="search__input" placeholder="Search services" />
+            <input class="search__input" placeholder="Search services" aria-label="Search services" />
             <button class="search__btn" aria-label="Search">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -676,6 +676,8 @@
                 name="social"
                 placeholder="DiscordName#0000 or username"
                 autocomplete="off"
+                required
+                aria-required="true"
               />
               <span
                 class="contact-form__error"
@@ -691,6 +693,8 @@
                 type="email"
                 placeholder="Enter Your Email"
                 autocomplete="email"
+                required
+                aria-required="true"
               />
               <span class="contact-form__error" id="contact-email-error"></span>
               <label class="contact-form__label" for="contact-comment"
@@ -1108,6 +1112,7 @@
             class="cart-widget__back"
             id="cart-widget-close"
             type="button"
+            aria-label="Close cart and continue shopping"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
