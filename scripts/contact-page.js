@@ -132,22 +132,20 @@
             currency: "USD",
           });
         }
+        // Reset the form so a returning user can submit again, then swap
+        // the form out for the inline success card. No redirect — the
+        // previous flow bounced people to /pages/game.html which felt
+        // disorienting (was the form even submitted?).
         e.reset();
         h("discord");
         restoreForm();
-        const modal = document.querySelector("#contact-modal");
-        const modalBtn = document.querySelector("#contact-modal-btn");
-        if (modal) {
-          modal.classList.add("is-open");
-          modal.setAttribute("aria-hidden", "false");
-          document.body.style.overflow = "hidden";
-          const close = () => {
-            modal.classList.remove("is-open");
-            modal.setAttribute("aria-hidden", "true");
-            document.body.style.overflow = "";
-            window.location.href = "./gta5.html";
-          };
-          modalBtn && modalBtn.addEventListener("click", close, { once: !0 });
+        const heading = document.querySelector("#contact-form-heading");
+        const success = document.querySelector("#contact-success");
+        if (heading) heading.hidden = true;
+        e.hidden = true;
+        if (success) {
+          success.hidden = false;
+          success.focus?.();
         }
       };
       const showFailure = (err) => {
