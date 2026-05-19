@@ -3,8 +3,15 @@
     t = document.querySelector("#contact-form-hint"),
     o = document.querySelector("#contact-dropdown"),
     a = document.querySelector("#contact-social-input"),
-    n = document.querySelector("#contact-email");
+    n = document.querySelector("#contact-email"),
+    msg = document.querySelector("#contact-comment"),
+    msgCounter = document.querySelector("#contact-comment-counter");
   if (!e || !o) return;
+  // Mirrors the backend's Pydantic constraint (Field(..., min_length=10))
+  // so the user sees the rule inline before the wire request fires —
+  // otherwise a too-short message comes back as a generic 422 and the
+  // catch-all "Something went wrong" banner, with no clue what's wrong.
+  const MSG_MIN = 10;
   const r = o.querySelector(".contact-dropdown__trigger"),
     c = o.querySelector(".contact-dropdown__value"),
     s = o.querySelector(".contact-dropdown__menu"),
@@ -54,6 +61,30 @@
           : (p(n, "contact-email-error", "Please enter a valid email address"),
             !1)
         : (p(n, "contact-email-error", "Please enter your email address"), !1);
+    },
+    g = () => {
+      const val = u(msg?.value);
+      if (!val) {
+        p(msg, "contact-comment-error", "Please write your message");
+        return false;
+      }
+      if (val.length < MSG_MIN) {
+        p(
+          msg,
+          "contact-comment-error",
+          "Message must be at least " + MSG_MIN + " characters",
+        );
+        return false;
+      }
+      v(msg, "contact-comment-error");
+      return true;
+    },
+    updateCounter = () => {
+      if (!msg || !msgCounter) return;
+      const len = u(msg.value).length;
+      msgCounter.textContent =
+        len >= MSG_MIN ? len + " characters" : len + " / " + MSG_MIN + " min";
+      msgCounter.classList.toggle("is-met", len >= MSG_MIN);
     };
   (a &&
     (a.addEventListener("blur", () => {
@@ -68,6 +99,15 @@
       }),
       n.addEventListener("input", () => {
         n.classList.contains("is-invalid") && f();
+      })),
+    msg &&
+      (updateCounter(),
+      msg.addEventListener("blur", () => {
+        msg.value && g();
+      }),
+      msg.addEventListener("input", () => {
+        updateCounter();
+        msg.classList.contains("is-invalid") && g();
       })));
   const b = () => {
       (o.classList.remove("is-open"), r.setAttribute("aria-expanded", "false"));
@@ -106,9 +146,13 @@
     }),
     e.addEventListener("submit", (o) => {
       o.preventDefault();
+      // Run all three validators (don't short-circuit) so every invalid
+      // field surfaces its error in one pass — otherwise a user fixes
+      // one, submits, gets the next, etc.
       const r = y(),
-        c = f();
-      if (!r || !c) {
+        c = f(),
+        msgOk = g();
+      if (!r || !c || !msgOk) {
         const t = e.querySelector(".is-invalid");
         return void (t && t.focus());
       }
@@ -138,6 +182,7 @@
         // disorienting (was the form even submitted?).
         e.reset();
         h("discord");
+        updateCounter();
         restoreForm();
         const heading = document.querySelector("#contact-form-heading");
         const success = document.querySelector("#contact-success");

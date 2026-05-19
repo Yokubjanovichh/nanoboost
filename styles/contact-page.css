@@ -325,6 +325,27 @@
 .page--contact .contact-form__error.is-visible {
   display: block;
 }
+.page--contact .contact-form__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+}
+.page--contact .contact-form__meta .contact-form__error {
+  margin-bottom: 0;
+  flex: 1;
+}
+.page--contact .contact-form__counter {
+  font-size: 1.2rem;
+  font-variant-numeric: tabular-nums;
+  color: rgba(255, 255, 255, 0.45);
+  white-space: nowrap;
+  transition: color 0.18s ease;
+}
+.page--contact .contact-form__counter.is-met {
+  color: #2de1fe;
+}
 .page--contact .contact-form__input.is-invalid,
 .page--contact .contact-form__textarea.is-invalid {
   box-shadow:

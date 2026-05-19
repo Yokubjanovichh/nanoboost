@@ -752,15 +752,31 @@
               />
               <span class="contact-form__error" id="contact-email-error"></span>
               <label class="contact-form__label" for="contact-comment"
-                >Comment</label
+                >Message *</label
               >
               <textarea
                 class="contact-form__textarea"
                 id="contact-comment"
                 name="comment"
-                placeholder="Your comment"
+                placeholder="Tell us what you need (at least 10 characters)"
                 rows="3"
+                minlength="10"
+                required
+                aria-required="true"
+                aria-describedby="contact-comment-counter"
               ></textarea>
+              <div class="contact-form__meta">
+                <span
+                  class="contact-form__error"
+                  id="contact-comment-error"
+                ></span>
+                <span
+                  class="contact-form__counter"
+                  id="contact-comment-counter"
+                  aria-live="polite"
+                  >0 / 10 min</span
+                >
+              </div>
               <button class="contact-form__btn animated-border" type="submit">
                 SEND
               </button>
