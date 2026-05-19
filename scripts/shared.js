@@ -295,6 +295,22 @@ if (dropdownRoot) {
   });
 
   dropdownRoot.addEventListener("click", function (e) {
+    // Game name <a>: let the browser navigate, don't drill into platforms
+    // (would flash the submenu open right before the page unloads).
+    if (e.target.closest(".dropdown__item-link")) return;
+
+    // Chevron <button>: keep the platform-drill behavior so touch users
+    // who can't hover still have a way into the submenu.
+    const chevron = e.target.closest(".dropdown__item-chevron");
+    if (chevron) {
+      const gameItem = chevron.closest(".dropdown__item[data-game]");
+      if (gameItem) {
+        e.preventDefault();
+        nbSetActiveGame(gameItem.dataset.game);
+      }
+      return;
+    }
+
     const gameItem = e.target.closest(".dropdown__item[data-game]");
     if (gameItem) {
       nbSetActiveGame(gameItem.dataset.game);
@@ -323,6 +339,15 @@ if (dropdownRoot) {
 
   dropdownRoot.addEventListener("keydown", function (e) {
     if (e.key !== "Enter" && e.key !== " ") return;
+    // The link element handles Enter natively (navigate) and the chevron
+    // button fires its own click event on Enter/Space — we mustn't
+    // preventDefault() on either or keyboard nav breaks.
+    if (
+      e.target.closest(".dropdown__item-link") ||
+      e.target.closest(".dropdown__item-chevron")
+    ) {
+      return;
+    }
     const gameItem = e.target.closest(".dropdown__item[data-game]");
     if (gameItem) {
       e.preventDefault();

@@ -531,6 +531,42 @@ a {
   opacity: 1;
   color: #6849fe;
 }
+/* Game tiles in the nav dropdown split into a link (game name) and a
+   chevron button (open platforms submenu). The original .dropdown__item
+   padding is moved onto the children so each gets a full hit target
+   without doubling up. Platform tiles (no link/chevron) keep the old
+   padding via the existing .dropdown__item rule. */
+.dropdown__item:has(.dropdown__item-link) {
+  padding: 0;
+  cursor: default;
+}
+.dropdown__item-link {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  padding: 1.1rem 0 1.1rem 2rem;
+  border-radius: inherit;
+  color: inherit;
+  font: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+.dropdown__item-chevron {
+  display: inline-flex;
+  align-items: center;
+  padding: 1.1rem 2rem 1.1rem 0.6rem;
+  background: transparent;
+  border: 0;
+  border-radius: inherit;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.dropdown__item-chevron:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
 .dropdown__sub {
   width: max-content;
   min-width: 20rem;
@@ -1044,6 +1080,12 @@ a {
     margin: 0 0.55rem;
     font-size: clamp(1.8rem, 5vw, 2.1rem);
     border-radius: 0.75rem;
+  }
+  .dropdown__item-link {
+    padding: 1.2rem 0 1.2rem 1.6rem;
+  }
+  .dropdown__item-chevron {
+    padding: 1.2rem 1.6rem 1.2rem 0.6rem;
   }
   .dropdown__sub {
     width: 100%;
