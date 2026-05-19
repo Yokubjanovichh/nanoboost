@@ -188,6 +188,7 @@
         "/public/orders/" + encodeURIComponent(orderNumber) + "/status",
       );
     },
+    adaptService: adaptService,
     invalidateCache: function () {
       cache.clear();
     },
