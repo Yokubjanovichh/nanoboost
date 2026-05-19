@@ -115,14 +115,26 @@
   }
 
   function buildNavDropdownItem(game) {
+    const slug = escape(game.slug || "");
+    const name = escape(game.name || "");
+    // Game name → <a> so a direct click navigates to the game page
+    // (e-commerce convention: hover/chevron drills into platforms,
+    // primary click sends you to the game). Chevron is a separate
+    // <button> for touch users who can't hover to reveal the submenu.
     return (
       '<li class="dropdown__item" data-game="' +
-      escape(game.slug || "") +
+      slug +
       '">' +
-      "<span>" +
-      escape(game.name || "") +
-      "</span>" +
+      '<a class="dropdown__item-link" href="/pages/game.html?game=' +
+      slug +
+      '"><span>' +
+      name +
+      "</span></a>" +
+      '<button class="dropdown__item-chevron" type="button" aria-label="Show platforms for ' +
+      name +
+      '">' +
       CHEVRON_SVG +
+      "</button>" +
       "</li>"
     );
   }
