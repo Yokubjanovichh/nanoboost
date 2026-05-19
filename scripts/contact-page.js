@@ -115,13 +115,6 @@
       const s = u(a?.value),
         l = u(n?.value),
         m = u(e.querySelector("#contact-comment")?.value),
-        p = {
-          type: "contact",
-          preferredContact: i[d].label,
-          handle: s,
-          email: l,
-          comment: m,
-        },
         v = e.querySelector(".contact-form__btn"),
         b = e.querySelectorAll("input, textarea, button");
       const restoreForm = () => {
@@ -180,11 +173,14 @@
         return;
       }
 
+      // Wire format: backend enum is lowercase ('discord'|'telegram'|'whatsapp').
+      // `d` already holds the lowercase dropdown key — never derive it from
+      // the display label, which is capitalized ("Discord") and would 422.
       const apiPayload = {
-        preferred_contact: p.preferredContact,
-        handle: p.handle,
-        email: p.email,
-        message: p.comment,
+        preferred_contact: d,
+        handle: s,
+        email: l,
+        message: m,
       };
 
       window.NB_API.submitContact(apiPayload)
