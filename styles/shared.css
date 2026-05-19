@@ -5,6 +5,14 @@
   font-style: normal;
   font-display: swap;
 }
+/* The HTML `hidden` attribute defaults to `display: none` but only at
+   user-agent specificity, so any component-level `display: flex` etc.
+   wins and the element stays visible. Promote it globally so `hidden`
+   always means hidden (matches modern UA stylesheets like Chrome 100+). */
+[hidden] {
+  display: none !important;
+}
+
 /* Accessibility: keyboard focus ring for all interactive elements.
    Visible only on :focus-visible so mouse clicks don't show an outline. */
 a:focus-visible,
