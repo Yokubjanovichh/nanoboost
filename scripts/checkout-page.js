@@ -381,8 +381,10 @@
       modal.classList.remove("is-open");
       modal.setAttribute("aria-hidden", "true");
       document.body.style.overflow = "";
-      const inPages = window.location.pathname.includes("/pages/");
-      window.location.href = inPages ? "./gta5.html" : "./pages/gta5.html";
+      // After a successful checkout drop the user at the homepage games
+      // grid so they can pick another game to shop, instead of a hard-
+      // coded GTA5 detour that breaks the multi-game story.
+      window.location.href = "/#games";
     };
     btn && btn.addEventListener("click", close, { once: true });
   }
