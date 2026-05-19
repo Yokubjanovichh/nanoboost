@@ -11,6 +11,7 @@
 
   const GRID_SELECTOR = ".games__grid";
   const DROPDOWN_LIST_SELECTOR = ".dropdown__games .dropdown__list";
+  const FOOTER_LISTS_SELECTOR = "[data-dynamic-games]";
 
   // API origin so /uploads/... paths resolve against the backend host
   // rather than nanoboost.io (which doesn't serve those files).
@@ -126,6 +127,53 @@
     );
   }
 
+  // Footer Games column item — mirrors the homepage grid's status rules:
+  //   active + has services → clickable link to /pages/game.html?game=<slug>
+  //   active + no services → disabled "(coming soon)" tag
+  //   coming_soon            → disabled "(soon)" tag
+  //   hidden                 → filtered out upstream, never reaches here
+  function buildFooterGameItem(game) {
+    const status = effectiveStatus(game);
+    const slug = escape(game.slug || "");
+    const name = escape(game.name || "");
+    const serviceCount = Number(game.service_count || 0);
+    const isClickable = status === "active" && serviceCount > 0;
+    if (isClickable) {
+      return (
+        '<li><a class="footer__link" href="/pages/game.html?game=' +
+        slug +
+        '">' +
+        name +
+        "</a></li>"
+      );
+    }
+    const suffix = status === "coming_soon" ? " (soon)" : " (coming soon)";
+    return (
+      '<li><span class="footer__link footer__link--disabled" aria-disabled="true">' +
+      name +
+      "<em>" +
+      suffix +
+      "</em></span></li>"
+    );
+  }
+
+  function populateFooterGames(visibleGames) {
+    const lists = document.querySelectorAll(FOOTER_LISTS_SELECTOR);
+    if (!lists.length) return;
+    const html = visibleGames.length
+      ? visibleGames.map(buildFooterGameItem).join("")
+      : "";
+    lists.forEach(function (list) {
+      list.innerHTML = html;
+    });
+  }
+
+  function clearFooterGames() {
+    document.querySelectorAll(FOOTER_LISTS_SELECTOR).forEach(function (list) {
+      list.innerHTML = "";
+    });
+  }
+
   // 4 skeleton cards keep layout stable until the API resolves.
   const SKELETON_CARD =
     '<article class="game-card game-card--skeleton" aria-hidden="true">' +
@@ -164,14 +212,20 @@
 
     try {
       const games = await window.NB_API.fetchGames();
-      if (!Array.isArray(games) || games.length === 0) return;
+      if (!Array.isArray(games) || games.length === 0) {
+        clearFooterGames();
+        return;
+      }
 
       // Hide what the backend marks hidden; admins may still want to
       // surface "coming_soon" on the homepage with a disabled CTA.
       const visible = games.filter(function (g) {
         return effectiveStatus(g) !== "hidden";
       });
-      if (visible.length === 0) return;
+      if (visible.length === 0) {
+        clearFooterGames();
+        return;
+      }
 
       // 1) Homepage grid — preserve the trailing "custom" CTA card.
       const grid = document.querySelector(GRID_SELECTOR);
@@ -191,6 +245,10 @@
           dropdownList.innerHTML = activeGames.map(buildNavDropdownItem).join("");
         }
       }
+
+      // 3) Footer Games column — every visible game (active + coming_soon),
+      //    status-aware rendering handled by buildFooterGameItem.
+      populateFooterGames(visible);
 
       window.dispatchEvent(
         new CustomEvent("nb:games-loaded", {
@@ -216,6 +274,10 @@
         console.warn("[NB] games bootstrap failed:", e);
       }
       // Hardcoded markup stays in place — graceful fallback.
+      // Footer Games column has no hardcoded fallback (skeletons only),
+      // so drop the skeletons to a clean empty column instead of
+      // letting them spin forever.
+      clearFooterGames();
     }
   }
 
