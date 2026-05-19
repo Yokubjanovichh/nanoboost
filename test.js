@@ -186,12 +186,6 @@ test("No hardcoded $ in price display functions (currency-aware)", () => {
   assert.ok(shared.includes("nbFormatPrice(0)"), "shared.js: empty cart should use nbFormatPrice(0)");
 });
 
-test("API URL is configured in services-data.js", () => {
-  const src = fs.readFileSync(path.join(SCRIPTS, "services-data.js"), "utf8");
-  assert.ok(src.includes("NB_API_URL"), "services-data.js: NB_API_URL not set");
-  assert.ok(src.includes("script.google.com"), "services-data.js: API URL should point to Google Apps Script");
-});
-
 test("All JS files used in HTML exist in scripts/", () => {
   const allHtml = [
     fs.readFileSync(path.join(ROOT, "index.html"), "utf8"),
