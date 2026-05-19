@@ -437,7 +437,25 @@ window.NB_CURRENCIES = NB_CURRENCIES;
 const NB_CART_KEY = "nb_cart",
   nbGetCart = () => {
     try {
-      return JSON.parse(localStorage.getItem("nb_cart") || "[]");
+      const raw = JSON.parse(localStorage.getItem("nb_cart") || "[]");
+      if (!Array.isArray(raw)) return [];
+      // Drop legacy rows that have an invalid price. Earlier builds of
+      // service-page.js extracted the price by regex from the *displayed*
+      // option label, so any item added while the page was in EUR mode
+      // landed with price = 0 and showed $0.00 in the cart widget.
+      // Persist the cleanup so the warning doesn't repeat on every read.
+      const clean = raw.filter((item) => {
+        const p = Number(item && item.price);
+        const ok = !Number.isNaN(p) && p > 0;
+        if (!ok && console && typeof console.warn === "function") {
+          console.warn("[NB] dropped cart item with invalid price:", item);
+        }
+        return ok;
+      });
+      if (clean.length !== raw.length) {
+        localStorage.setItem("nb_cart", JSON.stringify(clean));
+      }
+      return clean;
     } catch {
       return [];
     }
@@ -557,10 +575,20 @@ const nbIsInPages = () =>
         (p.textContent = "✕"),
         p.addEventListener("click", () => {
           const e = nbGetCart();
-          (e[t] && e[t].qty > 1 ? (e[t].qty -= 1) : e.splice(t, 1),
-            nbSaveCart(e),
-            nbUpdateCartBadges(),
-            nbRenderCartWidget());
+          if (e[t] && e[t].qty > 1) {
+            e[t].qty -= 1;
+          } else {
+            e.splice(t, 1);
+          }
+          nbSaveCart(e);
+          nbUpdateCartBadges();
+          // Auto-close when the last row leaves — showing an empty
+          // widget after the user just cleared it reads as broken UX.
+          if (e.length === 0) {
+            nbCloseCartWidget();
+          } else {
+            nbRenderCartWidget();
+          }
         }),
         s.appendChild(a),
         s.appendChild(d),
