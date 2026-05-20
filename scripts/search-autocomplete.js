@@ -403,14 +403,6 @@
       wireSearchButton(wrapper, input, controller);
       controllers.push(controller);
     });
-    document
-      .querySelectorAll(".mega-drawer__search")
-      .forEach(function (wrapper) {
-        const input = wrapper.querySelector(".mega-drawer__search-input");
-        if (!input) return;
-        const controller = attachPanel(wrapper, input);
-        controllers.push(controller);
-      });
   }
 
   function rebuild() {

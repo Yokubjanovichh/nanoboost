@@ -7,10 +7,6 @@ seo_fix.js
 dist/
 
 .playwright-mcp/
-image.png
-image*.png
-image*.jpg
-image*.jpeg
-image*.webp
+
 
 .vercel
