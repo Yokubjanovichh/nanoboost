@@ -1003,3 +1003,136 @@ document.addEventListener("click", (e) => {
   if (btn) return;
   window.location.href = link.href;
 });
+
+// Mobile mega-drawer: full-screen slide-in nav. The legacy nav__list
+// slide-down is hidden on ≤768px via shared.css, and the existing
+// #burger element is reused as the trigger — clicks open the drawer on
+// mobile and fall back to the legacy .nav toggle on desktop (which is
+// the regular hamburger ≤980px state). The drawer markup lives in the
+// HTML so search/sections render before JS settles.
+(function initMegaDrawer() {
+  const drawer = document.getElementById("mega-drawer");
+  const overlay = document.getElementById("mega-drawer-overlay");
+  const burgerEl = document.getElementById("burger");
+  if (!drawer || !burgerEl) return;
+  const closeBtn = drawer.querySelector(".mega-drawer__close");
+  const searchInput = drawer.querySelector(".mega-drawer__search-input");
+  const isMobile = () => window.matchMedia("(max-width: 768px)").matches;
+
+  function openDrawer() {
+    drawer.classList.add("is-open");
+    overlay && overlay.classList.add("is-open");
+    burgerEl.classList.add("is-open");
+    burgerEl.setAttribute("aria-expanded", "true");
+    document.documentElement.classList.add("nb-no-scroll");
+    setTimeout(function () {
+      searchInput && searchInput.focus({ preventScroll: true });
+    }, 360);
+  }
+  function closeDrawer() {
+    drawer.classList.remove("is-open");
+    overlay && overlay.classList.remove("is-open");
+    burgerEl.classList.remove("is-open");
+    burgerEl.setAttribute("aria-expanded", "false");
+    document.documentElement.classList.remove("nb-no-scroll");
+  }
+
+  burgerEl.addEventListener(
+    "click",
+    function (e) {
+      if (!isMobile()) return;
+      // Block the legacy .nav toggle handler (registered later, bubble
+      // phase) so the drawer is the only thing the burger drives on
+      // mobile. Desktop ≥769px falls through to the legacy behavior.
+      e.stopImmediatePropagation();
+      e.preventDefault();
+      drawer.classList.contains("is-open") ? closeDrawer() : openDrawer();
+    },
+    true,
+  );
+
+  closeBtn && closeBtn.addEventListener("click", closeDrawer);
+  overlay && overlay.addEventListener("click", closeDrawer);
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && drawer.classList.contains("is-open")) {
+      closeDrawer();
+    }
+  });
+
+  // A click on any link inside the drawer either navigates (browser
+  // default) or stays on-page (e.g. anchor) — either way close so the
+  // user doesn't return to a drawer covering the new page.
+  drawer.addEventListener("click", function (e) {
+    if (e.target.closest("a.mega-drawer__game, a.mega-drawer__link")) {
+      closeDrawer();
+    }
+  });
+
+  // Search submits to /pages/services.html?search=<q>.
+  if (searchInput) {
+    searchInput.addEventListener("keydown", function (e) {
+      if (e.key !== "Enter") return;
+      const q = String(searchInput.value || "").trim();
+      if (!q) return;
+      const inPages = window.location.pathname.includes("/pages/");
+      const base = inPages ? "./services.html" : "./pages/services.html";
+      window.location.href = base + "?search=" + encodeURIComponent(q);
+    });
+  }
+
+  // Resize: if the user rotates / resizes past the breakpoint while the
+  // drawer is open, drop it so the desktop layout isn't stuck behind it.
+  window.addEventListener("resize", function () {
+    if (!isMobile() && drawer.classList.contains("is-open")) closeDrawer();
+  });
+})();
+
+// Mobile currency pill — a smaller dropdown variant that lives next to
+// the cart icon on mobile (the desktop currency-switch markup stays in
+// place, only one or the other is visible at a time via media queries).
+(function initMobileCurrency() {
+  const pill = document.querySelector(".currency-switch--mobile");
+  if (!pill) return;
+  const btn = pill.querySelector(".currency-switch__btn");
+  const options = pill.querySelectorAll(".currency-switch__option");
+  const activeSym = pill.querySelector(".currency-switch__active-symbol");
+
+  function syncActive() {
+    const cur = nbGetCurrency();
+    const sym = (NB_CURRENCIES[cur] || NB_CURRENCIES.USD).symbol;
+    if (activeSym) activeSym.textContent = sym;
+    options.forEach(function (o) {
+      o.setAttribute(
+        "aria-selected",
+        o.dataset.currency === cur ? "true" : "false",
+      );
+    });
+  }
+  syncActive();
+
+  function toggle() {
+    pill.classList.toggle("is-open");
+    btn && btn.setAttribute("aria-expanded", pill.classList.contains("is-open"));
+  }
+  function close() {
+    pill.classList.remove("is-open");
+    btn && btn.setAttribute("aria-expanded", "false");
+  }
+
+  btn &&
+    btn.addEventListener("click", function (e) {
+      e.stopPropagation();
+      toggle();
+    });
+  options.forEach(function (o) {
+    o.addEventListener("click", function () {
+      const code = o.dataset.currency;
+      if (code) nbSetCurrency(code);
+      close();
+    });
+  });
+  document.addEventListener("click", function (e) {
+    if (!pill.contains(e.target)) close();
+  });
+  document.addEventListener("nb:currency-change", syncActive);
+})();

@@ -3460,3 +3460,370 @@ a {
     overflow: visible;
   }
 }
+
+/* ─────────────────────────────────────────────────────────────────
+   Mobile mega-drawer (≤768px)
+   Premium full-screen navigation replacing the legacy nav__list
+   slide-down menu. Desktop is untouched — every rule lives in the
+   media query so widescreen never paints these elements. */
+.mega-drawer,
+.mega-drawer__overlay,
+.currency-switch--mobile {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  /* Hide the legacy mobile nav and search; the drawer owns both now. */
+  .header .nav,
+  .header .search {
+    display: none !important;
+  }
+  /* Re-show the cart on mobile (the 980px rule hid it because the
+     legacy nav had its own cart link — the drawer doesn't). */
+  .header__right .cart {
+    display: inline-flex !important;
+  }
+  /* Hide the desktop currency switch on mobile in favour of the
+     compact mobile pill that sits next to the cart. */
+  .header__right > .currency-switch:not(.currency-switch--mobile) {
+    display: none !important;
+  }
+
+  /* Mobile top bar: burger | logo | currency pill | cart */
+  .header__inner {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    min-height: 5.6rem;
+  }
+  .header__right {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-left: auto;
+  }
+
+  /* Mobile currency pill — separate small button next to cart. */
+  .currency-switch--mobile {
+    position: relative;
+    display: inline-flex;
+  }
+  .currency-switch--mobile .currency-switch__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    min-width: 5.2rem;
+    min-height: 4rem;
+    padding: 0 1rem;
+    border-radius: 999px;
+    background: rgba(45, 225, 254, 0.08);
+    border: 1px solid rgba(45, 225, 254, 0.35);
+    color: #fff;
+    font: inherit;
+    font-weight: 600;
+    font-size: 1.4rem;
+    cursor: pointer;
+    transition: background 0.18s ease, border-color 0.18s ease;
+  }
+  .currency-switch--mobile .currency-switch__btn:hover,
+  .currency-switch--mobile.is-open .currency-switch__btn {
+    background: rgba(45, 225, 254, 0.16);
+    border-color: rgba(45, 225, 254, 0.6);
+  }
+  .currency-switch--mobile .currency-switch__menu {
+    position: absolute;
+    top: calc(100% + 0.6rem);
+    right: 0;
+    z-index: 60;
+    min-width: 12rem;
+    padding: 0.6rem;
+    list-style: none;
+    background: #14092e;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 1rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-0.4rem);
+    transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease;
+  }
+  .currency-switch--mobile.is-open .currency-switch__menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  .currency-switch--mobile .currency-switch__option {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    width: 100%;
+    padding: 1rem 1.2rem;
+    background: transparent;
+    border: 0;
+    border-radius: 0.6rem;
+    color: rgba(255, 255, 255, 0.85);
+    font: inherit;
+    font-size: 1.5rem;
+    text-align: left;
+    cursor: pointer;
+  }
+  .currency-switch--mobile .currency-switch__option:hover,
+  .currency-switch--mobile .currency-switch__option[aria-selected="true"] {
+    background: rgba(45, 225, 254, 0.12);
+    color: #fff;
+  }
+
+  /* Overlay behind the drawer. */
+  .mega-drawer__overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 998;
+    background: rgba(4, 2, 16, 0.62);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+  .mega-drawer.is-open ~ .mega-drawer__overlay,
+  .mega-drawer__overlay.is-open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* The drawer itself slides in from the left, full height, ~88vw wide. */
+  .mega-drawer {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 999;
+    width: min(88vw, 38rem);
+    height: 100vh;
+    height: 100dvh;
+    background: linear-gradient(180deg, #0c0628 0%, #050118 100%);
+    border-right: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow: 24px 0 60px rgba(0, 0, 0, 0.55);
+    transform: translateX(-100%);
+    transition: transform 0.36s cubic-bezier(0.16, 1, 0.3, 1);
+    overflow: hidden;
+  }
+  .mega-drawer.is-open {
+    transform: translateX(0);
+  }
+
+  .mega-drawer__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.4rem 1.6rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    flex-shrink: 0;
+  }
+  .mega-drawer__logo {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+  }
+  .mega-drawer__logo img {
+    height: 2.4rem;
+    width: auto;
+  }
+  .mega-drawer__close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 4.4rem;
+    height: 4.4rem;
+    padding: 0;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 999px;
+    color: rgba(255, 255, 255, 0.85);
+    cursor: pointer;
+    transition: background 0.18s ease, color 0.18s ease;
+  }
+  .mega-drawer__close:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+  }
+
+  .mega-drawer__search {
+    padding: 1.4rem 1.6rem 0.6rem;
+    flex-shrink: 0;
+  }
+  .mega-drawer__search-input {
+    width: 100%;
+    height: 4.6rem;
+    padding: 0 1.4rem;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 1rem;
+    color: #fff;
+    font: inherit;
+    font-size: 1.5rem;
+  }
+  .mega-drawer__search-input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+  }
+  .mega-drawer__search-input:focus {
+    outline: none;
+    border-color: rgba(45, 225, 254, 0.55);
+    background: rgba(45, 225, 254, 0.05);
+  }
+
+  .mega-drawer__nav {
+    flex: 1;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+    padding: 0.8rem 0 1.4rem;
+  }
+  .mega-drawer__section {
+    padding: 1.2rem 1.6rem 0.4rem;
+  }
+  .mega-drawer__section-label {
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.42);
+    margin: 0 0 0.6rem;
+  }
+
+  .mega-drawer__games {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .mega-drawer__game {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.2rem 1.4rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 1rem;
+    color: #fff;
+    text-decoration: none;
+    transition: background 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+  }
+  .mega-drawer__game:hover {
+    background: rgba(104, 73, 254, 0.12);
+    border-color: rgba(104, 73, 254, 0.35);
+    transform: translateX(2px);
+  }
+  .mega-drawer__game--disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+  .mega-drawer__game--disabled:hover {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.05);
+    transform: none;
+  }
+  .mega-drawer__game-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    min-width: 0;
+  }
+  .mega-drawer__game-name {
+    font-size: 1.65rem;
+    font-weight: 600;
+  }
+  .mega-drawer__game-meta {
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.55);
+  }
+  .mega-drawer__game-arrow {
+    flex-shrink: 0;
+    width: 1.6rem;
+    height: 1.6rem;
+    color: rgba(255, 255, 255, 0.5);
+  }
+  .mega-drawer__skeleton {
+    list-style: none;
+    height: 6.4rem;
+    border-radius: 1rem;
+  }
+
+  .mega-drawer__link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 0.6rem;
+    color: rgba(255, 255, 255, 0.88);
+    font-size: 1.55rem;
+    text-decoration: none;
+    border-radius: 0.6rem;
+    transition: color 0.18s ease, background 0.18s ease;
+  }
+  .mega-drawer__link:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.04);
+  }
+  .mega-drawer__link::after {
+    content: "→";
+    opacity: 0.5;
+    font-size: 1.4rem;
+  }
+
+  .mega-drawer__footer {
+    padding: 1.4rem 1.6rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    flex-shrink: 0;
+  }
+  .mega-drawer__contact {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1.4rem;
+    text-decoration: none;
+  }
+  .mega-drawer__contact:hover {
+    color: #2de1fe;
+  }
+  .mega-drawer__socials {
+    display: flex;
+    gap: 0.8rem;
+  }
+  .mega-drawer__social {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 4rem;
+    height: 4rem;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 999px;
+    color: rgba(255, 255, 255, 0.78);
+    text-decoration: none;
+    font-size: 1.4rem;
+    font-weight: 600;
+    transition: background 0.18s ease, color 0.18s ease;
+  }
+  .mega-drawer__social:hover {
+    background: rgba(104, 73, 254, 0.18);
+    color: #fff;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mega-drawer,
+  .mega-drawer__overlay,
+  .currency-switch--mobile .currency-switch__menu {
+    transition: none;
+  }
+}

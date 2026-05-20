@@ -428,6 +428,16 @@
               </svg>
             </button>
           </div>
+          <div class="currency-switch currency-switch--mobile" id="currency-switch-mobile-top">
+            <button type="button" class="currency-switch__btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Change currency">
+              <span class="currency-switch__active-symbol">$</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <ul class="currency-switch__menu" role="listbox" aria-label="Select currency">
+              <li><button type="button" class="currency-switch__option" role="option" aria-selected="true" data-currency="USD"><span class="currency-switch__symbol">$</span> USD</button></li>
+              <li><button type="button" class="currency-switch__option" role="option" aria-selected="false" data-currency="EUR"><span class="currency-switch__symbol">€</span> EUR</button></li>
+            </ul>
+          </div>
           <div class="currency-switch" id="currency-switch">
             <button type="button" class="currency-switch__btn" aria-haspopup="listbox" aria-expanded="false">
               <span class="currency-switch__active-symbol">$</span>
@@ -467,6 +477,50 @@
           </button>
         </div>
       </div>
+      <aside class="mega-drawer" id="mega-drawer" role="dialog" aria-modal="true" aria-label="Navigation menu" aria-hidden="true">
+        <div class="mega-drawer__header">
+          <a href="/" class="mega-drawer__logo" aria-label="Nanoboost home">
+            <img src="/assets/icons/logo-text.webp" alt="Nanoboost" width="120" height="18" />
+          </a>
+          <button type="button" class="mega-drawer__close" aria-label="Close menu">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+          </button>
+        </div>
+        <div class="mega-drawer__search">
+          <input type="search" class="mega-drawer__search-input" placeholder="Search services" aria-label="Search services" />
+        </div>
+        <nav class="mega-drawer__nav" aria-label="Site navigation">
+          <div class="mega-drawer__section">
+            <h2 class="mega-drawer__section-label">Games</h2>
+            <ul class="mega-drawer__games" id="mega-drawer-games">
+              <li class="mega-drawer__skeleton skeleton" aria-hidden="true"></li>
+              <li class="mega-drawer__skeleton skeleton" aria-hidden="true"></li>
+              <li class="mega-drawer__skeleton skeleton" aria-hidden="true"></li>
+            </ul>
+          </div>
+          <div class="mega-drawer__section">
+            <h2 class="mega-drawer__section-label">Company</h2>
+            <a href="/pages/why-us.html" class="mega-drawer__link">Why Us</a>
+            <a href="/pages/faq.html" class="mega-drawer__link">FAQ</a>
+            <a href="/pages/contact.html" class="mega-drawer__link">Contacts</a>
+          </div>
+          <div class="mega-drawer__section">
+            <h2 class="mega-drawer__section-label">Legal</h2>
+            <a href="/pages/terms-of-service.html" class="mega-drawer__link">Terms of Service</a>
+            <a href="/pages/privacy-policy.html" class="mega-drawer__link">Privacy Policy</a>
+            <a href="/pages/refund-policy.html" class="mega-drawer__link">Refund Policy</a>
+          </div>
+        </nav>
+        <footer class="mega-drawer__footer">
+          <a class="mega-drawer__contact" href="mailto:support@nanoboost.io">support@nanoboost.io</a>
+          <div class="mega-drawer__socials">
+            <a class="mega-drawer__social" href="https://discord.gg/VwFyntnk" target="_blank" rel="noopener noreferrer" aria-label="Discord">D</a>
+            <a class="mega-drawer__social" href="https://t.me/nanoboost_io" target="_blank" rel="noopener noreferrer" aria-label="Telegram">T</a>
+            <a class="mega-drawer__social" href="https://wa.me/380936414741" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">W</a>
+          </div>
+        </footer>
+      </aside>
+      <div class="mega-drawer__overlay" id="mega-drawer-overlay" aria-hidden="true"></div>
     </header>
     <main class="main" id="main-content">
       <section class="gta5-intro container" aria-labelledby="gta5-title">
