@@ -58,10 +58,19 @@
     }
 
     const isUsdt = trim(paymentInput?.value) === USDT_VALUE;
+    const isEur =
+      typeof window.nbGetCurrency === "function" &&
+      window.nbGetCurrency() === "EUR";
     let subtotal = 0;
 
     cart.forEach((item) => {
-      const price = Number(item.price) || 0;
+      // Cart items carry both currencies (priceUsd + priceEur) so the
+      // display total matches the admin's charm pricing exactly. Falls
+      // back to the legacy single-`price` field for stale entries.
+      const price =
+        Number(isEur ? item.priceEur : item.priceUsd) ||
+        Number(item.price) ||
+        0;
       const qty = item.qty || 1;
       const itemTotal = price * qty;
       subtotal += itemTotal;
@@ -470,8 +479,12 @@
     }
 
     if (typeof window.nbTrack === "function") {
+      // GA4 events stay in USD regardless of display currency so the
+      // analytics rollup is consistent across users.
+      const usdOf = (item) =>
+        Number(item.priceUsd) || Number(item.price) || 0;
       const cartSubtotal = cart.reduce(function (sum, item) {
-        return sum + (Number(item.price) || 0) * (item.qty || 1);
+        return sum + usdOf(item) * (item.qty || 1);
       }, 0);
       window.nbTrack("begin_checkout", {
         currency: "USD",
@@ -482,7 +495,7 @@
             item_id: item.serviceSlug || item.id || "",
             item_name: item.name || "",
             item_variant: optionLabel,
-            price: Number(item.price) || 0,
+            price: usdOf(item),
             quantity: item.qty || 1,
           };
         }),

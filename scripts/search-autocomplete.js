@@ -144,19 +144,10 @@
       .replace(/'/g, "&#39;");
   }
 
-  function formatPrice(usd) {
-    if (typeof window.nbFormatPrice === "function") {
-      return window.nbFormatPrice(usd);
-    }
-    return "$" + (Number(usd) || 0).toFixed(2);
-  }
-
   function renderServiceItem(item, index) {
-    const img = item.image
-      ? '<img class="search-autocomplete__thumb" src="' +
-        escapeHtml(item.image) +
-        '" alt="" loading="lazy" width="40" height="40">'
-      : '<div class="search-autocomplete__thumb search-autocomplete__thumb--placeholder" aria-hidden="true"></div>';
+    // Service row: title (truncated) on top, game name on a line below.
+    // Image + platform + price intentionally dropped — manager call to
+    // keep the dropdown lean and scannable.
     return (
       '<a class="search-autocomplete__item" role="option" id="sa-opt-' +
       index +
@@ -165,29 +156,16 @@
       '" href="' +
       escapeHtml(item.href) +
       '" aria-selected="false">' +
-      img +
       '<span class="search-autocomplete__main">' +
       '<span class="search-autocomplete__title">' +
       escapeHtml(item.title) +
       "</span>" +
-      '<span class="search-autocomplete__meta">' +
       (item.gameName
-        ? '<span class="search-autocomplete__game">' +
+        ? '<span class="search-autocomplete__sub">' +
           escapeHtml(item.gameName) +
           "</span>"
         : "") +
-      (item.platform
-        ? '<span class="search-autocomplete__platform">' +
-          escapeHtml(item.platform) +
-          "</span>"
-        : "") +
       "</span>" +
-      "</span>" +
-      (item.priceUsd > 0
-        ? '<span class="search-autocomplete__price">' +
-          escapeHtml(formatPrice(item.priceUsd)) +
-          "</span>"
-        : "") +
       "</a>"
     );
   }
@@ -207,18 +185,12 @@
       '" href="' +
       escapeHtml(game.href) +
       '" aria-selected="false">' +
-      '<div class="search-autocomplete__thumb search-autocomplete__thumb--game" aria-hidden="true">' +
-      escapeHtml(game.name.charAt(0).toUpperCase()) +
-      "</div>" +
       '<span class="search-autocomplete__main">' +
       '<span class="search-autocomplete__title">' +
       escapeHtml(game.name) +
       "</span>" +
-      '<span class="search-autocomplete__meta">' +
-      '<span class="search-autocomplete__game">Browse game</span>' +
-      '<span class="search-autocomplete__platform">' +
+      '<span class="search-autocomplete__sub">' +
       escapeHtml(meta) +
-      "</span>" +
       "</span>" +
       "</span>" +
       "</a>"
