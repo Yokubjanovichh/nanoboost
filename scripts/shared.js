@@ -1025,8 +1025,14 @@ document.addEventListener("click", (e) => {
     burgerEl.classList.add("is-open");
     burgerEl.setAttribute("aria-expanded", "true");
     document.documentElement.classList.add("nb-no-scroll");
+    // Move keyboard focus to the drawer panel itself (a11y) but
+    // intentionally NOT to the search input — autofocusing the
+    // <input> popped the iOS keyboard and covered half the menu
+    // before the user could see what's inside. They'll tap search
+    // themselves if they want to type.
+    drawer.setAttribute("tabindex", "-1");
     setTimeout(function () {
-      searchInput && searchInput.focus({ preventScroll: true });
+      drawer.focus({ preventScroll: true });
     }, 360);
   }
   function closeDrawer() {
@@ -1035,6 +1041,9 @@ document.addEventListener("click", (e) => {
     burgerEl.classList.remove("is-open");
     burgerEl.setAttribute("aria-expanded", "false");
     document.documentElement.classList.remove("nb-no-scroll");
+    // Return focus to the burger so keyboard users land back on the
+    // trigger that opened the drawer.
+    burgerEl.focus({ preventScroll: true });
   }
 
   burgerEl.addEventListener(

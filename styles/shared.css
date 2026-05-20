@@ -3504,11 +3504,42 @@ a {
     min-height: 6.4rem;
     height: auto;
   }
-  .header .logo__icon {
-    max-height: 2.4rem;
-    width: auto;
-    height: auto;
+  /* Logo: re-show the wordmark on mobile so the left side of the
+     header isn't visually empty. Icon + text together, capped so the
+     row stays balanced against the three 4.4rem control circles. */
+  .header__inner > .logo {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 0.6rem;
+    flex-shrink: 1;
+    min-width: 0;
   }
+  .header .logo__icon {
+    width: 2.8rem;
+    height: 2.8rem;
+    flex-shrink: 0;
+  }
+  .header .logo__text {
+    display: inline-flex !important;
+    align-items: center;
+    width: auto;
+    max-width: 14rem;
+    min-width: 0;
+    overflow: hidden;
+  }
+  .header .logo__text img {
+    height: 1.8rem;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+  }
+
+  /* No double cart entry-points on mobile — the header circle is the
+     one we keep, the bottom-right floating button is suppressed. */
+  .cart-float {
+    display: none !important;
+  }
+
   .header__right {
     display: flex;
     align-items: center;
