@@ -3999,8 +3999,8 @@ a {
 }
 .search-autocomplete__item {
   display: flex;
-  align-items: center;
-  padding: 1.2rem 1.4rem;
+  align-items: flex-start;
+  padding: 1.2rem 1.6rem;
   border-radius: 0.8rem;
   margin: 0 0.4rem;
   text-decoration: none;
@@ -4022,10 +4022,13 @@ a {
   font-size: 1.55rem;
   font-weight: 600;
   color: #fff;
-  line-height: 1.25;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  line-height: 1.35;
+  /* Full readability — long service names wrap rather than truncate.
+     Sales-critical: customers need to see the whole offer. Item
+     height is variable as a result, which matches the e-commerce
+     dropdown pattern (Stripe, Algolia, Linear). */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 .search-autocomplete__sub {
   font-size: 1.25rem;
