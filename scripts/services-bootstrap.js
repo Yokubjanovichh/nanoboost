@@ -130,6 +130,13 @@
     grid.innerHTML = HOT_SKELETON_CARD.repeat(HOT_LIMIT) + HOT_CUSTOM_CARD;
   }
 
+  // Phone (≤480px) only — friendly chip label for the platform.
+  const PLATFORM_CHIP = {
+    ps: "PS4/PS5",
+    xbox: "Xbox One/Series",
+    pc: "PC",
+  };
+
   function buildHotServiceCard(service) {
     const opt =
       (Array.isArray(service.options) && service.options[0]) || {};
@@ -140,13 +147,21 @@
     const gameName = String(
       (service.game && service.game.name) || service.game_name || "",
     ).trim();
-    // Split the title so the service name and game label render as a
-    // two-line hierarchy instead of a clipped 2-line clamp.
-    const strip = window.nbStripGamePrefix || function (t) { return t; };
-    const title = escapeHtml(strip(rawTitle, gameName));
+    // Two-step title cleanup so the card shows just the service name —
+    // the platform chip and the game badge own the rest of the labels.
+    const stripGame = window.nbStripGamePrefix || function (t) { return t; };
+    const stripPlatform = window.nbStripPlatformSuffix || function (t) { return t; };
+    const title = escapeHtml(stripPlatform(stripGame(rawTitle, gameName)));
     const gameBadge = gameName
       ? '<span class="service-card__game">' +
         escapeHtml(gameName) +
+        "</span>"
+      : "";
+    const platformKey = String(service.platform || "").toLowerCase();
+    const platformLabel = PLATFORM_CHIP[platformKey] || service.platform || "";
+    const platformChip = platformLabel
+      ? '<span class="service-card__platform">' +
+        escapeHtml(platformLabel) +
         "</span>"
       : "";
     const desk = escapeHtml(
@@ -161,8 +176,24 @@
       ),
     );
     const alt = escapeHtml(service.image_alt || title);
+    const ariaLabel = escapeHtml(
+      "View " +
+        (title.replace(/&[^;]+;/g, "")) +
+        (platformLabel ? " for " + platformLabel : "") +
+        " service",
+    );
+    // The whole card is an <a> so the entire tile is tappable on
+    // phones. BUY NOW degrades to a <span> styled like the button —
+    // it can't be a nested <a> (invalid HTML) and clicking anywhere
+    // on the card already triggers the parent link.
     return (
-      '<article class="service-card">' +
+      '<a class="service-card service-card--link" href="./pages/services.html?service=' +
+      slug +
+      '" data-service="' +
+      slug +
+      '" aria-label="' +
+      ariaLabel +
+      '">' +
       "<picture>" +
       '<source media="(max-width: 640px)" srcset="' +
       mob +
@@ -174,6 +205,7 @@
       '" width="1600" height="1300" loading="lazy">' +
       "</picture>" +
       '<div class="service-card__content">' +
+      platformChip +
       '<h3 class="service-card__name">' +
       title +
       "</h3>" +
@@ -188,13 +220,9 @@
       usd.toFixed(2) +
       "</span>" +
       "</p>" +
-      '<a href="./pages/services.html?service=' +
-      slug +
-      '" class="service-card__btn" data-service="' +
-      slug +
-      '">BUY NOW</a>' +
+      '<span class="service-card__btn">BUY NOW</span>' +
       "</div>" +
-      "</article>"
+      "</a>"
     );
   }
 
