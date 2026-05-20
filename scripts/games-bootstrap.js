@@ -186,6 +186,76 @@
     });
   }
 
+  // Mobile mega-drawer Games section. Same status rules as the
+  // homepage grid / nav dropdown / footer column — active+services →
+  // clickable card, coming_soon / no services → disabled tag, hidden
+  // → filtered out upstream.
+  const MEGA_DRAWER_GAMES_SELECTOR = "#mega-drawer-games";
+  const MEGA_ARROW_SVG =
+    '<svg class="mega-drawer__game-arrow" viewBox="0 0 24 24" fill="none" ' +
+    'stroke="currentColor" stroke-width="2.5" stroke-linecap="round" ' +
+    'stroke-linejoin="round" aria-hidden="true">' +
+    '<line x1="5" y1="12" x2="19" y2="12"/>' +
+    '<polyline points="12 5 19 12 12 19"/>' +
+    "</svg>";
+
+  function buildMegaDrawerGameItem(game) {
+    const status = effectiveStatus(game);
+    const slug = escape(game.slug || "");
+    const name = escape(game.name || "");
+    const serviceCount = Number(game.service_count || 0);
+    const isClickable = status === "active" && serviceCount > 0;
+    if (isClickable) {
+      const meta =
+        serviceCount === 1
+          ? "1 service available"
+          : serviceCount + " services available";
+      return (
+        '<li><a class="mega-drawer__game" href="/pages/game.html?game=' +
+        slug +
+        '">' +
+        '<span class="mega-drawer__game-info">' +
+        '<span class="mega-drawer__game-name">' +
+        name +
+        "</span>" +
+        '<span class="mega-drawer__game-meta">' +
+        meta +
+        "</span>" +
+        "</span>" +
+        MEGA_ARROW_SVG +
+        "</a></li>"
+      );
+    }
+    const meta =
+      status === "coming_soon" ? "Coming soon" : "Services coming soon";
+    return (
+      '<li><div class="mega-drawer__game mega-drawer__game--disabled" ' +
+      'aria-disabled="true">' +
+      '<span class="mega-drawer__game-info">' +
+      '<span class="mega-drawer__game-name">' +
+      name +
+      "</span>" +
+      '<span class="mega-drawer__game-meta">' +
+      meta +
+      "</span>" +
+      "</span>" +
+      "</div></li>"
+    );
+  }
+
+  function populateMegaDrawerGames(visibleGames) {
+    const list = document.querySelector(MEGA_DRAWER_GAMES_SELECTOR);
+    if (!list) return;
+    list.innerHTML = visibleGames.length
+      ? visibleGames.map(buildMegaDrawerGameItem).join("")
+      : "";
+  }
+
+  function clearMegaDrawerGames() {
+    const list = document.querySelector(MEGA_DRAWER_GAMES_SELECTOR);
+    if (list) list.innerHTML = "";
+  }
+
   // 4 skeleton cards keep layout stable until the API resolves.
   const SKELETON_CARD =
     '<article class="game-card game-card--skeleton" aria-hidden="true">' +
@@ -226,6 +296,7 @@
       const games = await window.NB_API.fetchGames();
       if (!Array.isArray(games) || games.length === 0) {
         clearFooterGames();
+        clearMegaDrawerGames();
         return;
       }
 
@@ -236,6 +307,7 @@
       });
       if (visible.length === 0) {
         clearFooterGames();
+        clearMegaDrawerGames();
         return;
       }
 
@@ -261,6 +333,9 @@
       // 3) Footer Games column — every visible game (active + coming_soon),
       //    status-aware rendering handled by buildFooterGameItem.
       populateFooterGames(visible);
+
+      // 4) Mobile mega-drawer Games section — same status-aware list.
+      populateMegaDrawerGames(visible);
 
       window.dispatchEvent(
         new CustomEvent("nb:games-loaded", {
@@ -290,6 +365,7 @@
       // so drop the skeletons to a clean empty column instead of
       // letting them spin forever.
       clearFooterGames();
+      clearMegaDrawerGames();
     }
   }
 
