@@ -41,7 +41,11 @@
     let mode = "typing";
     let raf = null;
     let last = 0;
-    let stopped = false;
+    // Start in the "stopped" state so the IntersectionObserver's first
+    // callback (input is visible at load time) flips us into start().
+    // The previous default `false` short-circuited the resume guard
+    // and the animation never kicked off on first paint.
+    let stopped = true;
 
     function step(now) {
       if (stopped) return;
@@ -119,9 +123,7 @@
   }
 
   function init() {
-    document
-      .querySelectorAll(".search__input, .mega-drawer__search-input")
-      .forEach(startRotator);
+    document.querySelectorAll(".search__input").forEach(startRotator);
   }
 
   if (document.readyState === "loading") {

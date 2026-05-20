@@ -3794,32 +3794,9 @@ a {
     color: #fff;
   }
 
-  .mega-drawer__search {
-    padding: 1.4rem 1.6rem 0.6rem;
-    flex-shrink: 0;
-  }
-  .mega-drawer__search-input {
-    width: 100%;
-    height: 4.6rem;
-    padding: 0 1.4rem;
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 1rem;
-    color: #fff;
-    font: inherit;
-    font-size: 1.5rem;
-  }
-  .mega-drawer__search-input::placeholder {
-    color: rgba(255, 255, 255, 0.4);
-  }
-  .mega-drawer__search-input:focus {
-    outline: none;
-    border-color: rgba(45, 225, 254, 0.55);
-    background: rgba(45, 225, 254, 0.05);
-  }
-
   .mega-drawer__nav {
     flex: 1;
+    margin-top: 0.4rem;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     overscroll-behavior: contain;
@@ -3973,9 +3950,10 @@ a {
 
 /* ─────────────────────────────────────────────────────────────────
    Search autocomplete dropdown
-   Used by both the header .search and the mobile mega-drawer
-   .mega-drawer__search. JS appends a <div class="search-autocomplete">
-   into each wrapper at boot. */
+   Desktop only — search is intentionally absent on ≤768px (drawer is
+   navigation-only, header search is hidden by the mobile media query).
+   JS appends <div class="search-autocomplete"> into each .search
+   wrapper at boot. */
 .search-autocomplete {
   position: absolute;
   top: calc(100% + 0.6rem);
@@ -4070,9 +4048,11 @@ a {
   font-size: 1.4rem;
   font-weight: 600;
   color: #fff;
-  white-space: nowrap;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
   overflow: hidden;
-  text-overflow: ellipsis;
 }
 .search-autocomplete__meta {
   display: flex;
@@ -4110,21 +4090,6 @@ a {
   font-size: 1.3rem;
   font-weight: 600;
   text-decoration: none;
-}
-
-/* Mobile mega-drawer hosts a wider input; reuse the same dropdown
-   styles but make it static (in-flow) so it doesn't overflow the
-   drawer panel. */
-.mega-drawer__search {
-  position: relative;
-}
-.mega-drawer__search .search-autocomplete {
-  position: static;
-  margin-top: 0.8rem;
-  max-height: 40rem;
-  background: rgba(255, 255, 255, 0.02);
-  border-color: rgba(255, 255, 255, 0.06);
-  box-shadow: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
