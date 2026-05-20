@@ -452,6 +452,21 @@ window.nbGetCurrency = nbGetCurrency;
 window.nbSetCurrency = nbSetCurrency;
 window.nbCurrencySymbol = nbCurrencySymbol;
 window.NB_CURRENCIES = NB_CURRENCIES;
+
+// Strip a leading game-name from a service title so service cards can
+// show "Open All Cars" + a small "Forza Horizon 6" badge instead of
+// the full "Forza Horizon 6 Open All Cars" string that gets clipped
+// on phones. Case-insensitive, tolerates a few common separators
+// (space / dash / colon / pipe / comma) between game and service.
+// Defensive: if stripping leaves nothing, return the original title.
+window.nbStripGamePrefix = function (title, gameName) {
+  const t = String(title || "").trim();
+  const g = String(gameName || "").trim();
+  if (!g || !t) return t;
+  if (t.toLowerCase().indexOf(g.toLowerCase()) !== 0) return t;
+  const rest = t.slice(g.length).replace(/^[\s\-:|,]+/, "").trim();
+  return rest || t;
+};
 const NB_CART_KEY = "nb_cart",
   nbGetCart = () => {
     try {

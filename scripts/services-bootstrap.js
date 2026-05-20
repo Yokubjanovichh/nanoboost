@@ -97,6 +97,7 @@
     '<div class="service-card__img service-card__img--skeleton skeleton"></div>' +
     '<div class="service-card__content">' +
     '<div class="service-card__name service-card__name--skeleton skeleton"></div>' +
+    '<div class="service-card__game service-card__game--skeleton skeleton"></div>' +
     '<div class="service-card__price service-card__price--skeleton skeleton"></div>' +
     '<div class="service-card__btn service-card__btn--skeleton skeleton"></div>' +
     "</div>" +
@@ -135,9 +136,19 @@
     const usd = Number(opt.price_usd || 0);
     const eur = Number(opt.price_eur || 0);
     const slug = escapeHtml(service.slug || "");
-    const title = escapeHtml(
-      String(service.title || "").replace(/<br\s*\/?>/g, " "),
-    );
+    const rawTitle = String(service.title || "").replace(/<br\s*\/?>/g, " ");
+    const gameName = String(
+      (service.game && service.game.name) || service.game_name || "",
+    ).trim();
+    // Split the title so the service name and game label render as a
+    // two-line hierarchy instead of a clipped 2-line clamp.
+    const strip = window.nbStripGamePrefix || function (t) { return t; };
+    const title = escapeHtml(strip(rawTitle, gameName));
+    const gameBadge = gameName
+      ? '<span class="service-card__game">' +
+        escapeHtml(gameName) +
+        "</span>"
+      : "";
     const desk = escapeHtml(
       absolutizeBackendUrl(service.image_desktop_url || service.image_url || ""),
     );
@@ -166,6 +177,7 @@
       '<h3 class="service-card__name">' +
       title +
       "</h3>" +
+      gameBadge +
       '<p class="service-card__price">' +
       '<span class="service-card__from">From</span>' +
       '<span class="service-card__amount" data-usd="' +

@@ -199,11 +199,12 @@ select:focus-visible,
 }
 .service-card__name--skeleton {
   display: block;
-  /* Real title is two-line clamped to 2.56em — match it so the swap
-     doesn't change the card height. */
-  height: 2.56em;
+  /* Matches the real .service-card__name 2-line clamp at line-height
+     1.25. The trailing margin pairs with the .service-card__game
+     skeleton block below so layout doesn't shift on hydration. */
+  height: 2.5em;
   width: 75%;
-  margin-bottom: 1.8rem;
+  margin: 0 auto 0.4rem;
   border-radius: 6px;
 }
 .service-card__price--skeleton {
@@ -2044,16 +2045,40 @@ a {
 .service-card__name {
   color: #fff;
   font-size: clamp(2rem, 1.2vw, 2.9rem);
-  font-weight: 500;
-  line-height: 1.28;
-  margin-bottom: 1.8rem;
+  font-weight: 600;
+  line-height: 1.25;
+  margin-bottom: 0.4rem;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   line-clamp: 2;
   overflow: hidden;
-  min-height: 2.56em;
-  max-height: 2.56em;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+/* Small game label under the service name on Hot Right Now cards.
+   Treats the game as supplemental metadata (uppercase, muted) so the
+   service name stays the visual lead. */
+.service-card__game {
+  display: block;
+  text-align: center;
+  font-size: clamp(1.2rem, 0.8vw, 1.4rem);
+  font-weight: 500;
+  line-height: 1.2;
+  color: rgba(255, 255, 255, 0.55);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 1.8rem;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.service-card__game--skeleton {
+  width: 60%;
+  height: 1.2em;
+  margin: 0.4rem auto 1.6rem;
+  border-radius: 0.4rem;
 }
 .service-card__price {
   display: flex;
@@ -3184,7 +3209,12 @@ a {
     justify-content: center;
   }
   .service-card__name {
-    font-size: 2.2rem;
+    font-size: 1.9rem;
+    line-height: 1.22;
+    margin-bottom: 0.4rem;
+  }
+  .service-card__game {
+    font-size: 1.15rem;
   }
   .service-card__price {
     gap: 0.8rem;
@@ -3397,18 +3427,20 @@ a {
     transform: none;
   }
   .service-card__name {
-    font-size: 2.25rem;
+    font-size: 1.9rem;
     line-height: 1.22;
-    margin-bottom: 1.7rem;
+    margin-bottom: 0.4rem;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     line-clamp: 2;
     overflow: hidden;
-    min-height: 2.44em;
-    max-height: 2.44em;
     text-align: center;
     align-self: center;
+  }
+  .service-card__game {
+    font-size: 1.15rem;
+    margin-bottom: 1.4rem;
   }
   .service-card__content--custom {
     padding: 0.8rem 0.8rem 4.8rem 0.4rem;
