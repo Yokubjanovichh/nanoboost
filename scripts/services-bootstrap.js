@@ -97,7 +97,6 @@
     '<div class="service-card__img service-card__img--skeleton skeleton"></div>' +
     '<div class="service-card__content">' +
     '<div class="service-card__name service-card__name--skeleton skeleton"></div>' +
-    '<div class="service-card__game service-card__game--skeleton skeleton"></div>' +
     '<div class="service-card__price service-card__price--skeleton skeleton"></div>' +
     '<div class="service-card__btn service-card__btn--skeleton skeleton"></div>' +
     "</div>" +
@@ -130,40 +129,18 @@
     grid.innerHTML = HOT_SKELETON_CARD.repeat(HOT_LIMIT) + HOT_CUSTOM_CARD;
   }
 
-  // Phone (≤480px) only — friendly chip label for the platform.
-  const PLATFORM_CHIP = {
-    ps: "PS4/PS5",
-    xbox: "Xbox One/Series",
-    pc: "PC",
-  };
-
   function buildHotServiceCard(service) {
     const opt =
       (Array.isArray(service.options) && service.options[0]) || {};
     const usd = Number(opt.price_usd || 0);
     const eur = Number(opt.price_eur || 0);
     const slug = escapeHtml(service.slug || "");
-    const rawTitle = String(service.title || "").replace(/<br\s*\/?>/g, " ");
-    const gameName = String(
-      (service.game && service.game.name) || service.game_name || "",
-    ).trim();
-    // Two-step title cleanup so the card shows just the service name —
-    // the platform chip and the game badge own the rest of the labels.
-    const stripGame = window.nbStripGamePrefix || function (t) { return t; };
-    const stripPlatform = window.nbStripPlatformSuffix || function (t) { return t; };
-    const title = escapeHtml(stripPlatform(stripGame(rawTitle, gameName)));
-    const gameBadge = gameName
-      ? '<span class="service-card__game">' +
-        escapeHtml(gameName) +
-        "</span>"
-      : "";
-    const platformKey = String(service.platform || "").toLowerCase();
-    const platformLabel = PLATFORM_CHIP[platformKey] || service.platform || "";
-    const platformChip = platformLabel
-      ? '<span class="service-card__platform">' +
-        escapeHtml(platformLabel) +
-        "</span>"
-      : "";
+    // Title is rendered as-is from admin — no game-prefix stripping,
+    // no platform-suffix stripping. The services-list-page style
+    // ("Cayo Perico Heist Pack PS4/PS5") is the source of truth.
+    const title = escapeHtml(
+      String(service.title || "").replace(/<br\s*\/?>/g, " "),
+    );
     const desk = escapeHtml(
       absolutizeBackendUrl(service.image_desktop_url || service.image_url || ""),
     );
@@ -176,12 +153,7 @@
       ),
     );
     const alt = escapeHtml(service.image_alt || title);
-    const ariaLabel = escapeHtml(
-      "View " +
-        (title.replace(/&[^;]+;/g, "")) +
-        (platformLabel ? " for " + platformLabel : "") +
-        " service",
-    );
+    const ariaLabel = escapeHtml("View " + title.replace(/&[^;]+;/g, "") + " service");
     // The whole card is an <a> so the entire tile is tappable on
     // phones. BUY NOW degrades to a <span> styled like the button —
     // it can't be a nested <a> (invalid HTML) and clicking anywhere
@@ -205,11 +177,9 @@
       '" width="1600" height="1300" loading="lazy">' +
       "</picture>" +
       '<div class="service-card__content">' +
-      platformChip +
       '<h3 class="service-card__name">' +
       title +
       "</h3>" +
-      gameBadge +
       '<p class="service-card__price">' +
       '<span class="service-card__from">From</span>' +
       '<span class="service-card__amount" data-usd="' +
