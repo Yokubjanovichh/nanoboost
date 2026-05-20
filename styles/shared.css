@@ -3489,46 +3489,91 @@ a {
     display: none !important;
   }
 
-  /* Mobile top bar: burger | logo | currency pill | cart */
+  /* Mobile top bar: burger | logo | currency pill | cart.
+     Three right-side controls share one design language — same 44×44
+     circular container, same glass background, same hover/active/focus
+     states. Only the inner glyph differs ($/€, cart icon, hamburger). */
+  .header {
+    padding: 0 1.6rem !important;
+  }
   .header__inner {
     display: flex;
     align-items: center;
     gap: 0.8rem;
-    min-height: 5.6rem;
+    padding: 1.2rem 0;
+    min-height: 6.4rem;
+    height: auto;
+  }
+  .header .logo__icon {
+    max-height: 2.4rem;
+    width: auto;
+    height: auto;
   }
   .header__right {
     display: flex;
     align-items: center;
-    gap: 0.6rem;
+    gap: 0.8rem;
     margin-left: auto;
   }
 
-  /* Mobile currency pill — separate small button next to cart. */
+  /* ---- Unified mobile control surface ---- */
+  .header__right .currency-switch--mobile .currency-switch__btn,
+  .header__right .cart,
+  .header .burger {
+    width: 4.4rem !important;
+    height: 4.4rem !important;
+    min-width: 4.4rem;
+    min-height: 4.4rem;
+    padding: 0;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    -webkit-backdrop-filter: blur(12px) saturate(180%);
+    backdrop-filter: blur(12px) saturate(180%);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.18s cubic-bezier(0.4, 0, 0.2, 1),
+      border-color 0.18s cubic-bezier(0.4, 0, 0.2, 1),
+      transform 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .header__right .currency-switch--mobile .currency-switch__btn:hover,
+  .header__right .cart:hover,
+  .header .burger:hover,
+  .currency-switch--mobile.is-open .currency-switch__btn,
+  .header .burger.is-open {
+    background: rgba(45, 225, 254, 0.10);
+    border-color: rgba(45, 225, 254, 0.30);
+  }
+  .header__right .currency-switch--mobile .currency-switch__btn:active,
+  .header__right .cart:active,
+  .header .burger:active {
+    transform: scale(0.94);
+  }
+  .header__right .currency-switch--mobile .currency-switch__btn:focus-visible,
+  .header__right .cart:focus-visible,
+  .header .burger:focus-visible {
+    outline: 2px solid rgba(45, 225, 254, 0.6);
+    outline-offset: 2px;
+  }
+
+  /* ---- Currency pill: just the symbol, no chevron ---- */
   .currency-switch--mobile {
     position: relative;
     display: inline-flex;
   }
   .currency-switch--mobile .currency-switch__btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    min-width: 5.2rem;
-    min-height: 4rem;
-    padding: 0 1rem;
-    border-radius: 999px;
-    background: rgba(45, 225, 254, 0.08);
-    border: 1px solid rgba(45, 225, 254, 0.35);
-    color: #fff;
-    font: inherit;
+    gap: 0;
     font-weight: 600;
-    font-size: 1.4rem;
-    cursor: pointer;
-    transition: background 0.18s ease, border-color 0.18s ease;
+    font-size: 1.6rem;
   }
-  .currency-switch--mobile .currency-switch__btn:hover,
-  .currency-switch--mobile.is-open .currency-switch__btn {
-    background: rgba(45, 225, 254, 0.16);
-    border-color: rgba(45, 225, 254, 0.6);
+  .currency-switch--mobile .currency-switch__btn > svg {
+    display: none;
+  }
+  .currency-switch--mobile .currency-switch__active-symbol {
+    line-height: 1;
   }
   .currency-switch--mobile .currency-switch__menu {
     position: absolute;
@@ -3572,6 +3617,62 @@ a {
     background: rgba(45, 225, 254, 0.12);
     color: #fff;
   }
+
+  /* ---- Cart: 20px icon centred, premium gradient badge ---- */
+  .header__right .cart {
+    position: relative;
+  }
+  .header__right .cart > svg {
+    width: 2rem;
+    height: 2rem;
+    flex-shrink: 0;
+  }
+  .header__right .cart .cart__badge {
+    position: absolute;
+    top: -0.4rem;
+    right: -0.4rem;
+    min-width: 1.8rem;
+    height: 1.8rem;
+    padding: 0 0.4rem;
+    border-radius: 999px;
+    border: 2px solid #08071a;
+    background: linear-gradient(135deg, #2de1fe 0%, #9d21fe 100%);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    bottom: auto;
+    left: auto;
+  }
+
+  /* ---- Burger: plain white 18×2 lines, no gradient frame ---- */
+  .header .burger {
+    flex-direction: column;
+    gap: 0.4rem;
+    /* Override the 980px gradient-border background composite. */
+    background: rgba(255, 255, 255, 0.04) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    /* Reset the CSS variables so .burger__line uses fixed values. */
+    --nb-burger-line-w: 1.8rem;
+    --nb-burger-line-h: 2px;
+    --nb-burger-gap: 0.4rem;
+  }
+  .header .burger.is-open {
+    background: rgba(45, 225, 254, 0.10) !important;
+    border-color: rgba(45, 225, 254, 0.30) !important;
+  }
+  .header .burger__line {
+    width: 1.8rem;
+    height: 2px;
+    background: #fff;
+    border-radius: 2px;
+  }
+  /* The 980px rule rotates lines using --nb-burger-gap / --nb-burger-line-h
+     vars — by resetting those above the X animation lands on the new
+     smaller geometry automatically (no rule duplication). */
 
   /* Overlay behind the drawer. */
   .mega-drawer__overlay {
