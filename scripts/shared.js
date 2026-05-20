@@ -453,70 +453,9 @@ window.nbSetCurrency = nbSetCurrency;
 window.nbCurrencySymbol = nbCurrencySymbol;
 window.NB_CURRENCIES = NB_CURRENCIES;
 
-// Strip a leading game-name from a service title so phone-layout
-// service cards can show "Open All Cars" + a separate "Forza Horizon 6"
-// badge instead of clipping the full string. Tries the API-provided
-// gameName first, then a few compacted variants (drops numeric tokens
-// for cases like "GTA 5 Online" → "GTA Online"), then a hard-coded
-// fallback list for known mismatches between admin's game.name and
-// the title prefixes editors actually type. Defensive: if a strip
-// would leave the title empty, the original is returned.
-//
-// Future cleanup: ship a dedicated `display_title` (or service.name)
-// field from the backend so the FE doesn't have to guess.
-const NB_TITLE_PREFIX_FALLBACKS = [
-  "GTA Online",
-  "GTA 5 Online",
-  "GTA V Online",
-  "GTA5 Online",
-  "Forza Horizon 6",
-  "Forza Horizon",
-];
-// Strip a trailing platform tag from a service title so the chip
-// component owns the platform label instead of duplicating it in the
-// card heading ("Cash Boost PS4/PS5" → "Cash Boost"). Tolerates the
-// common variants editors type in admin.
-window.nbStripPlatformSuffix = function (title) {
-  return String(title || "")
-    .replace(
-      /\s+(?:on\s+)?(PS4\/PS5|PS5\/PS4|PS4|PS5|Xbox(?:\s+(?:One|Series))?|PC)$/i,
-      "",
-    )
-    .trim();
-};
-window.nbStripGamePrefix = function (title, gameName) {
-  const t = String(title || "").trim();
-  if (!t) return t;
-  const candidates = [];
-  const g = String(gameName || "").trim();
-  if (g) {
-    candidates.push(g);
-    const tokens = g.split(/\s+/);
-    if (tokens.length >= 3) {
-      const compact = tokens
-        .filter(function (tok) {
-          return !/^\d+$/.test(tok);
-        })
-        .join(" ");
-      if (compact && compact !== g) candidates.push(compact);
-    }
-  }
-  for (let i = 0; i < NB_TITLE_PREFIX_FALLBACKS.length; i++) {
-    candidates.push(NB_TITLE_PREFIX_FALLBACKS[i]);
-  }
-  const tLower = t.toLowerCase();
-  for (let i = 0; i < candidates.length; i++) {
-    const c = candidates[i];
-    if (!c) continue;
-    if (tLower.indexOf(c.toLowerCase()) !== 0) continue;
-    const rest = t
-      .slice(c.length)
-      .replace(/^[\s\-:|,]+/, "")
-      .trim();
-    if (rest) return rest;
-  }
-  return t;
-};
+// nbStripGamePrefix / nbStripPlatformSuffix / NB_TITLE_PREFIX_FALLBACKS
+// were removed in fix/cards-minimalist. The card layout renders the
+// admin's full title as-is — single source of truth.
 const NB_CART_KEY = "nb_cart",
   nbGetCart = () => {
     try {

@@ -2060,18 +2060,11 @@ a {
   min-height: 2.56em;
   max-height: 2.56em;
 }
-/* Game label and platform chip are mobile-only; the desktop card
-   relies on the full admin title and uniform grid heights. */
-.service-card__game,
-.service-card__platform {
-  display: none;
-}
-.service-card__game--skeleton {
-  display: none;
-}
 /* The whole card is now an <a> on mobile (and stays an <article> for
    the skeleton + the "Need a custom service?" tile). Strip the link
-   underline + inherit colour so the wrap is invisible to the user. */
+   underline + inherit colour so the wrap is invisible to the user.
+   The platform-chip and game-subtitle decorations were removed in
+   fix/cards-minimalist — admin's full title is the single source. */
 .service-card--link {
   text-decoration: none;
   color: inherit;
@@ -3475,16 +3468,12 @@ a {
     font-size: clamp(3.4rem, 2.5vw, 5.6rem);
     line-height: 0.98;
   }
-  .service-card__btn {
-    width: min(100%, 20rem);
-    min-width: 15.6rem;
-    min-height: 3.8rem;
-    padding: 0 1.6rem;
-    font-size: 1.8rem;
-    letter-spacing: 0.02em;
-    border-radius: 999px;
-    margin: 0.2rem auto 0;
-  }
+  /* The phone-only horizontal card layout sets its own
+     .service-card__btn { width: 100% } further down — keeping the
+     old min-width: 15.6rem here used to clip "Level Boost" narrower
+     than the rest because the surrounding rules also set max-width
+     20rem and centred margin. Removed in fix/cards-minimalist so
+     every card's BUY NOW stretches identically. */
   .service-card__btn--custom {
     width: auto;
     left: 0.4rem;
@@ -4152,26 +4141,6 @@ a {
     gap: 0.5rem;
     min-width: 0;
   }
-  .service-card__platform {
-    display: inline-flex;
-    align-items: center;
-    padding: 0.35rem 0.9rem;
-    background: rgba(45, 225, 254, 0.12);
-    border: 1px solid rgba(45, 225, 254, 0.3);
-    border-radius: 999px;
-    color: #2de1fe;
-    font-size: 1rem;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    line-height: 1;
-    width: fit-content;
-    max-width: 100%;
-    margin: 0;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
   .service-card__name {
     font-size: 1.7rem;
     font-weight: 600;
@@ -4192,27 +4161,6 @@ a {
     overflow-wrap: break-word;
     hyphens: auto;
   }
-  .service-card__game {
-    display: block;
-    font-size: 1.1rem;
-    font-weight: 500;
-    color: rgba(255, 255, 255, 0.55);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    margin: 0;
-    text-align: left;
-    width: 100%;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .service-card__game--skeleton {
-    display: block;
-    width: 50%;
-    height: 1.1em;
-    margin: 0;
-    border-radius: 0.4rem;
-  }
   .service-card__price {
     margin: 0.2rem 0 0;
     align-self: flex-start;
@@ -4228,15 +4176,11 @@ a {
     align-items: center;
     justify-content: center;
   }
-  /* Custom CTA card keeps its vertical centred layout — no platform
-     chip, no game badge, no horizontal image to align against. */
+  /* Custom CTA card keeps its vertical centred layout — no horizontal
+     image to align against. */
   .service-card--custom {
     flex-direction: column;
     gap: 0;
-  }
-  .service-card--custom .service-card__game,
-  .service-card--custom .service-card__platform {
-    display: none;
   }
   .service-card--custom .service-card__content {
     align-items: center;
