@@ -337,9 +337,12 @@
       // 4) Mobile mega-drawer Games section — same status-aware list.
       populateMegaDrawerGames(visible);
 
+      // Expose the visible games list so the search autocomplete can
+      // build its game-suggestion directory without re-hitting /games.
+      window.NB_GAMES = visible;
       window.dispatchEvent(
         new CustomEvent("nb:games-loaded", {
-          detail: { count: visible.length, source: "api" },
+          detail: { count: visible.length, source: "api", games: visible },
         }),
       );
 

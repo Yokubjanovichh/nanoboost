@@ -644,18 +644,25 @@ a {
   flex-shrink: 0;
 }
 .search {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 2rem;
   border-bottom: 1.5px solid #2531d8;
   padding: 0 0.6rem 0.4rem 0.6rem;
   transition:
-    border-color 0.25s ease,
-    box-shadow 0.25s ease;
+    border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
+/* Premium focus glow — replaces the browser's default outline (we
+   strip it on the input itself) with a soft brand-cyan ring on the
+   container so the visible focus state lives on the whole search
+   group, not just the bare input. */
 .search:focus-within {
-  border-color: #653ade;
-  box-shadow: 0 2px 8px rgba(101, 58, 222, 0.3);
+  border-color: rgba(45, 225, 254, 0.6);
+  box-shadow:
+    0 0 0 3px rgba(45, 225, 254, 0.15),
+    0 4px 20px rgba(45, 225, 254, 0.08);
 }
 .search__input {
   background: 0 0;
@@ -666,7 +673,11 @@ a {
   font-weight: 400;
   color: #fff;
   width: 20rem;
-  caret-color: #2531d8;
+  caret-color: #2de1fe;
+}
+.search__input:focus,
+.search__input:focus-visible {
+  outline: none;
 }
 .search__input::-webkit-input-placeholder {
   color: rgba(255, 255, 255, 0.5);
@@ -3956,6 +3967,168 @@ a {
   .mega-drawer,
   .mega-drawer__overlay,
   .currency-switch--mobile .currency-switch__menu {
+    transition: none;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   Search autocomplete dropdown
+   Used by both the header .search and the mobile mega-drawer
+   .mega-drawer__search. JS appends a <div class="search-autocomplete">
+   into each wrapper at boot. */
+.search-autocomplete {
+  position: absolute;
+  top: calc(100% + 0.6rem);
+  left: 0;
+  right: 0;
+  z-index: 100;
+  max-height: 48rem;
+  overflow-y: auto;
+  background: rgba(14, 8, 38, 0.94);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1.2rem;
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(45, 225, 254, 0.1);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-0.4rem);
+  transition:
+    opacity 0.18s cubic-bezier(0.4, 0, 0.2, 1),
+    visibility 0.18s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.search-autocomplete.is-open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.search-autocomplete__section {
+  padding: 0.4rem 0;
+}
+.search-autocomplete__section + .search-autocomplete__section {
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+.search-autocomplete__section-label {
+  padding: 1rem 1.4rem 0.6rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.5);
+}
+.search-autocomplete__item {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 1rem 1.4rem;
+  border-radius: 0.8rem;
+  margin: 0 0.4rem;
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.12s ease;
+}
+.search-autocomplete__item:hover,
+.search-autocomplete__item[aria-selected="true"] {
+  background: rgba(45, 225, 254, 0.1);
+}
+.search-autocomplete__thumb {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 0.6rem;
+  object-fit: cover;
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.04);
+}
+.search-autocomplete__thumb--placeholder {
+  background: linear-gradient(
+    135deg,
+    rgba(45, 225, 254, 0.15),
+    rgba(157, 33, 254, 0.15)
+  );
+}
+.search-autocomplete__thumb--game {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #2de1fe 0%, #6849fe 50%, #9d21fe 100%);
+  color: #fff;
+  font-family: "LEMON MILK", "Poppins", sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+.search-autocomplete__main {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+  flex: 1;
+}
+.search-autocomplete__title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.search-autocomplete__meta {
+  display: flex;
+  gap: 0.8rem;
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+.search-autocomplete__game,
+.search-autocomplete__platform {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.search-autocomplete__price {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #2de1fe;
+  flex-shrink: 0;
+}
+.search-autocomplete__empty {
+  padding: 2rem 1.4rem;
+  text-align: center;
+}
+.search-autocomplete__empty-title {
+  font-size: 1.4rem;
+  color: rgba(255, 255, 255, 0.72);
+  margin: 0 0 1.2rem;
+}
+.search-autocomplete__empty-cta {
+  display: inline-block;
+  padding: 0.8rem 1.6rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #2de1fe 0%, #6849fe 50%, #9d21fe 100%);
+  color: #fff;
+  font-size: 1.3rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* Mobile mega-drawer hosts a wider input; reuse the same dropdown
+   styles but make it static (in-flow) so it doesn't overflow the
+   drawer panel. */
+.mega-drawer__search {
+  position: relative;
+}
+.mega-drawer__search .search-autocomplete {
+  position: static;
+  margin-top: 0.8rem;
+  max-height: 40rem;
+  background: rgba(255, 255, 255, 0.02);
+  border-color: rgba(255, 255, 255, 0.06);
+  box-shadow: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .search-autocomplete {
     transition: none;
   }
 }
