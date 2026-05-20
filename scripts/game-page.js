@@ -221,8 +221,17 @@
     grid.__nbLastList = list;
     grid.__nbLastPlatform = platform;
     list.forEach(function (svc) {
-      const article = document.createElement("article");
-      article.className = "service-card";
+      // Whole card is the link — mirrors services-bootstrap.js so the
+      // .service-card--link mobile rules (square image, gap, scale-
+      // on-tap, full-width BUY NOW) apply uniformly across game-page
+      // cards and Hot Right Now cards.
+      const card = document.createElement("a");
+      card.className = "service-card service-card--link";
+      card.href =
+        "./services.html?service=" + encodeURIComponent(svc.serviceParam);
+      card.dataset.service = svc.serviceParam;
+      card.setAttribute("aria-label", "View " + (svc.title || "") + " service");
+
       const tpl = document.createElement("template");
       tpl.innerHTML = buildPicture(
         svc.imageSrcDesktop || svc.imageSrc || "",
@@ -255,20 +264,20 @@
             : svc.priceNow;
       price.appendChild(amount);
 
-      const btn = document.createElement("a");
+      // BUY NOW degrades to a <span> — nested <a> inside the card link
+      // would be invalid HTML. Parent <a> handles navigation; CSS for
+      // .service-card__btn renders it visually as the button.
+      const btn = document.createElement("span");
       btn.className = "service-card__btn";
-      btn.href =
-        "./services.html?service=" + encodeURIComponent(svc.serviceParam);
-      btn.dataset.service = svc.serviceParam;
       btn.textContent = "BUY NOW";
 
       content.appendChild(name);
       content.appendChild(price);
       content.appendChild(btn);
 
-      article.appendChild(pic);
-      article.appendChild(content);
-      grid.appendChild(article);
+      card.appendChild(pic);
+      card.appendChild(content);
+      grid.appendChild(card);
     });
   }
 
@@ -470,10 +479,12 @@
   if (window.NB_SERVICES_BY_GAME) syncFromData();
 
   // Delegated click handler — fires GA4 select_item before the browser
-  // follows the BUY NOW link to services.html.
+  // follows the card link to services.html. The card is now a full
+  // <a class="service-card service-card--link" data-service="…">, so
+  // catch the whole tile not just the BUY NOW button.
   if (grid) {
     grid.addEventListener("click", function (e) {
-      const link = e.target.closest("a.service-card__btn[data-service]");
+      const link = e.target.closest("a.service-card--link[data-service]");
       if (!link) return;
       const slug = link.dataset.service;
       const list = grid.__nbLastList || [];
