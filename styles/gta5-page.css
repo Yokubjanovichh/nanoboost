@@ -296,13 +296,3 @@ body.page--game {
     padding: 0.95rem 2.1rem;
   }
 }
-@media (max-width: 1599.98px) {
-  .page--game .services__grid > .service-card:nth-child(5) {
-    display: flex;
-  }
-}
-@media (max-width: 480px), (orientation: landscape) and (max-height: 500px) {
-  .page--game .services__grid > .service-card:nth-child(5) {
-    display: grid;
-  }
-}
