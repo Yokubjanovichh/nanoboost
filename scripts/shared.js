@@ -472,6 +472,18 @@ const NB_TITLE_PREFIX_FALLBACKS = [
   "Forza Horizon 6",
   "Forza Horizon",
 ];
+// Strip a trailing platform tag from a service title so the chip
+// component owns the platform label instead of duplicating it in the
+// card heading ("Cash Boost PS4/PS5" → "Cash Boost"). Tolerates the
+// common variants editors type in admin.
+window.nbStripPlatformSuffix = function (title) {
+  return String(title || "")
+    .replace(
+      /\s+(?:on\s+)?(PS4\/PS5|PS5\/PS4|PS4|PS5|Xbox(?:\s+(?:One|Series))?|PC)$/i,
+      "",
+    )
+    .trim();
+};
 window.nbStripGamePrefix = function (title, gameName) {
   const t = String(title || "").trim();
   if (!t) return t;

@@ -1980,6 +1980,11 @@ a {
   isolation: isolate;
   border-radius: 2.4rem;
   cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease;
   -webkit-mask-image: -webkit-radial-gradient(white, black);
   min-height: clamp(380px, 22vw, 460px);
   padding: clamp(10px, 0.8vw, 14px) clamp(10px, 0.8vw, 14px)
@@ -2055,14 +2060,43 @@ a {
   min-height: 2.56em;
   max-height: 2.56em;
 }
-/* Game label is hidden on desktop — admin's full title is enough.
-   Mobile (≤480px) flips this to display:block so phone users see the
-   stripped service name + the game it belongs to as a stacked pair. */
-.service-card__game {
+/* Game label and platform chip are mobile-only; the desktop card
+   relies on the full admin title and uniform grid heights. */
+.service-card__game,
+.service-card__platform {
   display: none;
 }
 .service-card__game--skeleton {
   display: none;
+}
+/* The whole card is now an <a> on mobile (and stays an <article> for
+   the skeleton + the "Need a custom service?" tile). Strip the link
+   underline + inherit colour so the wrap is invisible to the user. */
+.service-card--link {
+  text-decoration: none;
+  color: inherit;
+}
+.service-card--link:active {
+  transform: scale(0.98);
+  transition: transform 0.12s ease-out;
+}
+@media (hover: hover) {
+  .service-card--link:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0 12px 32px rgba(157, 33, 254, 0.25),
+      0 0 0 1px rgba(255, 255, 255, 0.03) inset;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .service-card,
+  .service-card--link {
+    transition: none;
+  }
+  .service-card--link:active,
+  .service-card--link:hover {
+    transform: none;
+  }
 }
 .service-card__price {
   display: flex;
@@ -4074,41 +4108,76 @@ a {
 
 /* ─────────────────────────────────────────────────────────────────
    Phone (≤480px) service card redesign
-   The desktop card relies on a 2-line clamp + uniform grid heights
-   to look balanced. That same clamp clips long titles on phones
-   ("Forza Horizon 6 Open All Cars" → only the game half is visible),
-   and the dense 4-column grid is wasted at this width. Drop the
-   grid to a single full-width column, let titles wrap freely, and
-   surface the stripped service name + a small game label below it. */
+   Horizontal flex-row layout: square image on the left, content stack
+   on the right. The card is wrapped in a single <a> on mobile so the
+   whole tile is tappable; BUY NOW degrades to a styled <span>. Title
+   clamp is dropped so long names wrap freely instead of clipping. */
 @media (max-width: 480px) {
   .services__grid {
     grid-template-columns: 1fr;
-    gap: 1.6rem;
+    gap: 1.4rem;
     justify-content: stretch;
     max-width: 100%;
   }
   .service-card {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    gap: 1.4rem;
     min-height: auto;
-    padding: 1.2rem 1.2rem 2rem;
+    padding: 1.2rem;
   }
   .service-card__img {
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    margin: 0 auto 1.6rem;
-    border-radius: 1.4rem;
+    width: 12rem;
+    height: 12rem;
+    aspect-ratio: 1 / 1;
+    flex-shrink: 0;
+    margin: 0;
+    border-radius: 1.2rem;
     object-fit: cover;
+    background: linear-gradient(
+      135deg,
+      rgba(45, 225, 254, 0.08),
+      rgba(157, 33, 254, 0.08)
+    );
   }
   .service-card__content {
-    padding: 0 0.4rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
     align-items: flex-start;
     text-align: left;
+    padding: 0;
+    gap: 0.5rem;
+    min-width: 0;
+  }
+  .service-card__platform {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.35rem 0.9rem;
+    background: rgba(45, 225, 254, 0.12);
+    border: 1px solid rgba(45, 225, 254, 0.3);
+    border-radius: 999px;
+    color: #2de1fe;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1;
+    width: fit-content;
+    max-width: 100%;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .service-card__name {
-    font-size: 2rem;
+    font-size: 1.7rem;
     font-weight: 600;
-    line-height: 1.3;
-    margin-bottom: 0.4rem;
-    /* Override the desktop clamp + fixed height so the full title
+    line-height: 1.25;
+    margin: 0;
+    /* Drop the desktop clamp + fixed 2.56em height so the full title
        reads no matter how long it is. */
     display: block;
     -webkit-line-clamp: unset;
@@ -4118,23 +4187,21 @@ a {
     overflow: visible;
     text-align: left;
     align-self: stretch;
+    width: 100%;
     word-wrap: break-word;
     overflow-wrap: break-word;
     hyphens: auto;
-    width: 100%;
   }
   .service-card__game {
     display: block;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: 500;
     color: rgba(255, 255, 255, 0.55);
     letter-spacing: 0.06em;
     text-transform: uppercase;
-    margin-bottom: 1.6rem;
+    margin: 0;
     text-align: left;
     width: 100%;
-    /* On phones the badge stands alone on its row, so single-line
-       ellipsis still applies but with a generous limit. */
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -4143,21 +4210,37 @@ a {
     display: block;
     width: 50%;
     height: 1.1em;
-    margin: 0.4rem 0 1.6rem;
+    margin: 0;
     border-radius: 0.4rem;
   }
   .service-card__price {
-    margin-bottom: 1.2rem;
+    margin: 0.2rem 0 0;
     align-self: flex-start;
+    gap: 0.6rem;
   }
   .service-card__btn {
     width: 100%;
     align-self: stretch;
-    margin-top: 0.4rem;
+    margin-top: auto;
+    min-height: 4.4rem;
+    font-size: 1.4rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
   }
-  /* Custom CTA card stays single-game-agnostic — no game label
-     rendered into it, no badge to surface. */
-  .service-card--custom .service-card__game {
+  /* Custom CTA card keeps its vertical centred layout — no platform
+     chip, no game badge, no horizontal image to align against. */
+  .service-card--custom {
+    flex-direction: column;
+    gap: 0;
+  }
+  .service-card--custom .service-card__game,
+  .service-card--custom .service-card__platform {
     display: none;
+  }
+  .service-card--custom .service-card__content {
+    align-items: center;
+    text-align: center;
+    padding: 0.4rem;
   }
 }
