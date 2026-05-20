@@ -152,13 +152,31 @@ function nbBuildDropdownData() {
         if (platforms.length === 0) return "";
         const items = platforms
           .map(function (p) {
+            // Split the platform tile into a link (navigate to the
+            // game's services pre-filtered by platform) and a chevron
+            // button (drill into the services sublist — legacy hover
+            // behaviour). Mirrors the game tile pattern.
+            const label = nbEscDropdown(NB_PLATFORM_LABEL[p] || p);
+            const href =
+              "/pages/game.html?game=" +
+              encodeURIComponent(slug) +
+              "&platform=" +
+              encodeURIComponent(p);
             return (
               '<li class="dropdown__item" data-platform="' +
               nbEscDropdown(p) +
-              '" tabindex="0"><span>' +
-              nbEscDropdown(NB_PLATFORM_LABEL[p] || p) +
-              "</span>" +
+              '">' +
+              '<a class="dropdown__item-link" href="' +
+              href +
+              '"><span>' +
+              label +
+              "</span></a>" +
+              '<button class="dropdown__item-chevron" type="button" ' +
+              'aria-label="Show services for ' +
+              label +
+              '">' +
               NB_DROPDOWN_CHEVRON +
+              "</button>" +
               "</li>"
             );
           })
