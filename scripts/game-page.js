@@ -237,7 +237,13 @@
 
       const name = document.createElement("h3");
       name.className = "service-card__name";
-      name.textContent = svc.title;
+      // Drop the game prefix from the title — the page header already
+      // names the game, so leaving "Forza Horizon 6 …" in front of
+      // every card wastes the 2-line clamp on a redundant label.
+      const strip = window.nbStripGamePrefix;
+      name.textContent = strip
+        ? strip(svc.title, currentGameName)
+        : svc.title;
 
       const price = document.createElement("p");
       price.className = "service-card__price";

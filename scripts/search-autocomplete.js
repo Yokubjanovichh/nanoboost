@@ -33,10 +33,17 @@
     corpus = Object.entries(cfg).map(function (entry) {
       const slug = entry[0];
       const svc = entry[1] || {};
-      const title = String(svc.titleHtml || "").replace(/<br\s*\/?>/g, " ");
+      const rawTitle = String(svc.titleHtml || "").replace(
+        /<br\s*\/?>/g,
+        " ",
+      );
       const platform = svc.platform || "";
       const gameName = svc.gameName || "";
       const gameSlug = svc.gameSlug || "";
+      // Strip the leading game name from the displayed title so the
+      // dropdown matches the card hierarchy (title + subtitle).
+      const strip = window.nbStripGamePrefix;
+      const title = strip ? strip(rawTitle, gameName) : rawTitle;
       const opt0 = (svc.options || [])[0] || "";
       const m = String(opt0).match(/\$([\d.]+)/);
       const price = m ? Number(m[1]) : 0;
