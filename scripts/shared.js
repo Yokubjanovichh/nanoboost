@@ -416,16 +416,16 @@ const NB_CURRENCIES = {
     localStorage.setItem(NB_CURRENCY_KEY, code);
     document.dispatchEvent(new CustomEvent("nb:currency-change", { detail: { currency: code } }));
   },
-  nbConvertPrice = (usdAmt) => {
+  // Client-side currency conversion was removed in fix/critical-polish.
+  // Backend stores admin-curated price_usd + price_eur per option, so
+  // every caller now passes a value that's already in the active
+  // currency — the formatter just adds the symbol and rounds to 2dp.
+  // (The old `(Math.floor(raw) + 0.99).toFixed(2)` charm trick turned
+  // an empty $0.00 cart into €0.99 in EUR mode.)
+  nbConvertPrice = (amt) => Number(amt) || 0,
+  nbFormatPrice = (amt) => {
     const c = nbGetCurrency();
-    return (Number(usdAmt) || 0) * NB_CURRENCIES[c].rate;
-  },
-  nbFormatPrice = (usdAmt) => {
-    const c = nbGetCurrency(),
-      cfg = NB_CURRENCIES[c],
-      raw = (Number(usdAmt) || 0) * cfg.rate,
-      val = c === "USD" ? raw.toFixed(2) : (Math.floor(raw) + 0.99).toFixed(2);
-    return cfg.symbol + val;
+    return NB_CURRENCIES[c].symbol + (Number(amt) || 0).toFixed(2);
   },
   nbCurrencySymbol = () => NB_CURRENCIES[nbGetCurrency()].symbol;
 window.nbFormatPrice = nbFormatPrice;
@@ -439,16 +439,29 @@ const NB_CART_KEY = "nb_cart",
     try {
       const raw = JSON.parse(localStorage.getItem("nb_cart") || "[]");
       if (!Array.isArray(raw)) return [];
-      // Drop legacy rows that have an invalid price. Earlier builds of
-      // service-page.js extracted the price by regex from the *displayed*
-      // option label, so any item added while the page was in EUR mode
-      // landed with price = 0 and showed $0.00 in the cart widget.
-      // Persist the cleanup so the warning doesn't repeat on every read.
+      // Cart items now carry both priceUsd and priceEur (admin-curated
+      // charm pricing per currency). Legacy items with the old single
+      // `price` field can't be reliably converted to a charm EUR value
+      // client-side, so they're dropped with a warning. Persist the
+      // cleaned cart so the warning doesn't fire on every read.
       const clean = raw.filter((item) => {
-        const p = Number(item && item.price);
-        const ok = !Number.isNaN(p) && p > 0;
+        if (!item) return false;
+        // Migration: lift old `price` into priceUsd; require priceEur
+        // to also be present, otherwise drop (can't fabricate charm
+        // pricing without the backend's EUR figure).
+        if (item.price != null && item.priceUsd == null) {
+          item.priceUsd = Number(item.price) || 0;
+          delete item.price;
+        }
+        const pUsd = Number(item.priceUsd);
+        const pEur = Number(item.priceEur);
+        const ok =
+          !Number.isNaN(pUsd) &&
+          pUsd > 0 &&
+          !Number.isNaN(pEur) &&
+          pEur > 0;
         if (!ok && console && typeof console.warn === "function") {
-          console.warn("[NB] dropped cart item with invalid price:", item);
+          console.warn("[NB] dropped cart item with invalid prices:", item);
         }
         return ok;
       });
@@ -541,8 +554,12 @@ const nbIsInPages = () =>
     let n = 0,
       i = 0;
     const c = document.createDocumentFragment();
+    const isEur = nbGetCurrency() === "EUR";
     (r.forEach((e, t) => {
-      const o = Number(e.price) || 0,
+      // Per-item price in the active currency — both values come from
+      // the backend, no client-side conversion.
+      const o =
+          (isEur ? Number(e.priceEur) : Number(e.priceUsd)) || 0,
         r = e.qty || 1;
       ((n += o * r), (i += r));
       const s = document.createElement("div");

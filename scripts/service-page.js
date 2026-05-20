@@ -389,16 +389,16 @@ purchaseForm &&
     if (!r) return;
     const n = purchaseForm.querySelector('input[name="option"]'),
       s = n?.value || r.defaultOption || "",
-      // Resolve the USD price from the raw option object instead of the
-      // displayed label. In EUR mode `s` looks like "Discord - €23.00",
-      // so a /\$([\d.]+)/ match against it fails and the cart used to
-      // store price = 0 → $0.00 widget rows. The cart is always USD
-      // internally; nbFormatPrice handles the EUR display conversion.
+      // Cart stores both currencies straight from the backend so the
+      // widget can display admin-controlled charm pricing in either
+      // mode without a client-side conversion (which used to silently
+      // turn $0.00 into €0.99 because of a Math.floor + .99 trick).
       variantLabel = s.split(" - ")[0].trim(),
       rawOpt =
         (r.optionsRaw || []).find((o) => o && o.label === variantLabel) ||
         (r.optionsRaw || [])[0],
-      i = Number(rawOpt && rawOpt.price_usd) || 0,
+      priceUsd = Number(rawOpt && rawOpt.price_usd) || 0,
+      priceEur = Number(rawOpt && rawOpt.price_eur) || 0,
       o = document.createElement("div");
     o.innerHTML = nbSanitizeBr(r.titleHtml || "");
     const a = o.textContent.trim();
@@ -406,21 +406,22 @@ purchaseForm &&
       window.NB_addToCart({
         id: t,
         name: a,
-        price: i,
+        priceUsd: priceUsd,
+        priceEur: priceEur,
         image: r.imageSrcDesktop || r.imageSrc || "",
         option: s,
       });
     if (typeof window.nbTrack === "function") {
       window.nbTrack("add_to_cart", {
         currency: "USD",
-        value: i,
+        value: priceUsd,
         items: [
           {
             item_id: t,
             item_name: a,
             item_category: r.platform || "",
             item_variant: variantLabel,
-            price: i,
+            price: priceUsd,
             quantity: 1,
           },
         ],

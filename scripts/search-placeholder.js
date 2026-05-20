@@ -1,11 +1,10 @@
-// Animated rotating placeholder for the header / drawer search inputs.
+// Animated rotating placeholder for the header search input.
 // Cycles through a curated multi-game prompt list with type → hold →
 // delete → pause loop driven by requestAnimationFrame. Pauses while
-// the input is focused so the user isn't fighting with typing
-// suggestions, and respects prefers-reduced-motion (drops to the
-// first prompt as a static placeholder).
-//
-// Multi-game prompts — extend PROMPTS as new games launch.
+// the input is focused or the user has typed something, and an
+// IntersectionObserver pauses the loop when the input scrolls
+// off-screen so we're not burning frames the user can't see.
+// prefers-reduced-motion → static first prompt.
 
 (function () {
   "use strict";
@@ -40,18 +39,19 @@
     // typing | holding | deleting | pausing
     let mode = "typing";
     let raf = null;
-    let last = 0;
-    // Start in the "stopped" state so the IntersectionObserver's first
-    // callback (input is visible at load time) flips us into start().
-    // The previous default `false` short-circuited the resume guard
-    // and the animation never kicked off on first paint.
-    let stopped = true;
+    // Seed `last` with the current high-res timestamp so the first
+    // step() tick sees a real delta against `now` — defaulting to 0
+    // left the first frame thinking 16ms+ had passed since the epoch
+    // and skipped straight past TYPE_SPEED.
+    let last = performance.now();
+    let paused = false;
 
     function step(now) {
-      if (stopped) return;
+      if (paused) return;
       if (document.activeElement === input || input.value) {
-        // Don't fight the user — fall back to the neutral prompt and
-        // re-check shortly so we resume when they blur an empty field.
+        // Don't fight the user — fall back to the neutral prompt but
+        // keep the loop alive so we resume when they blur an empty
+        // field.
         input.placeholder = FALLBACK;
         raf = requestAnimationFrame(step);
         return;
@@ -83,42 +83,40 @@
       raf = requestAnimationFrame(step);
     }
 
-    function start() {
-      stopped = false;
-      idx = 0;
-      charIdx = 0;
-      mode = "typing";
-      last = 0;
+    function play() {
+      if (!paused && raf !== null) return;
+      paused = false;
+      last = performance.now();
       raf = requestAnimationFrame(step);
     }
-    function stop() {
-      stopped = true;
+    function pause() {
+      paused = true;
       if (raf) cancelAnimationFrame(raf);
+      raf = null;
       input.placeholder = FALLBACK;
     }
 
-    input.addEventListener("focus", stop);
+    // Kick off immediately — the IntersectionObserver below will pause
+    // us if the input happens to start off-screen (it'd fire a
+    // not-intersecting callback on its first tick in that case).
+    play();
+
+    input.addEventListener("focus", pause);
     input.addEventListener("blur", function () {
-      if (!input.value) start();
+      if (!input.value) play();
     });
-    // Pause the rotator while the input is off-screen (e.g. mobile
-    // drawer closed) to keep the requestAnimationFrame loop from
-    // doing layout work the user can't see.
+
     if ("IntersectionObserver" in window) {
       const io = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
           if (entry.isIntersecting) {
-            if (stopped && document.activeElement !== input && !input.value) {
-              start();
-            }
+            if (document.activeElement !== input && !input.value) play();
           } else {
-            stop();
+            pause();
           }
         });
       });
       io.observe(input);
-    } else {
-      start();
     }
   }
 

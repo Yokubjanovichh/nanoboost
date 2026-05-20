@@ -4000,8 +4000,7 @@ a {
 .search-autocomplete__item {
   display: flex;
   align-items: center;
-  gap: 1.2rem;
-  padding: 1rem 1.4rem;
+  padding: 1.2rem 1.4rem;
   border-radius: 0.8rem;
   margin: 0 0.4rem;
   text-decoration: none;
@@ -4012,65 +4011,28 @@ a {
 .search-autocomplete__item[aria-selected="true"] {
   background: rgba(45, 225, 254, 0.1);
 }
-.search-autocomplete__thumb {
-  width: 4rem;
-  height: 4rem;
-  border-radius: 0.6rem;
-  object-fit: cover;
-  flex-shrink: 0;
-  background: rgba(255, 255, 255, 0.04);
-}
-.search-autocomplete__thumb--placeholder {
-  background: linear-gradient(
-    135deg,
-    rgba(45, 225, 254, 0.15),
-    rgba(157, 33, 254, 0.15)
-  );
-}
-.search-autocomplete__thumb--game {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, #2de1fe 0%, #6849fe 50%, #9d21fe 100%);
-  color: #fff;
-  font-family: "LEMON MILK", "Poppins", sans-serif;
-  font-size: 1.6rem;
-  font-weight: 700;
-}
 .search-autocomplete__main {
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
+  gap: 0.3rem;
   min-width: 0;
   flex: 1;
 }
 .search-autocomplete__title {
-  font-size: 1.4rem;
+  font-size: 1.55rem;
   font-weight: 600;
   color: #fff;
-  line-height: 1.3;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-.search-autocomplete__meta {
-  display: flex;
-  gap: 0.8rem;
-  font-size: 1.2rem;
-  color: rgba(255, 255, 255, 0.6);
-}
-.search-autocomplete__game,
-.search-autocomplete__platform {
+  line-height: 1.25;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.search-autocomplete__price {
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: #2de1fe;
-  flex-shrink: 0;
+.search-autocomplete__sub {
+  font-size: 1.25rem;
+  color: rgba(255, 255, 255, 0.55);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .search-autocomplete__empty {
   padding: 2rem 1.4rem;
