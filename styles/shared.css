@@ -199,12 +199,11 @@ select:focus-visible,
 }
 .service-card__name--skeleton {
   display: block;
-  /* Matches the real .service-card__name 2-line clamp at line-height
-     1.25. The trailing margin pairs with the .service-card__game
-     skeleton block below so layout doesn't shift on hydration. */
-  height: 2.5em;
+  /* Real title is two-line clamped to 2.56em — match it so the swap
+     doesn't change the card height. */
+  height: 2.56em;
   width: 75%;
-  margin: 0 auto 0.4rem;
+  margin-bottom: 1.8rem;
   border-radius: 6px;
 }
 .service-card__price--skeleton {
@@ -2045,40 +2044,25 @@ a {
 .service-card__name {
   color: #fff;
   font-size: clamp(2rem, 1.2vw, 2.9rem);
-  font-weight: 600;
-  line-height: 1.25;
-  margin-bottom: 0.4rem;
+  font-weight: 500;
+  line-height: 1.28;
+  margin-bottom: 1.8rem;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   line-clamp: 2;
   overflow: hidden;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
+  min-height: 2.56em;
+  max-height: 2.56em;
 }
-/* Small game label under the service name on Hot Right Now cards.
-   Treats the game as supplemental metadata (uppercase, muted) so the
-   service name stays the visual lead. */
+/* Game label is hidden on desktop — admin's full title is enough.
+   Mobile (≤480px) flips this to display:block so phone users see the
+   stripped service name + the game it belongs to as a stacked pair. */
 .service-card__game {
-  display: block;
-  text-align: center;
-  font-size: clamp(1.2rem, 0.8vw, 1.4rem);
-  font-weight: 500;
-  line-height: 1.2;
-  color: rgba(255, 255, 255, 0.55);
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  margin-bottom: 1.8rem;
-  max-width: 100%;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  display: none;
 }
 .service-card__game--skeleton {
-  width: 60%;
-  height: 1.2em;
-  margin: 0.4rem auto 1.6rem;
-  border-radius: 0.4rem;
+  display: none;
 }
 .service-card__price {
   display: flex;
@@ -3209,12 +3193,7 @@ a {
     justify-content: center;
   }
   .service-card__name {
-    font-size: 1.9rem;
-    line-height: 1.22;
-    margin-bottom: 0.4rem;
-  }
-  .service-card__game {
-    font-size: 1.15rem;
+    font-size: 2.2rem;
   }
   .service-card__price {
     gap: 0.8rem;
@@ -3427,20 +3406,18 @@ a {
     transform: none;
   }
   .service-card__name {
-    font-size: 1.9rem;
+    font-size: 2.25rem;
     line-height: 1.22;
-    margin-bottom: 0.4rem;
+    margin-bottom: 1.7rem;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     line-clamp: 2;
     overflow: hidden;
+    min-height: 2.44em;
+    max-height: 2.44em;
     text-align: center;
     align-self: center;
-  }
-  .service-card__game {
-    font-size: 1.15rem;
-    margin-bottom: 1.4rem;
   }
   .service-card__content--custom {
     padding: 0.8rem 0.8rem 4.8rem 0.4rem;
@@ -4092,5 +4069,95 @@ a {
 @media (prefers-reduced-motion: reduce) {
   .search-autocomplete {
     transition: none;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   Phone (≤480px) service card redesign
+   The desktop card relies on a 2-line clamp + uniform grid heights
+   to look balanced. That same clamp clips long titles on phones
+   ("Forza Horizon 6 Open All Cars" → only the game half is visible),
+   and the dense 4-column grid is wasted at this width. Drop the
+   grid to a single full-width column, let titles wrap freely, and
+   surface the stripped service name + a small game label below it. */
+@media (max-width: 480px) {
+  .services__grid {
+    grid-template-columns: 1fr;
+    gap: 1.6rem;
+    justify-content: stretch;
+    max-width: 100%;
+  }
+  .service-card {
+    min-height: auto;
+    padding: 1.2rem 1.2rem 2rem;
+  }
+  .service-card__img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    margin: 0 auto 1.6rem;
+    border-radius: 1.4rem;
+    object-fit: cover;
+  }
+  .service-card__content {
+    padding: 0 0.4rem;
+    align-items: flex-start;
+    text-align: left;
+  }
+  .service-card__name {
+    font-size: 2rem;
+    font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: 0.4rem;
+    /* Override the desktop clamp + fixed height so the full title
+       reads no matter how long it is. */
+    display: block;
+    -webkit-line-clamp: unset;
+    line-clamp: unset;
+    min-height: auto;
+    max-height: none;
+    overflow: visible;
+    text-align: left;
+    align-self: stretch;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    width: 100%;
+  }
+  .service-card__game {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.55);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 1.6rem;
+    text-align: left;
+    width: 100%;
+    /* On phones the badge stands alone on its row, so single-line
+       ellipsis still applies but with a generous limit. */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .service-card__game--skeleton {
+    display: block;
+    width: 50%;
+    height: 1.1em;
+    margin: 0.4rem 0 1.6rem;
+    border-radius: 0.4rem;
+  }
+  .service-card__price {
+    margin-bottom: 1.2rem;
+    align-self: flex-start;
+  }
+  .service-card__btn {
+    width: 100%;
+    align-self: stretch;
+    margin-top: 0.4rem;
+  }
+  /* Custom CTA card stays single-game-agnostic — no game label
+     rendered into it, no badge to surface. */
+  .service-card--custom .service-card__game {
+    display: none;
   }
 }
