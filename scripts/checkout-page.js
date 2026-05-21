@@ -7,6 +7,9 @@
   "use strict";
 
   const CART_KEY = "nb_cart";
+  // Local-only prefill so a refresh doesn't wipe email/discord/telegram.
+  // Browser-scoped: never leaves the device, cleared on successful order.
+  const PREFILL_KEY = "nb_checkout_prefill";
   const USDT_VALUE = "usdt_trc20";
   const CARD_VALUE = "card_ecomtrade24";
   const PAYPAL_VALUE = "paypal";
@@ -115,12 +118,21 @@
       const opt = document.createElement("p");
       opt.className = "order-item__meta";
       opt.textContent = item.option || "";
-      const qtyEl = document.createElement("p");
-      qtyEl.className = "order-item__qty";
-      qtyEl.textContent = "x" + qty;
+
+      // Interactive qty row replaces the old static "x{qty}" label so
+      // users can adjust quantities or remove items without bouncing
+      // back to the cart widget.
+      const qtyRow = document.createElement("div");
+      qtyRow.className = "order-item__qty-row";
+      qtyRow.innerHTML =
+        '<button type="button" class="order-item__qty-btn" data-act="minus" aria-label="Decrease quantity">−</button>' +
+        '<span class="order-item__qty-value">' + qty + "</span>" +
+        '<button type="button" class="order-item__qty-btn" data-act="plus" aria-label="Increase quantity">+</button>' +
+        '<button type="button" class="order-item__remove" aria-label="Remove item">✕</button>';
+
       info.appendChild(name);
       if (item.option) info.appendChild(opt);
-      info.appendChild(qtyEl);
+      info.appendChild(qtyRow);
 
       const priceWrap = document.createElement("div");
       priceWrap.className = "order-item__price-wrap";
@@ -163,6 +175,61 @@
   }
 
   renderOrder();
+
+  // Sync global cart UI (badges + cart widget) after a mutation here.
+  // The widget helpers (nbUpdateCartBadges, nbRenderCartWidget) live in
+  // shared.js as classic top-level consts — accessible across scripts
+  // by bare name, but we guard with typeof so a missing helper can't
+  // break the inline qty edits.
+  function syncCartGlobals() {
+    const total = cart.reduce((s, it) => s + (it.qty || 1), 0);
+    document
+      .querySelectorAll(".cart__badge, .cart-float__badge")
+      .forEach((el) => {
+        el.textContent = String(total);
+        el.style.display = total > 0 ? "flex" : "none";
+      });
+    document.querySelectorAll(".cart-float").forEach((el) => {
+      el.style.display = total > 0 ? "" : "none";
+    });
+    try {
+      if (typeof nbRenderCartWidget === "function") nbRenderCartWidget();
+    } catch {}
+  }
+
+  // Delegated handler for qty +/− and remove buttons. Bound once;
+  // re-renders rebuild the rows but the listener on listEl persists.
+  if (listEl) {
+    listEl.addEventListener("click", (e) => {
+      const btn = e.target.closest(
+        '.order-item__qty-btn, .order-item__remove',
+      );
+      if (!btn) return;
+      const li = btn.closest(".order-item");
+      if (!li) return;
+      const index = Array.from(listEl.children).indexOf(li);
+      if (index < 0 || index >= cart.length) return;
+
+      const act = btn.dataset.act;
+      if (act === "plus") {
+        cart[index].qty = (cart[index].qty || 1) + 1;
+      } else if (act === "minus") {
+        if ((cart[index].qty || 1) > 1) {
+          cart[index].qty -= 1;
+        } else {
+          cart.splice(index, 1);
+        }
+      } else if (btn.classList.contains("order-item__remove")) {
+        cart.splice(index, 1);
+      }
+
+      try {
+        localStorage.setItem(CART_KEY, JSON.stringify(cart));
+      } catch {}
+      renderOrder();
+      syncCartGlobals();
+    });
+  }
 
   // --- Custom payment dropdown ----------------------------------------
 
@@ -283,8 +350,41 @@
 
   const emailEl = document.querySelector("#checkout-email");
   const discordEl = document.querySelector("#checkout-discord");
+  const telegramEl = document.querySelector("#checkout-telegram");
   const agreeEl = form.querySelector(".checkout-form__agree");
   const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  // --- Form prefill (browser-local) -----------------------------------
+
+  function loadPrefill() {
+    let data;
+    try {
+      data = JSON.parse(localStorage.getItem(PREFILL_KEY) || "{}");
+    } catch {
+      return;
+    }
+    if (emailEl && !emailEl.value && data.email) emailEl.value = data.email;
+    if (discordEl && !discordEl.value && data.discord) discordEl.value = data.discord;
+    if (telegramEl && !telegramEl.value && data.telegram) telegramEl.value = data.telegram;
+  }
+
+  function savePrefill() {
+    try {
+      localStorage.setItem(
+        PREFILL_KEY,
+        JSON.stringify({
+          email: trim(emailEl?.value),
+          discord: trim(discordEl?.value),
+          telegram: trim(telegramEl?.value),
+        }),
+      );
+    } catch {}
+  }
+
+  loadPrefill();
+  [emailEl, discordEl, telegramEl].filter(Boolean).forEach((el) => {
+    el.addEventListener("blur", savePrefill);
+  });
 
   const setError = (el, errId, msg) => {
     if (el) el.classList.add("is-invalid");
@@ -478,7 +578,11 @@
     const formControls = form.querySelectorAll("input, textarea, button, select");
     formControls.forEach((el) => (el.disabled = true));
     if (submitBtn) {
-      submitBtn.textContent = "SENDING...";
+      // Spinner DOM is recreated each submit so restoreForm just sets
+      // textContent back to "SUBMIT ORDER" and the spinner is gone.
+      submitBtn.innerHTML =
+        '<span class="checkout-form__btn-spinner" aria-hidden="true"></span>' +
+        '<span class="checkout-form__btn-label">SENDING...</span>';
       submitBtn.classList.add("is-loading");
     }
     setHint("");
@@ -546,20 +650,41 @@
           window.location.assign(res.checkout_url);
           return;
         }
-        // PayPal / USDT → success modal + clear cart.
+        // PayPal / USDT → success modal + clear cart + clear prefill.
+        // Prefill is wiped so the next order starts fresh on this
+        // device (privacy + matches Manager's call).
         localStorage.removeItem(CART_KEY);
+        try {
+          localStorage.removeItem(PREFILL_KEY);
+        } catch {}
         cart = [];
         renderOrder();
-        document
-          .querySelectorAll(".cart__badge, .cart-float__badge")
-          .forEach((el) => (el.textContent = "0"));
+        syncCartGlobals();
         form.reset();
         showOrderModal(res.order_number);
       })
       .catch((err) => {
-        let msg = err && err.message ? err.message : "Something went wrong. Please try again.";
-        if (err && err.status === 503) {
+        const status = err && err.status;
+        let msg = "Something went wrong. Please try again.";
+        if (status === 400) {
+          msg =
+            (err.data && err.data.detail) ||
+            "Invalid order data. Please check your inputs.";
+        } else if (status === 422) {
+          msg = "Some fields contain invalid data. Please review and try again.";
+        } else if (status === 429) {
+          msg = "Too many requests. Please wait a moment and try again.";
+        } else if (status === 502 || status === 504) {
+          msg = "Connection issue. Please check your internet and try again.";
+        } else if (status === 503) {
           msg = "This payment method is currently unavailable. Please choose another one.";
+        } else if (status === 500) {
+          msg = "Server error. Our team has been notified. Please try again shortly.";
+        } else if (err && err.message && !status) {
+          // No HTTP status → fetch/network failure (offline, DNS, etc.).
+          msg = "Network error. Please check your connection and try again.";
+        } else if (err && err.message) {
+          msg = err.message;
         }
         setHint(msg, true);
       })
