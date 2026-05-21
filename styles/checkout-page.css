@@ -708,75 +708,98 @@
   }
 }
 
-/* --- FIX 1: Continue Shopping back link ---------------------------- */
-.page--checkout .checkout__back {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem 2rem 0;
-}
-.page--checkout .checkout__back-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.8rem;
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 1.4rem;
-  font-weight: 500;
-  text-decoration: none;
-  transition: color 0.18s ease;
-}
-.page--checkout .checkout__back-link:hover,
-.page--checkout .checkout__back-link:focus-visible {
-  color: #2de1fe;
-  outline: none;
-}
-
-/* --- FIX 2: Cart item qty controls --------------------------------- */
+/* --- FIX 2: Cart item qty controls (premium) ----------------------- */
 .page--checkout .order-item__qty-row {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
-  margin-top: 0.6rem;
+  justify-content: space-between;
+  gap: 1.6rem;
+  margin-top: 1.2rem;
 }
-.page--checkout .order-item__qty-btn,
-.page--checkout .order-item__remove {
-  width: 2.8rem;
-  height: 2.8rem;
-  border-radius: 0.6rem;
-  background: rgba(255, 255, 255, 0.06);
+/* Stepper pill — integrated −/value/+ unit */
+.page--checkout .order-item__qty-stepper {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #fff;
+  border-radius: 999px;
+  padding: 0.3rem;
+  gap: 0;
+}
+.page--checkout .order-item__qty-btn {
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 50%;
+  background: transparent;
+  border: 0;
+  color: rgba(255, 255, 255, 0.85);
   cursor: pointer;
-  font-size: 1.4rem;
-  font-weight: 600;
+  font-size: 1.6rem;
+  font-weight: 500;
+  line-height: 1;
+  padding: 0;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0;
-  line-height: 1;
-  transition: background 0.18s ease, border-color 0.18s ease;
+  transition: background 0.15s ease, color 0.15s ease, transform 0.12s ease;
 }
 .page--checkout .order-item__qty-btn:hover,
 .page--checkout .order-item__qty-btn:focus-visible {
   background: rgba(45, 225, 254, 0.15);
-  border-color: rgba(45, 225, 254, 0.4);
+  color: #2de1fe;
   outline: none;
 }
-.page--checkout .order-item__qty-value {
-  min-width: 2rem;
-  text-align: center;
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.92);
+.page--checkout .order-item__qty-btn:active {
+  transform: scale(0.9);
 }
+.page--checkout .order-item__qty-value {
+  min-width: 2.4rem;
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #fff;
+  padding: 0 0.4rem;
+  font-variant-numeric: tabular-nums;
+}
+/* Remove — subtle ghost button, warms to red only on hover */
 .page--checkout .order-item__remove {
-  color: rgba(255, 100, 100, 0.85);
-  margin-left: auto;
+  width: 3.2rem;
+  height: 3.2rem;
+  border-radius: 50%;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.55);
+  cursor: pointer;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.18s ease, border-color 0.18s ease,
+    color 0.18s ease, transform 0.12s ease;
 }
 .page--checkout .order-item__remove:hover,
 .page--checkout .order-item__remove:focus-visible {
-  background: rgba(255, 100, 100, 0.15);
+  background: rgba(255, 100, 100, 0.1);
   border-color: rgba(255, 100, 100, 0.4);
+  color: rgba(255, 100, 100, 0.95);
   outline: none;
+}
+.page--checkout .order-item__remove:active {
+  transform: scale(0.92);
+}
+.page--checkout .order-item__remove svg {
+  display: block;
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .page--checkout .order-item__qty-btn,
+  .page--checkout .order-item__remove {
+    transition: none;
+  }
+  .page--checkout .order-item__qty-btn:active,
+  .page--checkout .order-item__remove:active {
+    transform: none;
+  }
 }
 
 /* --- FIX 4: Submit button loading spinner -------------------------- */
@@ -811,10 +834,7 @@
    focus. The rules below only add what's missing: tighter back-link
    padding and qty-row gap on the smallest phones. */
 @media (max-width: 480px) {
-  .page--checkout .checkout__back {
-    padding: 1.2rem 1.2rem 0;
-  }
   .page--checkout .order-item__qty-row {
-    gap: 0.4rem;
+    gap: 1rem;
   }
 }

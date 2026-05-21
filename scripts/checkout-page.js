@@ -119,16 +119,23 @@
       opt.className = "order-item__meta";
       opt.textContent = item.option || "";
 
-      // Interactive qty row replaces the old static "x{qty}" label so
-      // users can adjust quantities or remove items without bouncing
-      // back to the cart widget.
+      // Pill-shaped stepper (−/value/+) groups the quantity controls
+      // into a single visual unit, with the remove button held apart
+      // as a subtler ghost icon — Apple Cart / Shopify pattern.
       const qtyRow = document.createElement("div");
       qtyRow.className = "order-item__qty-row";
       qtyRow.innerHTML =
-        '<button type="button" class="order-item__qty-btn" data-act="minus" aria-label="Decrease quantity">−</button>' +
-        '<span class="order-item__qty-value">' + qty + "</span>" +
-        '<button type="button" class="order-item__qty-btn" data-act="plus" aria-label="Increase quantity">+</button>' +
-        '<button type="button" class="order-item__remove" aria-label="Remove item">✕</button>';
+        '<div class="order-item__qty-stepper">' +
+          '<button type="button" class="order-item__qty-btn" data-act="minus" aria-label="Decrease quantity">−</button>' +
+          '<span class="order-item__qty-value">' + qty + "</span>" +
+          '<button type="button" class="order-item__qty-btn" data-act="plus" aria-label="Increase quantity">+</button>' +
+        "</div>" +
+        '<button type="button" class="order-item__remove" aria-label="Remove item">' +
+          '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+            '<line x1="6" y1="6" x2="18" y2="18"/>' +
+            '<line x1="18" y1="6" x2="6" y2="18"/>' +
+          "</svg>" +
+        "</button>";
 
       info.appendChild(name);
       if (item.option) info.appendChild(opt);
