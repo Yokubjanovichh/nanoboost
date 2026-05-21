@@ -32,6 +32,7 @@
     : null;
   const discountRow = document.querySelector("#order-discount");
   const discountValueEl = document.querySelector("#order-discount-value");
+  const submitBtn = document.querySelector(".checkout-form__btn");
 
   let cart = (() => {
     try {
@@ -42,6 +43,21 @@
   })();
 
   // --- Render order list / subtotal -----------------------------------
+
+  function setSubmitEmptyState(isEmpty) {
+    // Only adjust empty-cart state — the loading state owns the button
+    // text/disabled flag during an in-flight submit.
+    if (!submitBtn || submitBtn.classList.contains("is-loading")) return;
+    if (isEmpty) {
+      submitBtn.disabled = true;
+      submitBtn.classList.add("is-disabled");
+      submitBtn.textContent = "CART IS EMPTY";
+    } else {
+      submitBtn.disabled = false;
+      submitBtn.classList.remove("is-disabled");
+      submitBtn.textContent = "SUBMIT ORDER";
+    }
+  }
 
   function renderOrder() {
     if (!listEl) return;
@@ -54,8 +70,11 @@
       li.textContent = "Your cart is empty";
       listEl.appendChild(li);
       if (subtotalEl) subtotalEl.textContent = fmtMoney(0);
+      discountRow && discountRow.classList.remove("is-visible");
+      setSubmitEmptyState(true);
       return;
     }
+    setSubmitEmptyState(false);
 
     const isUsdt = trim(paymentInput?.value) === USDT_VALUE;
     const isEur =
@@ -478,17 +497,18 @@
       return;
     }
 
+    // GA4 events stay in USD regardless of display currency so the
+    // analytics rollup is consistent across users.
+    const usdOf = (item) =>
+      Number(item.priceUsd) || Number(item.price) || 0;
+    const cartSubtotalUsd = cart.reduce(function (sum, item) {
+      return sum + usdOf(item) * (item.qty || 1);
+    }, 0);
+
     if (typeof window.nbTrack === "function") {
-      // GA4 events stay in USD regardless of display currency so the
-      // analytics rollup is consistent across users.
-      const usdOf = (item) =>
-        Number(item.priceUsd) || Number(item.price) || 0;
-      const cartSubtotal = cart.reduce(function (sum, item) {
-        return sum + usdOf(item) * (item.qty || 1);
-      }, 0);
       window.nbTrack("begin_checkout", {
         currency: "USD",
-        value: cartSubtotal,
+        value: cartSubtotalUsd,
         items: cart.map(function (item) {
           const optionLabel = String(item.option || "").split(" - ")[0].trim();
           return {
@@ -503,18 +523,26 @@
       });
     }
 
+    // Track whether the redirect path took over — in that case we leave
+    // the button in its loading state since the page is navigating away.
+    let isRedirecting = false;
+
     window.NB_API.createOrder(payload)
       .then((res) => {
         if (typeof gtag === "function") {
           gtag("event", "conversion", {
             send_to: "AW-18061608347/SR8uCNm5wZUcEJuLuaRD",
-            value: Number(res.final_total_usd) || 1.0,
+            // Falls back to the cart subtotal (USD) the user saw, not a
+            // hard-coded $1 — keeps Google Ads attribution honest when
+            // the backend response is missing a final total.
+            value: Number(res.final_total_usd) || cartSubtotalUsd,
             currency: "USD",
           });
         }
         // Card → redirect to provider checkout. Cart is cleared on
         // payment-success page so the user can return on cancel.
         if (res.checkout_url) {
+          isRedirecting = true;
           window.location.assign(res.checkout_url);
           return;
         }
@@ -525,17 +553,21 @@
         document
           .querySelectorAll(".cart__badge, .cart-float__badge")
           .forEach((el) => (el.textContent = "0"));
-        restoreForm();
         form.reset();
         showOrderModal(res.order_number);
       })
       .catch((err) => {
-        restoreForm();
         let msg = err && err.message ? err.message : "Something went wrong. Please try again.";
         if (err && err.status === 503) {
           msg = "This payment method is currently unavailable. Please choose another one.";
         }
         setHint(msg, true);
+      })
+      .finally(() => {
+        // Always re-enable the form, even if the success/error handlers
+        // throw — otherwise the user is stuck with a frozen SENDING...
+        // button and no way to retry.
+        if (!isRedirecting) restoreForm();
       });
   });
 

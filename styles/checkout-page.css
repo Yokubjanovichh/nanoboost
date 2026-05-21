@@ -286,14 +286,18 @@
     0 32px 64px rgba(0, 0, 0, 0.44),
     inset 0 0 0 1px rgba(255, 255, 255, 0.04);
 }
-.page--checkout .checkout-form__btn:disabled {
+.page--checkout .checkout-form__btn:disabled,
+.page--checkout .checkout-form__btn.is-disabled {
   cursor: not-allowed;
   transform: none;
+  opacity: 0.5;
+  pointer-events: none;
 }
 .page--checkout .checkout-form__btn.is-loading {
   position: relative;
   overflow: hidden;
   color: rgba(255, 255, 255, 0.6);
+  opacity: 1;
 }
 .page--checkout .checkout-form__btn.is-loading::after {
   content: "";
