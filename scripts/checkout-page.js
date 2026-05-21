@@ -502,26 +502,254 @@
     };
   }
 
-  function showOrderModal(orderNumber) {
-    const modal = document.querySelector("#order-modal");
-    const idEl = document.querySelector("#order-modal-id");
-    const btn = document.querySelector("#order-modal-btn");
-    if (!modal) return;
-    if (idEl) idEl.textContent = orderNumber || "";
+  // --- Manual payment modal (PayPal / USDT) ---------------------------
+  //
+  // After a non-card order is created, the BE has registered the order
+  // but no payment has actually moved yet. We show a QR + amount +
+  // wallet (USDT) and let the user signal "I have paid" → POST
+  // /claim-payment, which flips the BE state to "pending verification"
+  // so an operator can confirm on their side.
+
+  const USDT_TRC20_WALLET = "TJHCfq2fwzUKDcNTCCqqtWRdZELHfTscZh";
+  const CLAIM_COUNTDOWN_SECONDS = 30;
+  const SUPPORT_EMAIL = "support@nanoboost.io";
+
+  function escHtml(v) {
+    return String(v == null ? "" : v).replace(/[&<>"']/g, (c) => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;",
+    })[c]);
+  }
+
+  function openModalShell(modal) {
     modal.classList.add("is-open");
     modal.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
+  }
 
-    const close = () => {
-      modal.classList.remove("is-open");
-      modal.setAttribute("aria-hidden", "true");
-      document.body.style.overflow = "";
-      // After a successful checkout drop the user at the homepage games
-      // grid so they can pick another game to shop, instead of a hard-
-      // coded GTA5 detour that breaks the multi-game story.
+  function closeModalShell(modal) {
+    modal.classList.remove("is-open");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+  }
+
+  function wireCopyButton(btn) {
+    if (!btn) return;
+    const original = btn.innerHTML;
+    btn.addEventListener("click", async () => {
+      const text = btn.getAttribute("data-copy") || "";
+      if (!text) return;
+      try {
+        await navigator.clipboard.writeText(text);
+        btn.innerHTML = "✓ Copied";
+        setTimeout(() => {
+          btn.innerHTML = original;
+        }, 1500);
+      } catch {
+        // Older browsers / insecure contexts — silent fail.
+      }
+    });
+  }
+
+  function showPaymentModal({
+    orderNumber,
+    method,
+    currency,
+    finalTotalUsd,
+    finalTotalEur,
+  }) {
+    const modal = document.querySelector("#order-modal");
+    if (!modal) return;
+
+    const isUsdt = method === USDT_VALUE;
+    const isEur = currency === "EUR";
+    const usd = Number(finalTotalUsd) || 0;
+    const eur = Number(finalTotalEur) || 0;
+
+    // USDT amount is always the USD figure (1:1 peg in our pricing).
+    // PayPal honours the user's selected display currency when the BE
+    // provides the EUR conversion; otherwise it falls back to USD.
+    const amount = isUsdt
+      ? usd.toFixed(2)
+      : (isEur && eur ? eur : usd).toFixed(2);
+    const amountDisplay = isUsdt
+      ? amount + " USDT"
+      : (isEur && eur ? "€" : "$") + amount;
+
+    const qrSrc = isUsdt
+      ? "/assets/qr/usdt_qr.webp"
+      : "/assets/qr/paypal_qr.webp";
+    const methodLabel = isUsdt ? "USDT (TRC20)" : "PayPal";
+
+    const orderSafe = escHtml(orderNumber);
+    const amountSafe = escHtml(amountDisplay);
+
+    const detailsHtml = isUsdt
+      ? '<div class="payment-modal__address-block">' +
+          '<p class="payment-modal__address-label">Wallet address (TRC20):</p>' +
+          '<div class="payment-modal__address-row">' +
+            '<code class="payment-modal__address">' + escHtml(USDT_TRC20_WALLET) + "</code>" +
+            '<button type="button" class="payment-modal__copy-addr" data-copy="' + escHtml(USDT_TRC20_WALLET) + '" aria-label="Copy wallet address">Copy</button>' +
+          "</div>" +
+          '<p class="payment-modal__warning">' +
+            "⚠ Send only USDT on the TRC20 network. Other networks = lost funds." +
+          "</p>" +
+        "</div>"
+      : '<ol class="payment-modal__steps">' +
+          "<li>Open your PayPal app</li>" +
+          "<li>Scan this QR code</li>" +
+          "<li>Send <strong>" + amountSafe + "</strong> with order <strong>" + orderSafe + "</strong> in the note</li>" +
+        "</ol>";
+
+    modal.innerHTML =
+      '<div class="payment-modal__backdrop" data-modal-dismiss></div>' +
+      '<div class="payment-modal__card" role="document">' +
+        '<button type="button" class="payment-modal__close" aria-label="Close payment window">' +
+          '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+            '<line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/>' +
+          "</svg>" +
+        "</button>" +
+        '<h2 class="payment-modal__title" id="payment-modal-title">Complete Your Payment</h2>' +
+        '<p class="payment-modal__order">' +
+          'Order: <strong>' + orderSafe + "</strong> " +
+          '<button type="button" class="payment-modal__copy" data-copy="' + orderSafe + '" aria-label="Copy order number">Copy</button>' +
+        "</p>" +
+        '<div class="payment-modal__qr-wrap">' +
+          '<img class="payment-modal__qr" src="' + qrSrc + '" alt="' + escHtml(methodLabel) + ' QR code" width="240" height="240" />' +
+        "</div>" +
+        '<p class="payment-modal__amount-label">Send exactly</p>' +
+        '<p class="payment-modal__amount">' + amountSafe + "</p>" +
+        detailsHtml +
+        '<div class="payment-modal__claim">' +
+          '<p class="payment-modal__countdown" data-countdown>' +
+            'Button enables in <span data-seconds>' + CLAIM_COUNTDOWN_SECONDS + "</span>s..." +
+          "</p>" +
+          '<button type="button" class="payment-modal__claim-btn" disabled data-claim>' +
+            '<span class="payment-modal__claim-label">I have paid</span>' +
+          "</button>" +
+          '<p class="payment-modal__claim-error" data-claim-error aria-live="polite"></p>' +
+        "</div>" +
+        '<p class="payment-modal__help">' +
+          'Having issues? Email <a href="mailto:' + SUPPORT_EMAIL + '">' + SUPPORT_EMAIL + "</a>" +
+        "</p>" +
+      "</div>";
+
+    openModalShell(modal);
+
+    // Countdown gating — prevents knee-jerk "I paid" clicks before the
+    // user has had time to actually finish the transfer.
+    let seconds = CLAIM_COUNTDOWN_SECONDS;
+    const secondsEl = modal.querySelector("[data-seconds]");
+    const countdownEl = modal.querySelector("[data-countdown]");
+    const claimBtn = modal.querySelector("[data-claim]");
+    const claimErrEl = modal.querySelector("[data-claim-error]");
+
+    const timer = setInterval(() => {
+      seconds -= 1;
+      if (secondsEl) secondsEl.textContent = String(seconds);
+      if (seconds <= 0) {
+        clearInterval(timer);
+        if (countdownEl) countdownEl.style.display = "none";
+        if (claimBtn) claimBtn.disabled = false;
+      }
+    }, 1000);
+
+    // Copy buttons (order number + wallet address).
+    modal.querySelectorAll("[data-copy]").forEach(wireCopyButton);
+
+    // Close behaviour — both backdrop and X show the same confirm. The
+    // order stays pending on the BE side either way; an operator can
+    // recover it from the admin.
+    const attemptClose = () => {
+      const ok = window.confirm(
+        "Close payment window? Your order will remain pending. Contact " +
+          SUPPORT_EMAIL +
+          " if you need help.",
+      );
+      if (!ok) return;
+      clearInterval(timer);
+      closeModalShell(modal);
       window.location.href = "/#games";
     };
-    btn && btn.addEventListener("click", close, { once: true });
+
+    const closeBtn = modal.querySelector(".payment-modal__close");
+    closeBtn && closeBtn.addEventListener("click", attemptClose);
+    modal
+      .querySelector("[data-modal-dismiss]")
+      ?.addEventListener("click", attemptClose);
+
+    const onKey = (e) => {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        attemptClose();
+      }
+    };
+    document.addEventListener("keydown", onKey);
+    // Clean up the listener when the modal element is removed from the
+    // open state — best-effort, the listener is harmless if it lingers.
+    modal._onKey = onKey;
+
+    if (claimBtn) {
+      claimBtn.addEventListener("click", async () => {
+        if (claimBtn.disabled) return;
+        claimBtn.disabled = true;
+        claimBtn.innerHTML =
+          '<span class="payment-modal__spinner" aria-hidden="true"></span>' +
+          '<span class="payment-modal__claim-label">Submitting...</span>';
+        if (claimErrEl) claimErrEl.textContent = "";
+
+        try {
+          if (
+            !window.NB_API ||
+            typeof window.NB_API.claimPayment !== "function"
+          ) {
+            throw new Error("API client unavailable");
+          }
+          await window.NB_API.claimPayment(orderNumber);
+          clearInterval(timer);
+          document.removeEventListener("keydown", onKey);
+          showVerificationPending(orderNumber);
+        } catch (err) {
+          // Soft-fail inline so the user can retry; full alert pop-ups
+          // feel hostile after a successful payment on their end.
+          claimBtn.disabled = false;
+          claimBtn.innerHTML =
+            '<span class="payment-modal__claim-label">I have paid</span>';
+          if (claimErrEl) {
+            claimErrEl.textContent =
+              "Could not submit. Check your connection and try again, or email " +
+              SUPPORT_EMAIL +
+              ".";
+          }
+        }
+      });
+    }
+  }
+
+  function showVerificationPending(orderNumber) {
+    const modal = document.querySelector("#order-modal");
+    if (!modal) return;
+    const orderSafe = escHtml(orderNumber);
+    modal.innerHTML =
+      '<div class="payment-modal__backdrop"></div>' +
+      '<div class="payment-modal__card payment-modal__card--success" role="document">' +
+        '<div class="payment-modal__success-icon" aria-hidden="true">' +
+          '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">' +
+            '<polyline points="20 6 9 17 4 12"/>' +
+          "</svg>" +
+        "</div>" +
+        '<h2 class="payment-modal__title" id="payment-modal-title">Payment received</h2>' +
+        '<p class="payment-modal__order">Order: <strong>' + orderSafe + "</strong></p>" +
+        '<p class="payment-modal__success-text">' +
+          "Thank you. Our team will verify your payment and contact you on " +
+          "Discord or Telegram within 30 minutes." +
+        "</p>" +
+        '<a href="/#games" class="payment-modal__btn">Continue Browsing</a>' +
+      "</div>";
+    openModalShell(modal);
   }
 
   function setHint(msg, isError) {
@@ -657,9 +885,9 @@
           window.location.assign(res.checkout_url);
           return;
         }
-        // PayPal / USDT → success modal + clear cart + clear prefill.
-        // Prefill is wiped so the next order starts fresh on this
-        // device (privacy + matches Manager's call).
+        // PayPal / USDT → manual payment modal. The order is already
+        // registered on the BE; we collect "I have paid" confirmation
+        // and POST /claim-payment so an operator can verify the funds.
         localStorage.removeItem(CART_KEY);
         try {
           localStorage.removeItem(PREFILL_KEY);
@@ -668,7 +896,19 @@
         renderOrder();
         syncCartGlobals();
         form.reset();
-        showOrderModal(res.order_number);
+
+        const chosenMethod = trim(paymentInput && paymentInput.value);
+        const displayCurrency =
+          typeof window.nbGetCurrency === "function"
+            ? window.nbGetCurrency()
+            : "USD";
+        showPaymentModal({
+          orderNumber: res.order_number,
+          method: chosenMethod,
+          currency: displayCurrency,
+          finalTotalUsd: res.final_total_usd,
+          finalTotalEur: res.final_total_eur,
+        });
       })
       .catch((err) => {
         const status = err && err.status;

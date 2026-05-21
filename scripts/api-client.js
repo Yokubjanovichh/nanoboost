@@ -180,6 +180,12 @@
     createOrder: function (payload) {
       return postRequest("/public/orders", payload);
     },
+    claimPayment: function (orderNumber) {
+      return postRequest(
+        "/public/orders/" + encodeURIComponent(orderNumber) + "/claim-payment",
+        {},
+      );
+    },
     submitContact: function (payload) {
       return postRequest("/public/contact", payload);
     },
