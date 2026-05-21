@@ -181,7 +181,6 @@
       title +
       "</h3>" +
       '<p class="service-card__price">' +
-      '<span class="service-card__from">From</span>' +
       '<span class="service-card__amount" data-usd="' +
       usd.toFixed(2) +
       '" data-eur="' +
