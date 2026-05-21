@@ -82,6 +82,14 @@
 
   const HOT_GRID_SELECTOR = "#hot-services-grid";
   const HOT_LIMIT = 4;
+  // Hot Right Now lives in the home grid AND on /pages/*.html. A
+  // relative "./pages/services.html" resolves to /pages/pages/...
+  // 404 from any subpage, so we pick the prefix per page.
+  const SERVICE_LIST_PATH = window.location.pathname
+    .replace(/\\/g, "/")
+    .includes("/pages/")
+    ? "./services.html"
+    : "./pages/services.html";
 
   function escapeHtml(str) {
     return String(str == null ? "" : str)
@@ -159,7 +167,9 @@
     // it can't be a nested <a> (invalid HTML) and clicking anywhere
     // on the card already triggers the parent link.
     return (
-      '<a class="service-card service-card--link" href="./pages/services.html?service=' +
+      '<a class="service-card service-card--link" href="' +
+      SERVICE_LIST_PATH +
+      "?service=" +
       slug +
       '" data-service="' +
       slug +
