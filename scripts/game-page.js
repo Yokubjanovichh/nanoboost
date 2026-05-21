@@ -250,6 +250,9 @@
 
       const price = document.createElement("p");
       price.className = "service-card__price";
+      const fromLabel = document.createElement("span");
+      fromLabel.className = "service-card__from";
+      fromLabel.textContent = "From";
       const amount = document.createElement("span");
       amount.className = "service-card__amount";
       const isEur =
@@ -262,6 +265,7 @@
           : window.nbFormatPrice
             ? window.nbFormatPrice(rawUsd)
             : svc.priceNow;
+      price.appendChild(fromLabel);
       price.appendChild(amount);
 
       // BUY NOW degrades to a <span> — nested <a> inside the card link

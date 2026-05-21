@@ -2097,6 +2097,14 @@ a {
   gap: 1rem;
   margin-bottom: 1.8rem;
 }
+.service-card__from {
+  color: rgba(255, 255, 255, 0.92);
+  font-size: clamp(1.1rem, 0.72vw, 1.7rem);
+  line-height: 1;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
 .service-card__amount {
   color: #7355ff;
   font-size: clamp(2.8rem, 1.6vw, 5.6rem);
@@ -3217,6 +3225,9 @@ a {
   .service-card__price {
     gap: 0.8rem;
   }
+  .service-card__from {
+    font-size: 1.3rem;
+  }
   .service-card__btn {
     width: 100%;
     min-height: 5rem;
@@ -3449,6 +3460,9 @@ a {
     margin-bottom: 1.7rem;
     justify-content: center;
     align-self: center;
+  }
+  .service-card__from {
+    font-size: 0.95rem;
   }
   .service-card__amount {
     font-size: clamp(3.4rem, 2.5vw, 5.6rem);
