@@ -660,19 +660,21 @@
     // Copy buttons (order number + wallet address).
     modal.querySelectorAll("[data-copy]").forEach(wireCopyButton);
 
-    // Close behaviour — both backdrop and X show the same confirm. The
-    // order stays pending on the BE side either way; an operator can
-    // recover it from the admin.
+    // Close behaviour — both backdrop and X show the same confirm.
+    // We stay on the checkout page (no redirect) so the user can
+    // switch payment method or edit the form and resubmit. The
+    // previous order stays pending on the BE side; an operator can
+    // reconcile / cancel abandoned orders from the admin.
     const attemptClose = () => {
       const ok = window.confirm(
-        "Close payment window? Your order will remain pending. Contact " +
-          SUPPORT_EMAIL +
-          " if you need help.",
+        "Close payment window? You can complete payment later or " +
+          "switch payment method. Your order will remain pending until " +
+          "you confirm.",
       );
       if (!ok) return;
       clearInterval(timer);
+      document.removeEventListener("keydown", onKey);
       closeModalShell(modal);
-      window.location.href = "/#games";
     };
 
     const closeBtn = modal.querySelector(".payment-modal__close");
@@ -709,6 +711,19 @@
             throw new Error("API client unavailable");
           }
           await window.NB_API.claimPayment(orderNumber);
+
+          // Cleanup deferred until claim succeeds — the user has
+          // signalled the payment is on the way, so the cart + prefill
+          // + form can safely be wiped for the next order.
+          localStorage.removeItem(CART_KEY);
+          try {
+            localStorage.removeItem(PREFILL_KEY);
+          } catch {}
+          cart = [];
+          renderOrder();
+          syncCartGlobals();
+          if (form) form.reset();
+
           clearInterval(timer);
           document.removeEventListener("keydown", onKey);
           showVerificationPending(orderNumber);
@@ -885,17 +900,14 @@
           window.location.assign(res.checkout_url);
           return;
         }
-        // PayPal / USDT → manual payment modal. The order is already
-        // registered on the BE; we collect "I have paid" confirmation
-        // and POST /claim-payment so an operator can verify the funds.
-        localStorage.removeItem(CART_KEY);
-        try {
-          localStorage.removeItem(PREFILL_KEY);
-        } catch {}
-        cart = [];
-        renderOrder();
-        syncCartGlobals();
-        form.reset();
+        // PayPal / USDT → manual payment modal. The order is registered
+        // on the BE, but we DON'T clear cart/form yet — if the user
+        // closes the modal (e.g. to switch payment method) we want them
+        // dropped back on this same checkout page with everything intact
+        // so they can resubmit immediately. The actual cleanup happens
+        // only after the user signals "I have paid" (see claim handler
+        // inside showPaymentModal). Multiple pending orders on the BE
+        // are acceptable for the manual-fulfillment phase.
 
         const chosenMethod = trim(paymentInput && paymentInput.value);
         const displayCurrency =
