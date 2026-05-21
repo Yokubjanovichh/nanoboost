@@ -580,8 +580,8 @@
       : (isEur && eur ? "€" : "$") + amount;
 
     const qrSrc = isUsdt
-      ? "/assets/qr/usdt_qr.webp"
-      : "/assets/qr/paypal_qr.webp";
+      ? "/assets/qr/usdt_qr.webp?v=2"
+      : "/assets/qr/paypal_qr.webp?v=2";
     const methodLabel = isUsdt ? "USDT (TRC20)" : "PayPal";
 
     const orderSafe = escHtml(orderNumber);
