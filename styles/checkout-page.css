@@ -737,13 +737,13 @@
 }
 .page--checkout .order-item {
   display: grid;
-  grid-template-columns: 5.2rem 1fr auto;
+  grid-template-columns: 7rem 1fr auto;
   gap: 1.4rem;
   align-items: center;
 }
 .page--checkout .order-item__img {
-  width: 5.2rem;
-  height: 5.2rem;
+  width: 7rem;
+  height: 7rem;
   border-radius: 1.2rem;
   object-fit: cover;
   box-shadow: 0 10px 22px rgba(0, 0, 0, 0.35);
@@ -752,24 +752,25 @@
   min-width: 0;
 }
 .page--checkout .order-item__name {
-  font-size: 1.45rem;
-  font-weight: 500;
+  font-size: 1.7rem;
+  font-weight: 600;
   color: rgba(255, 255, 255, 0.92);
-  line-height: 1.25;
+  line-height: 1.3;
+  margin-bottom: 0.4rem;
 }
 .page--checkout .order-item__meta {
-  font-size: 1.25rem;
+  font-size: 1.3rem;
   color: rgba(255, 255, 255, 0.62);
-  margin-top: 0.3rem;
+  margin-bottom: 0.4rem;
 }
 .page--checkout .order-item__qty {
-  font-size: 1.25rem;
+  font-size: 1.3rem;
   color: rgba(255, 255, 255, 0.7);
   margin-top: 0.3rem;
 }
 .page--checkout .order-item__price {
-  font-size: 1.45rem;
-  font-weight: 500;
+  font-size: 1.8rem;
+  font-weight: 700;
   color: rgba(111, 75, 255, 0.95);
   white-space: nowrap;
 }
@@ -781,7 +782,7 @@
   border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 .page--checkout .order__subtotal-label {
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   color: rgba(255, 255, 255, 0.75);
 }
 .page--checkout .order__subtotal-value {
@@ -833,10 +834,14 @@
   flex-direction: column;
   align-items: flex-end;
   gap: 0.15rem;
+  /* Anchor the price column to the top of the now-taller info column
+     (image + name + meta + qty-row). Matches typical e-commerce cart
+     layouts where the price sits flush with the product title. */
+  align-self: start;
 }
 .page--checkout .order-item__price-old {
   display: none;
-  font-size: 1.15rem;
+  font-size: 1.3rem;
   color: rgba(255, 255, 255, 0.38);
   text-decoration: line-through;
 }
@@ -942,8 +947,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1.6rem;
-  margin-top: 1.2rem;
+  gap: 1.2rem;
+  margin-top: 0.8rem;
 }
 /* Stepper pill — integrated −/value/+ unit */
 .page--checkout .order-item__qty-stepper {
@@ -956,14 +961,14 @@
   gap: 0;
 }
 .page--checkout .order-item__qty-btn {
-  width: 2.6rem;
-  height: 2.6rem;
+  width: 3rem;
+  height: 3rem;
   border-radius: 50%;
   background: transparent;
   border: 0;
   color: rgba(255, 255, 255, 0.85);
   cursor: pointer;
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   font-weight: 500;
   line-height: 1;
   padding: 0;
@@ -982,9 +987,9 @@
   transform: scale(0.9);
 }
 .page--checkout .order-item__qty-value {
-  min-width: 2.4rem;
+  min-width: 2.8rem;
   text-align: center;
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   font-weight: 600;
   color: #fff;
   padding: 0 0.4rem;
@@ -992,8 +997,8 @@
 }
 /* Remove — subtle ghost button, warms to red only on hover */
 .page--checkout .order-item__remove {
-  width: 3.2rem;
-  height: 3.2rem;
+  width: 3.4rem;
+  height: 3.4rem;
   border-radius: 50%;
   background: transparent;
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -1060,10 +1065,48 @@
 /* Existing @media (max-width: 980px) already stacks the grid with
    column-reverse (order summary above the form) and existing
    ≤480px input font-sizes are ≥1.6rem so iOS doesn't auto-zoom on
-   focus. The rules below only add what's missing: tighter back-link
-   padding and qty-row gap on the smallest phones. */
+   focus. The rules below scale the order-item internals down
+   proportionally from the desktop scale-up so they still fit on a
+   small phone without crowding. */
 @media (max-width: 480px) {
+  .page--checkout .order-item {
+    grid-template-columns: 6rem 1fr auto;
+    gap: 1.2rem;
+  }
+  .page--checkout .order-item__img {
+    width: 6rem;
+    height: 6rem;
+  }
+  .page--checkout .order-item__name {
+    font-size: 1.55rem;
+  }
+  .page--checkout .order-item__meta {
+    font-size: 1.2rem;
+  }
+  .page--checkout .order-item__price {
+    font-size: 1.6rem;
+  }
   .page--checkout .order-item__qty-row {
     gap: 1rem;
+    margin-top: 0.6rem;
+  }
+  .page--checkout .order-item__qty-btn {
+    width: 2.8rem;
+    height: 2.8rem;
+    font-size: 1.7rem;
+  }
+  .page--checkout .order-item__qty-value {
+    font-size: 1.5rem;
+    min-width: 2.4rem;
+  }
+  .page--checkout .order-item__remove {
+    width: 3.2rem;
+    height: 3.2rem;
+  }
+  .page--checkout .order__subtotal-label {
+    font-size: 1.6rem;
+  }
+  .page--checkout .order__subtotal-value {
+    font-size: 1.7rem;
   }
 }
