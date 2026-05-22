@@ -511,6 +511,7 @@
   // so an operator can confirm on their side.
 
   const USDT_TRC20_WALLET = "TJHCfq2fwzUKDcNTCCqqtWRdZELHfTscZh";
+  const PAYPAL_USERNAME = "Support.nanoboost@gmail.com";
   const CLAIM_COUNTDOWN_SECONDS = 30;
   const SUPPORT_EMAIL = "support@nanoboost.io";
 
@@ -598,10 +599,21 @@
             "⚠ Send only USDT on the TRC20 network. Other networks = lost funds." +
           "</p>" +
         "</div>"
-      : '<ol class="payment-modal__steps">' +
-          "<li>Open your PayPal app</li>" +
-          "<li>Scan this QR code</li>" +
-          "<li>Send <strong>" + amountSafe + "</strong> with order <strong>" + orderSafe + "</strong> in the note</li>" +
+      : // PayPal: mirror the USDT address-block pattern so users who
+        // can't scan the QR (desktop, no PayPal app, etc.) have a
+        // copyable username to use on paypal.com. Steps follow the
+        // block to walk through the flow.
+        '<div class="payment-modal__address-block">' +
+          '<p class="payment-modal__address-label">PayPal username:</p>' +
+          '<div class="payment-modal__address-row">' +
+            '<code class="payment-modal__address">' + escHtml(PAYPAL_USERNAME) + "</code>" +
+            '<button type="button" class="payment-modal__copy-addr" data-copy="' + escHtml(PAYPAL_USERNAME) + '" aria-label="Copy PayPal username">Copy</button>' +
+          "</div>" +
+        "</div>" +
+        '<ol class="payment-modal__steps">' +
+          "<li>Open PayPal (app or paypal.com)</li>" +
+          "<li>Send <strong>" + amountSafe + "</strong> to the username above</li>" +
+          "<li>Include order <strong>" + orderSafe + "</strong> in the payment note</li>" +
         "</ol>";
 
     modal.innerHTML =
