@@ -3407,10 +3407,11 @@ a {
     align-items: stretch;
     border-radius: 2.4rem;
     padding: 0;
-    /* +10% on the card height so the image (width: 100% of its
-       grid cell, height: 100% of the row) grows proportionally
-       now that the admin-shortened titles leave breathing room. */
-    min-height: 24.2rem;
+    /* Second +10% pass on top of PR #67 — Manager wanted the image
+       even more prominent now that titles are short. Image keeps
+       width/height 100% of its grid cell, so the row height drives
+       the visible size. */
+    min-height: 26.6rem;
   }
   .service-card__content {
     padding: 1.2rem 1rem;
@@ -3436,11 +3437,9 @@ a {
     transform: none;
   }
   .service-card__name {
-    /* +10% on font size — admin-shortened titles ("FH6", "GTA5"
-       Cash Boost, etc.) leave room for a more confident heading.
-       min/max-height are em-relative so the 2-line clamp scales
-       with the font automatically. */
-    font-size: 2.5rem;
+    /* Second +10% pass on top of PR #67. The 2-line clamp below
+       uses em-relative min/max-height so it tracks the font. */
+    font-size: 2.75rem;
     line-height: 1.22;
     margin-bottom: 1.7rem;
     display: -webkit-box;
