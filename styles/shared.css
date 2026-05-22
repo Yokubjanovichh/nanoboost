@@ -3263,6 +3263,10 @@ a {
     gap: 0.6rem;
     flex-shrink: 1;
     min-width: 0;
+    /* Visual order on mobile: logo → currency+cart → burger.
+       HTML order is logo → burger → header__right, so we re-order
+       via flex `order` without touching markup. */
+    order: 1;
   }
   .header .logo__icon {
     width: 2.8rem;
@@ -3295,6 +3299,7 @@ a {
     align-items: center;
     gap: 0.8rem;
     margin-left: auto;
+    order: 2;
   }
 
   /* ---- Unified mobile control surface ---- */
@@ -3440,6 +3445,9 @@ a {
     --nb-burger-line-w: 1.8rem;
     --nb-burger-line-h: 2px;
     --nb-burger-gap: 0.4rem;
+    /* Sits last in the mobile row: [logo] ... [$ / cart] [burger]. */
+    order: 3;
+    margin-left: 0;
   }
   .header .burger.is-open {
     background: rgba(45, 225, 254, 0.10) !important;
@@ -3466,7 +3474,7 @@ a {
     backdrop-filter: blur(8px);
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
+    transition: opacity 0.42s ease, visibility 0.42s ease;
   }
   .mega-drawer.is-open ~ .mega-drawer__overlay,
   .mega-drawer__overlay.is-open {
@@ -3490,7 +3498,7 @@ a {
     border-right: 1px solid rgba(255, 255, 255, 0.06);
     box-shadow: 24px 0 60px rgba(0, 0, 0, 0.55);
     transform: translateX(-100%);
-    transition: transform 0.36s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 0.48s cubic-bezier(0.22, 1, 0.36, 1);
     overflow: hidden;
   }
   .mega-drawer.is-open {
