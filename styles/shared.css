@@ -2844,7 +2844,7 @@ a {
   max-width: 92rem;
 }
 @media (max-width: 1599.98px) {
-  .services__grid > .service-card:nth-child(5) {
+  #hot-services-grid > .service-card:nth-child(5) {
     display: none;
   }
 }
@@ -2857,7 +2857,7 @@ a {
   .services__grid {
     grid-template-columns: repeat(5, minmax(0, 1fr));
   }
-  .services__grid > .service-card:nth-child(5) {
+  #hot-services-grid > .service-card:nth-child(5) {
     display: flex;
   }
 }
