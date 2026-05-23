@@ -784,7 +784,9 @@ a {
   font-size: 1.4rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s, border-color 0.2s;
+  transition:
+    background 0.2s,
+    border-color 0.2s;
   white-space: nowrap;
 }
 .currency-switch__btn:hover {
@@ -829,7 +831,9 @@ a {
   font-size: 1.35rem;
   font-weight: 500;
   cursor: pointer;
-  transition: background 0.15s, color 0.15s;
+  transition:
+    background 0.15s,
+    color 0.15s;
 }
 .currency-switch__option:hover {
   background: rgba(101, 58, 222, 0.15);
@@ -3331,7 +3335,8 @@ a {
     justify-content: center;
     color: #fff;
     cursor: pointer;
-    transition: background 0.18s cubic-bezier(0.4, 0, 0.2, 1),
+    transition:
+      background 0.18s cubic-bezier(0.4, 0, 0.2, 1),
       border-color 0.18s cubic-bezier(0.4, 0, 0.2, 1),
       transform 0.18s cubic-bezier(0.4, 0, 0.2, 1);
   }
@@ -3340,8 +3345,8 @@ a {
   .header .burger:hover,
   .currency-switch--mobile.is-open .currency-switch__btn,
   .header .burger.is-open {
-    background: rgba(45, 225, 254, 0.10);
-    border-color: rgba(45, 225, 254, 0.30);
+    background: rgba(45, 225, 254, 0.1);
+    border-color: rgba(45, 225, 254, 0.3);
   }
   .header__right .currency-switch--mobile .currency-switch__btn:active,
   .header__right .cart:active,
@@ -3386,7 +3391,10 @@ a {
     opacity: 0;
     visibility: hidden;
     transform: translateY(-0.4rem);
-    transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease;
+    transition:
+      opacity 0.18s ease,
+      transform 0.18s ease,
+      visibility 0.18s ease;
   }
   .currency-switch--mobile.is-open .currency-switch__menu {
     opacity: 1;
@@ -3460,8 +3468,8 @@ a {
     margin-left: 0;
   }
   .header .burger.is-open {
-    background: rgba(45, 225, 254, 0.10) !important;
-    border-color: rgba(45, 225, 254, 0.30) !important;
+    background: rgba(45, 225, 254, 0.1) !important;
+    border-color: rgba(45, 225, 254, 0.3) !important;
   }
   .header .burger__line {
     width: 1.8rem;
@@ -3484,7 +3492,9 @@ a {
     backdrop-filter: blur(8px);
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.42s ease, visibility 0.42s ease;
+    transition:
+      opacity 0.42s ease,
+      visibility 0.42s ease;
   }
   .mega-drawer.is-open ~ .mega-drawer__overlay,
   .mega-drawer__overlay.is-open {
@@ -3544,7 +3554,9 @@ a {
     border-radius: 999px;
     color: rgba(255, 255, 255, 0.85);
     cursor: pointer;
-    transition: background 0.18s ease, color 0.18s ease;
+    transition:
+      background 0.18s ease,
+      color 0.18s ease;
   }
   .mega-drawer__close:hover {
     background: rgba(255, 255, 255, 0.1);
@@ -3590,7 +3602,10 @@ a {
     border-radius: 1rem;
     color: #fff;
     text-decoration: none;
-    transition: background 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+    transition:
+      background 0.18s ease,
+      border-color 0.18s ease,
+      transform 0.18s ease;
   }
   .mega-drawer__game:hover {
     background: rgba(104, 73, 254, 0.12);
@@ -3641,7 +3656,9 @@ a {
     font-size: 1.55rem;
     text-decoration: none;
     border-radius: 0.6rem;
-    transition: color 0.18s ease, background 0.18s ease;
+    transition:
+      color 0.18s ease,
+      background 0.18s ease;
   }
   .mega-drawer__link:hover {
     color: #fff;
@@ -3689,7 +3706,9 @@ a {
     text-decoration: none;
     font-size: 1.4rem;
     font-weight: 600;
-    transition: background 0.18s ease, color 0.18s ease;
+    transition:
+      background 0.18s ease,
+      color 0.18s ease;
   }
   .mega-drawer__social:hover {
     background: rgba(104, 73, 254, 0.18);
@@ -3839,11 +3858,11 @@ a {
     align-items: stretch;
     gap: 1.4rem;
     min-height: auto;
-    padding: 1.2rem;
+    padding: 0.8rem;
   }
   .service-card__img {
-    width: 12rem;
-    height: 12rem;
+    width: 13rem;
+    height: 13rem;
     aspect-ratio: 1 / 1;
     flex-shrink: 0;
     margin: 0;
