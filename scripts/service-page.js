@@ -187,6 +187,7 @@ const SERVICE_CONFIG = window.NB_SERVICE_CONFIG || {},
     const r = SERVICE_CONFIG[e];
     if (!r) return !1;
     updateBackToGameButton(r);
+    if (window.NB_SEO) window.NB_SEO.applyServiceSEO(Object.assign({}, r, { slug: e }));
     const n = document.querySelector("#service-hero-title"),
       frame = document.querySelector(".service-hero__image-frame");
     if (n && r.titleHtml) n.innerHTML = nbSanitizeBr(r.titleHtml);

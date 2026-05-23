@@ -152,6 +152,15 @@ function copyDirSync(src, dest) {
     console.log(`  pages/${f} ✓`);
   }
 
+  // --- Regenerate sitemap.xml from BE catalog ---
+  // Pulls /public/games + /public/services so per-game + per-service URLs
+  // land in the sitemap without anyone hand-editing the XML. If the BE is
+  // unreachable we keep the repo's static fallback so the build never
+  // ships a sitemap that's worse than the one we already had.
+  await regenerateSitemap(PUBLIC_API_URL).catch((err) => {
+    console.warn("⚠️  sitemap regeneration skipped:", err.message);
+  });
+
   // --- Write build manifest ---
   const manifest = {
     buildTime: new Date().toISOString(),
@@ -163,3 +172,87 @@ function copyDirSync(src, dest) {
   console.log(`\n✅ Build complete → dist/ (${elapsed}s)`);
   console.log(`   ${Object.keys(fileMap).length} files cache-busted`);
 })();
+
+async function regenerateSitemap(apiBase) {
+  console.log("\n🗺  Regenerating sitemap.xml...");
+  const today = new Date().toISOString().slice(0, 10);
+  const SITE = "https://nanoboost.io";
+  const xmlEscape = (s) =>
+    String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+  const fetchJson = async (path) => {
+    const res = await fetch(apiBase + path, {
+      headers: { Accept: "application/json" },
+    });
+    if (!res.ok) throw new Error("HTTP " + res.status + " " + path);
+    return res.json();
+  };
+
+  let games = [];
+  let services = [];
+  try {
+    const gResp = await fetchJson("/public/games");
+    games = Array.isArray(gResp) ? gResp : gResp.items || [];
+    // BE caps page_size at 100; paginate so we still pick up every
+    // published service for the sitemap even as the catalog grows.
+    let page = 1;
+    while (page < 20) {
+      const sResp = await fetchJson("/public/services?page_size=100&page=" + page);
+      const items = Array.isArray(sResp) ? sResp : sResp.items || [];
+      services = services.concat(items);
+      const total = (sResp && sResp.total) || services.length;
+      if (items.length === 0 || services.length >= total) break;
+      page += 1;
+    }
+    console.log(`   fetched ${games.length} games + ${services.length} services`);
+  } catch (err) {
+    console.warn("   BE unreachable (" + err.message + ") — keeping static sitemap.xml");
+    return;
+  }
+
+  const url = (loc, lastmod, changefreq, priority) =>
+    `  <url>\n    <loc>${xmlEscape(loc)}</loc>\n    <lastmod>${lastmod}</lastmod>\n    <changefreq>${changefreq}</changefreq>\n    <priority>${priority}</priority>\n  </url>`;
+
+  const blocks = [];
+  // Static URLs
+  blocks.push(url(SITE + "/", today, "weekly", "1.0"));
+  blocks.push(url(SITE + "/pages/services.html", today, "weekly", "0.9"));
+  blocks.push(url(SITE + "/pages/why-us.html", today, "monthly", "0.7"));
+  blocks.push(url(SITE + "/pages/faq.html", today, "monthly", "0.7"));
+  blocks.push(url(SITE + "/pages/contact.html", today, "monthly", "0.7"));
+
+  // Per-game URLs
+  for (const g of games) {
+    if (!g || !g.slug) continue;
+    blocks.push(
+      url(
+        SITE + "/pages/game.html?game=" + encodeURIComponent(g.slug),
+        today,
+        "daily",
+        "0.9",
+      ),
+    );
+  }
+
+  // Per-service URLs
+  for (const s of services) {
+    if (!s || !s.slug) continue;
+    blocks.push(
+      url(
+        SITE + "/pages/services.html?service=" + encodeURIComponent(s.slug),
+        today,
+        "weekly",
+        "0.8",
+      ),
+    );
+  }
+
+  const xml =
+    '<?xml version="1.0" encoding="UTF-8"?>\n' +
+    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
+    blocks.join("\n") +
+    "\n</urlset>\n";
+
+  fs.writeFileSync(path.join(DIST, "sitemap.xml"), xml);
+  console.log(`   sitemap.xml written (${blocks.length} URLs)`);
+}

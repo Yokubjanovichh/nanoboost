@@ -167,21 +167,36 @@
     SECTION.setAttribute("hidden", "");
   }
 
+  // Lets game-page.js feed the same list into FAQPage JSON-LD without
+  // re-fetching. Mock fallback rides the same channel so the schema still
+  // renders during the BE rollout window.
+  function broadcastFaqs(list) {
+    window.dispatchEvent(
+      new CustomEvent("nb:faqs-loaded", {
+        detail: { slug: slug, faqs: Array.isArray(list) ? list : [] },
+      }),
+    );
+  }
+
   (async function load() {
     try {
       const faqs = await window.NB_API.fetchGameFaqs(slug);
       if (Array.isArray(faqs) && faqs.length > 0) {
         showFaqs(faqs);
+        broadcastFaqs(faqs);
       } else {
         hideSection();
+        broadcastFaqs([]);
       }
     } catch (err) {
       if (err && err.status === 404) {
         // BE endpoint not deployed yet — keep the section useful with mock
         // copy. Once the endpoint goes live this branch goes silent.
         showFaqs(MOCK_FAQS);
+        broadcastFaqs(MOCK_FAQS);
       } else {
         hideSection();
+        broadcastFaqs([]);
       }
     }
   })();
