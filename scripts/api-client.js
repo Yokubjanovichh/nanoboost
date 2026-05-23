@@ -177,6 +177,15 @@
     fetchReviews: async function (params) {
       return unwrap(await request("/public/reviews", params || {}));
     },
+    fetchGameFaqs: async function (slug) {
+      const payload = await request(
+        "/public/games/" + encodeURIComponent(slug) + "/faqs",
+      );
+      // Backend may return either a bare list or { faqs: [...] }; normalize.
+      if (Array.isArray(payload)) return payload;
+      if (payload && Array.isArray(payload.faqs)) return payload.faqs;
+      return [];
+    },
     createOrder: function (payload) {
       return postRequest("/public/orders", payload);
     },

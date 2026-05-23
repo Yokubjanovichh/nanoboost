@@ -2837,6 +2837,16 @@ a {
   max-height: clamp(18rem, 18vw, 36rem);
   padding-bottom: clamp(1.4rem, 1.2vw, 2.4rem);
 }
+.faq-item--skeleton .faq-item__trigger {
+  pointer-events: none;
+}
+.faq-item--skeleton .faq-item__q {
+  display: block;
+  width: clamp(20rem, 38vw, 42rem);
+  height: 2.4rem;
+  border-radius: 0.6rem;
+  color: transparent;
+}
 .faq-item__a {
   color: rgba(255, 255, 255, 0.9);
   font-size: 1.6rem;
