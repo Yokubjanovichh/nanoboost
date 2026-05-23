@@ -353,6 +353,32 @@
     section.hidden = false;
   }
 
+  // Cached game metadata + FAQ list keep applyGameSEO re-runnable when
+  // either signal arrives (game.name first, FAQs later via game-faq.js).
+  let cachedGame = null;
+  let cachedFaqs = null;
+
+  function runGameSeo() {
+    if (!window.NB_SEO || !cachedGame) return;
+    const available = getAvailablePlatforms();
+    window.NB_SEO.applyGameSEO(
+      {
+        slug: currentGame,
+        name: cachedGame.name,
+        description: cachedGame.description,
+        platforms: available && available.length ? available : null,
+        heroImage: cachedGame.image_url || cachedGame.hero_image_url || null,
+      },
+      cachedFaqs,
+    );
+  }
+
+  window.addEventListener("nb:faqs-loaded", function (e) {
+    if (!e || !e.detail || e.detail.slug !== currentGame) return;
+    cachedFaqs = Array.isArray(e.detail.faqs) ? e.detail.faqs : null;
+    runGameSeo();
+  });
+
   function applyGameMeta(game) {
     if (!game) return;
     currentGameName = game.name || currentGameName;
@@ -364,32 +390,8 @@
     const h1 = document.getElementById("gta5-title");
     if (h1 && game.name) h1.setAttribute("aria-label", game.name);
 
-    const docTitle = (game.name || "Game") + " Boosting Services | Nanoboost";
-    document.title = docTitle;
-
-    const description =
-      game.description ||
-      "Browse " +
-        (game.name || "this game") +
-        " boosting services by platform. Fast delivery and professional players.";
-
-    const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) metaDesc.setAttribute("content", description);
-    const ogTitle = document.querySelector('meta[property="og:title"]');
-    if (ogTitle) ogTitle.setAttribute("content", docTitle);
-    const ogDesc = document.querySelector('meta[property="og:description"]');
-    if (ogDesc) ogDesc.setAttribute("content", description);
-    const ogUrl = document.querySelector('meta[property="og:url"]');
-    if (ogUrl) {
-      ogUrl.setAttribute(
-        "content",
-        "https://nanoboost.io/pages/game.html?game=" + encodeURIComponent(currentGame),
-      );
-    }
-    const twTitle = document.querySelector('meta[name="twitter:title"]');
-    if (twTitle) twTitle.setAttribute("content", docTitle);
-    const twDesc = document.querySelector('meta[name="twitter:description"]');
-    if (twDesc) twDesc.setAttribute("content", description);
+    cachedGame = game;
+    runGameSeo();
 
     const ld = document.getElementById("game-breadcrumb-jsonld");
     if (ld && game.name) {
@@ -476,6 +478,10 @@
   // first chance to know which platforms actually have content.
   window.addEventListener("nb:services-loaded", function () {
     syncFromData();
+    // Available platforms only resolve after services load — refresh
+    // SEO once the platform array is real so VideoGame.gamePlatform
+    // reflects the admin's actual lineup instead of the fallback.
+    runGameSeo();
   });
 
   // If services-bootstrap finished before we wired the listener (cache
