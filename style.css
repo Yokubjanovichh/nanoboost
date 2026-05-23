@@ -1,7 +1,7 @@
 .hero__top {
   position: relative;
   width: 100%;
-  height: clamp(32rem, 38vw, 48rem);
+  height: clamp(32rem, 38vw, 56rem);
   border-radius: 2.4rem;
   overflow: hidden;
   -webkit-mask-image: -webkit-radial-gradient(white, black);
@@ -25,7 +25,7 @@
   height: 100%;
   display: block;
   object-fit: cover;
-  object-position: top;
+  object-position: center;
 }
 .hero__inner {
   position: relative;
@@ -50,7 +50,7 @@
 }
 .hero__title-top {
   font-family: "LEMON MILK", sans-serif;
-  font-size: clamp(7.2rem, 5vw, 9.4rem);
+  font-size: clamp(5.6rem, 4.4vw, 8rem);
   font-weight: 500;
   color: #fff;
   letter-spacing: 0.01em;
@@ -58,7 +58,7 @@
 }
 .hero__title-bottom {
   font-family: "LEMON MILK", sans-serif;
-  font-size: clamp(7.2rem, 5.5vw, 9.8rem);
+  font-size: clamp(5.6rem, 4.6vw, 8.4rem);
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.02em;
