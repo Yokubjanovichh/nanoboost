@@ -163,9 +163,30 @@ const SERVICE_CONFIG = window.NB_SERVICE_CONFIG || {},
   // always show the same admin-curated set. The legacy per-service
   // "related" picker (score by platform + family + base) lived here and
   // produced a different list every navigation — it's gone now.
+  // Reveals the "< GameName" pill above the hero once the service config
+  // resolves. Hidden by default so it never sits empty during the initial
+  // skeleton frame; updated again on every dropdown switch (cross-game
+  // services would otherwise keep the stale game name).
+  updateBackToGameButton = (cfg) => {
+    const btn = document.getElementById("service-back-to-game");
+    if (!btn) return;
+    const slug = (cfg && cfg.gameSlug) || "";
+    const name = (cfg && cfg.gameName) || "";
+    if (!slug || !name) {
+      btn.hidden = true;
+      return;
+    }
+    btn.href = "./game.html?game=" + encodeURIComponent(slug);
+    btn.dataset.gameSlug = slug;
+    btn.setAttribute("aria-label", "Back to " + name);
+    const label = btn.querySelector(".service-back__label");
+    if (label) label.textContent = name;
+    btn.hidden = false;
+  },
   applyServiceToHero = (e, { updateUrl: t = !1 } = {}) => {
     const r = SERVICE_CONFIG[e];
     if (!r) return !1;
+    updateBackToGameButton(r);
     const n = document.querySelector("#service-hero-title"),
       frame = document.querySelector(".service-hero__image-frame");
     if (n && r.titleHtml) n.innerHTML = nbSanitizeBr(r.titleHtml);
@@ -449,3 +470,19 @@ window.addEventListener("nb:services-loaded", () => {
     applyServiceToHero(svc);
   }
 });
+
+// Fire GA4 once when the user uses the back pill — navigation itself is
+// handled by the native <a href>, this listener just records intent.
+(() => {
+  const btn = document.getElementById("service-back-to-game");
+  if (!btn) return;
+  btn.addEventListener("click", () => {
+    if (typeof window.nbTrack !== "function") return;
+    const slug = getRequestedSlug();
+    const cfg = SERVICE_CONFIG[slug];
+    window.nbTrack("nav_back_to_game", {
+      from_service: slug,
+      to_game: btn.dataset.gameSlug || (cfg && cfg.gameSlug) || "",
+    });
+  });
+})();
