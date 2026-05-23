@@ -4,6 +4,17 @@ body.page--service {
   overflow-x: hidden;
   overflow-x: clip;
 }
+/* Scoped tighter top breathing room: only the service detail page —
+   shared.css sets .main padding-top to var(--gap-header-main) for the
+   whole site, and on this page that's twice as much air as the layout
+   needs above the back pill / hero. */
+body.page--service .main {
+  padding-top: calc(var(--gap-header-main) / 2);
+}
+body.page--service .main > :first-child,
+body.page--service .service-back {
+  margin-top: 0;
+}
 .page--service
   .main
   > section.container
