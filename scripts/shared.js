@@ -895,11 +895,10 @@ document.addEventListener("click", (e) => {
 });
 
 // Mobile mega-drawer: full-screen slide-in nav. The legacy nav__list
-// slide-down is hidden on ≤768px via shared.css, and the existing
-// #burger element is reused as the trigger — clicks open the drawer on
-// mobile and fall back to the legacy .nav toggle on desktop (which is
-// the regular hamburger ≤980px state). The drawer markup lives in the
-// HTML so search/sections render before JS settles.
+// slide-down is hidden on ≤980px via shared.css (PR #69 collapsed the
+// old 769-980 intermediate zone), and the existing #burger element is
+// reused as the trigger — clicks open the drawer on every mobile
+// viewport. Desktop ≥981px is untouched (burger is hidden there).
 (function initMegaDrawer() {
   const drawer = document.getElementById("mega-drawer");
   const overlay = document.getElementById("mega-drawer-overlay");
@@ -907,7 +906,10 @@ document.addEventListener("click", (e) => {
   if (!drawer || !burgerEl) return;
   const closeBtn = drawer.querySelector(".mega-drawer__close");
   const searchInput = drawer.querySelector(".mega-drawer__search-input");
-  const isMobile = () => window.matchMedia("(max-width: 768px)").matches;
+  // Match the CSS premium-mobile breakpoint (PR #69). Before this sync
+  // the 769-980px range fell through to a legacy .nav toggle whose CSS
+  // had already been deleted — so the burger looked dead in that zone.
+  const isMobile = () => window.matchMedia("(max-width: 980px)").matches;
 
   function openDrawer() {
     drawer.classList.add("is-open");
@@ -942,7 +944,8 @@ document.addEventListener("click", (e) => {
       if (!isMobile()) return;
       // Block the legacy .nav toggle handler (registered later, bubble
       // phase) so the drawer is the only thing the burger drives on
-      // mobile. Desktop ≥769px falls through to the legacy behavior.
+      // mobile. Desktop ≥981px never reaches here because the burger
+      // is hidden by CSS.
       e.stopImmediatePropagation();
       e.preventDefault();
       drawer.classList.contains("is-open") ? closeDrawer() : openDrawer();
