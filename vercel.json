@@ -15,6 +15,10 @@
       "permanent": true
     }
   ],
+  "rewrites": [
+    { "source": "/payment-success", "destination": "/pages/payment-success.html" },
+    { "source": "/payment-cancelled", "destination": "/pages/payment-cancelled.html" }
+  ],
   "headers": [
     {
       "source": "/(.*)",
