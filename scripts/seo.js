@@ -183,6 +183,7 @@
         game.description ||
         "Professional " + game.name + " boosting service by Nanoboost.",
       gamePlatform: platforms,
+      publisher: { "@id": "https://nanoboost.io/#organization" },
     });
 
     // FAQPage requires at least one entry per Google's rich-result rules.
@@ -280,6 +281,7 @@
       image: service.imageSrcDesktop || DEFAULT_OG_IMAGE,
       description: description,
       brand: { "@type": "Brand", name: "Nanoboost" },
+      manufacturer: { "@id": "https://nanoboost.io/#organization" },
       category: service.gameName,
       offers: {
         "@type": "AggregateOffer",
