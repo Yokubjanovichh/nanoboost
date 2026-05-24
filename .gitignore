@@ -10,8 +10,3 @@ dist/
 
 
 .vercel
-
-# Local debug screenshots — never commit
-image*.png
-screenshot*.png
-history.png

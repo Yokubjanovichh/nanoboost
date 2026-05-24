@@ -3858,11 +3858,10 @@ a {
     align-items: stretch;
     gap: 1.4rem;
     min-height: auto;
-    padding: 0.8rem;
   }
   .service-card__img {
-    width: 13rem;
-    height: 13rem;
+    width: 15em;
+    height: 15em;
     aspect-ratio: 1 / 1;
     flex-shrink: 0;
     margin: 0;
@@ -3884,6 +3883,7 @@ a {
     padding: 0;
     gap: 0.5rem;
     min-width: 0;
+    padding: 0.8rem 0.8rem 0.8rem 0;
   }
   .service-card__name {
     font-size: 1.7rem;
@@ -3904,10 +3904,11 @@ a {
     word-wrap: break-word;
     overflow-wrap: break-word;
     hyphens: auto;
+    text-align: center;
   }
   .service-card__price {
     margin: 0.2rem 0 0;
-    align-self: flex-start;
+    align-self: center;
     gap: 0.6rem;
   }
   .service-card__btn {
