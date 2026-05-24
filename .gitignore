@@ -13,7 +13,5 @@ dist/
 
 # Local debug screenshots — never commit
 image*.png
-"Снимок экрана"*.png
-"Screenshot"*.png
 screenshot*.png
 history.png
