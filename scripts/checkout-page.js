@@ -190,14 +190,9 @@
   // break the inline qty edits.
   function syncCartGlobals() {
     const total = cart.reduce((s, it) => s + (it.qty || 1), 0);
-    document
-      .querySelectorAll(".cart__badge, .cart-float__badge")
-      .forEach((el) => {
-        el.textContent = String(total);
-        el.style.display = total > 0 ? "flex" : "none";
-      });
-    document.querySelectorAll(".cart-float").forEach((el) => {
-      el.style.display = total > 0 ? "" : "none";
+    document.querySelectorAll(".cart__badge").forEach((el) => {
+      el.textContent = String(total);
+      el.style.display = total > 0 ? "flex" : "none";
     });
     try {
       if (typeof nbRenderCartWidget === "function") nbRenderCartWidget();

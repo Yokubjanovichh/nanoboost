@@ -529,17 +529,11 @@ const nbIsInPages = () =>
   nbUpdateCartBadges = () => {
     const e = nbCartTotalQty(),
       t = e > 0,
-      o = t ? "flex" : "none",
-      r = t ? "" : "none";
+      o = t ? "flex" : "none";
     requestAnimationFrame(() => {
-      (document
-        .querySelectorAll(".cart__badge, .cart-float__badge")
-        .forEach((t) => {
-          ((t.textContent = e), (t.style.display = o));
-        }),
-        document.querySelectorAll(".cart-float").forEach((e) => {
-          e.style.display = r;
-        }));
+      document.querySelectorAll(".cart__badge").forEach((t) => {
+        ((t.textContent = e), (t.style.display = o));
+      });
     });
   },
   nbRenderCartWidget = () => {

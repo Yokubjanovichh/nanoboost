@@ -895,55 +895,6 @@ a {
    drawer) now owns the entire ≤980px range — see the block flagged
    "Mobile mega-drawer" further down. Body padding-top for the fixed
    header is set there. */
-.cart-float {
-  display: none;
-  background: 0 0;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-}
-@media (max-width: 980px) {
-  .cart-float {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: fixed;
-    bottom: 4rem;
-    right: 2rem;
-    left: auto;
-    z-index: 9999;
-    width: 5.6rem;
-    height: 5.6rem;
-    border-radius: 50%;
-    background:
-      linear-gradient(#08071a, #08071a) padding-box,
-      linear-gradient(135deg, #2de1fe 0, #6849fe 50%, #9d21fe 100%) border-box;
-    border: 2px solid transparent;
-    transition: box-shadow 0.25s ease;
-    box-shadow: 0 8px 32px rgba(104, 73, 254, 0.35);
-  }
-  .cart-float:hover {
-    box-shadow: 0 12px 40px rgba(104, 73, 254, 0.55);
-  }
-  .cart-float__badge {
-    position: absolute;
-    top: -0.5rem;
-    right: -0.5rem;
-    min-width: 2rem;
-    height: 2rem;
-    padding: 0 0.4rem;
-    border-radius: 50rem;
-    background: linear-gradient(135deg, #2de1fe 0, #6849fe 50%, #9d21fe 100%);
-    color: #fff;
-    font-family: Poppins, sans-serif;
-    font-size: 1.1rem;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    line-height: 1;
-  }
-}
 .cart-widget {
   position: fixed;
   inset: 0;
@@ -3323,12 +3274,6 @@ a {
     width: auto;
     max-width: 100%;
     object-fit: contain;
-  }
-
-  /* No double cart entry-points on mobile — the header circle is the
-     one we keep, the bottom-right floating button is suppressed. */
-  .cart-float {
-    display: none !important;
   }
 
   .header__right {

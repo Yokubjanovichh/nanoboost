@@ -44,7 +44,7 @@
       /* ignore */
     }
     document
-      .querySelectorAll(".cart__badge, .cart-float__badge")
+      .querySelectorAll(".cart__badge")
       .forEach((el) => (el.textContent = "0"));
   }
 
