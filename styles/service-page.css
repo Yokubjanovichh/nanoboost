@@ -337,6 +337,40 @@ body.page--service .service-back {
   flex-shrink: 0;
   font-weight: 600;
 }
+/* Discount row layout: label  -N% $orig $final.
+   The selected (aria-selected=true) state inverts colors via the rule
+   above, so badge/strikethrough colors here use semi-transparent neutrals
+   that read on both backgrounds. */
+.service-dropdown__option--has-discount {
+  gap: 0.9rem;
+}
+.service-dropdown__option .option-discount-badge {
+  display: inline-flex;
+  align-items: center;
+  height: 2rem;
+  padding: 0 0.7rem;
+  border-radius: 0.5rem;
+  background: linear-gradient(135deg, #2de1fe 0%, #6849fe 50%, #9d21fe 100%);
+  color: #fff;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  flex-shrink: 0;
+}
+.service-dropdown__option .option-price-original {
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: rgba(42, 36, 62, 0.5);
+  text-decoration: line-through;
+  flex-shrink: 0;
+}
+.service-dropdown__option[aria-selected="true"] .option-price-original {
+  color: rgba(255, 255, 255, 0.55);
+}
+.service-dropdown__option .option-price-final {
+  flex-shrink: 0;
+  font-weight: 700;
+}
 .service-dropdown__option:hover {
   background: rgba(110, 53, 219, 0.08);
 }

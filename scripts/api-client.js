@@ -118,14 +118,90 @@
     );
   }
 
+  // Resolves the discount configuration on an option into final USD/EUR
+  // prices and the integer % to show on badges. "amount" type derives a
+  // percent from discount_amount_usd / price_usd so we can render a single
+  // "-N%" pill across both currencies. Returns hasDiscount=false on missing
+  // / "none" / zero-value configs so downstream callers can short-circuit.
+  function computeOptionFinal(option) {
+    const baseUsd = Number(option && option.price_usd) || 0;
+    const baseEur = Number(option && option.price_eur) || 0;
+    const type = option && option.discount_type;
+    if (type === "percent") {
+      const p = Number(option.discount_percent) || 0;
+      if (p > 0) {
+        const ratio = Math.min(1, p / 100);
+        return {
+          finalUsd: Math.max(0, baseUsd * (1 - ratio)),
+          finalEur: Math.max(0, baseEur * (1 - ratio)),
+          originalUsd: baseUsd,
+          originalEur: baseEur,
+          discountType: "percent",
+          discountPercent: p,
+          discountAmountUsd: baseUsd * ratio,
+          discountAmountEur: baseEur * ratio,
+          hasDiscount: true,
+        };
+      }
+    } else if (type === "amount") {
+      const dUsd = Number(option.discount_amount_usd) || 0;
+      const dEur = Number(option.discount_amount_eur) || 0;
+      if (dUsd > 0 || dEur > 0) {
+        const pct = baseUsd > 0 ? Math.round((dUsd / baseUsd) * 100) : 0;
+        return {
+          finalUsd: Math.max(0, baseUsd - dUsd),
+          finalEur: Math.max(0, baseEur - dEur),
+          originalUsd: baseUsd,
+          originalEur: baseEur,
+          discountType: "amount",
+          discountPercent: pct,
+          discountAmountUsd: dUsd,
+          discountAmountEur: dEur,
+          hasDiscount: true,
+        };
+      }
+    }
+    return {
+      finalUsd: baseUsd,
+      finalEur: baseEur,
+      originalUsd: baseUsd,
+      originalEur: baseEur,
+      discountType: "none",
+      discountPercent: 0,
+      discountAmountUsd: 0,
+      discountAmountEur: 0,
+      hasDiscount: false,
+    };
+  }
+
+  // Dropdown / cart-side string format. Now uses the FINAL (post-discount)
+  // price so all downstream consumers (subtotal parsing, view_item tracking,
+  // cart line items) see the price the customer actually pays.
   function formatOptionString(option, currency) {
     if (!option) return "";
     const label = option.label || "";
+    const f = computeOptionFinal(option);
     const price =
       currency === "EUR"
-        ? "€" + Number(option.price_eur || 0).toFixed(2)
-        : "$" + Number(option.price_usd || 0).toFixed(2);
+        ? "€" + Number(f.finalEur).toFixed(2)
+        : "$" + Number(f.finalUsd).toFixed(2);
     return label + " - " + price;
+  }
+
+  function buildOptionRich(option) {
+    const f = computeOptionFinal(option);
+    return {
+      label: option && option.label ? String(option.label) : "",
+      priceUsd: f.originalUsd,
+      priceEur: f.originalEur,
+      finalUsd: f.finalUsd,
+      finalEur: f.finalEur,
+      discountType: f.discountType,
+      discountPercent: f.discountPercent,
+      discountAmountUsd: f.discountAmountUsd,
+      discountAmountEur: f.discountAmountEur,
+      hasDiscount: f.hasDiscount,
+    };
   }
 
   function adaptService(service) {
@@ -150,6 +226,10 @@
         return formatOptionString(o, "EUR");
       }),
       defaultOption: defaultOpt ? formatOptionString(defaultOpt, "USD") : "",
+      // Structured option list with original + final prices and discount
+      // metadata. Consumers that need to render a strikethrough or a -N%
+      // badge read from here instead of parsing the string format.
+      optionsRich: options.map(buildOptionRich),
       description: Array.isArray(service.description) ? service.description : [],
       whatYouGet: Array.isArray(service.what_you_get) ? service.what_you_get : [],
       sections: Array.isArray(service.sections) ? service.sections : [],
@@ -204,6 +284,7 @@
       );
     },
     adaptService: adaptService,
+    computeOptionFinal: computeOptionFinal,
     invalidateCache: function () {
       cache.clear();
     },

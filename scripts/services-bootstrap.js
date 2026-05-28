@@ -137,11 +137,44 @@
     grid.innerHTML = HOT_SKELETON_CARD.repeat(HOT_LIMIT) + HOT_CUSTOM_CARD;
   }
 
+  // Largest discount across all options drives the SALE pill on the card.
+  // Returns an integer percent (rounded) or 0 when nothing is discounted.
+  function maxDiscountPercent(options) {
+    if (!Array.isArray(options) || options.length === 0) return 0;
+    const compute =
+      window.NB_API && typeof window.NB_API.computeOptionFinal === "function"
+        ? window.NB_API.computeOptionFinal
+        : null;
+    if (!compute) return 0;
+    let max = 0;
+    for (let i = 0; i < options.length; i += 1) {
+      const f = compute(options[i]);
+      if (f.hasDiscount && f.discountPercent > max) {
+        max = f.discountPercent;
+      }
+    }
+    return Math.round(max);
+  }
+
   function buildHotServiceCard(service) {
     const opt =
       (Array.isArray(service.options) && service.options[0]) || {};
-    const usd = Number(opt.price_usd || 0);
-    const eur = Number(opt.price_eur || 0);
+    // "From <price>" reflects the post-discount price so the card price
+    // and the dropdown final price agree.
+    const computed =
+      window.NB_API && typeof window.NB_API.computeOptionFinal === "function"
+        ? window.NB_API.computeOptionFinal(opt)
+        : { finalUsd: Number(opt.price_usd || 0), finalEur: Number(opt.price_eur || 0) };
+    const usd = Number(computed.finalUsd) || 0;
+    const eur = Number(computed.finalEur) || 0;
+    const salePct = maxDiscountPercent(service.options);
+    const saleClass = salePct > 0 ? " has-sale" : "";
+    const saleBadge =
+      salePct > 0
+        ? '<span class="service-card__sale-badge" aria-label="On sale">-' +
+          salePct +
+          "%</span>"
+        : "";
     const slug = escapeHtml(service.slug || "");
     // Title is rendered as-is from admin — no game-prefix stripping,
     // no platform-suffix stripping. The services-list-page style
@@ -167,7 +200,9 @@
     // it can't be a nested <a> (invalid HTML) and clicking anywhere
     // on the card already triggers the parent link.
     return (
-      '<a class="service-card service-card--link" href="' +
+      '<a class="service-card service-card--link' +
+      saleClass +
+      '" href="' +
       SERVICE_LIST_PATH +
       "?service=" +
       slug +
@@ -176,6 +211,7 @@
       '" aria-label="' +
       ariaLabel +
       '">' +
+      saleBadge +
       "<picture>" +
       '<source media="(max-width: 640px)" srcset="' +
       mob +

@@ -83,19 +83,32 @@
     const isEur =
       typeof window.nbGetCurrency === "function" &&
       window.nbGetCurrency() === "EUR";
+    // Track both the pre-discount (admin "original") and post-admin-discount
+    // sums so the subtotal row can render <strikethrough original> → final
+    // when any item carries a per-option discount from the admin.
     let subtotal = 0;
+    let subtotalOriginal = 0;
 
     cart.forEach((item) => {
       // Cart items carry both currencies (priceUsd + priceEur) so the
       // display total matches the admin's charm pricing exactly. Falls
       // back to the legacy single-`price` field for stale entries.
+      // priceUsd/priceEur are POST-admin-discount; originalPrice* (added
+      // when the admin set a per-option discount) carry the pre-discount
+      // value so we can show a strikethrough.
       const price =
         Number(isEur ? item.priceEur : item.priceUsd) ||
         Number(item.price) ||
         0;
+      const originalPrice =
+        Number(isEur ? item.originalPriceEur : item.originalPriceUsd) ||
+        price;
       const qty = item.qty || 1;
       const itemTotal = price * qty;
+      const itemTotalOriginal = originalPrice * qty;
+      const hasAdminDiscount = itemTotalOriginal > itemTotal + 0.0001;
       subtotal += itemTotal;
+      subtotalOriginal += itemTotalOriginal;
 
       const li = document.createElement("li");
       li.className = "order-item";
@@ -143,10 +156,15 @@
 
       const priceWrap = document.createElement("div");
       priceWrap.className = "order-item__price-wrap";
+      // Strikethrough applies when EITHER the admin pre-priced this option
+      // with a discount, OR USDT is selected (5% storefront-wide preview).
+      // The "real" original (admin base) wins the strikethrough so the
+      // customer sees the maximum gap at a glance.
+      const showOld = hasAdminDiscount || isUsdt;
       const oldPrice = document.createElement("p");
       oldPrice.className =
-        "order-item__price-old" + (isUsdt ? " is-visible" : "");
-      oldPrice.textContent = fmtMoney(itemTotal);
+        "order-item__price-old" + (showOld ? " is-visible" : "");
+      oldPrice.textContent = fmtMoney(itemTotalOriginal);
       const cur = document.createElement("p");
       cur.className = "order-item__price";
       cur.textContent = fmtMoney(
@@ -162,22 +180,29 @@
     });
 
     const discountAmt = subtotal * DISCOUNT_RATE;
-    const finalTotal = subtotal - discountAmt;
+    const finalTotal = isUsdt ? subtotal - discountAmt : subtotal;
+    // Strike-through the pre-admin-discount sum whenever either layer is
+    // active: per-item admin discount, USDT 5%, or both stacked.
+    const hasAdminDiscountAny = subtotalOriginal > subtotal + 0.0001;
+    const showStrikedSubtotal = hasAdminDiscountAny || isUsdt;
     if (isUsdt) {
       discountRow && discountRow.classList.add("is-visible");
       if (discountValueEl) {
         discountValueEl.textContent = "-" + fmtMoney(discountAmt);
       }
-      if (subtotalEl) {
-        subtotalEl.innerHTML =
-          '<span class="order__subtotal-value--original">' +
-          fmtMoney(subtotal) +
-          "</span>" +
-          fmtMoney(finalTotal);
-      }
     } else {
       discountRow && discountRow.classList.remove("is-visible");
-      if (subtotalEl) subtotalEl.textContent = fmtMoney(subtotal);
+    }
+    if (subtotalEl) {
+      if (showStrikedSubtotal) {
+        subtotalEl.innerHTML =
+          '<span class="order__subtotal-value--original">' +
+          fmtMoney(subtotalOriginal) +
+          "</span>" +
+          fmtMoney(finalTotal);
+      } else {
+        subtotalEl.textContent = fmtMoney(subtotal);
+      }
     }
   }
 

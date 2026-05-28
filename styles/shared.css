@@ -1642,6 +1642,26 @@ a {
   gap: clamp(16px, 1.2vw, 22px);
   justify-content: center;
 }
+/* SALE pill on cards with discounted options. Sits inside the rounded
+   card body (positive top/right) because .service-card uses overflow:hidden
+   for its corner mask — a negative offset would clip the pill. */
+.service-card__sale-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: linear-gradient(135deg, #2de1fe 0%, #6849fe 50%, #9d21fe 100%);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.4rem;
+  letter-spacing: 0.02em;
+  padding: 0.4rem 0.9rem;
+  border-radius: 0.6rem;
+  box-shadow: 0 4px 12px rgba(104, 73, 254, 0.45);
+  z-index: 3;
+  pointer-events: none;
+  line-height: 1.1;
+}
+
 .service-card {
   position: relative;
   display: flex;

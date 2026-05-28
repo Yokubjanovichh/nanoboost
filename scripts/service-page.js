@@ -80,24 +80,67 @@ const SERVICE_CONFIG = window.NB_SERVICE_CONFIG || {},
       {
         close: i,
         open: o,
-        setOptions: (e, t) => {
+        // setOptions(stringOptions, selectedStr, optionsRich?)
+        // stringOptions: array of "Label - $X.XX" or "Label - €X.XX" — used
+        // for dataset.value (cart-submission contract) and as the default
+        // visible price token.
+        // optionsRich: optional structured array (NB_API.adaptService output)
+        // with discount metadata. When an entry has hasDiscount=true, the
+        // row renders Label · -N% · <strikethrough original> · final.
+        setOptions: (e, t, richArr) => {
           if (!s) return;
           const r = Array.isArray(e) ? e.filter(Boolean) : [];
           if (!r.length) return;
           const n = t && r.includes(t) ? t : r[0];
+          const isEur =
+            typeof window.nbGetCurrency === "function" &&
+            window.nbGetCurrency() === "EUR";
           ((s.innerHTML = ""),
-            r.forEach((e) => {
+            r.forEach((e, idx) => {
               const t = document.createElement("button");
               ((t.type = "button"),
-                (t.className = "service-dropdown__option"),
                 t.setAttribute("role", "option"),
                 (t.dataset.value = e));
-              const r = e.lastIndexOf(" - ");
-              if (-1 !== r) {
-                const n = e.slice(0, r),
-                  s = e.slice(r + 3);
-                t.innerHTML = `<span class="service-dropdown__label">${nbEscapeHtml(n)}</span><span class="service-dropdown__price">${nbEscapeHtml(nbConvertPriceStr(s))}</span>`;
-              } else t.textContent = e;
+              const rich = Array.isArray(richArr) ? richArr[idx] : null;
+              const dashIdx = e.lastIndexOf(" - ");
+              const labelText = dashIdx !== -1 ? e.slice(0, dashIdx) : e;
+              const priceText =
+                dashIdx !== -1 ? e.slice(dashIdx + 3) : "";
+              if (rich && rich.hasDiscount) {
+                t.className =
+                  "service-dropdown__option service-dropdown__option--has-discount";
+                const origRaw = isEur
+                  ? Number(rich.priceEur).toFixed(2)
+                  : Number(rich.priceUsd).toFixed(2);
+                const origSym = isEur ? "€" : "$";
+                const finalShown = nbConvertPriceStr(priceText);
+                t.innerHTML =
+                  '<span class="option-label service-dropdown__label">' +
+                  nbEscapeHtml(labelText) +
+                  "</span>" +
+                  '<span class="option-discount-badge">-' +
+                  Number(rich.discountPercent) +
+                  "%</span>" +
+                  '<span class="option-price-original">' +
+                  origSym +
+                  origRaw +
+                  "</span>" +
+                  '<span class="option-price-final service-dropdown__price">' +
+                  nbEscapeHtml(finalShown) +
+                  "</span>";
+              } else {
+                t.className = "service-dropdown__option";
+                if (dashIdx !== -1) {
+                  t.innerHTML =
+                    '<span class="service-dropdown__label">' +
+                    nbEscapeHtml(labelText) +
+                    '</span><span class="service-dropdown__price">' +
+                    nbEscapeHtml(nbConvertPriceStr(priceText)) +
+                    "</span>";
+                } else {
+                  t.textContent = e;
+                }
+              }
               (t.setAttribute("aria-selected", e === n ? "true" : "false"),
                 s.appendChild(t));
             }),
@@ -227,7 +270,7 @@ const SERVICE_CONFIG = window.NB_SERVICE_CONFIG || {},
           const isEur = window.nbGetCurrency && window.nbGetCurrency() === "EUR";
           const activeOptions = (isEur && r.eurOptions?.length) ? r.eurOptions : r.options;
           const defaultOpt = (isEur && r.eurOptions?.length) ? r.eurOptions[0] : r.defaultOption;
-          dropdownApi.setOptions(activeOptions, defaultOpt);
+          dropdownApi.setOptions(activeOptions, defaultOpt, r.optionsRich);
         })(),
       r.seoTitle)
     ) {
@@ -427,8 +470,23 @@ purchaseForm &&
       rawOpt =
         (r.optionsRaw || []).find((o) => o && o.label === variantLabel) ||
         (r.optionsRaw || [])[0],
-      priceUsd = Number(rawOpt && rawOpt.price_usd) || 0,
-      priceEur = Number(rawOpt && rawOpt.price_eur) || 0,
+      // priceUsd/priceEur are the POST-discount prices customer actually
+      // pays — these drive subtotal in cart + checkout. originalPrice*
+      // ride alongside so the checkout renderer can show a strikethrough
+      // when the admin set a per-option discount.
+      computed =
+        window.NB_API && typeof window.NB_API.computeOptionFinal === "function"
+          ? window.NB_API.computeOptionFinal(rawOpt || {})
+          : {
+              finalUsd: Number(rawOpt && rawOpt.price_usd) || 0,
+              finalEur: Number(rawOpt && rawOpt.price_eur) || 0,
+              originalUsd: Number(rawOpt && rawOpt.price_usd) || 0,
+              originalEur: Number(rawOpt && rawOpt.price_eur) || 0,
+              discountPercent: 0,
+              hasDiscount: false,
+            },
+      priceUsd = computed.finalUsd,
+      priceEur = computed.finalEur,
       o = document.createElement("div");
     o.innerHTML = nbSanitizeBr(r.titleHtml || "");
     const a = o.textContent.trim();
@@ -438,6 +496,10 @@ purchaseForm &&
         name: a,
         priceUsd: priceUsd,
         priceEur: priceEur,
+        originalPriceUsd: computed.originalUsd,
+        originalPriceEur: computed.originalEur,
+        discountPercent: computed.discountPercent,
+        hasDiscount: Boolean(computed.hasDiscount),
         image: r.imageSrcDesktop || r.imageSrc || "",
         option: s,
       });
@@ -466,7 +528,11 @@ document.addEventListener("nb:currency-change", () => {
     const isEur = window.nbGetCurrency && window.nbGetCurrency() === "EUR";
     const sel = purchaseForm?.querySelector('input[name="option"]')?.value;
     const activeOptions = (isEur && cfg.eurOptions?.length) ? cfg.eurOptions : cfg.options;
-    dropdownApi.setOptions(activeOptions, sel && activeOptions.includes(sel) ? sel : activeOptions[0]);
+    dropdownApi.setOptions(
+      activeOptions,
+      sel && activeOptions.includes(sel) ? sel : activeOptions[0],
+      cfg.optionsRich,
+    );
   }
 });
 
