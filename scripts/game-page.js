@@ -226,11 +226,21 @@
       // on-tap, full-width BUY NOW) apply uniformly across game-page
       // cards and Hot Right Now cards.
       const card = document.createElement("a");
-      card.className = "service-card service-card--link";
+      const salePct = Number(svc.salePercent) || 0;
+      card.className =
+        "service-card service-card--link" + (salePct > 0 ? " has-sale" : "");
       card.href =
         "./services.html?service=" + encodeURIComponent(svc.serviceParam);
       card.dataset.service = svc.serviceParam;
       card.setAttribute("aria-label", "View " + (svc.title || "") + " service");
+
+      if (salePct > 0) {
+        const sale = document.createElement("span");
+        sale.className = "service-card__sale-badge";
+        sale.setAttribute("aria-label", "On sale");
+        sale.textContent = "-" + salePct + "%";
+        card.appendChild(sale);
+      }
 
       const tpl = document.createElement("template");
       tpl.innerHTML = buildPicture(

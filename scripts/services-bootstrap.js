@@ -45,11 +45,24 @@
     }) || options[0];
   }
 
+  // "From <price>" tokens now reflect the post-discount price so the
+  // homepage card, the per-game card grid, and the service detail
+  // dropdown all agree on what the customer would actually pay.
   function formatPriceNow(option, currency) {
     if (!option) return "";
+    const compute =
+      window.NB_API && typeof window.NB_API.computeOptionFinal === "function"
+        ? window.NB_API.computeOptionFinal
+        : null;
+    const final = compute
+      ? compute(option)
+      : {
+          finalUsd: Number(option.price_usd || 0),
+          finalEur: Number(option.price_eur || 0),
+        };
     return currency === "EUR"
-      ? "€" + Number(option.price_eur || 0).toFixed(2)
-      : "$" + Number(option.price_usd || 0).toFixed(2);
+      ? "€" + Number(final.finalEur).toFixed(2)
+      : "$" + Number(final.finalUsd).toFixed(2);
   }
 
   // Delegates to the shared NB_API.adaptService so service-page.js can
@@ -60,8 +73,15 @@
   }
 
   // Convert backend Service into the legacy NB_GTA5_SERVICES[platform][] entry.
+  // salePercent (max discount across options, rounded) is passed through so
+  // game-page.js can render the SALE pill without re-parsing the raw
+  // option list.
   function adaptToLegacySummary(service) {
     const defaultOpt = pickDefaultOption(service.options);
+    const salePercent =
+      window.NB_API && typeof window.NB_API.maxDiscountPercent === "function"
+        ? window.NB_API.maxDiscountPercent(service.options)
+        : 0;
     return {
       serviceParam: service.slug,
       imageSrc: absolutizeBackendUrl(
@@ -75,6 +95,7 @@
       title: stripHtml(service.title || ""),
       priceNow: formatPriceNow(defaultOpt, "USD"),
       eurPriceNow: formatPriceNow(defaultOpt, "EUR"),
+      salePercent: salePercent,
     };
   }
 
@@ -137,25 +158,6 @@
     grid.innerHTML = HOT_SKELETON_CARD.repeat(HOT_LIMIT) + HOT_CUSTOM_CARD;
   }
 
-  // Largest discount across all options drives the SALE pill on the card.
-  // Returns an integer percent (rounded) or 0 when nothing is discounted.
-  function maxDiscountPercent(options) {
-    if (!Array.isArray(options) || options.length === 0) return 0;
-    const compute =
-      window.NB_API && typeof window.NB_API.computeOptionFinal === "function"
-        ? window.NB_API.computeOptionFinal
-        : null;
-    if (!compute) return 0;
-    let max = 0;
-    for (let i = 0; i < options.length; i += 1) {
-      const f = compute(options[i]);
-      if (f.hasDiscount && f.discountPercent > max) {
-        max = f.discountPercent;
-      }
-    }
-    return Math.round(max);
-  }
-
   function buildHotServiceCard(service) {
     const opt =
       (Array.isArray(service.options) && service.options[0]) || {};
@@ -167,7 +169,10 @@
         : { finalUsd: Number(opt.price_usd || 0), finalEur: Number(opt.price_eur || 0) };
     const usd = Number(computed.finalUsd) || 0;
     const eur = Number(computed.finalEur) || 0;
-    const salePct = maxDiscountPercent(service.options);
+    const salePct =
+      window.NB_API && typeof window.NB_API.maxDiscountPercent === "function"
+        ? window.NB_API.maxDiscountPercent(service.options)
+        : 0;
     const saleClass = salePct > 0 ? " has-sale" : "";
     const saleBadge =
       salePct > 0

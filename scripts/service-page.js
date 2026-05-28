@@ -114,18 +114,18 @@ const SERVICE_CONFIG = window.NB_SERVICE_CONFIG || {},
                   : Number(rich.priceUsd).toFixed(2);
                 const origSym = isEur ? "€" : "$";
                 const finalShown = nbConvertPriceStr(priceText);
+                // Variant C: label · <strikethrough original> · final.
+                // The SALE pill on the parent card already communicates
+                // the discount %, so we keep the in-row layout minimal.
                 t.innerHTML =
-                  '<span class="option-label service-dropdown__label">' +
+                  '<span class="service-dropdown__option-label">' +
                   nbEscapeHtml(labelText) +
                   "</span>" +
-                  '<span class="option-discount-badge">-' +
-                  Number(rich.discountPercent) +
-                  "%</span>" +
-                  '<span class="option-price-original">' +
+                  '<span class="service-dropdown__option-price-original">' +
                   origSym +
                   origRaw +
                   "</span>" +
-                  '<span class="option-price-final service-dropdown__price">' +
+                  '<span class="service-dropdown__option-price-final">' +
                   nbEscapeHtml(finalShown) +
                   "</span>";
               } else {

@@ -296,6 +296,20 @@
     },
     adaptService: adaptService,
     computeOptionFinal: computeOptionFinal,
+    // Largest discount across an options array. Returns 0 when nothing is
+    // discounted. Both services-bootstrap (homepage cards) and game-page
+    // (per-platform service grid) consume this to drive the SALE pill.
+    maxDiscountPercent: function (options) {
+      if (!Array.isArray(options) || options.length === 0) return 0;
+      let max = 0;
+      for (let i = 0; i < options.length; i += 1) {
+        const f = computeOptionFinal(options[i]);
+        if (f.hasDiscount && f.discountPercent > max) {
+          max = f.discountPercent;
+        }
+      }
+      return Math.round(max);
+    },
     invalidateCache: function () {
       cache.clear();
     },
