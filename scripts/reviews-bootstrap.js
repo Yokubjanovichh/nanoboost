@@ -113,35 +113,49 @@
   async function bootstrap() {
     const grid = document.querySelector(TESTIMONIALS_SELECTOR);
     if (!grid) return;
+    const section = grid.closest("[data-reviews-section]");
 
-    // Snapshot so we can restore the hardcoded fallback if the API fails.
-    const originalHtml = grid.innerHTML;
+    // SVG defs (gradient for filled stars) live inside the track and must
+    // survive every render. Capture once and re-prepend with every paint.
     const defsSvg = grid.querySelector("svg");
     const defsHtml = defsSvg ? defsSvg.outerHTML : "";
 
-    // Skeleton first — no hardcoded names flash through.
+    function show(html) {
+      grid.innerHTML = defsHtml + html;
+      grid.setAttribute("data-reviews-state", "ready");
+      if (section) section.removeAttribute("hidden");
+    }
+    function hide() {
+      grid.innerHTML = defsHtml;
+      grid.setAttribute("data-reviews-state", "hidden");
+      if (section) section.setAttribute("hidden", "");
+    }
+
+    // Skeleton first — no hardcoded names flash through. Section remains
+    // visible only while we have skeletons OR rendered reviews. On empty
+    // / error / no-API responses we hide the section entirely (no mock).
     grid.innerHTML =
       defsHtml + new Array(SKELETON_COUNT).fill(buildSkeleton()).join("");
+    grid.setAttribute("data-reviews-state", "loading");
+    if (section) section.removeAttribute("hidden");
 
     if (!window.NB_API || typeof window.NB_API.fetchReviews !== "function") {
-      grid.innerHTML = originalHtml;
+      hide();
       return;
     }
 
     try {
       const reviews = await window.NB_API.fetchReviews();
       if (!Array.isArray(reviews) || reviews.length === 0) {
-        grid.innerHTML = originalHtml;
+        hide();
         return;
       }
-
-      grid.innerHTML =
-        defsHtml + reviews.slice(0, MAX_REVIEWS).map(buildTestimonial).join("");
+      show(reviews.slice(0, MAX_REVIEWS).map(buildTestimonial).join(""));
     } catch (e) {
       if (console && typeof console.warn === "function") {
         console.warn("[NB] reviews bootstrap failed:", e);
       }
-      grid.innerHTML = originalHtml;
+      hide();
     }
   }
 

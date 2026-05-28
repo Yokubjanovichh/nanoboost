@@ -885,7 +885,7 @@
           </div>
         </div>
       </section>
-      <section class="testimonials container" aria-label="What say about us">
+      <section class="testimonials container" aria-label="What say about us" data-reviews-section hidden>
         <div class="testimonials__head">
           <h2 class="testimonials__title" aria-label="Testimonials">
             <svg
@@ -926,420 +926,48 @@
             <span class="testimonials__title-fg">What say about us</span>
           </h2>
         </div>
+        
         <div class="testimonials__viewport" aria-label="Customer testimonials">
-          <div class="testimonials__track" role="list">
+          <div class="testimonials__track" role="list" data-reviews-state="loading">
             <svg width="0" height="0" aria-hidden="true" focusable="false">
               <defs>
-                <linearGradient
-                  id="testimonialStarGradient"
-                  x1="0%"
-                  y1="100%"
-                  x2="100%"
-                  y2="0%"
-                >
+                <linearGradient id="testimonialStarGradient" x1="0%" y1="100%" x2="100%" y2="0%">
                   <stop offset="0%" stop-color="#2de1fe" />
                   <stop offset="55%" stop-color="#6849fe" />
                   <stop offset="100%" stop-color="#9d21fe" />
                 </linearGradient>
               </defs>
             </svg>
-            <article class="testimonial" role="listitem">
-              <div class="testimonial__stars" aria-hidden="true">
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
-                  />
-                </svg>
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
-                  />
-                </svg>
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
-                  />
-                </svg>
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
-                  />
-                </svg>
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
-                  />
-                </svg>
-              </div>
-              <p class="testimonial__text">
-                Fast delivery and everything exactly as described. Got my cash
-                and cars within hours. Highly recommend.
-              </p>
+            <article class="testimonial testimonial--skeleton" role="listitem" aria-hidden="true">
+              <div class="testimonial__stars testimonial__stars--skeleton skeleton"></div>
+              <div class="testimonial__text testimonial__text--skeleton skeleton"></div>
               <div class="testimonial__user">
-                <span class="testimonial__avatar" aria-hidden="true"></span>
+                <div class="testimonial__avatar testimonial__avatar--skeleton skeleton"></div>
                 <div class="testimonial__meta">
-                  <p class="testimonial__name">ShadowVortex</p>
-                  <p class="testimonial__service">GTA Cash + Cars (PS)</p>
+                  <div class="testimonial__name testimonial__name--skeleton skeleton"></div>
+                  <div class="testimonial__service testimonial__service--skeleton skeleton"></div>
                 </div>
               </div>
             </article>
-            <article class="testimonial" role="listitem">
-              <div class="testimonial__stars" aria-hidden="true">
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
-                  />
-                </svg>
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
-                  />
-                </svg>
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
-                  />
-                </svg>
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
-                  />
-                </svg>
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
-                  />
-                </svg>
-              </div>
-              <p class="testimonial__text">
-                Didn’t expect it to be this smooth. No issues, no delays — just
-                logged in and everything was there.
-              </p>
+            <article class="testimonial testimonial--skeleton" role="listitem" aria-hidden="true">
+              <div class="testimonial__stars testimonial__stars--skeleton skeleton"></div>
+              <div class="testimonial__text testimonial__text--skeleton skeleton"></div>
               <div class="testimonial__user">
-                <span class="testimonial__avatar" aria-hidden="true"></span>
+                <div class="testimonial__avatar testimonial__avatar--skeleton skeleton"></div>
                 <div class="testimonial__meta">
-                  <p class="testimonial__name">LX_Neon</p>
-                  <p class="testimonial__service">GTA Cash Boost (PS)</p>
+                  <div class="testimonial__name testimonial__name--skeleton skeleton"></div>
+                  <div class="testimonial__service testimonial__service--skeleton skeleton"></div>
                 </div>
               </div>
             </article>
-            <article class="testimonial" role="listitem">
-              <div class="testimonial__stars" aria-hidden="true">
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
-                  />
-                </svg>
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
-                  />
-                </svg>
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
-                  />
-                </svg>
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
-                  />
-                </svg>
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
-                  />
-                </svg>
-              </div>
-              <p class="testimonial__text">
-                Bought a modded account and it’s insane. Money, cars, level —
-                everything ready. Worth every cent.
-              </p>
+            <article class="testimonial testimonial--skeleton" role="listitem" aria-hidden="true">
+              <div class="testimonial__stars testimonial__stars--skeleton skeleton"></div>
+              <div class="testimonial__text testimonial__text--skeleton skeleton"></div>
               <div class="testimonial__user">
-                <span class="testimonial__avatar" aria-hidden="true"></span>
+                <div class="testimonial__avatar testimonial__avatar--skeleton skeleton"></div>
                 <div class="testimonial__meta">
-                  <p class="testimonial__name">K1ngRaptor</p>
-                  <p class="testimonial__service">GTA Modded Account (PS)</p>
-                </div>
-              </div>
-            </article>
-            <article class="testimonial" role="listitem">
-              <div class="testimonial__stars" aria-hidden="true">
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
-                  />
-                </svg>
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
-                  />
-                </svg>
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
-                  />
-                </svg>
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
-                  />
-                </svg>
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
-                  />
-                </svg>
-              </div>
-              <p class="testimonial__text">
-                Level boost was super fast. Skipped weeks of grinding.
-                Definitely coming back for more.
-              </p>
-              <div class="testimonial__user">
-                <span class="testimonial__avatar" aria-hidden="true"></span>
-                <div class="testimonial__meta">
-                  <p class="testimonial__name">GhostDrive</p>
-                  <p class="testimonial__service">GTA Level Boost (PS)</p>
-                </div>
-              </div>
-            </article>
-            <article class="testimonial" role="listitem">
-              <div class="testimonial__stars" aria-hidden="true">
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
-                  />
-                </svg>
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
-                  />
-                </svg>
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
-                  />
-                </svg>
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
-                  />
-                </svg>
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
-                  />
-                </svg>
-              </div>
-              <p class="testimonial__text">
-                Unlock All service is crazy good. Everything unlocked instantly.
-                Game feels completely different now.
-              </p>
-              <div class="testimonial__user">
-                <span class="testimonial__avatar" aria-hidden="true"></span>
-                <div class="testimonial__meta">
-                  <p class="testimonial__name">NovaRush</p>
-                  <p class="testimonial__service">GTA Unlock All (PC)</p>
-                </div>
-              </div>
-            </article>
-            <article class="testimonial" role="listitem">
-              <div class="testimonial__stars" aria-hidden="true">
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
-                  />
-                </svg>
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
-                  />
-                </svg>
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
-                  />
-                </svg>
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
-                  />
-                </svg>
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
-                  />
-                </svg>
-              </div>
-              <p class="testimonial__text">
-                Clean work. No bans, no problems. Support answered quickly and
-                explained everything.
-              </p>
-              <div class="testimonial__user">
-                <span class="testimonial__avatar" aria-hidden="true"></span>
-                <div class="testimonial__meta">
-                  <p class="testimonial__name">DriftPhantom</p>
-                  <p class="testimonial__service">GTA Cash Boost (Xbox)</p>
-                </div>
-              </div>
-            </article>
-            <article class="testimonial" role="listitem">
-              <div class="testimonial__stars" aria-hidden="true">
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
-                  />
-                </svg>
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
-                  />
-                </svg>
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
-                  />
-                </svg>
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
-                  />
-                </svg>
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
-                  />
-                </svg>
-              </div>
-              <p class="testimonial__text">
-                Cash boost worked perfectly. Finally able to buy everything I
-                wanted without grinding missions.
-              </p>
-              <div class="testimonial__user">
-                <span class="testimonial__avatar" aria-hidden="true"></span>
-                <div class="testimonial__meta">
-                  <p class="testimonial__name">PixelHunterX</p>
-                  <p class="testimonial__service">GTA Cash Boost (PC)</p>
-                </div>
-              </div>
-            </article>
-            <article class="testimonial" role="listitem">
-              <div class="testimonial__stars" aria-hidden="true">
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
-                  />
-                </svg>
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
-                  />
-                </svg>
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
-                  />
-                </svg>
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
-                  />
-                </svg>
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
-                  />
-                </svg>
-              </div>
-              <p class="testimonial__text">
-                Best service I’ve used so far. Fast, safe and exactly what I
-                needed for GTA Online.
-              </p>
-              <div class="testimonial__user">
-                <span class="testimonial__avatar" aria-hidden="true"></span>
-                <div class="testimonial__meta">
-                  <p class="testimonial__name">TitanZX</p>
-                  <p class="testimonial__service">GTA Modded Account (Xbox)</p>
-                </div>
-              </div>
-            </article>
-            <article class="testimonial" role="listitem">
-              <div class="testimonial__stars" aria-hidden="true">
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
-                  />
-                </svg>
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
-                  />
-                </svg>
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
-                  />
-                </svg>
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
-                  />
-                </svg>
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
-                  />
-                </svg>
-              </div>
-              <p class="testimonial__text">
-                Got Cash + Cars boost — garage is stacked now. Cars are fully
-                upgraded and ready to go.
-              </p>
-              <div class="testimonial__user">
-                <span class="testimonial__avatar" aria-hidden="true"></span>
-                <div class="testimonial__meta">
-                  <p class="testimonial__name">NightFuryGG</p>
-                  <p class="testimonial__service">GTA Cash + Cars (Xbox)</p>
-                </div>
-              </div>
-            </article>
-            <article class="testimonial" role="listitem">
-              <div class="testimonial__stars" aria-hidden="true">
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
-                  />
-                </svg>
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
-                  />
-                </svg>
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
-                  />
-                </svg>
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
-                  />
-                </svg>
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M12 3.6l2.66 5.38 5.94.86-4.3 4.2 1.01 5.92L12 17.17l-5.31 2.79 1.01-5.92-4.3-4.2 5.94-.86L12 3.6z"
-                  />
-                </svg>
-              </div>
-              <p class="testimonial__text">
-                Very professional service. Account delivered exactly as
-                promised. Will order again.
-              </p>
-              <div class="testimonial__user">
-                <span class="testimonial__avatar" aria-hidden="true"></span>
-                <div class="testimonial__meta">
-                  <p class="testimonial__name">ZeroLatency</p>
-                  <p class="testimonial__service">GTA Level Boost (Xbox)</p>
+                  <div class="testimonial__name testimonial__name--skeleton skeleton"></div>
+                  <div class="testimonial__service testimonial__service--skeleton skeleton"></div>
                 </div>
               </div>
             </article>
