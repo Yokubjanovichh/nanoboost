@@ -119,14 +119,25 @@
   }
 
   // Resolves the discount configuration on an option into final USD/EUR
-  // prices and the integer % to show on badges. "amount" type derives a
+  // prices and the integer % to show on badges. Backend doesn't return a
+  // discount_type field — we infer it from whichever value field is
+  // populated (percent wins if both somehow set). "amount" path derives a
   // percent from discount_amount_usd / price_usd so we can render a single
   // "-N%" pill across both currencies. Returns hasDiscount=false on missing
-  // / "none" / zero-value configs so downstream callers can short-circuit.
+  // / zero-value configs so downstream callers can short-circuit.
   function computeOptionFinal(option) {
     const baseUsd = Number(option && option.price_usd) || 0;
     const baseEur = Number(option && option.price_eur) || 0;
-    const type = option && option.discount_type;
+    let type = "none";
+    if (option && option.discount_percent != null && Number(option.discount_percent) > 0) {
+      type = "percent";
+    } else if (
+      option &&
+      option.discount_amount_usd != null &&
+      Number(option.discount_amount_usd) > 0
+    ) {
+      type = "amount";
+    }
     if (type === "percent") {
       const p = Number(option.discount_percent) || 0;
       if (p > 0) {
