@@ -1642,13 +1642,15 @@ a {
   gap: clamp(16px, 1.2vw, 22px);
   justify-content: center;
 }
-/* SALE pill on cards with discounted options. Sits inside the rounded
-   card body (positive top/right) because .service-card uses overflow:hidden
-   for its corner mask — a negative offset would clip the pill. */
+/* SALE pill on cards with discounted options. Anchored to the top-left of
+   the card so it sits over the image area without colliding with horizontal
+   card titles (which align to the top-right on game.html grid layouts).
+   Positive offsets keep it inside the card's rounded mask (.service-card
+   uses overflow:hidden + -webkit-mask for the corner clip). */
 .service-card__sale-badge {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 8px;
+  left: 8px;
   background: linear-gradient(135deg, #2de1fe 0%, #6849fe 50%, #9d21fe 100%);
   color: #fff;
   font-weight: 700;
@@ -1660,6 +1662,15 @@ a {
   z-index: 3;
   pointer-events: none;
   line-height: 1.1;
+}
+@media (max-width: 767px) {
+  .service-card__sale-badge {
+    top: 6px;
+    left: 6px;
+    font-size: 1.15rem;
+    padding: 0.3rem 0.7rem;
+    border-radius: 0.5rem;
+  }
 }
 
 .service-card {
