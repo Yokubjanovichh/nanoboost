@@ -383,12 +383,20 @@ async function loadService(slug) {
   const cfg = await loadService(slug);
   if (cfg) {
     applyServiceToHero(slug);
+    window.dispatchEvent(
+      new CustomEvent("nb:service-loaded", { detail: { slug, cfg } }),
+    );
   }
 })();
 window.addEventListener("popstate", async () => {
   const slug = getRequestedSlug();
   const cfg = await loadService(slug);
-  if (cfg) applyServiceToHero(slug);
+  if (cfg) {
+    applyServiceToHero(slug);
+    window.dispatchEvent(
+      new CustomEvent("nb:service-loaded", { detail: { slug, cfg } }),
+    );
+  }
 });
 document.addEventListener("click", async (e) => {
   const t = e.target.closest("a.service-card__btn");
