@@ -1,45 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <!-- Homepage -->
+
+  <!-- Static fallback. build.js regenerates this from the live BE catalog
+       on every deploy; this file ships only when /public/games or
+       /public/services is unreachable at build time. Excluded:
+       legal pages (noindex), checkout (transactional / robots disallow),
+       legacy gta5.html (Vercel 301 → game.html?game=gta5). -->
+
   <url>
     <loc>https://nanoboost.io/</loc>
-    <lastmod>2026-04-16</lastmod>
+    <lastmod>2026-05-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
-  <!-- Main Game Hub -->
-  <url>
-    <loc>https://nanoboost.io/pages/gta5.html</loc>
-    <lastmod>2026-04-16</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
   <url>
     <loc>https://nanoboost.io/pages/services.html</loc>
-    <lastmod>2026-04-16</lastmod>
+    <lastmod>2026-05-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
-  <!-- Info Pages -->
+  <!-- Game hubs -->
+  <url>
+    <loc>https://nanoboost.io/pages/game.html?game=gta5</loc>
+    <lastmod>2026-05-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://nanoboost.io/pages/game.html?game=forza-horizon-6</loc>
+    <lastmod>2026-05-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- GTA 5 Online services (18) -->
+  <url><loc>https://nanoboost.io/pages/services.html?service=gta5-cash-ps</loc><lastmod>2026-05-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://nanoboost.io/pages/services.html?service=gta5-cash-xbox</loc><lastmod>2026-05-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://nanoboost.io/pages/services.html?service=gta5-cash-pc</loc><lastmod>2026-05-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://nanoboost.io/pages/services.html?service=gta5-level-ps</loc><lastmod>2026-05-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://nanoboost.io/pages/services.html?service=gta5-level-xbox</loc><lastmod>2026-05-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://nanoboost.io/pages/services.html?service=gta5-level-pc</loc><lastmod>2026-05-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://nanoboost.io/pages/services.html?service=gta5-cars-ps</loc><lastmod>2026-05-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://nanoboost.io/pages/services.html?service=gta5-cars-xbox</loc><lastmod>2026-05-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://nanoboost.io/pages/services.html?service=gta5-luxury-ps</loc><lastmod>2026-05-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://nanoboost.io/pages/services.html?service=gta5-luxury-xbox</loc><lastmod>2026-05-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://nanoboost.io/pages/services.html?service=gta5-unlock-pc</loc><lastmod>2026-05-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://nanoboost.io/pages/services.html?service=gta5-cayo-ps</loc><lastmod>2026-05-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://nanoboost.io/pages/services.html?service=gta5-cayo-xbox</loc><lastmod>2026-05-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://nanoboost.io/pages/services.html?service=gta5-penthouses-ps</loc><lastmod>2026-05-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://nanoboost.io/pages/services.html?service=gta5-penthouses-xbox</loc><lastmod>2026-05-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://nanoboost.io/pages/services.html?service=gta5-modded-ps</loc><lastmod>2026-05-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://nanoboost.io/pages/services.html?service=gta5-modded-xbox</loc><lastmod>2026-05-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+
+  <!-- Forza Horizon 6 services (9) -->
+  <url><loc>https://nanoboost.io/pages/services.html?service=forza-horizon-6-starter-pack-xbox-oneseries</loc><lastmod>2026-05-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://nanoboost.io/pages/services.html?service=forza-horizon-6-starter-pack-pc</loc><lastmod>2026-05-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://nanoboost.io/pages/services.html?service=forza-horizon-6-perfomance-pack-xbox-oneseries</loc><lastmod>2026-05-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://nanoboost.io/pages/services.html?service=forza-horizon-6-perfomance-pack-pc</loc><lastmod>2026-05-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://nanoboost.io/pages/services.html?service=forza-horizon-6-ultimate-pack-xbox-oneseries</loc><lastmod>2026-05-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://nanoboost.io/pages/services.html?service=forza-horizon-6-ultimate-pack-pc</loc><lastmod>2026-05-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://nanoboost.io/pages/services.html?service=forza-horizon-6-open-all-cars-xbox-oneseries</loc><lastmod>2026-05-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://nanoboost.io/pages/services.html?service=forza-horizon-6-open-all-cars-pc</loc><lastmod>2026-05-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://nanoboost.io/pages/services.html?service=modded-account-xbox-oneseries-fh6</loc><lastmod>2026-05-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://nanoboost.io/pages/services.html?service=modded-account-pc-fh6</loc><lastmod>2026-05-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+
+  <!-- Info pages -->
   <url>
     <loc>https://nanoboost.io/pages/why-us.html</loc>
-    <lastmod>2026-04-16</lastmod>
+    <lastmod>2026-05-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://nanoboost.io/pages/faq.html</loc>
-    <lastmod>2026-04-16</lastmod>
+    <lastmod>2026-05-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://nanoboost.io/pages/contact.html</loc>
-    <lastmod>2026-04-16</lastmod>
+    <lastmod>2026-05-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  <!-- Legal pages excluded: they have noindex meta tag -->
 </urlset>

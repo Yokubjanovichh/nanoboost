@@ -1419,7 +1419,7 @@ a {
   margin-top: 1.8rem;
   display: flex;
   justify-content: flex-end;
-  gap: 0;
+  gap: 0.6rem;
 }
 .footer__chip {
   border-radius: 1rem;
@@ -1445,6 +1445,17 @@ a {
 }
 .footer__pay-icon--tether {
   transform: scale(1.16);
+}
+/* VISA is a horizontal wordmark (~3:1 aspect), so it lives in a wider
+   viewBox and gets a smaller scale than the round chip icons — same
+   visual weight at the 5rem chip box. */
+.footer__pay-icon--visa {
+  transform: scale(1.18);
+}
+/* Mastercard interlocking circles use a 3:2 viewBox; nudge it up so the
+   circles read at the same optical size as the other chips. */
+.footer__pay-icon--mastercard {
+  transform: scale(1.32);
 }
 .footer__chip:hover {
   transform: translateY(-1px);
@@ -1521,6 +1532,7 @@ a {
   }
   .footer__chips {
     justify-content: center;
+    gap: 0.4rem;
   }
   .footer__trust {
     justify-content: center;

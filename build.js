@@ -228,7 +228,7 @@ async function regenerateSitemap(apiBase) {
       url(
         SITE + "/pages/game.html?game=" + encodeURIComponent(g.slug),
         today,
-        "daily",
+        "weekly",
         "0.9",
       ),
     );

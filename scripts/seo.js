@@ -82,6 +82,29 @@
     setMeta('meta[property="og:url"]', "content", url);
   }
 
+  // Emit (or remove) a BreadcrumbList structured-data block. Items are
+  // ordered left-to-right; position is 1-indexed per Schema.org spec. A
+  // null / empty list clears the existing node — useful when a page falls
+  // back to a generic state mid-session.
+  function setBreadcrumbList(items) {
+    if (!Array.isArray(items) || items.length === 0) {
+      setJsonLd("seo-breadcrumb", null);
+      return;
+    }
+    setJsonLd("seo-breadcrumb", {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: items.map(function (it, idx) {
+        return {
+          "@type": "ListItem",
+          position: idx + 1,
+          name: it.name,
+          item: it.url,
+        };
+      }),
+    });
+  }
+
   // Replace an existing <script id="..."> JSON-LD block or append a new
   // one. Idempotent so re-runs on dropdown switches don't stack nodes.
   function setJsonLd(id, data) {
@@ -184,6 +207,12 @@
         "Professional " + game.name + " boosting service by Nanoboost.",
       gamePlatform: platforms,
     });
+
+    setBreadcrumbList([
+      { name: "Home", url: SITE_ORIGIN + "/" },
+      { name: "Games", url: SITE_ORIGIN + "/#games" },
+      { name: game.name, url: canonical },
+    ]);
 
     // FAQPage requires at least one entry per Google's rich-result rules.
     // Skip the schema entirely on empty lists rather than emitting an
@@ -291,11 +320,30 @@
         url: canonical,
       },
     });
+
+    // Service-level crumb: Home → Services → {Game} → {Service title}.
+    // Game crumb links back to the per-game hub so Googlebot can crawl up.
+    const breadcrumbItems = [
+      { name: "Home", url: SITE_ORIGIN + "/" },
+      { name: "Services", url: SITE_ORIGIN + "/pages/services.html" },
+    ];
+    if (service.gameSlug && service.gameName) {
+      breadcrumbItems.push({
+        name: service.gameName,
+        url:
+          SITE_ORIGIN +
+          "/pages/game.html?game=" +
+          encodeURIComponent(service.gameSlug),
+      });
+    }
+    breadcrumbItems.push({ name: cleanTitle, url: canonical });
+    setBreadcrumbList(breadcrumbItems);
   }
 
   window.NB_SEO = {
     applyGameSEO: applyGameSEO,
     applyServiceSEO: applyServiceSEO,
+    setBreadcrumbList: setBreadcrumbList,
     prettyPlatformLabel: prettyPlatformLabel,
     stripMarkdown: stripMarkdown,
   };

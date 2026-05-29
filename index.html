@@ -1589,7 +1589,68 @@
               />
             </div>
             <div class="footer__chips" aria-label="Payments">
-              <span class="footer__chip" aria-label="PayPal"
+              <span class="footer__chip" aria-label="VISA"
+                ><svg
+                  class="footer__pay-icon footer__pay-icon--visa"
+                  viewBox="0 0 64 22"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  preserveAspectRatio="xMidYMid meet"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <defs>
+                    <linearGradient
+                      id="footerVisaGradient"
+                      x1="0%"
+                      y1="100%"
+                      x2="100%"
+                      y2="0%"
+                    >
+                      <stop offset="0%" stop-color="#2de1fe" />
+                      <stop offset="50%" stop-color="#6849fe" />
+                      <stop offset="100%" stop-color="#9d21fe" />
+                    </linearGradient>
+                  </defs>
+                  <text
+                    x="32"
+                    y="17"
+                    text-anchor="middle"
+                    font-family="Helvetica, Arial, sans-serif"
+                    font-style="italic"
+                    font-weight="900"
+                    font-size="20"
+                    letter-spacing="0.6"
+                    fill="url(#footerVisaGradient)"
+                  >VISA</text>
+                </svg> </span
+              ><span class="footer__chip" aria-label="Mastercard"
+                ><svg
+                  class="footer__pay-icon footer__pay-icon--mastercard"
+                  viewBox="0 0 48 32"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  preserveAspectRatio="xMidYMid meet"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <defs>
+                    <linearGradient
+                      id="footerMastercardGradient"
+                      x1="0%"
+                      y1="100%"
+                      x2="100%"
+                      y2="0%"
+                    >
+                      <stop offset="0%" stop-color="#2de1fe" />
+                      <stop offset="50%" stop-color="#6849fe" />
+                      <stop offset="100%" stop-color="#9d21fe" />
+                    </linearGradient>
+                  </defs>
+                  <circle cx="19" cy="16" r="11" fill="url(#footerMastercardGradient)" fill-opacity="0.65" />
+                  <circle cx="29" cy="16" r="11" fill="url(#footerMastercardGradient)" fill-opacity="0.88" />
+                </svg> </span
+              ><span class="footer__chip" aria-label="PayPal"
                 ><svg
                   class="footer__pay-icon footer__pay-icon--paypal"
                   viewBox="0 0 48 48"
@@ -1730,19 +1791,13 @@
         "url": "https://nanoboost.io",
         "logo": "https://nanoboost.io/assets/icons/console-logo.png",
         "description": "Professional multi-game boosting services — GTA Online, Forza Horizon 6 and more. Cash, levels, items, modded accounts.",
+        "serviceType": "Game Boosting Service",
+        "paymentAccepted": ["Visa", "Mastercard", "PayPal", "USDT (TRC20)"],
         "sameAs": [
           "https://discord.gg/VwFyntnk",
           "https://wa.me/15559816409",
           "https://t.me/NanoboostchatBot"
         ],
-        "aggregateRating": {
-          "@type": "AggregateRating",
-          "ratingValue": "5",
-          "bestRating": "5",
-          "worstRating": "1",
-          "ratingCount": "9",
-          "reviewCount": "9"
-        },
         "contactPoint": {
           "@type": "ContactPoint",
           "contactType": "customer support",
