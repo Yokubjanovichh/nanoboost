@@ -368,7 +368,7 @@ body.page--service .service-back {
 }
 .service-dropdown__option-price-final {
   flex-shrink: 0;
-  font-weight: 700;
+  font-weight: 600;
   color: inherit;
 }
 @media (max-width: 480px) {
