@@ -352,9 +352,12 @@ body.page--service .service-back {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+/* font-size is intentionally omitted on both: inherits from
+   .service-dropdown__option so the strikethrough and final price stay
+   in lockstep with .service-dropdown__price (also inheriting) across
+   every responsive breakpoint. */
 .service-dropdown__option-price-original {
   flex-shrink: 0;
-  font-size: 1.2rem;
   font-weight: 500;
   color: rgba(42, 36, 62, 0.5);
   text-decoration: line-through;
@@ -366,15 +369,11 @@ body.page--service .service-back {
 .service-dropdown__option-price-final {
   flex-shrink: 0;
   font-weight: 700;
-  font-size: clamp(1.3rem, 0.95vw, 1.55rem);
   color: inherit;
 }
 @media (max-width: 480px) {
   .service-dropdown__option--has-discount {
     gap: 0.7rem;
-  }
-  .service-dropdown__option-price-original {
-    font-size: 1.1rem;
   }
 }
 .service-dropdown__option:hover {
