@@ -1,7 +1,10 @@
 # Railway/Nixpacks build + static serve config (DevOps infra).
-# Node provider auto-runs `npm ci` + `npm run build` (build.js -> dist/).
-# Serve the pre-rendered multi-page output with `serve` (Node-native,
-# clean-URL aware). Caddy was avoided here because the Node base image
-# does not ship the caddy binary at runtime.
+# install phase (npm ci) runs automatically via the Node provider.
+# build phase: build the site, then install `serve` globally while the
+# build network is available (avoids an unreliable npx download at
+# container start). start: serve the static multi-page output.
+[phases.build]
+cmds = ["npm run build", "npm install -g serve"]
+
 [start]
-cmd = "npx -y serve dist -l $PORT"
+cmd = "serve dist -l tcp://0.0.0.0:$PORT"
