@@ -1,8 +1,7 @@
 # Railway/Nixpacks build + static serve config (DevOps infra).
 # Node provider auto-runs `npm ci` + `npm run build` (build.js -> dist/).
-# We add Caddy to the runtime and serve the static dist/ output.
-[phases.setup]
-nixPkgs = ["...", "caddy"]
-
+# Serve the pre-rendered multi-page output with `serve` (Node-native,
+# clean-URL aware). Caddy was avoided here because the Node base image
+# does not ship the caddy binary at runtime.
 [start]
-cmd = "caddy run --config Caddyfile --adapter caddyfile"
+cmd = "npx -y serve dist -l $PORT"
