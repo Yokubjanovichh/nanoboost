@@ -1,0 +1,9 @@
+:{$PORT}
+
+root * /srv
+encode gzip
+
+# Multi-page static site: try exact path, then .html extension, then
+# directory index. No SPA fallback (distinct pre-rendered HTML pages).
+try_files {path} {path}.html {path}/
+file_server
