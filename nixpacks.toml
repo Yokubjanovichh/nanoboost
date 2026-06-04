@@ -1,0 +1,8 @@
+# Railway/Nixpacks build + static serve config (DevOps infra).
+# Node provider auto-runs `npm ci` + `npm run build` (build.js -> dist/).
+# We add Caddy to the runtime and serve the static dist/ output.
+[phases.setup]
+nixPkgs = ["...", "caddy"]
+
+[start]
+cmd = "caddy run --config Caddyfile --adapter caddyfile"

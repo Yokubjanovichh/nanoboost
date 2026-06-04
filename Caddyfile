@@ -1,0 +1,10 @@
+:{$PORT}
+
+root * dist
+encode gzip
+
+# Multi-page static site: try exact path, then .html extension,
+# then directory index, else 404. No SPA fallback (storefront is
+# a set of distinct pre-rendered HTML pages, not a single-page app).
+try_files {path} {path}.html {path}/
+file_server
