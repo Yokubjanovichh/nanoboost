@@ -3,7 +3,29 @@
 root * /srv
 encode gzip
 
-# Multi-page static site: try exact path, then .html extension, then
-# directory index. No SPA fallback (distinct pre-rendered HTML pages).
+# --- Security headers (parity with old vercel.json, all responses) ---
+header {
+	X-Content-Type-Options nosniff
+	X-Frame-Options DENY
+	Referrer-Policy strict-origin-when-cross-origin
+}
+
+# --- Immutable 1y cache for hashed assets ---
+@immutable path /assets/* /scripts/* /styles/*
+header @immutable Cache-Control "public, max-age=31536000, immutable"
+@stylehash path_regexp ^/style\.[^/]+\.css$
+header @stylehash Cache-Control "public, max-age=31536000, immutable"
+
+# --- Redirects (301) ---
+redir /index.html / permanent
+redir /pages/gta5.html /pages/game.html?game=gta5 permanent
+
+# --- Rewrites (payment return pages; query string e.g. ?order=... preserved) ---
+@payment_success path /payment-success
+rewrite @payment_success /pages/payment-success.html
+@payment_cancelled path /payment-cancelled
+rewrite @payment_cancelled /pages/payment-cancelled.html
+
+# --- Multi-page static serve (Caddy runs rewrite before try_files) ---
 try_files {path} {path}.html {path}/
 file_server
