@@ -229,6 +229,45 @@ body.page--service .service-back {
   color: #5f53db;
   text-shadow: 0 8px 28px rgba(95, 83, 219, 0.28);
 }
+/* Cashback pill rides in the same row as the "Choose an Option" label, so
+   it stays visible even when the dropdown menu opens beneath it. Wrapper
+   centers the label and pushes the badge to the right edge of the form's
+   internal column, falling onto a second line on narrow screens via
+   flex-wrap. Brand gradient + box-shadow match the storefront SALE chips
+   so the new badge reads as the same family, not a foreign sticker. */
+.service-hero__label-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  row-gap: 0.6rem;
+}
+.service-hero__label-row .service-hero__label {
+  margin: 0;
+}
+.service-hero__cashback {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 1rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #2de1fe 0%, #6849fe 50%, #9d21fe 100%);
+  color: #fff;
+  font-family: Poppins, sans-serif;
+  font-size: clamp(1.15rem, 0.85vw, 1.4rem);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  white-space: nowrap;
+  box-shadow: 0 6px 18px rgba(104, 73, 254, 0.32);
+  text-shadow: none;
+}
+@media (max-width: 480px) {
+  .service-hero__cashback {
+    font-size: 1.1rem;
+    padding: 0.3rem 0.8rem;
+  }
+}
 .service-hero__select-wrap {
   position: relative;
   z-index: 4;
